@@ -1,0 +1,279 @@
+/**
+ * ai/index.js  — Institutional AI Pipeline v2.0
+ *
+ * Each expert uses EXACT Pine Script rules from:
+ *   - Institutional 1-5m Engine v4.0
+ *   - Indian Market Assessment v4.0
+ *
+ * Flow:
+ *   computeIndicators(candles) → deterministic ind object
+ *   → 4 rule-based local experts (Ollama)
+ *   → Groq-70B final verdict (JSON)
+ *   → clampSignal()
+ */
+
+import {
+    groqCall, queueOllama, unloadModel,
+    extractJSON, clampSignal, buildPrompt
+} from '../services/ai_helpers.js';
+
+// Long, model-friendly timeouts
+const TIMEOUTS = {
+    'tinyllama':   120_000,
+    'gemma2:2b':   150_000,
+    'phi3':       180_000,
+    'llama3.1:8b':240_000
+};
+
+async function runExpert(model, prompt) {
+    try {
+        return await queueOllama(model, prompt, TIMEOUTS[model]);
+    } finally {
+        await unloadModel(model);
+    }
+}
+
+// ─── EXPERT PROMPT BUILDERS ──────────────────────────────────────────────────
+// Each expert receives pre-computed deterministic values + Pine Script rules.
+// Models only need to READ the values and APPLY the rules — no guessing.
+
+function promptMomentum(ind) {
+    // Expert 1: Momentum — Pine Script rules from Institutional Engine
+    const rsiSignal = ind.rsi > 65  ? 'OVERBOUGHT'
+                    : ind.rsi < 35  ? 'OVERSOLD'
+                    : ind.rsi > 50  ? 'LONG'       // momentumLong rule
+                    : ind.rsi < 50  ? 'SHORT'       // momentumShort rule
+                    : 'NEUTRAL';
+
+    const emaSignal = ind.emaFast > ind.emaSlow ? 'EMA_BULL'
+                    : ind.emaFast < ind.emaSlow ? 'EMA_BEAR'
+                    : 'EMA_FLAT';
+
+    return `You are Expert1 (Momentum Analyst).
+
+COMPUTED VALUES (already calculated, use as-is):
+rsi: ${ind.rsi}
+emaFast: ${ind.emaFast?.toFixed(4)}
+emaSlow: ${ind.emaSlow?.toFixed(4)}
+ema200: ${ind.ema200?.toFixed(4)}
+price: ${ind.price}
+macd: ${ind.macd}
+emaStackBull: ${ind.emaStackBull}
+emaStackBear: ${ind.emaStackBear}
+
+PINE SCRIPT RULES (apply exactly):
+- momentumLong  = RSI > 50 AND RSI < 65  → signal LONG
+- momentumShort = RSI < 50 AND RSI > 35  → signal SHORT
+- RSI > 65 = overbought, avoid LONG
+- RSI < 35 = oversold, avoid SHORT
+- emaFast > emaSlow + emaStackBull = strong bull
+- emaFast < emaSlow + emaStackBear = strong bear
+
+PRE-APPLIED RESULT: rsiSignal=${rsiSignal}, emaSignal=${emaSignal}
+
+OUTPUT FORMAT ONLY (no sentences, no markdown):
+signal: LONG|SHORT|NEUTRAL
+strength: LOW|MEDIUM|HIGH
+note: max 4 words`;
+}
+
+function promptPriceAction(ind) {
+    // Expert 2: Price Action — regime + trend from Indian Market Assessment
+    const trendScore = `bull${ind.bullCount}/bear${ind.bearCount}`;
+    const nearRes    = ind.price >= ind.resistance20 * 0.995;
+    const nearSup    = ind.price <= ind.support20   * 1.005;
+
+    return `You are Expert2 (Price Action Analyst).
+
+COMPUTED VALUES (already calculated, use as-is):
+price: ${ind.price}
+overallTrend: ${ind.overallTrend}
+bullCount: ${ind.bullCount}/4 periods
+bearCount: ${ind.bearCount}/4 periods
+trend1M: ${ind.trends?.trend1M}
+trend3M: ${ind.trends?.trend3M}
+trend1Y: ${ind.trends?.trend1Y}
+resistance20: ${ind.resistance20}
+support20: ${ind.support20}
+nearResistance: ${nearRes}
+nearSupport: ${nearSup}
+ret1M: ${ind.returns?.ret1M}%
+ret3M: ${ind.returns?.ret3M}%
+
+PINE SCRIPT RULES (apply exactly):
+- bullCount >= 3/4 → trend UP
+- bearCount >= 3/4 → trend DOWN
+- price near resistance (within 0.5%) → caution for LONG
+- price near support   (within 0.5%) → caution for SHORT
+- overallTrend=Strong Bull → UP, Strong Bear → DOWN, else SIDEWAYS
+
+OUTPUT FORMAT ONLY (no sentences, no markdown):
+trend: UP|DOWN|SIDEWAYS
+volume: LOW|MEDIUM|HIGH
+note: max 4 words`;
+}
+
+function promptRisk(ind) {
+    // Expert 3: Risk/Regime — ATR regime + session + volatility filters
+    const sessionStr = ind.session?.london ? 'LONDON'
+                     : ind.session?.ny     ? 'NEW_YORK'
+                     : ind.session?.nse    ? 'NSE_INDIA'
+                     : 'OFF_SESSION';
+
+    const regimeRisk = ind.regime === 'Volatile'      ? 'HIGH'
+                     : ind.regime === 'Strong Trend'  ? 'LOW'
+                     : ind.regime === 'Trend'         ? 'LOW'
+                     : 'MEDIUM';
+
+    return `You are Expert3 (Risk Analyst).
+
+COMPUTED VALUES (already calculated, use as-is):
+atr: ${ind.atr}
+atrPct: ${ind.atrPct}%
+atrRegimeOK: ${ind.atrRegimeOK}
+volFilter: ${ind.volFilter}
+regime: ${ind.regime}
+bbSqueeze: ${ind.bbSqueeze}
+volExpanded: ${ind.volExpanded}
+adx: ${ind.adx}
+session: ${sessionStr}
+sessionActive: ${ind.session?.active}
+slDist: ${ind.slDist}
+tpDist: ${ind.tpDist}
+rrRatio: ${ind.rrRatio}
+
+PINE SCRIPT RULES (apply exactly):
+- atrRegimeOK=false → HIGH risk, do not trade
+- volFilter=false   → HIGH risk (volume spike or too low)
+- session=OFF       → HIGH risk (no institutional flow)
+- regime=Volatile   → HIGH risk (ATR expanded > 1.3x MA)
+- regime=Strong Trend + session active → LOW risk
+- bbSqueeze=true    → MEDIUM risk (breakout imminent)
+- rrRatio >= 1.33   → risk acceptable
+- adx >= 25         → trending, risk acceptable
+- adx < 25          → ranging, risk elevated
+
+PRE-APPLIED RESULT: regimeRisk=${regimeRisk}
+
+OUTPUT FORMAT ONLY (no sentences, no markdown):
+risk: LOW|MEDIUM|HIGH
+volatility: LOW|MEDIUM|HIGH
+note: max 4 words`;
+}
+
+function promptVerdict(ind) {
+    // Expert 4: Final Verdict — IGS + all signals from Indian LT Assessment
+    const deterministicSignal = ind.longSignal  ? 'LONG'
+                               : ind.shortSignal ? 'SHORT'
+                               : 'NEUTRAL';
+
+    const confidence = ind.longSignal || ind.shortSignal
+        ? Math.min(95, 50 + ind.igs * 4 + ind.bullCount * 5)
+        : 40;
+
+    return `You are Expert4 (Final Verdict).
+
+COMPUTED VALUES (already calculated, use as-is):
+deterministicSignal: ${deterministicSignal}
+longSignal: ${ind.longSignal}
+shortSignal: ${ind.shortSignal}
+igs: ${ind.igs} (Investment Grade Score)
+igsGrade: ${ind.igsGrade}
+igsAction: ${ind.igsAction}
+overallTrend: ${ind.overallTrend}
+regime: ${ind.regime}
+sessionActive: ${ind.session?.active}
+atrRegimeOK: ${ind.atrRegimeOK}
+volFilter: ${ind.volFilter}
+bullCount: ${ind.bullCount}/4
+bearCount: ${ind.bearCount}/4
+estimatedConfidence: ${confidence}
+
+PINE SCRIPT RULES (apply exactly):
+- longSignal=true  = emaFast>emaSlow + volFilter + RSI 50-65 + atrRegimeOK + session → LONG
+- shortSignal=true = emaFast<emaSlow + volFilter + RSI 35-50 + atrRegimeOK + session → SHORT
+- If NEITHER signal → NEUTRAL
+- IGS >= 8  → Strong Buy conviction
+- IGS >= 5  → Hold/Add conviction
+- IGS < 3   → Avoid / low conviction
+- regime=Volatile → reduce confidence by 20
+- session=false   → reduce confidence by 30
+
+OUTPUT FORMAT ONLY (no sentences, no markdown):
+signal: LONG|SHORT|NEUTRAL
+confidence: 0-100
+reason: max 6 words`;
+}
+
+// ─── PIPELINE ────────────────────────────────────────────────────────────────
+
+async function runPipeline(symbol, ind) {
+    console.log(`\n[PIPELINE] ===== ${symbol} =====`);
+    console.log(`[PIPELINE] Signal: ${ind.longSignal ? 'LONG' : ind.shortSignal ? 'SHORT' : 'NEUTRAL'} | IGS: ${ind.igsGrade} | Regime: ${ind.regime} | Session: ${ind.session?.active ? 'ACTIVE' : 'CLOSED'}`);
+    console.log('[PIPELINE] Running rule-based experts...');
+
+    const e1 = await runExpert('llama3.1:8b', promptVerdict(ind));     // heaviest
+    const e2 = await runExpert('phi3',        promptRisk(ind));        // next
+    const e3 = await runExpert('gemma2:2b',   promptPriceAction(ind)); // medium
+    const e4 = await runExpert('tinyllama',   promptMomentum(ind));    // light
+
+    const context = [
+        `Expert1 (Momentum): ${e1 || 'no response'}`,
+        `Expert2 (PriceAction): ${e2 || 'no response'}`,
+        `Expert3 (Risk): ${e3 || 'no response'}`,
+        `Expert4 (Verdict): ${e4 || 'no response'}`
+    ].join('\n');
+
+    let final = null;
+
+    try {
+        const raw    = await groqCall(buildPrompt(symbol, ind, 'full', context));
+        const parsed = extractJSON(raw);
+        if (parsed?.signal) {
+            final = clampSignal({ ...parsed, agent: 'Groq-70B', _source: 'Groq+4Experts' });
+        }
+    } catch (e) {
+        console.error('[GROQ FAIL]', e.message);
+    }
+
+    // Fallback 1: use Expert4 JSON if present
+    if (!final) {
+        const fb = extractJSON(e4);
+        if (fb?.signal) {
+            final = clampSignal({ ...fb, agent: 'llama3.1:8b', _source: 'LocalFallback' });
+        }
+    }
+
+    // Fallback 2: use deterministic signal directly
+    if (!final) {
+        final = clampSignal({
+            signal:     ind.longSignal ? 'LONG' : ind.shortSignal ? 'SHORT' : 'NEUTRAL',
+            confidence: ind.longSignal || ind.shortSignal ? 60 : 40,
+            reason:     `Deterministic: ${ind.regime} | IGS:${ind.igsGrade}`,
+            agent:      'DeterministicFallback',
+            _source:    'PineScriptRules'
+        });
+    }
+
+    // Attach computed context to final signal
+    final.indicators = {
+        rsi:         ind.rsi,
+        regime:      ind.regime,
+        igsGrade:    ind.igsGrade,
+        igsAction:   ind.igsAction,
+        overallTrend:ind.overallTrend,
+        session:     ind.session?.active ? 'ACTIVE' : 'CLOSED',
+        atrRegimeOK: ind.atrRegimeOK,
+        volFilter:   ind.volFilter,
+        rrRatio:     ind.rrRatio,
+        slDist:      ind.slDist,
+        tpDist:      ind.tpDist
+    };
+
+    console.log('[PIPELINE] FINAL:', JSON.stringify(final));
+    return final;
+}
+
+export async function generateSignal(symbol, ind) {
+    return runPipeline(symbol, ind || {});
+}

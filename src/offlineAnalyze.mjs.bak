@@ -1,0 +1,53 @@
+// 1. Extract indicators from your analysis result
+const { rsi, trendScore } = indicators;
+
+// 2. Decision engine: RSI (30/70) + TrendScore filter
+let signal = "NEUTRAL";
+let confidence = 50;
+
+if (rsi < 30 && trendScore > 0.3) {
+  signal = "LONG";    // Oversold + positive trend
+  confidence = 85;
+} else if (rsi > 70 && trendScore < -0.3) {
+  signal = "SHORT";   // Overbought + negative trend
+  confidence = 85;
+} else if (rsi < 40 && trendScore > 0.1) {
+  signal = "NEUTRAL"; // Slightly bullish, stay flat
+  confidence = 60;
+}
+
+// 3. Ensure these are in the object you save
+const signalOutput = {
+  symbol: "BTC_USD",      // or your dynamic symbol
+  timeframe: "1h",
+  timestamp_utc: Date.now(), // or candle timestamp
+  signal,
+  confidence,
+  indicators
+};
+// 1. Extract indicators from your analysis result
+const { rsi, trendScore } = indicators;
+
+// 2. Decision engine: RSI (30/70) + TrendScore filter
+let signal = "NEUTRAL";
+let confidence = 50;
+
+if (rsi < 30 && trendScore > 0.3) {
+  signal = "LONG";
+  confidence = 85;
+} else if (rsi > 70 && trendScore < -0.3) {
+  signal = "SHORT";
+  confidence = 85;
+} else if (rsi < 40 && trendScore > 0.1) {
+  signal = "NEUTRAL";
+  confidence = 60;
+}
+
+const signalOutput = {
+  symbol: "BTC_USD",
+  timeframe: "1h",
+  timestamp_utc: Date.now(),
+  signal,
+  confidence,
+  indicators
+};

@@ -1,0 +1,72 @@
+import pandas as pd
+import numpy as np
+
+DATA_PATH    = "data/BTCUSDT_1h.csv"
+INITIAL_CAP  = 750.0
+DONCHIAN_LEN = 10
+ATR_LEN      = 14
+ATR_MULT     = 2.0
+
+df = pd.read_csv(DATA_PATH)
+df["ts"] = pd.to_datetime(df["timestamp"], unit="ms", utc=True)
+
+for col in ["open", "high", "low", "close", "volume"]:
+    df[col] = pd.to_numeric(df[col], errors="coerce")
+
+df.dropna(subset=["close"], inplace=True)
+df.reset_index(drop=True, inplace=True)
+
+df["don_high"] = df["high"].shift(1).rolling(DONCHIAN_LEN).max()
+df["atr"]      = (df["high"] - df["low"]).rolling(ATR_LEN).mean()
+
+equity   = INITIAL_CAP
+position = None
+trades   = []
+
+for i, row in df.iterrows():
+    if pd.isna(row["don_high"]) or pd.isna(row["atr"]):
+        continue
+
+    price = row["close"]
+    atr   = row["atr"]
+
+    if position is None:
+        if price > row["don_high"]:
+            position = {
+                "entry_price": price,
+                "trail_stop":  price - ATR_MULT * atr,
+            }
+    else:
+        position["trail_stop"] = max(
+            position["trail_stop"],
+            price - ATR_MULT * atr
+        )
+
+        exit_reason = None
+        if price <= position["trail_stop"]:
+            exit_reason = "ATR_TRAIL"
+        elif i == len(df) - 1:
+            exit_reason = "EOD"
+
+        if exit_reason:
+            pnl = (price - position["entry_price"]) / position["entry_price"]
+            equity *= (1 + pnl)
+            trades.append({
+                "reason":  exit_reason,
+                "entry":   position["entry_price"],
+                "exit":    price,
+                "pnl_pct": pnl * 100.0,
+            })
+            position = None
+
+wins = sum(1 for t in trades if t["pnl_pct"] > 0)
+
+print(f"Final Equity: {equity:.2f}")
+print(f"Total Trades: {len(trades)}")
+
+if trades:
+    print(f"Win Rate   : {wins/len(trades)*100:.2f}%")
+    for t in trades:
+        print(f"{t['reason']:9s} | entry={t['entry']:.2f} -> exit={t['exit']:.2f} | pnl={t['pnl_pct']:+.2f}%")
+else:
+    print("Win Rate   : 0.00%")

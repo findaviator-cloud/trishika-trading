@@ -1,0 +1,14 @@
+{
+  "signal": "NEUTRAL",
+  "confidence": 50,
+  "reason": "No reason",
+  "agent": "System",
+  "_source": "unknown",
+  "indicators": {
+    "rsi": 59.39,
+    "ema20": 1.15226129611713,
+    "ema50": 1.1525235417335988,
+    "trendScore": 0,
+    "regime": "Ranging"
+  }
+}

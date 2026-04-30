@@ -1,0 +1,26 @@
+{
+  "signal": "NEUTRAL",
+  "confidence": 50,
+  "reason": "AI failed, defaulting to neutral",
+  "agent": "System",
+  "_source": "Fallback",
+  "indicators": {
+    "meta": {
+      "symbol": "XAU/USD",
+      "timeframe": "15min",
+      "asOf": "2026-03-27T14:50:39.639Z"
+    },
+    "price": {
+      "last": 4473.53278,
+      "changePct": 0.2638067444358523,
+      "atr": 13.476470076957964
+    },
+    "indicators": {
+      "rsi": 70.72,
+      "ema20": 4439.720647139539,
+      "ema50": 4433.2409944879555,
+      "trendScore": 0.8,
+      "regime": "Trending"
+    }
+  }
+}

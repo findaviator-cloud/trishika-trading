@@ -1,0 +1,5 @@
+config  [error opening dir]
+scripts
+└── readLog.js
+
+1 directory, 1 file

@@ -1,0 +1,14 @@
+{
+  "signal": "LONG",
+  "confidence": 85,
+  "reason": "No reason",
+  "agent": "System",
+  "_source": "unknown",
+  "indicators": {
+    "rsi": 70.72,
+    "ema20": 4439.720647139539,
+    "ema50": 4433.2409944879555,
+    "trendScore": 0.8,
+    "regime": "Trending"
+  }
+}

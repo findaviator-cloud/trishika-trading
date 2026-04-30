@@ -1,0 +1,14 @@
+{
+  "signal": "SHORT",
+  "confidence": 85,
+  "reason": "No reason",
+  "agent": "System",
+  "_source": "unknown",
+  "indicators": {
+    "rsi": 35.8,
+    "ema20": 1997.404669781682,
+    "ema50": 2021.9632695100934,
+    "trendScore": -0.8,
+    "regime": "Trending-HighVol"
+  }
+}

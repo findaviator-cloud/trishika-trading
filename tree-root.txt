@@ -1,0 +1,198 @@
+.
+├── Procfile
+├── README.md
+├── backups
+├── data
+│   └── trades.db
+├── emaSlow
+├── fix_trishika.sh
+├── index.html
+├── logs
+│   └── signals.jsonl
+├── node_modules
+│   ├── @pinojs
+│   ├── accepts
+│   ├── array-flatten
+│   ├── asynckit
+│   ├── atomic-sleep
+│   ├── axios
+│   ├── base64-js
+│   ├── better-sqlite3
+│   ├── bindings
+│   ├── bl
+│   ├── body-parser
+│   ├── buffer
+│   ├── bytes
+│   ├── call-bind-apply-helpers
+│   ├── call-bound
+│   ├── chownr
+│   ├── combined-stream
+│   ├── content-disposition
+│   ├── content-type
+│   ├── cookie
+│   ├── cookie-signature
+│   ├── cors
+│   ├── debug
+│   ├── decompress-response
+│   ├── deep-extend
+│   ├── delayed-stream
+│   ├── depd
+│   ├── destroy
+│   ├── detect-libc
+│   ├── dotenv
+│   ├── dunder-proto
+│   ├── ee-first
+│   ├── encodeurl
+│   ├── end-of-stream
+│   ├── es-define-property
+│   ├── es-errors
+│   ├── es-object-atoms
+│   ├── es-set-tostringtag
+│   ├── escape-html
+│   ├── etag
+│   ├── expand-template
+│   ├── express
+│   ├── file-uri-to-path
+│   ├── finalhandler
+│   ├── follow-redirects
+│   ├── form-data
+│   ├── forwarded
+│   ├── fresh
+│   ├── fs-constants
+│   ├── function-bind
+│   ├── get-intrinsic
+│   ├── get-proto
+│   ├── github-from-package
+│   ├── gopd
+│   ├── has-symbols
+│   ├── has-tostringtag
+│   ├── hasown
+│   ├── http-errors
+│   ├── iconv-lite
+│   ├── ieee754
+│   ├── inherits
+│   ├── ini
+│   ├── ipaddr.js
+│   ├── math-intrinsics
+│   ├── media-typer
+│   ├── merge-descriptors
+│   ├── methods
+│   ├── mime
+│   ├── mime-db
+│   ├── mime-types
+│   ├── mimic-response
+│   ├── minimist
+│   ├── mkdirp-classic
+│   ├── ms
+│   ├── napi-build-utils
+│   ├── negotiator
+│   ├── node-abi
+│   ├── object-assign
+│   ├── object-inspect
+│   ├── on-exit-leak-free
+│   ├── on-finished
+│   ├── once
+│   ├── parseurl
+│   ├── path-to-regexp
+│   ├── pino
+│   ├── pino-abstract-transport
+│   ├── pino-std-serializers
+│   ├── prebuild-install
+│   ├── process-warning
+│   ├── proxy-addr
+│   ├── proxy-from-env
+│   ├── pump
+│   ├── qs
+│   ├── quick-format-unescaped
+│   ├── range-parser
+│   ├── raw-body
+│   ├── rc
+│   ├── readable-stream
+│   ├── real-require
+│   ├── safe-buffer
+│   ├── safe-stable-stringify
+│   ├── safer-buffer
+│   ├── semver
+│   ├── send
+│   ├── serve-static
+│   ├── setprototypeof
+│   ├── side-channel
+│   ├── side-channel-list
+│   ├── side-channel-map
+│   ├── side-channel-weakmap
+│   ├── simple-concat
+│   ├── simple-get
+│   ├── sonic-boom
+│   ├── split2
+│   ├── statuses
+│   ├── string_decoder
+│   ├── strip-json-comments
+│   ├── tar-fs
+│   ├── tar-stream
+│   ├── thread-stream
+│   ├── toidentifier
+│   ├── tunnel-agent
+│   ├── type-is
+│   ├── unpipe
+│   ├── util-deprecate
+│   ├── utils-merge
+│   ├── vary
+│   ├── wrappy
+│   └── ws
+├── notebooks
+├── ollama
+├── package-lock.json
+├── package.json
+├── requirements.txt
+├── routes_wiring_guide.js
+├── scripts
+│   └── readLog.js
+├── server.js
+├── server.js.new
+├── services
+│   ├── _ollama_stream_patch.js
+│   ├── journalService.js
+│   └── systemMonitor.js
+├── setup.bat
+├── src
+│   ├── ai
+│   ├── analytics
+│   ├── angel
+│   ├── backtest
+│   ├── boot.js
+│   ├── candle
+│   ├── config
+│   ├── indicators
+│   ├── optimizer
+│   ├── portfolio
+│   ├── routes
+│   ├── services
+│   └── ws
+├── start.sh
+├── stop.sh
+├── strategy
+│   ├── __init__.py
+│   ├── __pycache__
+│   ├── ai_model.py
+│   ├── analytics.py
+│   ├── backtest.py
+│   ├── execution.py
+│   ├── indicators.py
+│   ├── main.py
+│   ├── mtf.py
+│   ├── regime.py
+│   ├── risk.py
+│   ├── strategy.py
+│   ├── time_filter.py
+│   ├── trend_strength.py
+│   ├── volatility.py
+│   └── walkforward.py
+├── tree-root.txt
+└── venv
+    ├── bin
+    ├── include
+    ├── lib
+    ├── lib64 -> lib
+    └── pyvenv.cfg
+
+157 directories, 39 files
