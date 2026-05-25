@@ -209,6 +209,15 @@ export function runMonitorCycle() {
         logEvent('INFO', 'PORTFOLIO_GATE_PASS',
           `Entry permitted for ${gate.payload.symbol}`,
           gate.payload);
+        routeOrder({
+          symbol:      signal.meta?.symbol ?? 'ETH',
+          side:        action === 'LONG' ? 'BUY' : 'SELL',
+          qty:         1.0,
+          entry_price: signal.price?.last ?? 0,
+          stop_price:  signal.signal?.stopPrice ?? null,
+          ts:          signal.ts ?? Date.now(),
+          meta:        { regime, confidence: signal.signal?.confidence ?? 0, strategy: 'donchian_daily' },
+        }).catch(err => logEvent('WARN', 'ROUTE_ORDER_FAIL', err.message));
       }
     }
     const snap = portfolioSnapshot(state.equity);

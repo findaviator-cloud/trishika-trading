@@ -23,6 +23,7 @@
  *   Default SLIPPAGE_PCT = 0.0005 (0.05% — conservative for daily bars)
  */
 
+import 'dotenv/config';
 import fs   from 'fs';
 import path from 'path';
 import { sendAlert } from './alert.js';
