@@ -1,15 +1,51 @@
 import { WebSocket } from "ws";
-import { CONFIG, WS_TYPES, BINANCE_TO_SYMBOL, TWELVE_TO_SYMBOL } from "../config/index.js";
-import { computeIndicators } from "../indicators/index.js";
+import https from "https";
+import { CONFIG, WS_TYPES, TWELVE_TO_SYMBOL } from "../config/index.js";
 import { writeDonchianSignal } from "../strategy/live_signal_writer.js";
+
+// ── Twelve Data REST fetch (hourly candles) ───────────────────────────────────
+function fetchTwelveHourly(symbol, limit = 200) {
+  return new Promise((resolve, reject) => {
+    const key = CONFIG.twelveKey;
+    const sym = encodeURIComponent(symbol);
+    const url = `https://api.twelvedata.com/time_series?symbol=${sym}&interval=1h&outputsize=${limit}&apikey=${key}`;
+    https.get(url, { timeout: 15000 }, (res) => {
+      let data = "";
+      res.on("data", chunk => data += chunk);
+      res.on("end", () => {
+        try {
+          const parsed = JSON.parse(data);
+          if (parsed.status !== "ok") {
+            reject(new Error(`Twelve Data error: ${parsed.message}`)); return;
+          }
+          const rows = parsed.values.reverse().map(r => ({
+            time:   new Date(r.datetime).getTime(),
+            open:   parseFloat(r.open),
+            high:   parseFloat(r.high),
+            low:    parseFloat(r.low),
+            close:  parseFloat(r.close),
+            volume: 0,
+          }));
+          resolve(rows);
+        } catch (e) { reject(e); }
+      });
+    }).on("error", reject).on("timeout", () => reject(new Error("Twelve Data fetch timeout")));
+  });
+}
 
 export class CandleEngine {
   constructor(symbol, candleMs = null) {
-    this.symbol = symbol; this.candleMs = candleMs || CONFIG.candleMs;
-    this.candles = []; this.currentCandle = null; this.lastAnalysis = null;
-    this.analysisTime = 0; this.analyzing = false;
-    this.subscribers = new Set(); this.source = "binance";
+    this.symbol = symbol;
+    this.candleMs = candleMs || CONFIG.candleMs;
+    this.candles = [];
+    this.currentCandle = null;
+    this.lastAnalysis = null;
+    this.analysisTime = 0;
+    this.analyzing = false;
+    this.subscribers = new Set();
+    this.source = "twelvedata";
   }
+
   onTick(price, qty, time) {
     const bucketTime = Math.floor(time / this.candleMs) * this.candleMs;
     if (!this.currentCandle || this.currentCandle.time !== bucketTime) {
@@ -28,41 +64,74 @@ export class CandleEngine {
     }
     this.broadcast({ type: WS_TYPES.TICK, candle: this.currentCandle, symbol: this.symbol });
   }
-  getIndicators() { return computeIndicators(this.candles); }
+
+  loadCandles(candles) {
+    this.candles = candles.slice(-CONFIG.maxCandles);
+    if (this.candles.length > 0) {
+      writeDonchianSignal(this.symbol, this.candles);
+    }
+  }
+
+  getIndicators() { return null; }
+
   broadcast(msg) {
     const data = JSON.stringify(msg);
-    for (const ws of this.subscribers) { if (ws.readyState === WebSocket.OPEN) ws.send(data); }
+    for (const ws of this.subscribers) {
+      if (ws.readyState === WebSocket.OPEN) ws.send(data);
+    }
   }
+
   subscribe(ws)   { this.subscribers.add(ws); }
   unsubscribe(ws) { this.subscribers.delete(ws); }
 }
 
-export function connectBinance(engines, log) {
-  const streams = Object.values(CONFIG.symbols).map(s => `${s}@trade`).join("/");
-  const ws = new WebSocket(`wss://stream.binance.com:9443/stream?streams=${streams}`);
-  ws.on("open",  () => log.info("Binance WS connected"));
-  ws.on("close", () => { log.warn("Binance WS closed — reconnecting in 3s..."); setTimeout(() => connectBinance(engines, log), 3000); });
-  ws.on("error", (e) => log.error("Binance WS:", e.message));
-  ws.on("message", (raw) => {
-    try {
-      const { data } = JSON.parse(raw);
-      if (!data || data.e !== "trade") return;
-      const sym = BINANCE_TO_SYMBOL[data.s.toLowerCase()];
-      if (sym && engines[sym]) engines[sym].onTick(parseFloat(data.p), parseFloat(data.q), data.T);
-    } catch(e) { log.error("Binance parse:", e.message); }
-  });
+// ── Crypto polling via Twelve Data REST (replaces Binance WS) ────────────────
+const CRYPTO_SYMBOLS = {
+  BTC: "BTC/USD",
+  ETH: "ETH/USD",
+  SOL: "SOL/USD",
+  BNB: "BNB/USD",
+};
+
+export async function connectBinance(engines, log) {
+  log.info("Crypto → using Twelve Data REST (Binance blocked on Render)");
+
+  async function pollCrypto() {
+    for (const [sym, tdSym] of Object.entries(CRYPTO_SYMBOLS)) {
+      try {
+        const candles = await fetchTwelveHourly(tdSym, 200);
+        if (engines[sym]) {
+          engines[sym].loadCandles(candles);
+          const last = candles[candles.length - 1];
+          log.info(`[CRYPTO] ${sym} updated — last close: ${last.close}`);
+        }
+      } catch (err) {
+        log.error(`[CRYPTO] ${sym} fetch failed:`, err.message);
+      }
+    }
+    setTimeout(pollCrypto, 5 * 60 * 1000); // poll every 5 min
+  }
+
+  pollCrypto();
 }
 
+// ── Twelve Data WebSocket (Forex + Gold) ─────────────────────────────────────
 export function connectTwelveData(engines, log) {
-  if (!CONFIG.twelveKey) { log.warn("Twelve Data key missing — Gold & EURUSD disabled"); return; }
+  if (!CONFIG.twelveKey) {
+    log.warn("Twelve Data key missing — Forex & Gold disabled");
+    return;
+  }
   const ws = new WebSocket("wss://ws.twelvedata.com/v1/quotes/price?apikey=" + CONFIG.twelveKey);
   ws.on("open", () => {
     log.info("Twelve Data WS connected");
     const symbols = Object.values(CONFIG.forexSymbols);
-    ws.send(JSON.stringify({ action:"subscribe", params:{ symbols: symbols.join(",") } }));
+    ws.send(JSON.stringify({ action: "subscribe", params: { symbols: symbols.join(",") } }));
     log.info(`Twelve Data → subscribed: ${symbols.join(", ")}`);
   });
-  ws.on("close", () => { log.warn("Twelve Data WS closed — reconnecting in 5s..."); setTimeout(() => connectTwelveData(engines, log), 5000); });
+  ws.on("close", () => {
+    log.warn("Twelve Data WS closed — reconnecting in 5s...");
+    setTimeout(() => connectTwelveData(engines, log), 5000);
+  });
   ws.on("error", (e) => log.error("Twelve Data WS:", e.message));
   ws.on("message", (raw) => {
     try {
@@ -71,8 +140,10 @@ export function connectTwelveData(engines, log) {
       if (msg.event === "subscribe-status") { log.info("Twelve Data subscribed:", JSON.stringify(msg)); return; }
       if (msg.event === "price" && msg.price) {
         const sym = TWELVE_TO_SYMBOL[msg.symbol];
-        if (sym && engines[sym]) engines[sym].onTick(parseFloat(msg.price), 1, msg.timestamp ? msg.timestamp * 1000 : Date.now());
+        if (sym && engines[sym]) {
+          engines[sym].onTick(parseFloat(msg.price), 1, msg.timestamp ? msg.timestamp * 1000 : Date.now());
+        }
       }
-    } catch(e) { log.error("Twelve Data parse:", e.message); }
+    } catch (e) { log.error("Twelve Data parse:", e.message); }
   });
 }
