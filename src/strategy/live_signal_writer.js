@@ -7,14 +7,9 @@
  *      - BTC, ETH, SOL, BNB
  *      - smaLen: 100, donchianLen: 30, atrMult: 2.0
  *
- *   2. Daily ETH (called on schedule via refreshDailyETH)
- *      - fetches last 300 daily bars from Binance REST
+ *   2. Daily ETH/SOL (called on schedule via refreshDailyETH/refreshDailySOL)
+ *      - fetches last 300 daily bars from Twelve Data
  *      - smaLen: 100, donchianLen: 20, atrMult: 2.0
- *      - writes signals_live/ETH_USD_1d.json
- *
- * Validated config:
- *   hourly:  short-only edge on ETH/BNB/SOL in bear regime (Nov 2025–Apr 2026)
- *   daily:   ls_sma100 profitable on 100% of combos on ETH full-cycle (Jul 2023–Apr 2026)
  */
 
 import fs      from 'fs';
@@ -39,7 +34,7 @@ const HOURLY_OPTS = {
   donchianLen: 30,
   atrLen:      14,
   atrMult:     2.0,
-  smaLen:      100,   // updated: ls_sma100 dominates on full-cycle daily data
+  smaLen:      100,
   allowLong:   true,
   allowShort:  true,
 };
@@ -48,7 +43,7 @@ const DAILY_ETH_OPTS = {
   donchianLen: 20,
   atrLen:      14,
   atrMult:     2.0,
-  smaLen:      100,   // ls_sma100 validated: ETH daily mean_eq=2549, 100% profitable combos
+  smaLen:      100,
   allowLong:   true,
   allowShort:  true,
 };
@@ -93,6 +88,36 @@ function writeSignalFile(filename, symbol, timeframe, sig, lastCandle) {
   }
 }
 
+// ── Twelve Data REST fetch (daily bars) ──────────────────────────────────────
+function fetchTwelveDataKlines(symbol, limit) {
+  return new Promise((resolve, reject) => {
+    const key = process.env.TWELVE_DATA_API_KEY;
+    const sym = encodeURIComponent(symbol);
+    const url = `https://api.twelvedata.com/time_series?symbol=${sym}&interval=1day&outputsize=${limit}&apikey=${key}`;
+    https.get(url, { timeout: 15000 }, (res) => {
+      let data = '';
+      res.on('data', chunk => data += chunk);
+      res.on('end', () => {
+        try {
+          const parsed = JSON.parse(data);
+          if (parsed.status !== 'ok') {
+            reject(new Error(`Twelve Data error: ${parsed.message}`)); return;
+          }
+          const rows = parsed.values.reverse().map(r => ({
+            time:   new Date(r.datetime).getTime(),
+            open:   parseFloat(r.open),
+            high:   parseFloat(r.high),
+            low:    parseFloat(r.low),
+            close:  parseFloat(r.close),
+            volume: 0,
+          }));
+          resolve(rows);
+        } catch (e) { reject(e); }
+      });
+    }).on('error', reject).on('timeout', () => reject(new Error('Twelve Data fetch timeout')));
+  });
+}
+
 // ── hourly writer (called from CandleEngine on candle close) ──────────────────
 export function writeDonchianSignal(symbol, candles) {
   try {
@@ -105,41 +130,17 @@ export function writeDonchianSignal(symbol, candles) {
   }
 }
 
-// ── Binance REST fetch (daily bars) ──────────────────────────────────────────
-function fetchBinanceKlines(symbol, interval, limit) {
-  return new Promise((resolve, reject) => {
-    const url = `https://api.binance.com/api/v3/klines?symbol=${symbol}&interval=${interval}&limit=${limit}`;
-    https.get(url, { timeout: 15000 }, (res) => {
-      let data = '';
-      res.on('data', chunk => data += chunk);
-      res.on('end', () => {
-        try {
-          const rows = JSON.parse(data).map(r => ({
-            time:   r[0],
-            open:   parseFloat(r[1]),
-            high:   parseFloat(r[2]),
-            low:    parseFloat(r[3]),
-            close:  parseFloat(r[4]),
-            volume: parseFloat(r[5]),
-          }));
-          resolve(rows);
-        } catch (e) { reject(e); }
-      });
-    }).on('error', reject).on('timeout', () => reject(new Error('Binance fetch timeout')));
-  });
-}
-
-// ── daily SOL refresh (short_only, validated 67% OOS profit rate) ──────────────
+// ── daily SOL refresh ─────────────────────────────────────────────────────────
 export async function refreshDailySOL() {
   try {
-    const candles = await fetchBinanceKlines('SOLUSDT', '1d', 300);
+    const candles = await fetchTwelveDataKlines('SOL/USD', 300);
     if (candles.length < 130) {
       console.warn(`[DONCHIAN DAILY] SOL: Not enough bars: ${candles.length}`);
       return;
     }
     const sig = donchianSignal(candles, {
       donchianLen: 20, atrLen: 14, atrMult: 2.0,
-      smaLen: 200,        // sma not used (allowShort only)
+      smaLen: 200,
       allowLong: false, allowShort: true,
     });
     writeSignalFile(SOL_DAILY_FILE, 'SOL/USD', '1d', sig, candles[candles.length - 1]);
@@ -148,11 +149,10 @@ export async function refreshDailySOL() {
   }
 }
 
-// ── daily ETH refresh (call on schedule, e.g. every hour) ────────────────────
+// ── daily ETH refresh ─────────────────────────────────────────────────────────
 export async function refreshDailyETH() {
   try {
-    // fetch 300 daily bars — enough for smaLen=100 + donchianLen=20 + warmup
-    const candles = await fetchBinanceKlines('ETHUSDT', '1d', 300);
+    const candles = await fetchTwelveDataKlines('ETH/USD', 300);
     if (candles.length < 130) {
       console.warn(`[DONCHIAN DAILY] Not enough bars: ${candles.length}`);
       return;
