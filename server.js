@@ -1,38 +1,82 @@
 import 'dotenv/config';
+import http from 'http';
 import express from 'express';
 import path from 'path';
 import { fileURLToPath } from 'url';
 import routes from './src/routes/index.js';
+import { CandleEngine, connectBinance, connectTwelveData } from './src/candle/index.js';
+import { connectAngelOneFeed, angelLogin } from './src/angel/index.js';
+import { registerWebSocket } from './src/ws/index.js';
+import { refreshDailyETH, refreshDailySOL } from './src/strategy/live_signal_writer.js';
+import { runMonitorCycle } from './src/strategy/monitor.js';
+import { CONFIG } from './src/config/index.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 const app = express();
+const server = http.createServer(app);
 const port = process.env.PORT || 3000;
 
 app.use(express.json());
 app.use('/api', routes);
-
-// Serve static frontend from ./public
 app.use(express.static(path.join(__dirname, 'public')));
 
-import { refreshDailyETH, refreshDailySOL } from './src/strategy/live_signal_writer.js';
-import { runMonitorCycle } from './src/strategy/monitor.js';
+const log = { info: console.log, warn: console.warn, error: console.error, debug: console.log };
 
-app.listen(port, () => {
-  console.log(`🚀 SERVER: http://localhost:${port}`);
-  console.log(`📡 Signal: http://localhost:${port}/api/signal?symbol=BTC`);
+// ── Engines setup ─────────────────────────────────────────────────────────────
+const engines = {};
 
-  // Daily ETH signal refresh — runs immediately then every hour
-  // Uses nested setTimeout to avoid overlap if fetch takes longer than interval
-  const DAILY_REFRESH_MS = 60 * 60 * 1000; // 1 hour
+// Crypto engines (Binance)
+for (const sym of ['BTC', 'ETH', 'SOL', 'BNB']) {
+  engines[sym] = new CandleEngine(sym);
+  engines[sym].source = 'binance';
+}
+
+// Forex/Gold engines (Twelve Data)
+for (const sym of ['EUR_USD', 'XAU_USD']) {
+  engines[sym] = new CandleEngine(sym);
+  engines[sym].source = 'twelvedata';
+}
+
+// India F&O engines (Angel One)
+const FNO_SYMS = ['NIFTY','BANKNIFTY','RELIANCE','TCS','INFY','HDFCBANK',
+                  'ICICIBANK','SBIN','BHARTIARTL','ITC','WIPRO','HCLTECH',
+                  'AXISBANK','KOTAKBANK','LT','ONGC','TATAMOTORS',
+                  'BAJFINANCE','MARUTI','ADANIENT'];
+for (const sym of FNO_SYMS) {
+  engines[sym] = new CandleEngine(sym);
+  engines[sym].source = 'angelone';
+}
+
+// ── Start server ──────────────────────────────────────────────────────────────
+server.listen(port, async () => {
+  log.info(`🚀 SERVER: http://localhost:${port}`);
+  log.info(`📡 Signal: http://localhost:${port}/api/signal?symbol=BTC`);
+
+  // WebSocket
+  registerWebSocket(server, engines, log);
+
+  // Binance WebSocket
+  connectBinance(engines, log);
+
+  // Twelve Data WebSocket
+  connectTwelveData(engines, log);
+
+  // Angel One login + feed
+  const angelOk = await angelLogin();
+  if (angelOk) connectAngelOneFeed(engines, log);
+
+  // Daily ETH/SOL refresh
+  const DAILY_REFRESH_MS = 60 * 60 * 1000;
   async function scheduleDailyRefresh() {
     await refreshDailyETH();
     await refreshDailySOL();
     setTimeout(scheduleDailyRefresh, DAILY_REFRESH_MS);
   }
-  scheduleDailyRefresh().catch(e => console.error('[SCHEDULER]', e.message));
+  scheduleDailyRefresh().catch(e => log.error('[SCHEDULER]', e.message));
 
+  // Monitor cycle
   const MONITOR_MS = 5 * 60 * 1000;
   function scheduleMonitor() {
     runMonitorCycle();
