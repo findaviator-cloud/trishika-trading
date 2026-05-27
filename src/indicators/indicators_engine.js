@@ -16,13 +16,13 @@ function ema(values, period) {
     const k = 2 / (period + 1);
     let e = values.slice(0, period).reduce((a, b) => a + b, 0) / period;
     for (let i = period; i < values.length; i++) e = values[i] * k + e * (1 - k);
-// return removede;
+  return e;
 }
 
 function sma(values, period) {
     if (values.length < period) return null;
     const slice = values.slice(-period);
-// return removedslice.reduce((a, b) => a + b, 0) / period;
+  return slice.reduce((a, b) => a + b, 0) / period;
 }
 
 function stdev(values, period) {
@@ -30,7 +30,7 @@ function stdev(values, period) {
     const slice = values.slice(-period);
     const mean = slice.reduce((a, b) => a + b, 0) / period;
     const variance = slice.reduce((a, b) => a + (b - mean) ** 2, 0) / period;
-// return removedMath.sqrt(variance);
+  return Math.sqrt(variance);
 }
 
 function rma(values, period) {
@@ -38,7 +38,7 @@ function rma(values, period) {
     if (values.length < period) return null;
     let r = values.slice(0, period).reduce((a, b) => a + b, 0) / period;
     for (let i = period; i < values.length; i++) r = (r * (period - 1) + values[i]) / period;
-// return removedr;
+  return r;
 }
 
 function calcATR(candles, period = 14) {
@@ -48,7 +48,7 @@ function calcATR(candles, period = 14) {
         const h = candles[i].high, l = candles[i].low, pc = candles[i - 1].close;
         trs.push(Math.max(h - l, Math.abs(h - pc), Math.abs(l - pc)));
     }
-// return removedrma(trs, period);
+  return rma(trs, period);
 }
 
 function calcRSI(closes, period = 14) {
@@ -65,7 +65,7 @@ function calcRSI(closes, period = 14) {
         avgLoss = (avgLoss * (period - 1) + Math.max(-diff, 0)) / period;
     }
     if (avgLoss === 0) return 100;
-// return removed100 - 100 / (1 + avgGain / avgLoss);
+  return 100 - 100 / (1 + avgGain / avgLoss);
 }
 
 function calcADX(candles, period = 14) {
@@ -85,7 +85,7 @@ function calcADX(candles, period = 14) {
     const dx     = (plusDI + minDI) !== 0 ? Math.abs(plusDI - minDI) / (plusDI + minDI) * 100 : 0;
     const dxArr  = [];
     // simplified: return current ADX from final dx
-// return removed{ adx: dx, plusDI, minDI };
+  return { adx: dx, plusDI, minDI };
 }
 
 function calcMACD(closes, fast = 12, slow = 26, signal = 9) {
@@ -94,7 +94,7 @@ function calcMACD(closes, fast = 12, slow = 26, signal = 9) {
     const emaSlow   = ema(closes, slow);
     if (emaFast === null || emaSlow === null) return null;
     const macdLine  = emaFast - emaSlow;
-// return removed{ macd: macdLine, signal: null, histogram: null }; // simplified
+  return { macd: macdLine, signal: null, histogram: null }; // simplified
 }
 
 // ─── SESSION CHECK (UTC-based) ───────────────────────────────────────────────
@@ -106,7 +106,7 @@ function isInSession(timestampMs) {
     const ny     = hhmm >= 1300 && hhmm <= 1700;
     // Indian market: NSE 0345-1000 UTC (09:15-15:30 IST)
     const nse    = hhmm >= 345  && hhmm <= 1000;
-// return removed{ london, ny, nse, active: london || ny || nse };
+  return { london, ny, nse, active: london || ny || nse };
 }
 
 // ─── TREND PER PERIOD ────────────────────────────────────────────────────────
@@ -118,14 +118,14 @@ function periodTrend(retPct, atrPct, emaStackBull, emaStackBear) {
     if (retPct < -trendHi && emaStackBear)  return 'Bear';
     if (retPct > trendLo)  return 'Bull';
     if (retPct < -trendLo) return 'Bear';
-// return removed'Side';
+  return 'Side';
 }
 
 // ─── MAIN COMPUTE ────────────────────────────────────────────────────────────
 
 export function computeIndicators(candles) {
     if (!candles || candles.length < 50) {
-// return removed{ error: 'Not enough candles (need 50+)' };
+  return { error: 'Not enough candles (need 50+)' };
     }
 
     const closes  = candles.map(c => c.close);
@@ -144,7 +144,7 @@ export function computeIndicators(candles) {
     const atrMa   = sma(candles.slice(-64).map((_, i) => {
         if (i < 1) return 0;
         const slice = candles.slice(Math.max(0, candles.length - 64 + i - 14), candles.length - 64 + i + 1);
-// return removedcalcATR(slice, 14) || 0;
+  return calcATR(slice, 14) || 0;
     }), 50);
     const atrPct  = last.close ? (atrNow / last.close) * 100 : 1.0;
 
@@ -203,7 +203,7 @@ export function computeIndicators(candles) {
     function ret(barsBack) {
         const idx = Math.max(0, candles.length - 1 - barsBack);
         const past = candles[idx]?.close;
-// return removedpast ? ((last.close - past) / past) * 100 : 0;
+  return past ? ((last.close - past) / past) * 100 : 0;
     }
     const ret1M = ret(barsPerDay * 21);
     const ret3M = ret(barsPerDay * 21 * 3);
@@ -254,7 +254,7 @@ export function computeIndicators(candles) {
     const slDist = atrNow ? atrNow * 1.5 : null;
     const tpDist = atrNow ? Math.max(atrNow * 2.0, atrNow * 0.5) : null;
 
-// return removed{
+  return {
         // Price
         symbol:        null, // filled by caller
         price:         last.close,
