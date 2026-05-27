@@ -1,5 +1,4 @@
 import "dotenv/config";
-import "dotenv/config";
 
 export const WS_TYPES = Object.freeze({ SUBSCRIBE:"subscribe", INIT:"init", TICK:"tick", CANDLE_CLOSED:"candle_closed", ANALYSIS:"analysis", PORTFOLIO:"portfolio", ERROR:"error" });
 export const SIGNAL = Object.freeze({ LONG:"LONG", SHORT:"SHORT", NEUTRAL:"NEUTRAL" });
@@ -17,7 +16,7 @@ export const CONFIG = Object.freeze({
   analysisInterval: parseInt(process.env.ANALYSIS_MS || "1200000"),
   rateLimit:        parseInt(process.env.RATE_LIMIT  || "30"),
   allowedOrigin:    process.env.ALLOWED_ORIGIN || "*",
-  twelveKey:        process.env.TWELVE_DATA_KEY || null,
+  twelveKey:        process.env.TWELVE_DATA_API_KEY || process.env.TWELVE_DATA_KEY || null,
   forexCandleMs:    1200000,
   angelApiKey:      process.env.ANGEL_API_KEY    || null,
   angelClientId:    process.env.ANGEL_CLIENT_ID  || null,
@@ -25,19 +24,34 @@ export const CONFIG = Object.freeze({
   angelTotpSecret:  process.env.ANGEL_TOTP_SECRET|| null,
   fnoCandleMs:      1200000,
   useGroq:          process.env.USE_GROQ !== "false",
+  symbols: {
+    BTC: "btcusdt",
+    ETH: "ethusdt",
+    SOL: "solusdt",
+    BNB: "bnbusdt",
+  },
+  forexSymbols: {
+    EUR_USD: "EUR/USD",
+    XAU_USD: "XAU/USD",
+  },
 });
 
-export const TWELVE_TO_SYMBOL  = Object.freeze(Object.fromEntries(Object.entries(CONFIG.forexSymbols || {}).map(([s,t])=>[t,s])));
+export const BINANCE_TO_SYMBOL = Object.freeze(
+  Object.fromEntries(
+    Object.entries(CONFIG.symbols).map(([s, b]) => [b, s])
+  )
+);
+
+export const TWELVE_TO_SYMBOL = Object.freeze(
+  Object.fromEntries(
+    Object.entries(CONFIG.forexSymbols).map(([s, t]) => [t, s])
+  )
+);
 
 export function validateEnv(log) {
   if (!CONFIG.groqKey)    log.warn("GROQ_API_KEY not set — local models only");
-  if (!CONFIG.twelveKey)  log.warn("TWELVE_DATA_KEY not set — Gold & EURUSD disabled");
+  if (!CONFIG.twelveKey)  log.warn("TWELVE_DATA_API_KEY not set — Gold & EURUSD disabled");
   else                    log.info("Twelve Data → enabled");
   if (CONFIG.angelApiKey) log.info("Angel One → credentials loaded");
   else                    log.warn("Angel One credentials not set — F&O disabled");
 }
-export const BINANCE_TO_SYMBOL = Object.freeze(
-  Object.fromEntries(
-    Object.entries(CONFIG.symbols || {}).map(([s, b]) => [b, s])
-  )
-);
