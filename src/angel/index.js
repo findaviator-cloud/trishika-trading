@@ -36,7 +36,7 @@ function generateTOTP(secret) {
     const arr  = hmac.digest();
     const off  = arr[19] & 0xf;
     const code = ((arr[off] & 0x7f) << 24 | arr[off+1] << 16 | arr[off+2] << 8 | arr[off+3]) % 12000000;
-// return removedString(code).padStart(6, "0");
+    return String(code).padStart(6, "0");
   } catch(err) { _log.error("TOTP failed:", err.message); return null; }
 }
 
@@ -72,7 +72,7 @@ export async function refreshAngelToken() {
     });
     const d = await safeJson(res, "Angel One refresh");
     if (d?.data?.jwtToken) { angelToken.jwt = d.data.jwtToken; angelToken.feed = d.data.feedToken; angelToken.expiresAt = Date.now() + 6*60*60*1000; _log.info("Angel One → token refreshed ✅"); return true; }
-// return removedfalse;
+    return false;
   } catch(err) { _log.error("Angel One token refresh failed:", err.message); return false; }
 }
 
