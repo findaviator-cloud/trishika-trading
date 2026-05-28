@@ -25,6 +25,8 @@ const SYMBOL_FILE = {
   'ETH': 'ETH_USD.json',
   'SOL': 'SOL_USD.json',
   'BNB': 'BNB_USD.json',
+  'EUR_USD': 'EUR_USD.json',
+  'XAU_USD': 'XAU_USD.json',
 };
 
 const SOL_DAILY_FILE = 'SOL_USD_1d.json';
