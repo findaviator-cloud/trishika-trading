@@ -1,7 +1,44 @@
 import crypto from "crypto";
+import fs from "fs";
+import path from "path";
 import { WebSocketServer } from "ws";
 import { ROUTES, WS_TYPES, CONFIG } from "../config/index.js";
 import { getPortfolio, getPositions, getFunds, angelToken } from "../angel/index.js";
+
+const SIGNALS_DIR = path.resolve("signals_live");
+
+const SYMBOL_FILE = {
+  BTC: "BTC_USD.json",
+  ETH: "ETH_USD.json",
+  SOL: "SOL_USD.json",
+  BNB: "BNB_USD.json",
+  EUR_USD: "EUR_USD.json",
+  XAU_USD: "XAU_USD.json",
+};
+
+function loadSignal(symbol) {
+  try {
+    const file = SYMBOL_FILE[symbol];
+    if (!file) return null;
+    const filePath = path.join(SIGNALS_DIR, file);
+    if (!fs.existsSync(filePath)) return null;
+    const raw = fs.readFileSync(filePath, "utf8");
+    const data = JSON.parse(raw);
+    return {
+      signal:     data.signal?.action     ?? "NEUTRAL",
+      confidence: data.signal?.confidence ?? 0,
+      reason:     data.signal?.reason     ?? "",
+      stopPrice:  data.signal?.stopPrice  ?? null,
+      direction:  data.signal?.direction  ?? 0,
+      _source:    "Donchian-ATR",
+      timestamp:  data.meta?.asOf ? new Date(data.meta.asOf).getTime() : Date.now(),
+      indicators: data.indicators ?? {},
+      price:      data.price ?? {},
+    };
+  } catch (e) {
+    return null;
+  }
+}
 
 export function registerWebSocket(server, engines, log) {
   const wss = new WebSocketServer({ server, path: ROUTES.WS });
@@ -28,14 +65,15 @@ export function registerWebSocket(server, engines, log) {
 
         if (msg.type === WS_TYPES.SUBSCRIBE) {
           if (typeof msg.symbol !== "string") { ws.send(JSON.stringify({ type:WS_TYPES.ERROR, message:"symbol must be a string" })); return; }
-          const sym = msg.symbol.toUpperCase().replace(/[^A-Z]/g, "").slice(0, 10);
+          const sym = msg.symbol.toUpperCase().replace(/[^A-Z_]/g, "").slice(0, 10);
           if (!engines[sym]) { ws.send(JSON.stringify({ type:WS_TYPES.ERROR, message:`Unknown symbol: ${sym}`, available:Object.keys(engines) })); return; }
           if (subscribedSymbol && engines[subscribedSymbol]) engines[subscribedSymbol].unsubscribe(ws);
           subscribedSymbol = sym;
           engines[sym].subscribe(ws);
           log.info(`WS ${ws.id} → ${sym}`);
           const eng = engines[sym];
-          ws.send(JSON.stringify({ type:WS_TYPES.INIT, symbol:sym, candles:eng.candles.slice(-100), current:eng.currentCandle, analysis:eng.lastAnalysis, symbols:Object.keys(engines), candleMs:eng.candleMs, source:eng.source, isForex:eng.source==="twelvedata", isFno:eng.source==="angelone", angelConnected:!!angelToken.jwt, aiMode:CONFIG.groqKey?"Groq ⚡ + Local queue":"Local queue only" }));
+          const analysis = loadSignal(sym);
+          ws.send(JSON.stringify({ type:WS_TYPES.INIT, symbol:sym, candles:eng.candles.slice(-100), current:eng.currentCandle, analysis, symbols:Object.keys(engines), candleMs:eng.candleMs, source:eng.source, isForex:eng.source==="twelvedata", isFno:eng.source==="angelone", angelConnected:!!angelToken.jwt, aiMode:CONFIG.groqKey?"Groq ⚡ + Local queue":"Local queue only" }));
         }
 
         if (msg.type === "subscribe_portfolio") {
@@ -63,5 +101,5 @@ export function registerWebSocket(server, engines, log) {
     ws.on("error", (e) => log.error(`WS ${ws.id}:`, e.message));
   });
 
-// return removedwss;
+  return wss;
 }
