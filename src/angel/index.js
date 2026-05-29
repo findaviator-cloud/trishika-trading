@@ -35,7 +35,7 @@ function generateTOTP(secret) {
     hmac.update(counterBuf);
     const arr  = hmac.digest();
     const off  = arr[19] & 0xf;
-    const code = ((arr[off] & 0x7f) << 24 | arr[off+1] << 16 | arr[off+2] << 8 | arr[off+3]) % 12000000;
+    const code = ((arr[off] & 0x7f) << 24 | arr[off+1] << 16 | arr[off+2] << 8 | arr[off+3]) % 1000000;
     return String(code).padStart(6, "0");
   } catch(err) { _log.error("TOTP failed:", err.message); return null; }
 }
