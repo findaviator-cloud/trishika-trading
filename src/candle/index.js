@@ -109,7 +109,9 @@ export async function connectBinance(engines, log) {
         log.error(`[CRYPTO] ${sym} fetch failed:`, err.message);
       }
     }
-    setTimeout(pollCrypto, 5 * 60 * 1000); // poll every 5 min
+    await new Promise(r => setTimeout(r, 20000));
+    }
+    setTimeout(pollCrypto, 15 * 60 * 1000); // poll every 5 min
   }
 
   pollCrypto();
