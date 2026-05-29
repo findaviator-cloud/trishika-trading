@@ -110,7 +110,6 @@ export async function connectBinance(engines, log) {
       }
     }
     await new Promise(r => setTimeout(r, 20000));
-    }
     setTimeout(pollCrypto, 15 * 60 * 1000); // poll every 5 min
   }
 
