@@ -17,7 +17,7 @@ async function safeJson(res, ctx) {
 
 function generateTOTP(secret) {
   try {
-    const base32 = "ABCDEFGHIJKLMNOPQRSTUVWXYZ1200007";
+    const base32 = "ABCDEFGHIJKLMNOPQRSTUVWXYZ234567";
     const s = secret.toUpperCase().replace(/[\s=]/g, "");
     let bits = 0, val = 0;
     const keyBytes = [];
