@@ -324,6 +324,11 @@
     white-space: nowrap;
   }
 
+  .signal-time {
+    color: var(--accent);
+    font-weight: 600;
+    font-size: 11px;
+  }
   .timestamp {
     font-size: 10px;
     color: var(--muted);
@@ -689,7 +694,7 @@ function renderCard(sym) {
       <div class="card-footer">
         ${source ? `<div class="experts-badge">${source}</div>` : '<div></div>'}
         ${reason ? `<div class="reason-text" title="${reason}">${reason}</div>` : ''}
-        ${analysis?.timestamp ? `<div class="timestamp">${timeAgo(analysis.timestamp)}</div>` : '<div class="timestamp">waiting...</div>'}
+        ${analysis?.timestamp ? `<div class="timestamp ${signal !== 'NEUTRAL' ? 'signal-time' : ''}">${signal !== 'NEUTRAL' ? '🕐 Signal at: ' : ''}${timeAgo(analysis.timestamp)}</div>` : '<div class="timestamp">waiting...</div>'}
       </div>
 
       ${!hasAnalysis ? '<div class="waiting-overlay"><div class="waiting-text">ANALYSING...</div></div>' : ''}
