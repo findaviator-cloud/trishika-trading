@@ -27,10 +27,10 @@ const log = { info: console.log, warn: console.warn, error: console.error, debug
 // ── Engines setup ─────────────────────────────────────────────────────────────
 const engines = {};
 
-// Crypto engines (Binance)
+// Crypto engines (Twelve Data)
 for (const sym of ['BTC', 'ETH', 'SOL', 'BNB']) {
   engines[sym] = new CandleEngine(sym);
-  engines[sym].source = 'binance';
+  engines[sym].source = 'twelvedata';
 }
 
 // Forex/Gold engines (Twelve Data)
@@ -57,7 +57,7 @@ server.listen(port, async () => {
   // WebSocket
   registerWebSocket(server, engines, log);
 
-  // Binance WebSocket
+  // Binance WebSocket (Twelve Data REST)
   connectBinance(engines, log);
 
   // Twelve Data WebSocket
@@ -66,6 +66,13 @@ server.listen(port, async () => {
   // Angel One login + feed
   const angelOk = await angelLogin();
   if (angelOk) connectAngelOneFeed(engines, log);
+
+  // Auto re-login every 5 hours
+  setInterval(async () => {
+    log.info("Angel One → re-logging in...");
+    const ok = await angelLogin();
+    if (ok) connectAngelOneFeed(engines, log);
+  }, 5 * 60 * 60 * 1000);
 
   // Daily ETH/SOL refresh
   const DAILY_REFRESH_MS = 60 * 60 * 1000;
