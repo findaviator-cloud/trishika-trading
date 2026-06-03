@@ -117,6 +117,7 @@ function writeSignalFile(filename, symbol, timeframe, sig, lastCandle) {
     fs.writeFileSync(path.join(SIGNALS_DIR, filename), JSON.stringify(payload, null, 2), 'utf8');
   } catch(e) { /* disk write optional on Render */ }
 
+  console.log(`[DONCHIAN] ${symbol}/${timeframe} → ${sig.signal} conf=${sig.confidence} — ${sig.reason}`);
   if (sig.direction !== 0) {
     console.log(`[DONCHIAN] ${symbol}/${timeframe} → ${sig.signal}  `+
                 `conf=${sig.confidence}  stop=${sig.stopPrice}  ${sig.reason}`);
