@@ -1,11 +1,9 @@
 import crypto from "crypto";
-import fs from "fs";
-import path from "path";
+import { getSignal } from "../strategy/signal_store.js";
 import { WebSocketServer } from "ws";
 import { ROUTES, WS_TYPES, CONFIG } from "../config/index.js";
 import { getPortfolio, getPositions, getFunds, angelToken } from "../angel/index.js";
 
-const SIGNALS_DIR = path.resolve("signals_live");
 
 const SYMBOL_FILE = {
   BTC: "BTC_USD.json",
@@ -40,10 +38,8 @@ function loadSignal(symbol) {
   try {
     const file = SYMBOL_FILE[symbol];
     if (!file) return null;
-    const filePath = path.join(SIGNALS_DIR, file);
-    if (!fs.existsSync(filePath)) return null;
-    const raw = fs.readFileSync(filePath, "utf8");
-    const data = JSON.parse(raw);
+    const data = getSignal(file);
+    if (!data) return null;
     return {
       signal:     data.signal?.action     ?? "NEUTRAL",
       confidence: data.signal?.confidence ?? 0,

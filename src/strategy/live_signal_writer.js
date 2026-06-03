@@ -16,6 +16,7 @@ import fs      from 'fs';
 import path    from 'path';
 import https   from 'https';
 import { donchianSignal } from './donchian.js';
+import { setSignal } from './signal_store.js';
 
 const SIGNALS_DIR = path.resolve('signals_live');
 
@@ -101,8 +102,11 @@ function writeSignalFile(filename, symbol, timeframe, sig, lastCandle) {
     },
   };
 
-  if (!fs.existsSync(SIGNALS_DIR)) fs.mkdirSync(SIGNALS_DIR, { recursive: true });
-  fs.writeFileSync(path.join(SIGNALS_DIR, filename), JSON.stringify(payload, null, 2), 'utf8');
+  setSignal(filename, payload);
+  try {
+    if (!fs.existsSync(SIGNALS_DIR)) fs.mkdirSync(SIGNALS_DIR, { recursive: true });
+    fs.writeFileSync(path.join(SIGNALS_DIR, filename), JSON.stringify(payload, null, 2), 'utf8');
+  } catch(e) { /* disk write optional on Render */ }
 
   if (sig.direction !== 0) {
     console.log(`[DONCHIAN] ${symbol}/${timeframe} → ${sig.signal}  `+
