@@ -116,6 +116,48 @@ export const FNO_SYMBOLS = [
 
 export const ANGEL_TOKEN_TO_SYMBOL = Object.freeze(Object.fromEntries(FNO_SYMBOLS.map(s => [s.token, s.symbol])));
 
+export async function loadFnoHistory(engines, log) {
+  if (!angelToken.jwt) { log.warn("Angel One not logged in — F&O history skipped"); return; }
+  const FNO_SYMS = Object.keys(engines).filter(s => engines[s].source === "angelone");
+  log.info(`[FNO] Loading history for ${FNO_SYMS.length} symbols via Angel One REST...`);
+  for (const sym of FNO_SYMS) {
+    try {
+      const fnoEntry = FNO_SYMBOLS.find(f => f.symbol === sym);
+      if (!fnoEntry) continue;
+      const body = JSON.stringify({
+        exchange: "NSE",
+        symboltoken: fnoEntry.token,
+        interval: "ONE_HOUR",
+        fromdate: (() => { const d = new Date(); d.setDate(d.getDate() - 30); return d.toISOString().slice(0,10) + " 09:15"; })(),
+        todate: (() => { const d = new Date(); return d.toISOString().slice(0,10) + " 15:30"; })(),
+      });
+      const res = await fetch("https://apiconnect.angelone.in/rest/secure/angelbroking/historical/v1/getCandleData", {
+        method: "POST",
+        headers: { ...HEADERS(), "Content-Type": "application/json" },
+        body,
+      });
+      const d = await safeJson(res, `FNO history ${sym}`);
+      if (d?.data && Array.isArray(d.data) && d.data.length > 0) {
+        const candles = d.data.map(r => ({
+          time:   new Date(r[0]).getTime(),
+          open:   parseFloat(r[1]),
+          high:   parseFloat(r[2]),
+          low:    parseFloat(r[3]),
+          close:  parseFloat(r[4]),
+          volume: parseFloat(r[5]) || 0,
+        }));
+        engines[sym].loadCandles(candles);
+        log.info(`[FNO] ${sym} history loaded — ${candles.length} candles`);
+      } else {
+        log.warn(`[FNO] ${sym} — no data returned`);
+      }
+      await new Promise(r => setTimeout(r, 300)); // rate limit
+    } catch (err) {
+      log.error(`[FNO] ${sym} history failed:`, err.message);
+    }
+  }
+}
+
 export function connectAngelOneFeed(engines, log) {
   if (!angelToken.jwt || !angelToken.feed) { log.warn("Angel One not logged in — feed not started"); return; }
   const ws = new WebSocket("wss://smartapisocket.angelone.in/smart-stream", {

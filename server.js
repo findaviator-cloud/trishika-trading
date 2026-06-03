@@ -5,7 +5,7 @@ import path from 'path';
 import { fileURLToPath } from 'url';
 import routes from './src/routes/index.js';
 import { CandleEngine, connectBinance, connectTwelveData, loadForexHistory } from './src/candle/index.js';
-import { connectAngelOneFeed, angelLogin } from './src/angel/index.js';
+import { connectAngelOneFeed, angelLogin, loadFnoHistory } from './src/angel/index.js';
 import { registerWebSocket } from './src/ws/index.js';
 import { refreshDailyETH, refreshDailySOL } from './src/strategy/live_signal_writer.js';
 import { runMonitorCycle } from './src/strategy/monitor.js';
@@ -68,6 +68,7 @@ server.listen(port, async () => {
   // Angel One login + feed
   const angelOk = await angelLogin();
   if (angelOk) connectAngelOneFeed(engines, log);
+  if (angelOk) await loadFnoHistory(engines, log);
 
   // Auto re-login every 5 hours
   setInterval(async () => {
