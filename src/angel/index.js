@@ -124,6 +124,8 @@ export async function loadFnoHistory(engines, log) {
     try {
       const fnoEntry = FNO_SYMBOLS.find(f => f.symbol === sym);
       if (!fnoEntry) continue;
+      // NIFTY/BANKNIFTY index historical alag API se milta hai — skip for now
+      if (sym === "NIFTY" || sym === "BANKNIFTY") { log.info(`[FNO] ${sym} — index skipped`); continue; }
       const body = JSON.stringify({
         exchange: "NSE",
         symboltoken: fnoEntry.token,
@@ -151,7 +153,7 @@ export async function loadFnoHistory(engines, log) {
       } else {
         log.warn(`[FNO] ${sym} — no data returned`);
       }
-      await new Promise(r => setTimeout(r, 300)); // rate limit
+      await new Promise(r => setTimeout(r, 1500)); // rate limit
     } catch (err) {
       log.error(`[FNO] ${sym} history failed:`, err.message);
     }
