@@ -62,6 +62,15 @@ const HOURLY_OPTS = {
   allowShort:  true,
 };
 
+const FNO_OPTS = {
+  donchianLen: 30,
+  atrLen:      14,
+  atrMult:     2.0,
+  smaLen:      50,
+  allowLong:   true,
+  allowShort:  true,
+};
+
 const DAILY_ETH_OPTS = {
   donchianLen: 20,
   atrLen:      14,
@@ -145,11 +154,18 @@ function fetchTwelveDataKlines(symbol, limit) {
 }
 
 // ── hourly writer (called from CandleEngine on candle close) ──────────────────
+const FNO_SYMBOLS_SET = new Set([
+  'NIFTY','BANKNIFTY','RELIANCE','TCS','INFY','HDFCBANK','ICICIBANK','SBIN',
+  'BHARTIARTL','ITC','WIPRO','HCLTECH','AXISBANK','KOTAKBANK','LT','ONGC',
+  'TATAMOTORS','BAJFINANCE','MARUTI','ADANIENT'
+]);
+
 export function writeDonchianSignal(symbol, candles) {
   try {
     const file = SYMBOL_FILE[symbol];
     if (!file) { console.warn(`[DONCHIAN] No file mapping for symbol: ${symbol}`); return; }
-    const sig = donchianSignal(candles, HOURLY_OPTS);
+    const opts = FNO_SYMBOLS_SET.has(symbol) ? FNO_OPTS : HOURLY_OPTS;
+    const sig = donchianSignal(candles, opts);
     writeSignalFile(file, `${symbol}/USD`, '1h', sig, candles[candles.length - 1]);
   } catch (err) {
     console.error(`[DONCHIAN WRITER] ${symbol}:`, err.message);
