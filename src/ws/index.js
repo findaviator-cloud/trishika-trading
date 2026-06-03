@@ -1,5 +1,5 @@
 import crypto from "crypto";
-import { getSignal } from "../strategy/signal_store.js";
+import { getSignal, getAllSignals } from "../strategy/signal_store.js";
 import { WebSocketServer } from "ws";
 import { ROUTES, WS_TYPES, CONFIG } from "../config/index.js";
 import { getPortfolio, getPositions, getFunds, angelToken } from "../angel/index.js";
@@ -59,6 +59,17 @@ function loadSignal(symbol) {
 export function registerWebSocket(server, engines, log) {
   const wss = new WebSocketServer({ server, path: ROUTES.WS });
   const portfolioSubscribers = new Set();
+  // Broadcast analysis updates every 30s to all engine subscribers
+  setInterval(() => {
+    for (const [sym, eng] of Object.entries(engines)) {
+      const analysis = loadSignal(sym);
+      if (!analysis) continue;
+      const msg = JSON.stringify({ type: WS_TYPES.ANALYSIS, symbol: sym, data: analysis });
+      for (const ws of eng.subscribers) {
+        if (ws.readyState === 1) ws.send(msg);
+      }
+    }
+  }, 30000);
 
   setInterval(async () => {
     if (portfolioSubscribers.size === 0 || !angelToken.jwt) return;
