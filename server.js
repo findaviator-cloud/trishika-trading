@@ -4,7 +4,7 @@ import express from 'express';
 import path from 'path';
 import { fileURLToPath } from 'url';
 import routes from './src/routes/index.js';
-import { CandleEngine, connectBinance, connectTwelveData } from './src/candle/index.js';
+import { CandleEngine, connectBinance, connectTwelveData, loadForexHistory } from './src/candle/index.js';
 import { connectAngelOneFeed, angelLogin } from './src/angel/index.js';
 import { registerWebSocket } from './src/ws/index.js';
 import { refreshDailyETH, refreshDailySOL } from './src/strategy/live_signal_writer.js';
@@ -62,6 +62,8 @@ server.listen(port, async () => {
 
   // Twelve Data WebSocket
   connectTwelveData(engines, log);
+  // Forex/Gold historical candles load
+  await loadForexHistory(engines, log);
 
   // Angel One login + feed
   const angelOk = await angelLogin();

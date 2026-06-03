@@ -117,6 +117,22 @@ export async function connectBinance(engines, log) {
 }
 
 // ── Twelve Data WebSocket (Forex + Gold) ─────────────────────────────────────
+export async function loadForexHistory(engines, log) {
+  const FOREX_MAP = { EUR_USD: "EUR/USD", XAU_USD: "XAU/USD" };
+  for (const [sym, tdSym] of Object.entries(FOREX_MAP)) {
+    try {
+      const candles = await fetchTwelveHourly(tdSym, 200);
+      if (engines[sym]) {
+        engines[sym].loadCandles(candles);
+        const last = candles[candles.length - 1];
+        log.info(`[FOREX] ${sym} history loaded — ${candles.length} candles, last close: ${last.close}`);
+      }
+    } catch (err) {
+      log.error(`[FOREX] ${sym} history load failed:`, err.message);
+    }
+  }
+}
+
 export function connectTwelveData(engines, log) {
   if (!CONFIG.twelveKey) {
     log.warn("Twelve Data key missing — Forex & Gold disabled");
