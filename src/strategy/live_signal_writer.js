@@ -17,6 +17,7 @@ import path    from 'path';
 import https   from 'https';
 import { donchianSignal } from './donchian.js';
 import { setSignal } from './signal_store.js';
+import { logSignal } from './signal_logger.js';
 
 const SIGNALS_DIR = path.resolve('signals_live');
 
@@ -168,6 +169,7 @@ export function writeDonchianSignal(symbol, candles) {
     const opts = FNO_SYMBOLS_SET.has(symbol) ? FNO_OPTS : HOURLY_OPTS;
     const sig = donchianSignal(candles, opts);
     writeSignalFile(file, `${symbol}/USD`, '1h', sig, candles[candles.length - 1]);
+    logSignal(symbol, sig, candles[candles.length - 1]);
   } catch (err) {
     console.error(`[DONCHIAN WRITER] ${symbol}:`, err.message);
   }
