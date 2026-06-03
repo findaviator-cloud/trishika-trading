@@ -61,12 +61,15 @@ export function registerWebSocket(server, engines, log) {
   const portfolioSubscribers = new Set();
   // Broadcast analysis updates every 30s to all engine subscribers
   setInterval(() => {
+    const allAnalysis = {};
+    for (const s of Object.keys(engines)) {
+      const a = loadSignal(s);
+      if (a) allAnalysis[s] = a;
+    }
+    const bulkMsg = JSON.stringify({ type: "bulk_analysis", allAnalysis });
     for (const [sym, eng] of Object.entries(engines)) {
-      const analysis = loadSignal(sym);
-      if (!analysis) continue;
-      const msg = JSON.stringify({ type: WS_TYPES.ANALYSIS, symbol: sym, data: analysis });
       for (const ws of eng.subscribers) {
-        if (ws.readyState === 1) ws.send(msg);
+        if (ws.readyState === 1) ws.send(bulkMsg);
       }
     }
   }, 30000);
@@ -100,7 +103,12 @@ export function registerWebSocket(server, engines, log) {
           log.info(`WS ${ws.id} → ${sym}`);
           const eng = engines[sym];
           const analysis = loadSignal(sym);
-          ws.send(JSON.stringify({ type:WS_TYPES.INIT, symbol:sym, candles:eng.candles.slice(-100), current:eng.currentCandle, analysis, symbols:Object.keys(engines), candleMs:eng.candleMs, source:eng.source, isForex:eng.source==="twelvedata", isFno:eng.source==="angelone", angelConnected:!!angelToken.jwt, aiMode:CONFIG.groqKey?"Groq ⚡ + Local queue":"Local queue only" }));
+          const allAnalysis = {};
+          for (const s of Object.keys(engines)) {
+            const a = loadSignal(s);
+            if (a) allAnalysis[s] = a;
+          }
+          ws.send(JSON.stringify({ type:WS_TYPES.INIT, symbol:sym, candles:eng.candles.slice(-100), current:eng.currentCandle, analysis, allAnalysis, symbols:Object.keys(engines), candleMs:eng.candleMs, source:eng.source, isForex:eng.source==="twelvedata", isFno:eng.source==="angelone", angelConnected:!!angelToken.jwt, aiMode:CONFIG.groqKey?"Groq ⚡ + Local queue":"Local queue only" }));
         }
 
         if (msg.type === "subscribe_portfolio") {

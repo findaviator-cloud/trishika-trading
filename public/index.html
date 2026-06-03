@@ -808,7 +808,27 @@ function connectWS(sym) {
         if (!state[sym]) state[sym] = {};
         state[sym].current = msg.current;
         state[sym].analysis = msg.analysis;
-        updateCard(sym);
+        // Load all symbols analysis at once
+        if (msg.allAnalysis) {
+          for (const [s, a] of Object.entries(msg.allAnalysis)) {
+            if (!state[s]) state[s] = {};
+            state[s].analysis = a;
+          }
+        }
+        updateAllCards();
+        updateStats();
+        updateTicker();
+      }
+      if (msg.type === 'bulk_analysis') {
+        if (msg.allAnalysis) {
+          for (const [s, a] of Object.entries(msg.allAnalysis)) {
+            if (!state[s]) state[s] = {};
+            state[s].analysis = a;
+          }
+        }
+        updateAllCards();
+        updateStats();
+        updateTicker();
       }
     } catch(e) {}
   };
@@ -816,6 +836,12 @@ function connectWS(sym) {
   ws.onclose = () => {
     setTimeout(() => { if (wsSymbol) connectWS(wsSymbol); }, 30000);
   };
+}
+
+function updateAllCards() {
+  for (const sym of Object.keys(state)) {
+    updateCard(sym);
+  }
 }
 
 function updateCard(sym) {
