@@ -137,7 +137,7 @@ export async function loadFnoHistory(engines, log) {
     "KOTAKBANK":  "KOTAKBANK.NS",
     "LT":         "LT.NS",
     "ONGC":       "ONGC.NS",
-    "TATAMOTORS": "TATAMOTORS.NS",
+    "TATAMOTORS": "TATAMOTORS.BO",
     "BAJFINANCE": "BAJFINANCE.NS",
     "MARUTI":     "MARUTI.NS",
     "ADANIENT":   "ADANIENT.NS",
