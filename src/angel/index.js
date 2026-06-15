@@ -194,8 +194,9 @@ export function connectAngelOneFeed(engines, log) {
     try {
       if (raw instanceof Buffer) {
         if (raw.length < 48) return;
+        log.debug(`[ANGEL] packet length: ${raw.length}`);
         const token = raw.slice(2, 27).toString("utf8").replace(/\0/g, "").trim();
-        const ltp = raw.readUInt32BE(51) / 100;
+        const ltp = raw.readUInt32BE(35) / 100;
         const sym   = ANGEL_TOKEN_TO_SYMBOL[token];
         if (sym && engines[sym]) engines[sym].onTick(Number(ltp), 1, Date.now());
         return;
