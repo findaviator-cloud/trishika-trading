@@ -204,6 +204,6 @@ export function connectAngelOneFeed(engines, log) {
       if (msg.type === "heartbeat") { ws.send(JSON.stringify({ heartbeat:"pong" })); return; }
     } catch(e) { log.error("Angel One feed parse:", e.message); }
   });
-  ws.on("close", () => { log.warn("Angel One feed WS closed — reconnecting in 5s..."); setTimeout(() => connectAngelOneFeed(engines, log), 30000); });
+  ws.on("close", () => { log.warn("Angel One feed WS closed — reconnecting in 5s..."); setTimeout(() => connectAngelOneFeed(engines, log), 60000); });
   ws.on("error", (e) => log.error("Angel One feed WS:", e.message));
 }
