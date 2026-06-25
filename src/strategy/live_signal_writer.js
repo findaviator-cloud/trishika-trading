@@ -16,7 +16,7 @@ import fs      from 'fs';
 import path    from 'path';
 import https   from 'https';
 import { donchianSignal } from './donchian.js';
-import { setSignal } from './signal_store.js';
+import { setSignal, addToHistory } from './signal_store.js';
 import { logSignal } from './signal_logger.js';
 
 const SIGNALS_DIR = path.resolve('signals_live');
@@ -170,6 +170,8 @@ export function writeDonchianSignal(symbol, candles) {
     const sig = donchianSignal(candles, opts);
     writeSignalFile(file, `${symbol}/USD`, '1h', sig, candles[candles.length - 1]);
     logSignal(symbol, sig, candles[candles.length - 1]);
+    const src = FNO_SYMBOLS_SET.has(symbol) ? 'FNO' : 'CRYPTO/FOREX';
+    addToHistory(symbol, sig.signal, candles[candles.length-1].close, sig.stopPrice, sig.confidence, sig.reason, src);
   } catch (err) {
     console.error(`[DONCHIAN WRITER] ${symbol}:`, err.message);
   }
@@ -189,6 +191,7 @@ export async function refreshDailySOL() {
       allowLong: false, allowShort: true,
     });
     writeSignalFile(SOL_DAILY_FILE, 'SOL/USD', '1d', sig, candles[candles.length - 1]);
+    addToHistory('SOL/USD', sig.signal, candles[candles.length-1].close, sig.stopPrice, sig.confidence, sig.reason, 'CRYPTO-DAILY');
   } catch (err) {
     console.error('[DONCHIAN DAILY SOL]', err.message);
   }
@@ -204,6 +207,7 @@ export async function refreshDailyETH() {
     }
     const sig = donchianSignal(candles, DAILY_ETH_OPTS);
     writeSignalFile('ETH_USD_1d.json', 'ETH/USD', '1d', sig, candles[candles.length - 1]);
+    addToHistory('ETH/USD', sig.signal, candles[candles.length-1].close, sig.stopPrice, sig.confidence, sig.reason, 'CRYPTO-DAILY');
   } catch (err) {
     console.error('[DONCHIAN DAILY ETH]', err.message);
   }
