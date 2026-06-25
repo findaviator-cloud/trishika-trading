@@ -514,6 +514,114 @@
     transition: transform 0.2s;
   }
   .toggle.on::after { transform: translateX(16px); }
+
+  /* SIGNAL HISTORY PANEL */
+  .history-section {
+    margin: 24px 0;
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    overflow: hidden;
+  }
+  .history-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 16px 20px;
+    border-bottom: 1px solid var(--border);
+  }
+  .history-title {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--accent);
+    letter-spacing: 1px;
+    text-transform: uppercase;
+  }
+  .history-badge {
+    background: rgba(0,212,255,0.1);
+    color: var(--accent);
+    border: 1px solid rgba(0,212,255,0.3);
+    border-radius: 20px;
+    padding: 3px 10px;
+    font-size: 11px;
+    font-family: 'Space Mono', monospace;
+  }
+  .history-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 12px;
+  }
+  .history-table th {
+    padding: 10px 16px;
+    text-align: left;
+    color: var(--muted);
+    font-weight: 500;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    font-size: 10px;
+    border-bottom: 1px solid var(--border);
+    background: var(--bg3);
+  }
+  .history-table td {
+    padding: 10px 16px;
+    border-bottom: 1px solid rgba(30,41,54,0.5);
+    font-family: 'Space Mono', monospace;
+    font-size: 11px;
+  }
+  .history-table tr:hover td { background: rgba(0,212,255,0.03); }
+  .history-table tr:last-child td { border-bottom: none; }
+  .badge-long {
+    background: rgba(0,255,136,0.15);
+    color: var(--green);
+    border: 1px solid rgba(0,255,136,0.3);
+    border-radius: 4px;
+    padding: 2px 8px;
+    font-size: 10px;
+    font-weight: 700;
+  }
+  .badge-short {
+    background: rgba(255,51,102,0.15);
+    color: var(--red);
+    border: 1px solid rgba(255,51,102,0.3);
+    border-radius: 4px;
+    padding: 2px 8px;
+    font-size: 10px;
+    font-weight: 700;
+  }
+  .source-fno { color: var(--yellow); }
+  .source-crypto { color: var(--accent); }
+  .history-empty {
+    padding: 32px;
+    text-align: center;
+    color: var(--muted);
+    font-size: 13px;
+  }
+  .history-refresh {
+    background: transparent;
+    border: 1px solid var(--border);
+    color: var(--muted);
+    padding: 4px 12px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 11px;
+    transition: all 0.2s;
+  }
+  .history-refresh:hover { border-color: var(--accent); color: var(--accent); }
+  .conf-bar {
+    display: inline-block;
+    width: 40px;
+    height: 4px;
+    background: var(--border);
+    border-radius: 2px;
+    vertical-align: middle;
+    margin-left: 4px;
+    overflow: hidden;
+  }
+  .conf-fill {
+    height: 100%;
+    border-radius: 2px;
+    background: var(--accent);
+  }
 </style>
 </head>
 <body>
@@ -906,13 +1014,98 @@ async function loadEnabledSymbols() {
   } catch(err) {}
 }
 
+
+// ── 24-HOUR SIGNAL HISTORY ──
+async function loadHistory() {
+  try {
+    const r = await fetch('/api/history');
+    const d = await r.json();
+    const container = document.getElementById('history-container');
+    document.getElementById('history-count').textContent = d.count + ' signals';
+
+    if (!d.signals || d.signals.length === 0) {
+      container.innerHTML = '<div class="history-empty">No signals in last 24 hours. Signals will appear here as they are generated.</div>';
+      return;
+    }
+
+    const rows = d.signals.map(s => {
+      const time = new Date(s.time).toLocaleString('en-IN', {
+        timeZone: 'Asia/Kolkata',
+        day: '2-digit', month: 'short',
+        hour: '2-digit', minute: '2-digit', hour12: false
+      });
+      const badge = s.action === 'LONG'
+        ? '<span class="badge-long">▲ LONG</span>'
+        : '<span class="badge-short">▼ SHORT</span>';
+      const src = s.source && s.source.includes('FNO')
+        ? `<span class="source-fno">${s.source}</span>`
+        : `<span class="source-crypto">${s.source || '-'}</span>`;
+      const conf = s.confidence || 0;
+      const confBar = `<span style="color:var(--muted)">${conf}%</span><span class="conf-bar"><span class="conf-fill" style="width:${conf}%"></span></span>`;
+      const entry = s.entry ? Number(s.entry).toLocaleString('en-IN', {maximumFractionDigits: 2}) : '-';
+      const stop = s.stop ? Number(s.stop).toLocaleString('en-IN', {maximumFractionDigits: 2}) : '-';
+      const reason = (s.reason || '').length > 45 ? s.reason.substring(0, 45) + '...' : (s.reason || '-');
+
+      return `<tr>
+        <td style="color:var(--muted)">${time} IST</td>
+        <td style="color:var(--text);font-weight:600">${s.symbol}</td>
+        <td>${badge}</td>
+        <td>${confBar}</td>
+        <td style="color:var(--green)">${entry}</td>
+        <td style="color:var(--red)">${stop}</td>
+        <td>${src}</td>
+        <td style="color:var(--muted);font-size:10px">${reason}</td>
+      </tr>`;
+    }).join('');
+
+    container.innerHTML = `
+      <table class="history-table">
+        <thead>
+          <tr>
+            <th>Time (IST)</th>
+            <th>Symbol</th>
+            <th>Signal</th>
+            <th>Confidence</th>
+            <th>Entry</th>
+            <th>Stop</th>
+            <th>Source</th>
+            <th>Reason</th>
+          </tr>
+        </thead>
+        <tbody>${rows}</tbody>
+      </table>`;
+  } catch(err) {
+    document.getElementById('history-container').innerHTML =
+      '<div class="history-empty">Failed to load history: ' + err.message + '</div>';
+  }
+}
+
+// Auto-refresh history every 60 seconds
+setInterval(loadHistory, 60000);
+
 // Init
 loadEnabledSymbols().then(() => loadAllSymbols()).then(() => {
   // Connect WS to ETH by default
   connectWS('ETH');
   // Poll every 30 seconds for updates
   setInterval(pollUpdates, 30000);
+  // Load 24-hour signal history
+  loadHistory();
 });
 </script>
+
+<!-- 24-HOUR SIGNAL HISTORY -->
+<div class="history-section" style="max-width:1200px;margin:24px auto;">
+  <div class="history-header">
+    <div class="history-title">⏱ 24-Hour Signal History</div>
+    <div style="display:flex;align-items:center;gap:10px;">
+      <span class="history-badge" id="history-count">0 signals</span>
+      <button class="history-refresh" onclick="loadHistory()">↺ Refresh</button>
+    </div>
+  </div>
+  <div id="history-container">
+    <div class="history-empty">Loading signal history...</div>
+  </div>
+</div>
 </body>
 </html>
