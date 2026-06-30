@@ -146,8 +146,8 @@ export function connectTwelveData(engines, log) {
     log.info(`Twelve Data → subscribed: ${symbols.join(", ")}`);
   });
   ws.on("close", () => {
-    log.warn("Twelve Data WS closed — reconnecting in 5s...");
-    setTimeout(() => connectTwelveData(engines, log), 5000);
+    log.warn("Twelve Data WS closed — reconnecting in 60s...");
+    setTimeout(() => connectTwelveData(engines, log), 60000);
   });
   ws.on("error", (e) => log.error("Twelve Data WS:", e.message));
   ws.on("message", (raw) => {
