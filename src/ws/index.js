@@ -59,22 +59,36 @@ function loadSignal(symbol) {
 export function registerWebSocket(server, engines, log) {
   const wss = new WebSocketServer({ server, path: ROUTES.WS });
   const portfolioSubscribers = new Set();
-  // Broadcast analysis updates every 30s to all engine subscribers
+  // Broadcast analysis updates every 60s — only if changed, only during market hours
+  let lastBulkMsg = null;
   setInterval(() => {
+    const now = new Date();
+    const istHour = (now.getUTCHours() + 5.5) % 24;
+    const day = now.getUTCDay();
+    const isWeekday = day >= 1 && day <= 5;
+    const isMarketHours = istHour >= 9 && istHour <= 15.5;
+    if (!isWeekday || !isMarketHours) return;
+
     const allAnalysis = {};
     for (const s of Object.keys(engines)) {
       const a = loadSignal(s);
       if (a) allAnalysis[s] = a;
     }
     const bulkMsg = JSON.stringify({ type: "bulk_analysis", allAnalysis });
+    if (bulkMsg === lastBulkMsg) return;
+    lastBulkMsg = bulkMsg;
     for (const [sym, eng] of Object.entries(engines)) {
       for (const ws of eng.subscribers) {
         if (ws.readyState === 1) ws.send(bulkMsg);
       }
     }
-  }, 30000);
+  }, 60000);
 
   setInterval(async () => {
+    const now = new Date();
+    const istHour = (now.getUTCHours() + 5.5) % 24;
+    const day = now.getUTCDay();
+    if (day < 1 || day > 5 || istHour < 9 || istHour > 15.5) return;
     if (portfolioSubscribers.size === 0 || !angelToken.jwt) return;
     try {
       const [positions, funds] = await Promise.all([getPositions(), getFunds()]);
