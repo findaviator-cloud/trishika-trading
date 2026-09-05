@@ -1,0 +1,4963 @@
+{
+  "generatedAt": "2026-09-04T12:24:16.682Z",
+  "scope": "BTC, ETH, SOL, BNB",
+  "lockedOosStartUtc": "2025-03-01",
+  "methodology": {
+    "description": "Supplementary closed-trade risk metrics reported under separate entry-attribution and exit-realization conventions.",
+    "riskFreeRatePerTrade": 0,
+    "sortinoTargetPerTrade": 0,
+    "annualization": "Trade-level Sharpe and Sortino annualized using realized trade frequency over calendar duration.",
+    "cvarConvention": "Empirical mean of worst ceil(N × tail_probability) trade returns, minimum one trade.",
+    "criticalLimitation": "Not a daily/4H mark-to-market portfolio equity curve. Do not use alone for final production-risk approval."
+  },
+  "modes": {
+    "ENTRY_ATTRIBUTION": {
+      "key": "ENTRY_ATTRIBUTION",
+      "label": "OOS Entry-Attributed Closed-Trade Metrics",
+      "inclusionRule": "Include a closed trade if entryTime >= OOS_START_MS.",
+      "primaryTimeField": "entryTime",
+      "limitation": "A trade may realize after its entry-attributed OOS window."
+    },
+    "EXIT_REALIZATION": {
+      "key": "EXIT_REALIZATION",
+      "label": "OOS Exit-Realized Closed-Trade Metrics",
+      "inclusionRule": "Include a closed trade if exitTime >= OOS_START_MS.",
+      "primaryTimeField": "exitTime",
+      "limitation": "A pre-OOS trade can contribute its full lifetime P&L if it exits during OOS."
+    }
+  },
+  "metrics": [
+    {
+      "symbol": "BTC",
+      "variant": "A",
+      "mode": "ENTRY_ATTRIBUTION",
+      "status": "OK",
+      "methodology": {
+        "modeLabel": "OOS Entry-Attributed Closed-Trade Metrics",
+        "oosStartUtc": "2025-03-01",
+        "inclusionRule": "Include a closed trade if entryTime >= OOS_START_MS.",
+        "modeLimitation": "A trade may realize after its entry-attributed OOS window.",
+        "returnBasis": "Net closed-trade P&L percentage",
+        "equityBasis": "Sequential compounding by closed trade, ordered by exit timestamp",
+        "annualization": "Trade-level mean/std ratios annualized by observed trades per calendar year",
+        "riskFreeRatePerTrade": 0,
+        "sortinoTargetPerTrade": 0,
+        "primaryLimitation": "This is supplementary trade-level risk analysis, not daily or 4H marked-to-market portfolio risk accounting."
+      },
+      "period": {
+        "firstIncludedEntryUtc": "2025-03-02",
+        "lastIncludedExitUtc": "2026-08-17",
+        "durationStartUtc": "2025-03-01",
+        "durationYears": 1.464294,
+        "tradeCount": 58,
+        "tradesPerYear": 39.6095
+      },
+      "distribution": {
+        "averageTradeReturnPct": 0.2245,
+        "sampleStdDevTradeReturnPct": 7.3298,
+        "downsideDeviationPct": 2.2514,
+        "winCount": 11,
+        "lossCount": 47,
+        "winRatePct": 18.97,
+        "bestTradePct": 34.1248,
+        "worstTradePct": -4.8504
+      },
+      "performance": {
+        "totalReturnPct": -0.2932,
+        "cagrPct": -0.2003
+      },
+      "riskAdjusted": {
+        "sharpeRatioAnnualizedTradeFrequency": 0.1928,
+        "sortinoRatioAnnualizedTradeFrequency": 0.6276,
+        "maxDrawdownPct": -25.6334,
+        "calmarRatioCagrOverAbsoluteMaxDrawdown": -0.0078,
+        "ulcerIndexPct": 14.0095,
+        "cvar95Pct": -4.6743,
+        "cvar95TailTradeCount": 3,
+        "cvar95WorstTradePct": -4.8504,
+        "cvar95Interpretation": "Tail contains 3 worst closed trades.",
+        "cvar99Pct": -4.8504,
+        "cvar99TailTradeCount": 1,
+        "cvar99WorstTradePct": -4.8504,
+        "cvar99Interpretation": "Tail contains one trade; interpret as worst-trade diagnostic."
+      },
+      "equityCurve": [
+        {
+          "sequence": 0,
+          "equity": 1,
+          "drawdownPct": 0
+        },
+        {
+          "sequence": 1,
+          "equity": 0.95149559,
+          "drawdownPct": -4.8504
+        },
+        {
+          "sequence": 2,
+          "equity": 0.9074456,
+          "drawdownPct": -9.2554
+        },
+        {
+          "sequence": 3,
+          "equity": 0.89187168,
+          "drawdownPct": -10.8128
+        },
+        {
+          "sequence": 4,
+          "equity": 0.86972339,
+          "drawdownPct": -13.0277
+        },
+        {
+          "sequence": 5,
+          "equity": 0.84510959,
+          "drawdownPct": -15.489
+        },
+        {
+          "sequence": 6,
+          "equity": 0.82595205,
+          "drawdownPct": -17.4048
+        },
+        {
+          "sequence": 7,
+          "equity": 1.0403512,
+          "drawdownPct": 0
+        },
+        {
+          "sequence": 8,
+          "equity": 1.01975691,
+          "drawdownPct": -1.9796
+        },
+        {
+          "sequence": 9,
+          "equity": 1.00180225,
+          "drawdownPct": -3.7054
+        },
+        {
+          "sequence": 10,
+          "equity": 0.97776025,
+          "drawdownPct": -6.0163
+        },
+        {
+          "sequence": 11,
+          "equity": 0.95514088,
+          "drawdownPct": -8.1905
+        },
+        {
+          "sequence": 12,
+          "equity": 0.94669973,
+          "drawdownPct": -9.0019
+        },
+        {
+          "sequence": 13,
+          "equity": 0.93119451,
+          "drawdownPct": -10.4923
+        },
+        {
+          "sequence": 14,
+          "equity": 0.91467173,
+          "drawdownPct": -12.0805
+        },
+        {
+          "sequence": 15,
+          "equity": 0.96694137,
+          "drawdownPct": -7.0563
+        },
+        {
+          "sequence": 16,
+          "equity": 0.94335804,
+          "drawdownPct": -9.3231
+        },
+        {
+          "sequence": 17,
+          "equity": 0.92879249,
+          "drawdownPct": -10.7232
+        },
+        {
+          "sequence": 18,
+          "equity": 0.91078546,
+          "drawdownPct": -12.454
+        },
+        {
+          "sequence": 19,
+          "equity": 0.89427786,
+          "drawdownPct": -14.0408
+        },
+        {
+          "sequence": 20,
+          "equity": 0.89638741,
+          "drawdownPct": -13.838
+        },
+        {
+          "sequence": 21,
+          "equity": 0.87671884,
+          "drawdownPct": -15.7286
+        },
+        {
+          "sequence": 22,
+          "equity": 0.85697556,
+          "drawdownPct": -17.6263
+        },
+        {
+          "sequence": 23,
+          "equity": 0.84109892,
+          "drawdownPct": -19.1524
+        },
+        {
+          "sequence": 24,
+          "equity": 0.82870992,
+          "drawdownPct": -20.3433
+        },
+        {
+          "sequence": 25,
+          "equity": 0.81552162,
+          "drawdownPct": -21.6109
+        },
+        {
+          "sequence": 26,
+          "equity": 0.80201278,
+          "drawdownPct": -22.9094
+        },
+        {
+          "sequence": 27,
+          "equity": 0.78537227,
+          "drawdownPct": -24.5089
+        },
+        {
+          "sequence": 28,
+          "equity": 0.93984829,
+          "drawdownPct": -9.6605
+        },
+        {
+          "sequence": 29,
+          "equity": 0.91282226,
+          "drawdownPct": -12.2583
+        },
+        {
+          "sequence": 30,
+          "equity": 0.88722682,
+          "drawdownPct": -14.7185
+        },
+        {
+          "sequence": 31,
+          "equity": 0.85717278,
+          "drawdownPct": -17.6074
+        },
+        {
+          "sequence": 32,
+          "equity": 0.83096127,
+          "drawdownPct": -20.1268
+        },
+        {
+          "sequence": 33,
+          "equity": 0.82673608,
+          "drawdownPct": -20.533
+        },
+        {
+          "sequence": 34,
+          "equity": 0.80701047,
+          "drawdownPct": -22.429
+        },
+        {
+          "sequence": 35,
+          "equity": 0.7874711,
+          "drawdownPct": -24.3072
+        },
+        {
+          "sequence": 36,
+          "equity": 0.7736737,
+          "drawdownPct": -25.6334
+        },
+        {
+          "sequence": 37,
+          "equity": 0.79691222,
+          "drawdownPct": -23.3997
+        },
+        {
+          "sequence": 38,
+          "equity": 1.06885701,
+          "drawdownPct": 0
+        },
+        {
+          "sequence": 39,
+          "equity": 1.0293962,
+          "drawdownPct": -3.6919
+        },
+        {
+          "sequence": 40,
+          "equity": 0.98263137,
+          "drawdownPct": -8.0671
+        },
+        {
+          "sequence": 41,
+          "equity": 0.95008472,
+          "drawdownPct": -11.1121
+        },
+        {
+          "sequence": 42,
+          "equity": 0.93299048,
+          "drawdownPct": -12.7114
+        },
+        {
+          "sequence": 43,
+          "equity": 0.91271163,
+          "drawdownPct": -14.6086
+        },
+        {
+          "sequence": 44,
+          "equity": 0.88321504,
+          "drawdownPct": -17.3683
+        },
+        {
+          "sequence": 45,
+          "equity": 0.85344754,
+          "drawdownPct": -20.1533
+        },
+        {
+          "sequence": 46,
+          "equity": 0.93202983,
+          "drawdownPct": -12.8013
+        },
+        {
+          "sequence": 47,
+          "equity": 0.91008724,
+          "drawdownPct": -14.8542
+        },
+        {
+          "sequence": 48,
+          "equity": 0.9107995,
+          "drawdownPct": -14.7875
+        },
+        {
+          "sequence": 49,
+          "equity": 0.89169889,
+          "drawdownPct": -16.5745
+        },
+        {
+          "sequence": 50,
+          "equity": 1.07241769,
+          "drawdownPct": 0
+        },
+        {
+          "sequence": 51,
+          "equity": 1.0467824,
+          "drawdownPct": -2.3904
+        },
+        {
+          "sequence": 52,
+          "equity": 1.01438821,
+          "drawdownPct": -5.4111
+        },
+        {
+          "sequence": 53,
+          "equity": 1.02293714,
+          "drawdownPct": -4.6139
+        },
+        {
+          "sequence": 54,
+          "equity": 1.05216732,
+          "drawdownPct": -1.8883
+        },
+        {
+          "sequence": 55,
+          "equity": 1.03216493,
+          "drawdownPct": -3.7535
+        },
+        {
+          "sequence": 56,
+          "equity": 1.00854778,
+          "drawdownPct": -5.9557
+        },
+        {
+          "sequence": 57,
+          "equity": 1.00218329,
+          "drawdownPct": -6.5492
+        },
+        {
+          "sequence": 58,
+          "equity": 0.99706774,
+          "drawdownPct": -7.0262
+        }
+      ]
+    },
+    {
+      "symbol": "BTC",
+      "variant": "B",
+      "mode": "ENTRY_ATTRIBUTION",
+      "status": "OK",
+      "methodology": {
+        "modeLabel": "OOS Entry-Attributed Closed-Trade Metrics",
+        "oosStartUtc": "2025-03-01",
+        "inclusionRule": "Include a closed trade if entryTime >= OOS_START_MS.",
+        "modeLimitation": "A trade may realize after its entry-attributed OOS window.",
+        "returnBasis": "Net closed-trade P&L percentage",
+        "equityBasis": "Sequential compounding by closed trade, ordered by exit timestamp",
+        "annualization": "Trade-level mean/std ratios annualized by observed trades per calendar year",
+        "riskFreeRatePerTrade": 0,
+        "sortinoTargetPerTrade": 0,
+        "primaryLimitation": "This is supplementary trade-level risk analysis, not daily or 4H marked-to-market portfolio risk accounting."
+      },
+      "period": {
+        "firstIncludedEntryUtc": "2025-03-24",
+        "lastIncludedExitUtc": "2026-08-17",
+        "durationStartUtc": "2025-03-01",
+        "durationYears": 1.464294,
+        "tradeCount": 33,
+        "tradesPerYear": 22.5365
+      },
+      "distribution": {
+        "averageTradeReturnPct": 1.2184,
+        "sampleStdDevTradeReturnPct": 8.8398,
+        "downsideDeviationPct": 2.1036,
+        "winCount": 6,
+        "lossCount": 27,
+        "winRatePct": 18.18,
+        "bestTradePct": 34.1248,
+        "worstTradePct": -3.5849
+      },
+      "performance": {
+        "totalReturnPct": 33.9695,
+        "cagrPct": 22.1055
+      },
+      "riskAdjusted": {
+        "sharpeRatioAnnualizedTradeFrequency": 0.6543,
+        "sortinoRatioAnnualizedTradeFrequency": 2.7496,
+        "maxDrawdownPct": -17.1003,
+        "calmarRatioCagrOverAbsoluteMaxDrawdown": 1.2927,
+        "ulcerIndexPct": 7.4721,
+        "cvar95Pct": -3.4776,
+        "cvar95TailTradeCount": 2,
+        "cvar95WorstTradePct": -3.5849,
+        "cvar95Interpretation": "Tail contains 2 worst closed trades.",
+        "cvar99Pct": -3.5849,
+        "cvar99TailTradeCount": 1,
+        "cvar99WorstTradePct": -3.5849,
+        "cvar99Interpretation": "Tail contains one trade; interpret as worst-trade diagnostic."
+      },
+      "equityCurve": [
+        {
+          "sequence": 0,
+          "equity": 1,
+          "drawdownPct": 0
+        },
+        {
+          "sequence": 1,
+          "equity": 0.97983916,
+          "drawdownPct": -2.0161
+        },
+        {
+          "sequence": 2,
+          "equity": 0.95550633,
+          "drawdownPct": -4.4494
+        },
+        {
+          "sequence": 3,
+          "equity": 0.92846481,
+          "drawdownPct": -7.1535
+        },
+        {
+          "sequence": 4,
+          "equity": 0.90741772,
+          "drawdownPct": -9.2582
+        },
+        {
+          "sequence": 5,
+          "equity": 1.12749986,
+          "drawdownPct": 0
+        },
+        {
+          "sequence": 6,
+          "equity": 1.1076482,
+          "drawdownPct": -1.7607
+        },
+        {
+          "sequence": 7,
+          "equity": 1.09785925,
+          "drawdownPct": -2.6289
+        },
+        {
+          "sequence": 8,
+          "equity": 1.07837923,
+          "drawdownPct": -4.3566
+        },
+        {
+          "sequence": 9,
+          "equity": 1.14000407,
+          "drawdownPct": 0
+        },
+        {
+          "sequence": 10,
+          "equity": 1.11790217,
+          "drawdownPct": -1.9388
+        },
+        {
+          "sequence": 11,
+          "equity": 1.09337312,
+          "drawdownPct": -4.0904
+        },
+        {
+          "sequence": 12,
+          "equity": 1.06875089,
+          "drawdownPct": -6.2503
+        },
+        {
+          "sequence": 13,
+          "equity": 1.04895082,
+          "drawdownPct": -7.9871
+        },
+        {
+          "sequence": 14,
+          "equity": 1.03225755,
+          "drawdownPct": -9.4514
+        },
+        {
+          "sequence": 15,
+          "equity": 0.99525233,
+          "drawdownPct": -12.6975
+        },
+        {
+          "sequence": 16,
+          "equity": 0.9746024,
+          "drawdownPct": -14.5089
+        },
+        {
+          "sequence": 17,
+          "equity": 0.94505984,
+          "drawdownPct": -17.1003
+        },
+        {
+          "sequence": 18,
+          "equity": 1.08091636,
+          "drawdownPct": -5.1831
+        },
+        {
+          "sequence": 19,
+          "equity": 1.05060758,
+          "drawdownPct": -7.8418
+        },
+        {
+          "sequence": 20,
+          "equity": 1.04526555,
+          "drawdownPct": -8.3104
+        },
+        {
+          "sequence": 21,
+          "equity": 1.01995753,
+          "drawdownPct": -10.5304
+        },
+        {
+          "sequence": 22,
+          "equity": 1.36801612,
+          "drawdownPct": 0
+        },
+        {
+          "sequence": 23,
+          "equity": 1.32270479,
+          "drawdownPct": -3.3122
+        },
+        {
+          "sequence": 24,
+          "equity": 1.29395537,
+          "drawdownPct": -5.4137
+        },
+        {
+          "sequence": 25,
+          "equity": 1.25034444,
+          "drawdownPct": -8.6016
+        },
+        {
+          "sequence": 26,
+          "equity": 1.22090784,
+          "drawdownPct": -10.7534
+        },
+        {
+          "sequence": 27,
+          "equity": 1.19530387,
+          "drawdownPct": -12.625
+        },
+        {
+          "sequence": 28,
+          "equity": 1.43755368,
+          "drawdownPct": 0
+        },
+        {
+          "sequence": 29,
+          "equity": 1.39306652,
+          "drawdownPct": -3.0946
+        },
+        {
+          "sequence": 30,
+          "equity": 1.40480682,
+          "drawdownPct": -2.278
+        },
+        {
+          "sequence": 31,
+          "equity": 1.37810052,
+          "drawdownPct": -4.1357
+        },
+        {
+          "sequence": 32,
+          "equity": 1.34656796,
+          "drawdownPct": -6.3292
+        },
+        {
+          "sequence": 33,
+          "equity": 1.33969454,
+          "drawdownPct": -6.8073
+        }
+      ]
+    },
+    {
+      "symbol": "ETH",
+      "variant": "A",
+      "mode": "ENTRY_ATTRIBUTION",
+      "status": "OK",
+      "methodology": {
+        "modeLabel": "OOS Entry-Attributed Closed-Trade Metrics",
+        "oosStartUtc": "2025-03-01",
+        "inclusionRule": "Include a closed trade if entryTime >= OOS_START_MS.",
+        "modeLimitation": "A trade may realize after its entry-attributed OOS window.",
+        "returnBasis": "Net closed-trade P&L percentage",
+        "equityBasis": "Sequential compounding by closed trade, ordered by exit timestamp",
+        "annualization": "Trade-level mean/std ratios annualized by observed trades per calendar year",
+        "riskFreeRatePerTrade": 0,
+        "sortinoTargetPerTrade": 0,
+        "primaryLimitation": "This is supplementary trade-level risk analysis, not daily or 4H marked-to-market portfolio risk accounting."
+      },
+      "period": {
+        "firstIncludedEntryUtc": "2025-03-19",
+        "lastIncludedExitUtc": "2026-08-12",
+        "durationStartUtc": "2025-03-01",
+        "durationYears": 1.449236,
+        "tradeCount": 64,
+        "tradesPerYear": 44.1612
+      },
+      "distribution": {
+        "averageTradeReturnPct": 0.644,
+        "sampleStdDevTradeReturnPct": 11.7046,
+        "downsideDeviationPct": 3.4297,
+        "winCount": 13,
+        "lossCount": 51,
+        "winRatePct": 20.31,
+        "bestTradePct": 58.2355,
+        "worstTradePct": -7.7898
+      },
+      "performance": {
+        "totalReturnPct": 6.3832,
+        "cagrPct": 4.3621
+      },
+      "riskAdjusted": {
+        "sharpeRatioAnnualizedTradeFrequency": 0.3657,
+        "sortinoRatioAnnualizedTradeFrequency": 1.2479,
+        "maxDrawdownPct": -37.7807,
+        "calmarRatioCagrOverAbsoluteMaxDrawdown": 0.1155,
+        "ulcerIndexPct": 22.4721,
+        "cvar95Pct": -6.2613,
+        "cvar95TailTradeCount": 4,
+        "cvar95WorstTradePct": -7.7898,
+        "cvar95Interpretation": "Tail contains 4 worst closed trades.",
+        "cvar99Pct": -7.7898,
+        "cvar99TailTradeCount": 1,
+        "cvar99WorstTradePct": -7.7898,
+        "cvar99Interpretation": "Tail contains one trade; interpret as worst-trade diagnostic."
+      },
+      "equityCurve": [
+        {
+          "sequence": 0,
+          "equity": 1,
+          "drawdownPct": 0
+        },
+        {
+          "sequence": 1,
+          "equity": 0.96052265,
+          "drawdownPct": -3.9477
+        },
+        {
+          "sequence": 2,
+          "equity": 0.93078751,
+          "drawdownPct": -6.9212
+        },
+        {
+          "sequence": 3,
+          "equity": 1.0866737,
+          "drawdownPct": 0
+        },
+        {
+          "sequence": 4,
+          "equity": 1.05077943,
+          "drawdownPct": -3.3031
+        },
+        {
+          "sequence": 5,
+          "equity": 1.0106896,
+          "drawdownPct": -6.9924
+        },
+        {
+          "sequence": 6,
+          "equity": 1.04935514,
+          "drawdownPct": -3.4342
+        },
+        {
+          "sequence": 7,
+          "equity": 1.01632786,
+          "drawdownPct": -6.4735
+        },
+        {
+          "sequence": 8,
+          "equity": 1.35191397,
+          "drawdownPct": 0
+        },
+        {
+          "sequence": 9,
+          "equity": 1.28983036,
+          "drawdownPct": -4.5923
+        },
+        {
+          "sequence": 10,
+          "equity": 1.24268744,
+          "drawdownPct": -8.0794
+        },
+        {
+          "sequence": 11,
+          "equity": 1.1869889,
+          "drawdownPct": -12.1994
+        },
+        {
+          "sequence": 12,
+          "equity": 1.14642515,
+          "drawdownPct": -15.1998
+        },
+        {
+          "sequence": 13,
+          "equity": 1.08310965,
+          "drawdownPct": -19.8832
+        },
+        {
+          "sequence": 14,
+          "equity": 1.03677518,
+          "drawdownPct": -23.3106
+        },
+        {
+          "sequence": 15,
+          "equity": 1.00424116,
+          "drawdownPct": -25.7171
+        },
+        {
+          "sequence": 16,
+          "equity": 0.97128034,
+          "drawdownPct": -28.1552
+        },
+        {
+          "sequence": 17,
+          "equity": 0.93655567,
+          "drawdownPct": -30.7237
+        },
+        {
+          "sequence": 18,
+          "equity": 1.30551869,
+          "drawdownPct": -3.4318
+        },
+        {
+          "sequence": 19,
+          "equity": 1.25200898,
+          "drawdownPct": -7.3899
+        },
+        {
+          "sequence": 20,
+          "equity": 1.35370379,
+          "drawdownPct": 0
+        },
+        {
+          "sequence": 21,
+          "equity": 1.28890739,
+          "drawdownPct": -4.7866
+        },
+        {
+          "sequence": 22,
+          "equity": 1.22358253,
+          "drawdownPct": -9.6122
+        },
+        {
+          "sequence": 23,
+          "equity": 1.19564922,
+          "drawdownPct": -11.6757
+        },
+        {
+          "sequence": 24,
+          "equity": 1.16098795,
+          "drawdownPct": -14.2362
+        },
+        {
+          "sequence": 25,
+          "equity": 1.16189451,
+          "drawdownPct": -14.1692
+        },
+        {
+          "sequence": 26,
+          "equity": 1.12332852,
+          "drawdownPct": -17.0181
+        },
+        {
+          "sequence": 27,
+          "equity": 1.07380585,
+          "drawdownPct": -20.6765
+        },
+        {
+          "sequence": 28,
+          "equity": 0.9901582,
+          "drawdownPct": -26.8556
+        },
+        {
+          "sequence": 29,
+          "equity": 0.931372,
+          "drawdownPct": -31.1982
+        },
+        {
+          "sequence": 30,
+          "equity": 0.88811172,
+          "drawdownPct": -34.3939
+        },
+        {
+          "sequence": 31,
+          "equity": 0.85995954,
+          "drawdownPct": -36.4736
+        },
+        {
+          "sequence": 32,
+          "equity": 1.09161584,
+          "drawdownPct": -19.3608
+        },
+        {
+          "sequence": 33,
+          "equity": 1.05053363,
+          "drawdownPct": -22.3956
+        },
+        {
+          "sequence": 34,
+          "equity": 1.01130431,
+          "drawdownPct": -25.2935
+        },
+        {
+          "sequence": 35,
+          "equity": 0.96880644,
+          "drawdownPct": -28.4329
+        },
+        {
+          "sequence": 36,
+          "equity": 0.92751601,
+          "drawdownPct": -31.4831
+        },
+        {
+          "sequence": 37,
+          "equity": 0.89590834,
+          "drawdownPct": -33.818
+        },
+        {
+          "sequence": 38,
+          "equity": 0.88537394,
+          "drawdownPct": -34.5962
+        },
+        {
+          "sequence": 39,
+          "equity": 0.86406331,
+          "drawdownPct": -36.1704
+        },
+        {
+          "sequence": 40,
+          "equity": 0.90334606,
+          "drawdownPct": -33.2686
+        },
+        {
+          "sequence": 41,
+          "equity": 1.42941397,
+          "drawdownPct": 0
+        },
+        {
+          "sequence": 42,
+          "equity": 1.36577964,
+          "drawdownPct": -4.4518
+        },
+        {
+          "sequence": 43,
+          "equity": 1.28662518,
+          "drawdownPct": -9.9893
+        },
+        {
+          "sequence": 44,
+          "equity": 1.23463414,
+          "drawdownPct": -13.6266
+        },
+        {
+          "sequence": 45,
+          "equity": 1.24085767,
+          "drawdownPct": -13.1912
+        },
+        {
+          "sequence": 46,
+          "equity": 1.19480218,
+          "drawdownPct": -16.4131
+        },
+        {
+          "sequence": 47,
+          "equity": 1.14692078,
+          "drawdownPct": -19.7629
+        },
+        {
+          "sequence": 48,
+          "equity": 1.09916557,
+          "drawdownPct": -23.1038
+        },
+        {
+          "sequence": 49,
+          "equity": 1.05463895,
+          "drawdownPct": -26.2188
+        },
+        {
+          "sequence": 50,
+          "equity": 1.0233758,
+          "drawdownPct": -28.4059
+        },
+        {
+          "sequence": 51,
+          "equity": 1.03835451,
+          "drawdownPct": -27.358
+        },
+        {
+          "sequence": 52,
+          "equity": 1.00902493,
+          "drawdownPct": -29.4099
+        },
+        {
+          "sequence": 53,
+          "equity": 0.97751833,
+          "drawdownPct": -31.614
+        },
+        {
+          "sequence": 54,
+          "equity": 0.96484038,
+          "drawdownPct": -32.501
+        },
+        {
+          "sequence": 55,
+          "equity": 0.93599782,
+          "drawdownPct": -34.5188
+        },
+        {
+          "sequence": 56,
+          "equity": 0.91340888,
+          "drawdownPct": -36.0991
+        },
+        {
+          "sequence": 57,
+          "equity": 0.88937166,
+          "drawdownPct": -37.7807
+        },
+        {
+          "sequence": 58,
+          "equity": 1.11917397,
+          "drawdownPct": -21.704
+        },
+        {
+          "sequence": 59,
+          "equity": 1.08562252,
+          "drawdownPct": -24.0512
+        },
+        {
+          "sequence": 60,
+          "equity": 1.04822904,
+          "drawdownPct": -26.6672
+        },
+        {
+          "sequence": 61,
+          "equity": 1.14953245,
+          "drawdownPct": -19.5802
+        },
+        {
+          "sequence": 62,
+          "equity": 1.11446956,
+          "drawdownPct": -22.0331
+        },
+        {
+          "sequence": 63,
+          "equity": 1.08530425,
+          "drawdownPct": -24.0735
+        },
+        {
+          "sequence": 64,
+          "equity": 1.06383219,
+          "drawdownPct": -25.5756
+        }
+      ]
+    },
+    {
+      "symbol": "ETH",
+      "variant": "B",
+      "mode": "ENTRY_ATTRIBUTION",
+      "status": "OK",
+      "methodology": {
+        "modeLabel": "OOS Entry-Attributed Closed-Trade Metrics",
+        "oosStartUtc": "2025-03-01",
+        "inclusionRule": "Include a closed trade if entryTime >= OOS_START_MS.",
+        "modeLimitation": "A trade may realize after its entry-attributed OOS window.",
+        "returnBasis": "Net closed-trade P&L percentage",
+        "equityBasis": "Sequential compounding by closed trade, ordered by exit timestamp",
+        "annualization": "Trade-level mean/std ratios annualized by observed trades per calendar year",
+        "riskFreeRatePerTrade": 0,
+        "sortinoTargetPerTrade": 0,
+        "primaryLimitation": "This is supplementary trade-level risk analysis, not daily or 4H marked-to-market portfolio risk accounting."
+      },
+      "period": {
+        "firstIncludedEntryUtc": "2025-03-28",
+        "lastIncludedExitUtc": "2026-08-12",
+        "durationStartUtc": "2025-03-01",
+        "durationYears": 1.449236,
+        "tradeCount": 37,
+        "tradesPerYear": 25.5307
+      },
+      "distribution": {
+        "averageTradeReturnPct": 1.6143,
+        "sampleStdDevTradeReturnPct": 13.6436,
+        "downsideDeviationPct": 3.3471,
+        "winCount": 6,
+        "lossCount": 31,
+        "winRatePct": 16.22,
+        "bestTradePct": 58.2355,
+        "worstTradePct": -6.0353
+      },
+      "performance": {
+        "totalReturnPct": 38.7707,
+        "cagrPct": 25.3684
+      },
+      "riskAdjusted": {
+        "sharpeRatioAnnualizedTradeFrequency": 0.5978,
+        "sortinoRatioAnnualizedTradeFrequency": 2.4369,
+        "maxDrawdownPct": -39.3882,
+        "calmarRatioCagrOverAbsoluteMaxDrawdown": 0.6441,
+        "ulcerIndexPct": 18.6639,
+        "cvar95Pct": -5.9863,
+        "cvar95TailTradeCount": 2,
+        "cvar95WorstTradePct": -6.0353,
+        "cvar95Interpretation": "Tail contains 2 worst closed trades.",
+        "cvar99Pct": -6.0353,
+        "cvar99TailTradeCount": 1,
+        "cvar99WorstTradePct": -6.0353,
+        "cvar99Interpretation": "Tail contains one trade; interpret as worst-trade diagnostic."
+      },
+      "equityCurve": [
+        {
+          "sequence": 0,
+          "equity": 1,
+          "drawdownPct": 0
+        },
+        {
+          "sequence": 1,
+          "equity": 1.16747774,
+          "drawdownPct": 0
+        },
+        {
+          "sequence": 2,
+          "equity": 1.12293559,
+          "drawdownPct": -3.8152
+        },
+        {
+          "sequence": 3,
+          "equity": 1.08759245,
+          "drawdownPct": -6.8426
+        },
+        {
+          "sequence": 4,
+          "equity": 1.0230188,
+          "drawdownPct": -12.3736
+        },
+        {
+          "sequence": 5,
+          "equity": 0.96127683,
+          "drawdownPct": -17.6621
+        },
+        {
+          "sequence": 6,
+          "equity": 0.92072842,
+          "drawdownPct": -21.1352
+        },
+        {
+          "sequence": 7,
+          "equity": 0.88707607,
+          "drawdownPct": -24.0177
+        },
+        {
+          "sequence": 8,
+          "equity": 0.8473164,
+          "drawdownPct": -27.4233
+        },
+        {
+          "sequence": 9,
+          "equity": 0.8183605,
+          "drawdownPct": -29.9035
+        },
+        {
+          "sequence": 10,
+          "equity": 0.78335176,
+          "drawdownPct": -32.9022
+        },
+        {
+          "sequence": 11,
+          "equity": 0.75877018,
+          "drawdownPct": -35.0077
+        },
+        {
+          "sequence": 12,
+          "equity": 0.73386611,
+          "drawdownPct": -37.1409
+        },
+        {
+          "sequence": 13,
+          "equity": 0.70762933,
+          "drawdownPct": -39.3882
+        },
+        {
+          "sequence": 14,
+          "equity": 0.98640514,
+          "drawdownPct": -15.5097
+        },
+        {
+          "sequence": 15,
+          "equity": 1.0665262,
+          "drawdownPct": -8.647
+        },
+        {
+          "sequence": 16,
+          "equity": 1.01247214,
+          "drawdownPct": -13.277
+        },
+        {
+          "sequence": 17,
+          "equity": 0.98312108,
+          "drawdownPct": -15.791
+        },
+        {
+          "sequence": 18,
+          "equity": 0.950489,
+          "drawdownPct": -18.5861
+        },
+        {
+          "sequence": 19,
+          "equity": 0.92035953,
+          "drawdownPct": -21.1668
+        },
+        {
+          "sequence": 20,
+          "equity": 1.11025047,
+          "drawdownPct": -4.9018
+        },
+        {
+          "sequence": 21,
+          "equity": 1.06879119,
+          "drawdownPct": -8.453
+        },
+        {
+          "sequence": 22,
+          "equity": 1.03236918,
+          "drawdownPct": -11.5727
+        },
+        {
+          "sequence": 23,
+          "equity": 1.02023023,
+          "drawdownPct": -12.6124
+        },
+        {
+          "sequence": 24,
+          "equity": 0.98840892,
+          "drawdownPct": -15.3381
+        },
+        {
+          "sequence": 25,
+          "equity": 1.5640136,
+          "drawdownPct": 0
+        },
+        {
+          "sequence": 26,
+          "equity": 1.50081361,
+          "drawdownPct": -4.0409
+        },
+        {
+          "sequence": 27,
+          "equity": 1.44510964,
+          "drawdownPct": -7.6025
+        },
+        {
+          "sequence": 28,
+          "equity": 1.38493851,
+          "drawdownPct": -11.4497
+        },
+        {
+          "sequence": 29,
+          "equity": 1.34581925,
+          "drawdownPct": -13.9509
+        },
+        {
+          "sequence": 30,
+          "equity": 1.30379632,
+          "drawdownPct": -16.6378
+        },
+        {
+          "sequence": 31,
+          "equity": 1.26482114,
+          "drawdownPct": -19.1298
+        },
+        {
+          "sequence": 32,
+          "equity": 1.23429653,
+          "drawdownPct": -21.0815
+        },
+        {
+          "sequence": 33,
+          "equity": 1.20181485,
+          "drawdownPct": -23.1583
+        },
+        {
+          "sequence": 34,
+          "equity": 1.5123485,
+          "drawdownPct": -3.3034
+        },
+        {
+          "sequence": 35,
+          "equity": 1.46025675,
+          "drawdownPct": -6.634
+        },
+        {
+          "sequence": 36,
+          "equity": 1.41571619,
+          "drawdownPct": -9.4818
+        },
+        {
+          "sequence": 37,
+          "equity": 1.38770713,
+          "drawdownPct": -11.2727
+        }
+      ]
+    },
+    {
+      "symbol": "SOL",
+      "variant": "A",
+      "mode": "ENTRY_ATTRIBUTION",
+      "status": "OK",
+      "methodology": {
+        "modeLabel": "OOS Entry-Attributed Closed-Trade Metrics",
+        "oosStartUtc": "2025-03-01",
+        "inclusionRule": "Include a closed trade if entryTime >= OOS_START_MS.",
+        "modeLimitation": "A trade may realize after its entry-attributed OOS window.",
+        "returnBasis": "Net closed-trade P&L percentage",
+        "equityBasis": "Sequential compounding by closed trade, ordered by exit timestamp",
+        "annualization": "Trade-level mean/std ratios annualized by observed trades per calendar year",
+        "riskFreeRatePerTrade": 0,
+        "sortinoTargetPerTrade": 0,
+        "primaryLimitation": "This is supplementary trade-level risk analysis, not daily or 4H marked-to-market portfolio risk accounting."
+      },
+      "period": {
+        "firstIncludedEntryUtc": "2025-03-02",
+        "lastIncludedExitUtc": "2026-08-17",
+        "durationStartUtc": "2025-03-01",
+        "durationYears": 1.462469,
+        "tradeCount": 62,
+        "tradesPerYear": 42.3941
+      },
+      "distribution": {
+        "averageTradeReturnPct": -0.263,
+        "sampleStdDevTradeReturnPct": 9.7813,
+        "downsideDeviationPct": 3.7384,
+        "winCount": 14,
+        "lossCount": 48,
+        "winRatePct": 22.58,
+        "bestTradePct": 54.0112,
+        "worstTradePct": -8.6643
+      },
+      "performance": {
+        "totalReturnPct": -33.3814,
+        "cagrPct": -24.2506
+      },
+      "riskAdjusted": {
+        "sharpeRatioAnnualizedTradeFrequency": -0.175,
+        "sortinoRatioAnnualizedTradeFrequency": -0.458,
+        "maxDrawdownPct": -38.0832,
+        "calmarRatioCagrOverAbsoluteMaxDrawdown": -0.6368,
+        "ulcerIndexPct": 24.0308,
+        "cvar95Pct": -6.8011,
+        "cvar95TailTradeCount": 4,
+        "cvar95WorstTradePct": -8.6643,
+        "cvar95Interpretation": "Tail contains 4 worst closed trades.",
+        "cvar99Pct": -8.6643,
+        "cvar99TailTradeCount": 1,
+        "cvar99WorstTradePct": -8.6643,
+        "cvar99Interpretation": "Tail contains one trade; interpret as worst-trade diagnostic."
+      },
+      "equityCurve": [
+        {
+          "sequence": 0,
+          "equity": 1,
+          "drawdownPct": 0
+        },
+        {
+          "sequence": 1,
+          "equity": 0.91335697,
+          "drawdownPct": -8.6643
+        },
+        {
+          "sequence": 2,
+          "equity": 0.85961001,
+          "drawdownPct": -14.039
+        },
+        {
+          "sequence": 3,
+          "equity": 0.82375686,
+          "drawdownPct": -17.6243
+        },
+        {
+          "sequence": 4,
+          "equity": 0.81354073,
+          "drawdownPct": -18.6459
+        },
+        {
+          "sequence": 5,
+          "equity": 0.77339608,
+          "drawdownPct": -22.6604
+        },
+        {
+          "sequence": 6,
+          "equity": 0.76244107,
+          "drawdownPct": -23.7559
+        },
+        {
+          "sequence": 7,
+          "equity": 0.8944286,
+          "drawdownPct": -10.5571
+        },
+        {
+          "sequence": 8,
+          "equity": 0.86255827,
+          "drawdownPct": -13.7442
+        },
+        {
+          "sequence": 9,
+          "equity": 0.92463285,
+          "drawdownPct": -7.5367
+        },
+        {
+          "sequence": 10,
+          "equity": 0.86719881,
+          "drawdownPct": -13.2801
+        },
+        {
+          "sequence": 11,
+          "equity": 0.83144948,
+          "drawdownPct": -16.8551
+        },
+        {
+          "sequence": 12,
+          "equity": 0.87468514,
+          "drawdownPct": -12.5315
+        },
+        {
+          "sequence": 13,
+          "equity": 0.8408993,
+          "drawdownPct": -15.9101
+        },
+        {
+          "sequence": 14,
+          "equity": 0.79295067,
+          "drawdownPct": -20.7049
+        },
+        {
+          "sequence": 15,
+          "equity": 0.75783639,
+          "drawdownPct": -24.2164
+        },
+        {
+          "sequence": 16,
+          "equity": 0.8849588,
+          "drawdownPct": -11.5041
+        },
+        {
+          "sequence": 17,
+          "equity": 0.87903327,
+          "drawdownPct": -12.0967
+        },
+        {
+          "sequence": 18,
+          "equity": 0.88504585,
+          "drawdownPct": -11.4954
+        },
+        {
+          "sequence": 19,
+          "equity": 0.84195053,
+          "drawdownPct": -15.8049
+        },
+        {
+          "sequence": 20,
+          "equity": 0.79786356,
+          "drawdownPct": -20.2136
+        },
+        {
+          "sequence": 21,
+          "equity": 0.75353877,
+          "drawdownPct": -24.6461
+        },
+        {
+          "sequence": 22,
+          "equity": 0.77948512,
+          "drawdownPct": -22.0515
+        },
+        {
+          "sequence": 23,
+          "equity": 0.77814489,
+          "drawdownPct": -22.1855
+        },
+        {
+          "sequence": 24,
+          "equity": 0.7467682,
+          "drawdownPct": -25.3232
+        },
+        {
+          "sequence": 25,
+          "equity": 0.7948788,
+          "drawdownPct": -20.5121
+        },
+        {
+          "sequence": 26,
+          "equity": 0.76585324,
+          "drawdownPct": -23.4147
+        },
+        {
+          "sequence": 27,
+          "equity": 0.98304666,
+          "drawdownPct": -1.6953
+        },
+        {
+          "sequence": 28,
+          "equity": 0.93016114,
+          "drawdownPct": -6.9839
+        },
+        {
+          "sequence": 29,
+          "equity": 0.89438862,
+          "drawdownPct": -10.5611
+        },
+        {
+          "sequence": 30,
+          "equity": 0.85155603,
+          "drawdownPct": -14.8444
+        },
+        {
+          "sequence": 31,
+          "equity": 0.81900662,
+          "drawdownPct": -18.0993
+        },
+        {
+          "sequence": 32,
+          "equity": 0.77921024,
+          "drawdownPct": -22.079
+        },
+        {
+          "sequence": 33,
+          "equity": 0.7491353,
+          "drawdownPct": -25.0865
+        },
+        {
+          "sequence": 34,
+          "equity": 0.71540431,
+          "drawdownPct": -28.4596
+        },
+        {
+          "sequence": 35,
+          "equity": 0.67717596,
+          "drawdownPct": -32.2824
+        },
+        {
+          "sequence": 36,
+          "equity": 0.65640092,
+          "drawdownPct": -34.3599
+        },
+        {
+          "sequence": 37,
+          "equity": 0.68345587,
+          "drawdownPct": -31.6544
+        },
+        {
+          "sequence": 38,
+          "equity": 1.05259845,
+          "drawdownPct": 0
+        },
+        {
+          "sequence": 39,
+          "equity": 1.00192628,
+          "drawdownPct": -4.814
+        },
+        {
+          "sequence": 40,
+          "equity": 0.93736345,
+          "drawdownPct": -10.9477
+        },
+        {
+          "sequence": 41,
+          "equity": 0.89303038,
+          "drawdownPct": -15.1594
+        },
+        {
+          "sequence": 42,
+          "equity": 0.85106167,
+          "drawdownPct": -19.1466
+        },
+        {
+          "sequence": 43,
+          "equity": 0.82060785,
+          "drawdownPct": -22.0398
+        },
+        {
+          "sequence": 44,
+          "equity": 0.78114937,
+          "drawdownPct": -25.7885
+        },
+        {
+          "sequence": 45,
+          "equity": 0.76057665,
+          "drawdownPct": -27.7429
+        },
+        {
+          "sequence": 46,
+          "equity": 0.72882348,
+          "drawdownPct": -30.7596
+        },
+        {
+          "sequence": 47,
+          "equity": 0.7032669,
+          "drawdownPct": -33.1875
+        },
+        {
+          "sequence": 48,
+          "equity": 0.67636404,
+          "drawdownPct": -35.7434
+        },
+        {
+          "sequence": 49,
+          "equity": 0.66595621,
+          "drawdownPct": -36.7322
+        },
+        {
+          "sequence": 50,
+          "equity": 0.65173548,
+          "drawdownPct": -38.0832
+        },
+        {
+          "sequence": 51,
+          "equity": 0.66600951,
+          "drawdownPct": -36.7271
+        },
+        {
+          "sequence": 52,
+          "equity": 0.81625714,
+          "drawdownPct": -22.4531
+        },
+        {
+          "sequence": 53,
+          "equity": 0.7845577,
+          "drawdownPct": -25.4647
+        },
+        {
+          "sequence": 54,
+          "equity": 0.75072991,
+          "drawdownPct": -28.6784
+        },
+        {
+          "sequence": 55,
+          "equity": 0.71767766,
+          "drawdownPct": -31.8185
+        },
+        {
+          "sequence": 56,
+          "equity": 0.73587366,
+          "drawdownPct": -30.0898
+        },
+        {
+          "sequence": 57,
+          "equity": 0.71223256,
+          "drawdownPct": -32.3358
+        },
+        {
+          "sequence": 58,
+          "equity": 0.69073759,
+          "drawdownPct": -34.3779
+        },
+        {
+          "sequence": 59,
+          "equity": 0.67222245,
+          "drawdownPct": -36.1369
+        },
+        {
+          "sequence": 60,
+          "equity": 0.68052372,
+          "drawdownPct": -35.3482
+        },
+        {
+          "sequence": 61,
+          "equity": 0.67784506,
+          "drawdownPct": -35.6027
+        },
+        {
+          "sequence": 62,
+          "equity": 0.66618646,
+          "drawdownPct": -36.7103
+        }
+      ]
+    },
+    {
+      "symbol": "SOL",
+      "variant": "B",
+      "mode": "ENTRY_ATTRIBUTION",
+      "status": "OK",
+      "methodology": {
+        "modeLabel": "OOS Entry-Attributed Closed-Trade Metrics",
+        "oosStartUtc": "2025-03-01",
+        "inclusionRule": "Include a closed trade if entryTime >= OOS_START_MS.",
+        "modeLimitation": "A trade may realize after its entry-attributed OOS window.",
+        "returnBasis": "Net closed-trade P&L percentage",
+        "equityBasis": "Sequential compounding by closed trade, ordered by exit timestamp",
+        "annualization": "Trade-level mean/std ratios annualized by observed trades per calendar year",
+        "riskFreeRatePerTrade": 0,
+        "sortinoTargetPerTrade": 0,
+        "primaryLimitation": "This is supplementary trade-level risk analysis, not daily or 4H marked-to-market portfolio risk accounting."
+      },
+      "period": {
+        "firstIncludedEntryUtc": "2025-03-28",
+        "lastIncludedExitUtc": "2026-08-17",
+        "durationStartUtc": "2025-03-01",
+        "durationYears": 1.462469,
+        "tradeCount": 38,
+        "tradesPerYear": 25.9835
+      },
+      "distribution": {
+        "averageTradeReturnPct": -0.0587,
+        "sampleStdDevTradeReturnPct": 11.5884,
+        "downsideDeviationPct": 3.9899,
+        "winCount": 8,
+        "lossCount": 30,
+        "winRatePct": 21.05,
+        "bestTradePct": 54.0112,
+        "worstTradePct": -8.0717
+      },
+      "performance": {
+        "totalReturnPct": -20.0942,
+        "cagrPct": -14.2201
+      },
+      "riskAdjusted": {
+        "sharpeRatioAnnualizedTradeFrequency": -0.0258,
+        "sortinoRatioAnnualizedTradeFrequency": -0.075,
+        "maxDrawdownPct": -47.808,
+        "calmarRatioCagrOverAbsoluteMaxDrawdown": -0.2974,
+        "ulcerIndexPct": 27.968,
+        "cvar95Pct": -7.7444,
+        "cvar95TailTradeCount": 2,
+        "cvar95WorstTradePct": -8.0717,
+        "cvar95Interpretation": "Tail contains 2 worst closed trades.",
+        "cvar99Pct": -8.0717,
+        "cvar99TailTradeCount": 1,
+        "cvar99WorstTradePct": -8.0717,
+        "cvar99Interpretation": "Tail contains one trade; interpret as worst-trade diagnostic."
+      },
+      "equityCurve": [
+        {
+          "sequence": 0,
+          "equity": 1,
+          "drawdownPct": 0
+        },
+        {
+          "sequence": 1,
+          "equity": 0.98759812,
+          "drawdownPct": -1.2402
+        },
+        {
+          "sequence": 2,
+          "equity": 0.95418718,
+          "drawdownPct": -4.5813
+        },
+        {
+          "sequence": 3,
+          "equity": 0.92018753,
+          "drawdownPct": -7.9812
+        },
+        {
+          "sequence": 4,
+          "equity": 0.90155959,
+          "drawdownPct": -9.844
+        },
+        {
+          "sequence": 5,
+          "equity": 0.84555876,
+          "drawdownPct": -15.4441
+        },
+        {
+          "sequence": 6,
+          "equity": 0.81070151,
+          "drawdownPct": -18.9298
+        },
+        {
+          "sequence": 7,
+          "equity": 0.83778211,
+          "drawdownPct": -16.2218
+        },
+        {
+          "sequence": 8,
+          "equity": 0.79980631,
+          "drawdownPct": -20.0194
+        },
+        {
+          "sequence": 9,
+          "equity": 0.75420083,
+          "drawdownPct": -24.5799
+        },
+        {
+          "sequence": 10,
+          "equity": 0.72080252,
+          "drawdownPct": -27.9197
+        },
+        {
+          "sequence": 11,
+          "equity": 0.79591349,
+          "drawdownPct": -20.4087
+        },
+        {
+          "sequence": 12,
+          "equity": 0.75366519,
+          "drawdownPct": -24.6335
+        },
+        {
+          "sequence": 13,
+          "equity": 0.75882026,
+          "drawdownPct": -24.118
+        },
+        {
+          "sequence": 14,
+          "equity": 0.71908623,
+          "drawdownPct": -28.0914
+        },
+        {
+          "sequence": 15,
+          "equity": 0.67913786,
+          "drawdownPct": -32.0862
+        },
+        {
+          "sequence": 16,
+          "equity": 0.70252239,
+          "drawdownPct": -29.7478
+        },
+        {
+          "sequence": 17,
+          "equity": 0.67419498,
+          "drawdownPct": -32.5805
+        },
+        {
+          "sequence": 18,
+          "equity": 0.61977626,
+          "drawdownPct": -38.0224
+        },
+        {
+          "sequence": 19,
+          "equity": 0.57380635,
+          "drawdownPct": -42.6194
+        },
+        {
+          "sequence": 20,
+          "equity": 0.54170052,
+          "drawdownPct": -45.8299
+        },
+        {
+          "sequence": 21,
+          "equity": 0.52191995,
+          "drawdownPct": -47.808
+        },
+        {
+          "sequence": 22,
+          "equity": 0.6699347,
+          "drawdownPct": -33.0065
+        },
+        {
+          "sequence": 23,
+          "equity": 0.64417007,
+          "drawdownPct": -35.583
+        },
+        {
+          "sequence": 24,
+          "equity": 0.61954767,
+          "drawdownPct": -38.0452
+        },
+        {
+          "sequence": 25,
+          "equity": 0.59563518,
+          "drawdownPct": -40.4365
+        },
+        {
+          "sequence": 26,
+          "equity": 0.56881577,
+          "drawdownPct": -43.1184
+        },
+        {
+          "sequence": 27,
+          "equity": 0.53842053,
+          "drawdownPct": -46.1579
+        },
+        {
+          "sequence": 28,
+          "equity": 0.82922781,
+          "drawdownPct": -17.0772
+        },
+        {
+          "sequence": 29,
+          "equity": 0.79000907,
+          "drawdownPct": -20.9991
+        },
+        {
+          "sequence": 30,
+          "equity": 0.76173992,
+          "drawdownPct": -23.826
+        },
+        {
+          "sequence": 31,
+          "equity": 0.74167838,
+          "drawdownPct": -25.8322
+        },
+        {
+          "sequence": 32,
+          "equity": 0.73026549,
+          "drawdownPct": -26.9735
+        },
+        {
+          "sequence": 33,
+          "equity": 0.89500888,
+          "drawdownPct": -10.4991
+        },
+        {
+          "sequence": 34,
+          "equity": 0.85560449,
+          "drawdownPct": -14.4396
+        },
+        {
+          "sequence": 35,
+          "equity": 0.82811685,
+          "drawdownPct": -17.1883
+        },
+        {
+          "sequence": 36,
+          "equity": 0.80312453,
+          "drawdownPct": -19.6875
+        },
+        {
+          "sequence": 37,
+          "equity": 0.8130423,
+          "drawdownPct": -18.6958
+        },
+        {
+          "sequence": 38,
+          "equity": 0.79905837,
+          "drawdownPct": -20.0942
+        }
+      ]
+    },
+    {
+      "symbol": "BNB",
+      "variant": "A",
+      "mode": "ENTRY_ATTRIBUTION",
+      "status": "OK",
+      "methodology": {
+        "modeLabel": "OOS Entry-Attributed Closed-Trade Metrics",
+        "oosStartUtc": "2025-03-01",
+        "inclusionRule": "Include a closed trade if entryTime >= OOS_START_MS.",
+        "modeLimitation": "A trade may realize after its entry-attributed OOS window.",
+        "returnBasis": "Net closed-trade P&L percentage",
+        "equityBasis": "Sequential compounding by closed trade, ordered by exit timestamp",
+        "annualization": "Trade-level mean/std ratios annualized by observed trades per calendar year",
+        "riskFreeRatePerTrade": 0,
+        "sortinoTargetPerTrade": 0,
+        "primaryLimitation": "This is supplementary trade-level risk analysis, not daily or 4H marked-to-market portfolio risk accounting."
+      },
+      "period": {
+        "firstIncludedEntryUtc": "2025-03-15",
+        "lastIncludedExitUtc": "2026-07-27",
+        "durationStartUtc": "2025-03-01",
+        "durationYears": 1.405886,
+        "tradeCount": 62,
+        "tradesPerYear": 44.1003
+      },
+      "distribution": {
+        "averageTradeReturnPct": -0.1659,
+        "sampleStdDevTradeReturnPct": 7.5952,
+        "downsideDeviationPct": 2.9479,
+        "winCount": 14,
+        "lossCount": 48,
+        "winRatePct": 22.58,
+        "bestTradePct": 44.097,
+        "worstTradePct": -10.2213
+      },
+      "performance": {
+        "totalReturnPct": -22.3814,
+        "cagrPct": -16.491
+      },
+      "riskAdjusted": {
+        "sharpeRatioAnnualizedTradeFrequency": -0.1451,
+        "sortinoRatioAnnualizedTradeFrequency": -0.3737,
+        "maxDrawdownPct": -42.2996,
+        "calmarRatioCagrOverAbsoluteMaxDrawdown": -0.3899,
+        "ulcerIndexPct": 23.5071,
+        "cvar95Pct": -7.7022,
+        "cvar95TailTradeCount": 4,
+        "cvar95WorstTradePct": -10.2213,
+        "cvar95Interpretation": "Tail contains 4 worst closed trades.",
+        "cvar99Pct": -10.2213,
+        "cvar99TailTradeCount": 1,
+        "cvar99WorstTradePct": -10.2213,
+        "cvar99Interpretation": "Tail contains one trade; interpret as worst-trade diagnostic."
+      },
+      "equityCurve": [
+        {
+          "sequence": 0,
+          "equity": 1,
+          "drawdownPct": 0
+        },
+        {
+          "sequence": 1,
+          "equity": 1.00145095,
+          "drawdownPct": 0
+        },
+        {
+          "sequence": 2,
+          "equity": 1.02347322,
+          "drawdownPct": 0
+        },
+        {
+          "sequence": 3,
+          "equity": 0.99340949,
+          "drawdownPct": -2.9374
+        },
+        {
+          "sequence": 4,
+          "equity": 0.99803289,
+          "drawdownPct": -2.4857
+        },
+        {
+          "sequence": 5,
+          "equity": 0.98888683,
+          "drawdownPct": -3.3793
+        },
+        {
+          "sequence": 6,
+          "equity": 1.07546365,
+          "drawdownPct": 0
+        },
+        {
+          "sequence": 7,
+          "equity": 1.04929943,
+          "drawdownPct": -2.4328
+        },
+        {
+          "sequence": 8,
+          "equity": 1.02601113,
+          "drawdownPct": -4.5983
+        },
+        {
+          "sequence": 9,
+          "equity": 1.00695925,
+          "drawdownPct": -6.3698
+        },
+        {
+          "sequence": 10,
+          "equity": 0.99739705,
+          "drawdownPct": -7.2589
+        },
+        {
+          "sequence": 11,
+          "equity": 0.98439588,
+          "drawdownPct": -8.4678
+        },
+        {
+          "sequence": 12,
+          "equity": 0.97006498,
+          "drawdownPct": -9.8003
+        },
+        {
+          "sequence": 13,
+          "equity": 1.11643332,
+          "drawdownPct": 0
+        },
+        {
+          "sequence": 14,
+          "equity": 1.09144412,
+          "drawdownPct": -2.2383
+        },
+        {
+          "sequence": 15,
+          "equity": 1.17228404,
+          "drawdownPct": 0
+        },
+        {
+          "sequence": 16,
+          "equity": 1.12767511,
+          "drawdownPct": -3.8053
+        },
+        {
+          "sequence": 17,
+          "equity": 1.11038743,
+          "drawdownPct": -5.28
+        },
+        {
+          "sequence": 18,
+          "equity": 1.23721259,
+          "drawdownPct": 0
+        },
+        {
+          "sequence": 19,
+          "equity": 1.18218483,
+          "drawdownPct": -4.4477
+        },
+        {
+          "sequence": 20,
+          "equity": 1.14598442,
+          "drawdownPct": -7.3737
+        },
+        {
+          "sequence": 21,
+          "equity": 1.02884995,
+          "drawdownPct": -16.8413
+        },
+        {
+          "sequence": 22,
+          "equity": 0.94197544,
+          "drawdownPct": -23.8631
+        },
+        {
+          "sequence": 23,
+          "equity": 0.86948253,
+          "drawdownPct": -29.7225
+        },
+        {
+          "sequence": 24,
+          "equity": 0.84118588,
+          "drawdownPct": -32.0096
+        },
+        {
+          "sequence": 25,
+          "equity": 1.0280253,
+          "drawdownPct": -16.908
+        },
+        {
+          "sequence": 26,
+          "equity": 0.9948671,
+          "drawdownPct": -19.588
+        },
+        {
+          "sequence": 27,
+          "equity": 0.95943492,
+          "drawdownPct": -22.4519
+        },
+        {
+          "sequence": 28,
+          "equity": 0.92328213,
+          "drawdownPct": -25.374
+        },
+        {
+          "sequence": 29,
+          "equity": 0.89064969,
+          "drawdownPct": -28.0116
+        },
+        {
+          "sequence": 30,
+          "equity": 0.88827064,
+          "drawdownPct": -28.2039
+        },
+        {
+          "sequence": 31,
+          "equity": 0.9335374,
+          "drawdownPct": -24.5451
+        },
+        {
+          "sequence": 32,
+          "equity": 1.34519984,
+          "drawdownPct": 0
+        },
+        {
+          "sequence": 33,
+          "equity": 1.3069215,
+          "drawdownPct": -2.8456
+        },
+        {
+          "sequence": 34,
+          "equity": 1.26602773,
+          "drawdownPct": -5.8855
+        },
+        {
+          "sequence": 35,
+          "equity": 1.22282544,
+          "drawdownPct": -9.0971
+        },
+        {
+          "sequence": 36,
+          "equity": 1.17772085,
+          "drawdownPct": -12.4501
+        },
+        {
+          "sequence": 37,
+          "equity": 1.13161203,
+          "drawdownPct": -15.8778
+        },
+        {
+          "sequence": 38,
+          "equity": 1.08873812,
+          "drawdownPct": -19.065
+        },
+        {
+          "sequence": 39,
+          "equity": 1.05871562,
+          "drawdownPct": -21.2968
+        },
+        {
+          "sequence": 40,
+          "equity": 1.04510752,
+          "drawdownPct": -22.3084
+        },
+        {
+          "sequence": 41,
+          "equity": 1.03928031,
+          "drawdownPct": -22.7416
+        },
+        {
+          "sequence": 42,
+          "equity": 1.01133912,
+          "drawdownPct": -24.8187
+        },
+        {
+          "sequence": 43,
+          "equity": 0.99559966,
+          "drawdownPct": -25.9887
+        },
+        {
+          "sequence": 44,
+          "equity": 0.96990425,
+          "drawdownPct": -27.8989
+        },
+        {
+          "sequence": 45,
+          "equity": 0.94686516,
+          "drawdownPct": -29.6116
+        },
+        {
+          "sequence": 46,
+          "equity": 0.95549013,
+          "drawdownPct": -28.9704
+        },
+        {
+          "sequence": 47,
+          "equity": 0.93743,
+          "drawdownPct": -30.313
+        },
+        {
+          "sequence": 48,
+          "equity": 0.95655223,
+          "drawdownPct": -28.8914
+        },
+        {
+          "sequence": 49,
+          "equity": 0.93215646,
+          "drawdownPct": -30.705
+        },
+        {
+          "sequence": 50,
+          "equity": 0.91211561,
+          "drawdownPct": -32.1948
+        },
+        {
+          "sequence": 51,
+          "equity": 0.89274189,
+          "drawdownPct": -33.635
+        },
+        {
+          "sequence": 52,
+          "equity": 0.87251653,
+          "drawdownPct": -35.1385
+        },
+        {
+          "sequence": 53,
+          "equity": 0.85020727,
+          "drawdownPct": -36.797
+        },
+        {
+          "sequence": 54,
+          "equity": 0.85597337,
+          "drawdownPct": -36.3683
+        },
+        {
+          "sequence": 55,
+          "equity": 0.83494527,
+          "drawdownPct": -37.9315
+        },
+        {
+          "sequence": 56,
+          "equity": 0.87014637,
+          "drawdownPct": -35.3147
+        },
+        {
+          "sequence": 57,
+          "equity": 0.85765722,
+          "drawdownPct": -36.2431
+        },
+        {
+          "sequence": 58,
+          "equity": 0.8344551,
+          "drawdownPct": -37.9679
+        },
+        {
+          "sequence": 59,
+          "equity": 0.81698783,
+          "drawdownPct": -39.2664
+        },
+        {
+          "sequence": 60,
+          "equity": 0.80036218,
+          "drawdownPct": -40.5024
+        },
+        {
+          "sequence": 61,
+          "equity": 0.78656053,
+          "drawdownPct": -41.5284
+        },
+        {
+          "sequence": 62,
+          "equity": 0.77618625,
+          "drawdownPct": -42.2996
+        }
+      ]
+    },
+    {
+      "symbol": "BNB",
+      "variant": "B",
+      "mode": "ENTRY_ATTRIBUTION",
+      "status": "OK",
+      "methodology": {
+        "modeLabel": "OOS Entry-Attributed Closed-Trade Metrics",
+        "oosStartUtc": "2025-03-01",
+        "inclusionRule": "Include a closed trade if entryTime >= OOS_START_MS.",
+        "modeLimitation": "A trade may realize after its entry-attributed OOS window.",
+        "returnBasis": "Net closed-trade P&L percentage",
+        "equityBasis": "Sequential compounding by closed trade, ordered by exit timestamp",
+        "annualization": "Trade-level mean/std ratios annualized by observed trades per calendar year",
+        "riskFreeRatePerTrade": 0,
+        "sortinoTargetPerTrade": 0,
+        "primaryLimitation": "This is supplementary trade-level risk analysis, not daily or 4H marked-to-market portfolio risk accounting."
+      },
+      "period": {
+        "firstIncludedEntryUtc": "2025-03-24",
+        "lastIncludedExitUtc": "2026-07-26",
+        "durationStartUtc": "2025-03-01",
+        "durationYears": 1.40178,
+        "tradeCount": 38,
+        "tradesPerYear": 27.1084
+      },
+      "distribution": {
+        "averageTradeReturnPct": 0.3681,
+        "sampleStdDevTradeReturnPct": 7.526,
+        "downsideDeviationPct": 2.5441,
+        "winCount": 9,
+        "lossCount": 29,
+        "winRatePct": 23.68,
+        "bestTradePct": 36.9458,
+        "worstTradePct": -8.4438
+      },
+      "performance": {
+        "totalReturnPct": 5.0651,
+        "cagrPct": 3.5877
+      },
+      "riskAdjusted": {
+        "sharpeRatioAnnualizedTradeFrequency": 0.2547,
+        "sortinoRatioAnnualizedTradeFrequency": 0.7534,
+        "maxDrawdownPct": -27.6544,
+        "calmarRatioCagrOverAbsoluteMaxDrawdown": 0.1297,
+        "ulcerIndexPct": 15.5005,
+        "cvar95Pct": -6.106,
+        "cvar95TailTradeCount": 2,
+        "cvar95WorstTradePct": -8.4438,
+        "cvar95Interpretation": "Tail contains 2 worst closed trades.",
+        "cvar99Pct": -8.4438,
+        "cvar99TailTradeCount": 1,
+        "cvar99WorstTradePct": -8.4438,
+        "cvar99Interpretation": "Tail contains one trade; interpret as worst-trade diagnostic."
+      },
+      "equityCurve": [
+        {
+          "sequence": 0,
+          "equity": 1,
+          "drawdownPct": 0
+        },
+        {
+          "sequence": 1,
+          "equity": 0.97642191,
+          "drawdownPct": -2.3578
+        },
+        {
+          "sequence": 2,
+          "equity": 0.99789378,
+          "drawdownPct": -0.2106
+        },
+        {
+          "sequence": 3,
+          "equity": 0.988749,
+          "drawdownPct": -1.1251
+        },
+        {
+          "sequence": 4,
+          "equity": 1.05495075,
+          "drawdownPct": 0
+        },
+        {
+          "sequence": 5,
+          "equity": 1.03536149,
+          "drawdownPct": -1.8569
+        },
+        {
+          "sequence": 6,
+          "equity": 1.01665425,
+          "drawdownPct": -3.6302
+        },
+        {
+          "sequence": 7,
+          "equity": 1.00340206,
+          "drawdownPct": -4.8864
+        },
+        {
+          "sequence": 8,
+          "equity": 0.98879447,
+          "drawdownPct": -6.271
+        },
+        {
+          "sequence": 9,
+          "equity": 1.13798882,
+          "drawdownPct": 0
+        },
+        {
+          "sequence": 10,
+          "equity": 1.22227617,
+          "drawdownPct": 0
+        },
+        {
+          "sequence": 11,
+          "equity": 1.36188093,
+          "drawdownPct": 0
+        },
+        {
+          "sequence": 12,
+          "equity": 1.32017793,
+          "drawdownPct": -3.0622
+        },
+        {
+          "sequence": 13,
+          "equity": 1.20870413,
+          "drawdownPct": -11.2474
+        },
+        {
+          "sequence": 14,
+          "equity": 1.16936778,
+          "drawdownPct": -14.1358
+        },
+        {
+          "sequence": 15,
+          "equity": 1.14027619,
+          "drawdownPct": -16.272
+        },
+        {
+          "sequence": 16,
+          "equity": 1.10349742,
+          "drawdownPct": -18.9725
+        },
+        {
+          "sequence": 17,
+          "equity": 1.06419637,
+          "drawdownPct": -21.8583
+        },
+        {
+          "sequence": 18,
+          "equity": 1.02409603,
+          "drawdownPct": -24.8028
+        },
+        {
+          "sequence": 19,
+          "equity": 0.98790042,
+          "drawdownPct": -27.4606
+        },
+        {
+          "sequence": 20,
+          "equity": 0.9852616,
+          "drawdownPct": -27.6544
+        },
+        {
+          "sequence": 21,
+          "equity": 1.01491497,
+          "drawdownPct": -25.477
+        },
+        {
+          "sequence": 22,
+          "equity": 0.98833676,
+          "drawdownPct": -27.4285
+        },
+        {
+          "sequence": 23,
+          "equity": 1.35348524,
+          "drawdownPct": -0.6165
+        },
+        {
+          "sequence": 24,
+          "equity": 1.31113448,
+          "drawdownPct": -3.7262
+        },
+        {
+          "sequence": 25,
+          "equity": 1.26639296,
+          "drawdownPct": -7.0115
+        },
+        {
+          "sequence": 26,
+          "equity": 1.23147153,
+          "drawdownPct": -9.5757
+        },
+        {
+          "sequence": 27,
+          "equity": 1.2246052,
+          "drawdownPct": -10.0799
+        },
+        {
+          "sequence": 28,
+          "equity": 1.20554669,
+          "drawdownPct": -11.4793
+        },
+        {
+          "sequence": 29,
+          "equity": 1.17691015,
+          "drawdownPct": -13.582
+        },
+        {
+          "sequence": 30,
+          "equity": 1.15466486,
+          "drawdownPct": -15.2154
+        },
+        {
+          "sequence": 31,
+          "equity": 1.12521645,
+          "drawdownPct": -17.3778
+        },
+        {
+          "sequence": 32,
+          "equity": 1.0997243,
+          "drawdownPct": -19.2496
+        },
+        {
+          "sequence": 33,
+          "equity": 1.06901335,
+          "drawdownPct": -21.5046
+        },
+        {
+          "sequence": 34,
+          "equity": 1.07626339,
+          "drawdownPct": -20.9723
+        },
+        {
+          "sequence": 35,
+          "equity": 1.12163841,
+          "drawdownPct": -17.6405
+        },
+        {
+          "sequence": 36,
+          "equity": 1.09129483,
+          "drawdownPct": -19.8686
+        },
+        {
+          "sequence": 37,
+          "equity": 1.06908706,
+          "drawdownPct": -21.4992
+        },
+        {
+          "sequence": 38,
+          "equity": 1.05065144,
+          "drawdownPct": -22.8529
+        }
+      ]
+    },
+    {
+      "symbol": "BTC",
+      "variant": "A",
+      "mode": "EXIT_REALIZATION",
+      "status": "OK",
+      "methodology": {
+        "modeLabel": "OOS Exit-Realized Closed-Trade Metrics",
+        "oosStartUtc": "2025-03-01",
+        "inclusionRule": "Include a closed trade if exitTime >= OOS_START_MS.",
+        "modeLimitation": "A pre-OOS trade can contribute its full lifetime P&L if it exits during OOS.",
+        "returnBasis": "Net closed-trade P&L percentage",
+        "equityBasis": "Sequential compounding by closed trade, ordered by exit timestamp",
+        "annualization": "Trade-level mean/std ratios annualized by observed trades per calendar year",
+        "riskFreeRatePerTrade": 0,
+        "sortinoTargetPerTrade": 0,
+        "primaryLimitation": "This is supplementary trade-level risk analysis, not daily or 4H marked-to-market portfolio risk accounting."
+      },
+      "period": {
+        "firstIncludedEntryUtc": "2025-02-24",
+        "lastIncludedExitUtc": "2026-08-17",
+        "durationStartUtc": "2025-02-24",
+        "durationYears": 1.476158,
+        "tradeCount": 59,
+        "tradesPerYear": 39.9686
+      },
+      "distribution": {
+        "averageTradeReturnPct": 0.2335,
+        "sampleStdDevTradeReturnPct": 7.2667,
+        "downsideDeviationPct": 2.2322,
+        "winCount": 12,
+        "lossCount": 47,
+        "winRatePct": 20.34,
+        "bestTradePct": 34.1248,
+        "worstTradePct": -4.8504
+      },
+      "performance": {
+        "totalReturnPct": 0.4612,
+        "cagrPct": 0.3122
+      },
+      "riskAdjusted": {
+        "sharpeRatioAnnualizedTradeFrequency": 0.2032,
+        "sortinoRatioAnnualizedTradeFrequency": 0.6614,
+        "maxDrawdownPct": -25.6334,
+        "calmarRatioCagrOverAbsoluteMaxDrawdown": 0.0122,
+        "ulcerIndexPct": 13.8902,
+        "cvar95Pct": -4.6743,
+        "cvar95TailTradeCount": 3,
+        "cvar95WorstTradePct": -4.8504,
+        "cvar95Interpretation": "Tail contains 3 worst closed trades.",
+        "cvar99Pct": -4.8504,
+        "cvar99TailTradeCount": 1,
+        "cvar99WorstTradePct": -4.8504,
+        "cvar99Interpretation": "Tail contains one trade; interpret as worst-trade diagnostic."
+      },
+      "equityCurve": [
+        {
+          "sequence": 0,
+          "equity": 1,
+          "drawdownPct": 0
+        },
+        {
+          "sequence": 1,
+          "equity": 1.00756681,
+          "drawdownPct": 0
+        },
+        {
+          "sequence": 2,
+          "equity": 0.95869537,
+          "drawdownPct": -4.8504
+        },
+        {
+          "sequence": 3,
+          "equity": 0.91431206,
+          "drawdownPct": -9.2554
+        },
+        {
+          "sequence": 4,
+          "equity": 0.8986203,
+          "drawdownPct": -10.8128
+        },
+        {
+          "sequence": 5,
+          "equity": 0.87630442,
+          "drawdownPct": -13.0277
+        },
+        {
+          "sequence": 6,
+          "equity": 0.85150437,
+          "drawdownPct": -15.489
+        },
+        {
+          "sequence": 7,
+          "equity": 0.83220187,
+          "drawdownPct": -17.4048
+        },
+        {
+          "sequence": 8,
+          "equity": 1.04822334,
+          "drawdownPct": 0
+        },
+        {
+          "sequence": 9,
+          "equity": 1.02747322,
+          "drawdownPct": -1.9796
+        },
+        {
+          "sequence": 10,
+          "equity": 1.0093827,
+          "drawdownPct": -3.7054
+        },
+        {
+          "sequence": 11,
+          "equity": 0.98515877,
+          "drawdownPct": -6.0163
+        },
+        {
+          "sequence": 12,
+          "equity": 0.96236825,
+          "drawdownPct": -8.1905
+        },
+        {
+          "sequence": 13,
+          "equity": 0.95386323,
+          "drawdownPct": -9.0019
+        },
+        {
+          "sequence": 14,
+          "equity": 0.93824068,
+          "drawdownPct": -10.4923
+        },
+        {
+          "sequence": 15,
+          "equity": 0.92159287,
+          "drawdownPct": -12.0805
+        },
+        {
+          "sequence": 16,
+          "equity": 0.97425804,
+          "drawdownPct": -7.0563
+        },
+        {
+          "sequence": 17,
+          "equity": 0.95049625,
+          "drawdownPct": -9.3231
+        },
+        {
+          "sequence": 18,
+          "equity": 0.93582048,
+          "drawdownPct": -10.7232
+        },
+        {
+          "sequence": 19,
+          "equity": 0.9176772,
+          "drawdownPct": -12.454
+        },
+        {
+          "sequence": 20,
+          "equity": 0.90104469,
+          "drawdownPct": -14.0408
+        },
+        {
+          "sequence": 21,
+          "equity": 0.9031702,
+          "drawdownPct": -13.838
+        },
+        {
+          "sequence": 22,
+          "equity": 0.88335281,
+          "drawdownPct": -15.7286
+        },
+        {
+          "sequence": 23,
+          "equity": 0.86346013,
+          "drawdownPct": -17.6263
+        },
+        {
+          "sequence": 24,
+          "equity": 0.84746336,
+          "drawdownPct": -19.1524
+        },
+        {
+          "sequence": 25,
+          "equity": 0.83498061,
+          "drawdownPct": -20.3433
+        },
+        {
+          "sequence": 26,
+          "equity": 0.82169251,
+          "drawdownPct": -21.6109
+        },
+        {
+          "sequence": 27,
+          "equity": 0.80808145,
+          "drawdownPct": -22.9094
+        },
+        {
+          "sequence": 28,
+          "equity": 0.79131503,
+          "drawdownPct": -24.5089
+        },
+        {
+          "sequence": 29,
+          "equity": 0.94695994,
+          "drawdownPct": -9.6605
+        },
+        {
+          "sequence": 30,
+          "equity": 0.91972941,
+          "drawdownPct": -12.2583
+        },
+        {
+          "sequence": 31,
+          "equity": 0.8939403,
+          "drawdownPct": -14.7185
+        },
+        {
+          "sequence": 32,
+          "equity": 0.86365885,
+          "drawdownPct": -17.6074
+        },
+        {
+          "sequence": 33,
+          "equity": 0.837249,
+          "drawdownPct": -20.1268
+        },
+        {
+          "sequence": 34,
+          "equity": 0.83299183,
+          "drawdownPct": -20.533
+        },
+        {
+          "sequence": 35,
+          "equity": 0.81311697,
+          "drawdownPct": -22.429
+        },
+        {
+          "sequence": 36,
+          "equity": 0.79342974,
+          "drawdownPct": -24.3072
+        },
+        {
+          "sequence": 37,
+          "equity": 0.77952794,
+          "drawdownPct": -25.6334
+        },
+        {
+          "sequence": 38,
+          "equity": 0.8029423,
+          "drawdownPct": -23.3997
+        },
+        {
+          "sequence": 39,
+          "equity": 1.07694485,
+          "drawdownPct": 0
+        },
+        {
+          "sequence": 40,
+          "equity": 1.03718544,
+          "drawdownPct": -3.6919
+        },
+        {
+          "sequence": 41,
+          "equity": 0.99006675,
+          "drawdownPct": -8.0671
+        },
+        {
+          "sequence": 42,
+          "equity": 0.95727383,
+          "drawdownPct": -11.1121
+        },
+        {
+          "sequence": 43,
+          "equity": 0.94005025,
+          "drawdownPct": -12.7114
+        },
+        {
+          "sequence": 44,
+          "equity": 0.91961794,
+          "drawdownPct": -14.6086
+        },
+        {
+          "sequence": 45,
+          "equity": 0.88989816,
+          "drawdownPct": -17.3683
+        },
+        {
+          "sequence": 46,
+          "equity": 0.85990541,
+          "drawdownPct": -20.1533
+        },
+        {
+          "sequence": 47,
+          "equity": 0.93908232,
+          "drawdownPct": -12.8013
+        },
+        {
+          "sequence": 48,
+          "equity": 0.9169737,
+          "drawdownPct": -14.8542
+        },
+        {
+          "sequence": 49,
+          "equity": 0.91769134,
+          "drawdownPct": -14.7875
+        },
+        {
+          "sequence": 50,
+          "equity": 0.89844621,
+          "drawdownPct": -16.5745
+        },
+        {
+          "sequence": 51,
+          "equity": 1.08053247,
+          "drawdownPct": 0
+        },
+        {
+          "sequence": 52,
+          "equity": 1.0547032,
+          "drawdownPct": -2.3904
+        },
+        {
+          "sequence": 53,
+          "equity": 1.0220639,
+          "drawdownPct": -5.4111
+        },
+        {
+          "sequence": 54,
+          "equity": 1.03067751,
+          "drawdownPct": -4.6139
+        },
+        {
+          "sequence": 55,
+          "equity": 1.06012887,
+          "drawdownPct": -1.8883
+        },
+        {
+          "sequence": 56,
+          "equity": 1.03997512,
+          "drawdownPct": -3.7535
+        },
+        {
+          "sequence": 57,
+          "equity": 1.01617926,
+          "drawdownPct": -5.9557
+        },
+        {
+          "sequence": 58,
+          "equity": 1.00976661,
+          "drawdownPct": -6.5492
+        },
+        {
+          "sequence": 59,
+          "equity": 1.00461236,
+          "drawdownPct": -7.0262
+        }
+      ]
+    },
+    {
+      "symbol": "BTC",
+      "variant": "B",
+      "mode": "EXIT_REALIZATION",
+      "status": "OK",
+      "methodology": {
+        "modeLabel": "OOS Exit-Realized Closed-Trade Metrics",
+        "oosStartUtc": "2025-03-01",
+        "inclusionRule": "Include a closed trade if exitTime >= OOS_START_MS.",
+        "modeLimitation": "A pre-OOS trade can contribute its full lifetime P&L if it exits during OOS.",
+        "returnBasis": "Net closed-trade P&L percentage",
+        "equityBasis": "Sequential compounding by closed trade, ordered by exit timestamp",
+        "annualization": "Trade-level mean/std ratios annualized by observed trades per calendar year",
+        "riskFreeRatePerTrade": 0,
+        "sortinoTargetPerTrade": 0,
+        "primaryLimitation": "This is supplementary trade-level risk analysis, not daily or 4H marked-to-market portfolio risk accounting."
+      },
+      "period": {
+        "firstIncludedEntryUtc": "2025-03-24",
+        "lastIncludedExitUtc": "2026-08-17",
+        "durationStartUtc": "2025-03-01",
+        "durationYears": 1.464294,
+        "tradeCount": 33,
+        "tradesPerYear": 22.5365
+      },
+      "distribution": {
+        "averageTradeReturnPct": 1.2184,
+        "sampleStdDevTradeReturnPct": 8.8398,
+        "downsideDeviationPct": 2.1036,
+        "winCount": 6,
+        "lossCount": 27,
+        "winRatePct": 18.18,
+        "bestTradePct": 34.1248,
+        "worstTradePct": -3.5849
+      },
+      "performance": {
+        "totalReturnPct": 33.9695,
+        "cagrPct": 22.1055
+      },
+      "riskAdjusted": {
+        "sharpeRatioAnnualizedTradeFrequency": 0.6543,
+        "sortinoRatioAnnualizedTradeFrequency": 2.7496,
+        "maxDrawdownPct": -17.1003,
+        "calmarRatioCagrOverAbsoluteMaxDrawdown": 1.2927,
+        "ulcerIndexPct": 7.4721,
+        "cvar95Pct": -3.4776,
+        "cvar95TailTradeCount": 2,
+        "cvar95WorstTradePct": -3.5849,
+        "cvar95Interpretation": "Tail contains 2 worst closed trades.",
+        "cvar99Pct": -3.5849,
+        "cvar99TailTradeCount": 1,
+        "cvar99WorstTradePct": -3.5849,
+        "cvar99Interpretation": "Tail contains one trade; interpret as worst-trade diagnostic."
+      },
+      "equityCurve": [
+        {
+          "sequence": 0,
+          "equity": 1,
+          "drawdownPct": 0
+        },
+        {
+          "sequence": 1,
+          "equity": 0.97983916,
+          "drawdownPct": -2.0161
+        },
+        {
+          "sequence": 2,
+          "equity": 0.95550633,
+          "drawdownPct": -4.4494
+        },
+        {
+          "sequence": 3,
+          "equity": 0.92846481,
+          "drawdownPct": -7.1535
+        },
+        {
+          "sequence": 4,
+          "equity": 0.90741772,
+          "drawdownPct": -9.2582
+        },
+        {
+          "sequence": 5,
+          "equity": 1.12749986,
+          "drawdownPct": 0
+        },
+        {
+          "sequence": 6,
+          "equity": 1.1076482,
+          "drawdownPct": -1.7607
+        },
+        {
+          "sequence": 7,
+          "equity": 1.09785925,
+          "drawdownPct": -2.6289
+        },
+        {
+          "sequence": 8,
+          "equity": 1.07837923,
+          "drawdownPct": -4.3566
+        },
+        {
+          "sequence": 9,
+          "equity": 1.14000407,
+          "drawdownPct": 0
+        },
+        {
+          "sequence": 10,
+          "equity": 1.11790217,
+          "drawdownPct": -1.9388
+        },
+        {
+          "sequence": 11,
+          "equity": 1.09337312,
+          "drawdownPct": -4.0904
+        },
+        {
+          "sequence": 12,
+          "equity": 1.06875089,
+          "drawdownPct": -6.2503
+        },
+        {
+          "sequence": 13,
+          "equity": 1.04895082,
+          "drawdownPct": -7.9871
+        },
+        {
+          "sequence": 14,
+          "equity": 1.03225755,
+          "drawdownPct": -9.4514
+        },
+        {
+          "sequence": 15,
+          "equity": 0.99525233,
+          "drawdownPct": -12.6975
+        },
+        {
+          "sequence": 16,
+          "equity": 0.9746024,
+          "drawdownPct": -14.5089
+        },
+        {
+          "sequence": 17,
+          "equity": 0.94505984,
+          "drawdownPct": -17.1003
+        },
+        {
+          "sequence": 18,
+          "equity": 1.08091636,
+          "drawdownPct": -5.1831
+        },
+        {
+          "sequence": 19,
+          "equity": 1.05060758,
+          "drawdownPct": -7.8418
+        },
+        {
+          "sequence": 20,
+          "equity": 1.04526555,
+          "drawdownPct": -8.3104
+        },
+        {
+          "sequence": 21,
+          "equity": 1.01995753,
+          "drawdownPct": -10.5304
+        },
+        {
+          "sequence": 22,
+          "equity": 1.36801612,
+          "drawdownPct": 0
+        },
+        {
+          "sequence": 23,
+          "equity": 1.32270479,
+          "drawdownPct": -3.3122
+        },
+        {
+          "sequence": 24,
+          "equity": 1.29395537,
+          "drawdownPct": -5.4137
+        },
+        {
+          "sequence": 25,
+          "equity": 1.25034444,
+          "drawdownPct": -8.6016
+        },
+        {
+          "sequence": 26,
+          "equity": 1.22090784,
+          "drawdownPct": -10.7534
+        },
+        {
+          "sequence": 27,
+          "equity": 1.19530387,
+          "drawdownPct": -12.625
+        },
+        {
+          "sequence": 28,
+          "equity": 1.43755368,
+          "drawdownPct": 0
+        },
+        {
+          "sequence": 29,
+          "equity": 1.39306652,
+          "drawdownPct": -3.0946
+        },
+        {
+          "sequence": 30,
+          "equity": 1.40480682,
+          "drawdownPct": -2.278
+        },
+        {
+          "sequence": 31,
+          "equity": 1.37810052,
+          "drawdownPct": -4.1357
+        },
+        {
+          "sequence": 32,
+          "equity": 1.34656796,
+          "drawdownPct": -6.3292
+        },
+        {
+          "sequence": 33,
+          "equity": 1.33969454,
+          "drawdownPct": -6.8073
+        }
+      ]
+    },
+    {
+      "symbol": "ETH",
+      "variant": "A",
+      "mode": "EXIT_REALIZATION",
+      "status": "OK",
+      "methodology": {
+        "modeLabel": "OOS Exit-Realized Closed-Trade Metrics",
+        "oosStartUtc": "2025-03-01",
+        "inclusionRule": "Include a closed trade if exitTime >= OOS_START_MS.",
+        "modeLimitation": "A pre-OOS trade can contribute its full lifetime P&L if it exits during OOS.",
+        "returnBasis": "Net closed-trade P&L percentage",
+        "equityBasis": "Sequential compounding by closed trade, ordered by exit timestamp",
+        "annualization": "Trade-level mean/std ratios annualized by observed trades per calendar year",
+        "riskFreeRatePerTrade": 0,
+        "sortinoTargetPerTrade": 0,
+        "primaryLimitation": "This is supplementary trade-level risk analysis, not daily or 4H marked-to-market portfolio risk accounting."
+      },
+      "period": {
+        "firstIncludedEntryUtc": "2025-02-25",
+        "lastIncludedExitUtc": "2026-08-12",
+        "durationStartUtc": "2025-02-25",
+        "durationYears": 1.460187,
+        "tradeCount": 65,
+        "tradesPerYear": 44.5148
+      },
+      "distribution": {
+        "averageTradeReturnPct": 0.981,
+        "sampleStdDevTradeReturnPct": 11.9264,
+        "downsideDeviationPct": 3.4032,
+        "winCount": 14,
+        "lossCount": 51,
+        "winRatePct": 21.54,
+        "bestTradePct": 58.2355,
+        "worstTradePct": -7.7898
+      },
+      "performance": {
+        "totalReturnPct": 30.3705,
+        "cagrPct": 19.9167
+      },
+      "riskAdjusted": {
+        "sharpeRatioAnnualizedTradeFrequency": 0.5488,
+        "sortinoRatioAnnualizedTradeFrequency": 1.9233,
+        "maxDrawdownPct": -37.7807,
+        "calmarRatioCagrOverAbsoluteMaxDrawdown": 0.5272,
+        "ulcerIndexPct": 22.2985,
+        "cvar95Pct": -6.2613,
+        "cvar95TailTradeCount": 4,
+        "cvar95WorstTradePct": -7.7898,
+        "cvar95Interpretation": "Tail contains 4 worst closed trades.",
+        "cvar99Pct": -7.7898,
+        "cvar99TailTradeCount": 1,
+        "cvar99WorstTradePct": -7.7898,
+        "cvar99Interpretation": "Tail contains one trade; interpret as worst-trade diagnostic."
+      },
+      "equityCurve": [
+        {
+          "sequence": 0,
+          "equity": 1,
+          "drawdownPct": 0
+        },
+        {
+          "sequence": 1,
+          "equity": 1.22547962,
+          "drawdownPct": 0
+        },
+        {
+          "sequence": 2,
+          "equity": 1.17710093,
+          "drawdownPct": -3.9477
+        },
+        {
+          "sequence": 3,
+          "equity": 1.14066112,
+          "drawdownPct": -6.9212
+        },
+        {
+          "sequence": 4,
+          "equity": 1.33169647,
+          "drawdownPct": 0
+        },
+        {
+          "sequence": 5,
+          "equity": 1.28770877,
+          "drawdownPct": -3.3031
+        },
+        {
+          "sequence": 6,
+          "equity": 1.23857951,
+          "drawdownPct": -6.9924
+        },
+        {
+          "sequence": 7,
+          "equity": 1.28596333,
+          "drawdownPct": -3.4342
+        },
+        {
+          "sequence": 8,
+          "equity": 1.24548907,
+          "drawdownPct": -6.4735
+        },
+        {
+          "sequence": 9,
+          "equity": 1.65674301,
+          "drawdownPct": 0
+        },
+        {
+          "sequence": 10,
+          "equity": 1.58066082,
+          "drawdownPct": -4.5923
+        },
+        {
+          "sequence": 11,
+          "equity": 1.52288813,
+          "drawdownPct": -8.0794
+        },
+        {
+          "sequence": 12,
+          "equity": 1.4546307,
+          "drawdownPct": -12.1994
+        },
+        {
+          "sequence": 13,
+          "equity": 1.40492065,
+          "drawdownPct": -15.1998
+        },
+        {
+          "sequence": 14,
+          "equity": 1.3273288,
+          "drawdownPct": -19.8832
+        },
+        {
+          "sequence": 15,
+          "equity": 1.27054685,
+          "drawdownPct": -23.3106
+        },
+        {
+          "sequence": 16,
+          "equity": 1.23067708,
+          "drawdownPct": -25.7171
+        },
+        {
+          "sequence": 17,
+          "equity": 1.19028426,
+          "drawdownPct": -28.1552
+        },
+        {
+          "sequence": 18,
+          "equity": 1.14772988,
+          "drawdownPct": -30.7237
+        },
+        {
+          "sequence": 19,
+          "equity": 1.59988655,
+          "drawdownPct": -3.4318
+        },
+        {
+          "sequence": 20,
+          "equity": 1.53431148,
+          "drawdownPct": -7.3899
+        },
+        {
+          "sequence": 21,
+          "equity": 1.65893641,
+          "drawdownPct": 0
+        },
+        {
+          "sequence": 22,
+          "equity": 1.57952974,
+          "drawdownPct": -4.7866
+        },
+        {
+          "sequence": 23,
+          "equity": 1.49947545,
+          "drawdownPct": -9.6122
+        },
+        {
+          "sequence": 24,
+          "equity": 1.46524375,
+          "drawdownPct": -11.6757
+        },
+        {
+          "sequence": 25,
+          "equity": 1.42276706,
+          "drawdownPct": -14.2362
+        },
+        {
+          "sequence": 26,
+          "equity": 1.42387804,
+          "drawdownPct": -14.1692
+        },
+        {
+          "sequence": 27,
+          "equity": 1.3766162,
+          "drawdownPct": -17.0181
+        },
+        {
+          "sequence": 28,
+          "equity": 1.31592718,
+          "drawdownPct": -20.6765
+        },
+        {
+          "sequence": 29,
+          "equity": 1.2134187,
+          "drawdownPct": -26.8556
+        },
+        {
+          "sequence": 30,
+          "equity": 1.1413774,
+          "drawdownPct": -31.1982
+        },
+        {
+          "sequence": 31,
+          "equity": 1.08836281,
+          "drawdownPct": -34.3939
+        },
+        {
+          "sequence": 32,
+          "equity": 1.05386289,
+          "drawdownPct": -36.4736
+        },
+        {
+          "sequence": 33,
+          "equity": 1.33775296,
+          "drawdownPct": -19.3608
+        },
+        {
+          "sequence": 34,
+          "equity": 1.28740755,
+          "drawdownPct": -22.3956
+        },
+        {
+          "sequence": 35,
+          "equity": 1.23933282,
+          "drawdownPct": -25.2935
+        },
+        {
+          "sequence": 36,
+          "equity": 1.18725255,
+          "drawdownPct": -28.4329
+        },
+        {
+          "sequence": 37,
+          "equity": 1.13665196,
+          "drawdownPct": -31.4831
+        },
+        {
+          "sequence": 38,
+          "equity": 1.09791741,
+          "drawdownPct": -33.818
+        },
+        {
+          "sequence": 39,
+          "equity": 1.08500772,
+          "drawdownPct": -34.5962
+        },
+        {
+          "sequence": 40,
+          "equity": 1.05889197,
+          "drawdownPct": -36.1704
+        },
+        {
+          "sequence": 41,
+          "equity": 1.10703219,
+          "drawdownPct": -33.2686
+        },
+        {
+          "sequence": 42,
+          "equity": 1.75171769,
+          "drawdownPct": 0
+        },
+        {
+          "sequence": 43,
+          "equity": 1.67373511,
+          "drawdownPct": -4.4518
+        },
+        {
+          "sequence": 44,
+          "equity": 1.57673293,
+          "drawdownPct": -9.9893
+        },
+        {
+          "sequence": 45,
+          "equity": 1.51301897,
+          "drawdownPct": -13.6266
+        },
+        {
+          "sequence": 46,
+          "equity": 1.52064579,
+          "drawdownPct": -13.1912
+        },
+        {
+          "sequence": 47,
+          "equity": 1.46420572,
+          "drawdownPct": -16.4131
+        },
+        {
+          "sequence": 48,
+          "equity": 1.40552804,
+          "drawdownPct": -19.7629
+        },
+        {
+          "sequence": 49,
+          "equity": 1.34700501,
+          "drawdownPct": -23.1038
+        },
+        {
+          "sequence": 50,
+          "equity": 1.29243854,
+          "drawdownPct": -26.2188
+        },
+        {
+          "sequence": 51,
+          "equity": 1.25412618,
+          "drawdownPct": -28.4059
+        },
+        {
+          "sequence": 52,
+          "equity": 1.27248229,
+          "drawdownPct": -27.358
+        },
+        {
+          "sequence": 53,
+          "equity": 1.23653949,
+          "drawdownPct": -29.4099
+        },
+        {
+          "sequence": 54,
+          "equity": 1.19792879,
+          "drawdownPct": -31.614
+        },
+        {
+          "sequence": 55,
+          "equity": 1.18239222,
+          "drawdownPct": -32.501
+        },
+        {
+          "sequence": 56,
+          "equity": 1.14704626,
+          "drawdownPct": -34.5188
+        },
+        {
+          "sequence": 57,
+          "equity": 1.11936397,
+          "drawdownPct": -36.0991
+        },
+        {
+          "sequence": 58,
+          "equity": 1.08990685,
+          "drawdownPct": -37.7807
+        },
+        {
+          "sequence": 59,
+          "equity": 1.37152489,
+          "drawdownPct": -21.704
+        },
+        {
+          "sequence": 60,
+          "equity": 1.33040827,
+          "drawdownPct": -24.0512
+        },
+        {
+          "sequence": 61,
+          "equity": 1.28458333,
+          "drawdownPct": -26.6672
+        },
+        {
+          "sequence": 62,
+          "equity": 1.40872858,
+          "drawdownPct": -19.5802
+        },
+        {
+          "sequence": 63,
+          "equity": 1.36575973,
+          "drawdownPct": -22.0331
+        },
+        {
+          "sequence": 64,
+          "equity": 1.33001824,
+          "drawdownPct": -24.0735
+        },
+        {
+          "sequence": 65,
+          "equity": 1.30370466,
+          "drawdownPct": -25.5756
+        }
+      ]
+    },
+    {
+      "symbol": "ETH",
+      "variant": "B",
+      "mode": "EXIT_REALIZATION",
+      "status": "OK",
+      "methodology": {
+        "modeLabel": "OOS Exit-Realized Closed-Trade Metrics",
+        "oosStartUtc": "2025-03-01",
+        "inclusionRule": "Include a closed trade if exitTime >= OOS_START_MS.",
+        "modeLimitation": "A pre-OOS trade can contribute its full lifetime P&L if it exits during OOS.",
+        "returnBasis": "Net closed-trade P&L percentage",
+        "equityBasis": "Sequential compounding by closed trade, ordered by exit timestamp",
+        "annualization": "Trade-level mean/std ratios annualized by observed trades per calendar year",
+        "riskFreeRatePerTrade": 0,
+        "sortinoTargetPerTrade": 0,
+        "primaryLimitation": "This is supplementary trade-level risk analysis, not daily or 4H marked-to-market portfolio risk accounting."
+      },
+      "period": {
+        "firstIncludedEntryUtc": "2025-03-28",
+        "lastIncludedExitUtc": "2026-08-12",
+        "durationStartUtc": "2025-03-01",
+        "durationYears": 1.449236,
+        "tradeCount": 37,
+        "tradesPerYear": 25.5307
+      },
+      "distribution": {
+        "averageTradeReturnPct": 1.6143,
+        "sampleStdDevTradeReturnPct": 13.6436,
+        "downsideDeviationPct": 3.3471,
+        "winCount": 6,
+        "lossCount": 31,
+        "winRatePct": 16.22,
+        "bestTradePct": 58.2355,
+        "worstTradePct": -6.0353
+      },
+      "performance": {
+        "totalReturnPct": 38.7707,
+        "cagrPct": 25.3684
+      },
+      "riskAdjusted": {
+        "sharpeRatioAnnualizedTradeFrequency": 0.5978,
+        "sortinoRatioAnnualizedTradeFrequency": 2.4369,
+        "maxDrawdownPct": -39.3882,
+        "calmarRatioCagrOverAbsoluteMaxDrawdown": 0.6441,
+        "ulcerIndexPct": 18.6639,
+        "cvar95Pct": -5.9863,
+        "cvar95TailTradeCount": 2,
+        "cvar95WorstTradePct": -6.0353,
+        "cvar95Interpretation": "Tail contains 2 worst closed trades.",
+        "cvar99Pct": -6.0353,
+        "cvar99TailTradeCount": 1,
+        "cvar99WorstTradePct": -6.0353,
+        "cvar99Interpretation": "Tail contains one trade; interpret as worst-trade diagnostic."
+      },
+      "equityCurve": [
+        {
+          "sequence": 0,
+          "equity": 1,
+          "drawdownPct": 0
+        },
+        {
+          "sequence": 1,
+          "equity": 1.16747774,
+          "drawdownPct": 0
+        },
+        {
+          "sequence": 2,
+          "equity": 1.12293559,
+          "drawdownPct": -3.8152
+        },
+        {
+          "sequence": 3,
+          "equity": 1.08759245,
+          "drawdownPct": -6.8426
+        },
+        {
+          "sequence": 4,
+          "equity": 1.0230188,
+          "drawdownPct": -12.3736
+        },
+        {
+          "sequence": 5,
+          "equity": 0.96127683,
+          "drawdownPct": -17.6621
+        },
+        {
+          "sequence": 6,
+          "equity": 0.92072842,
+          "drawdownPct": -21.1352
+        },
+        {
+          "sequence": 7,
+          "equity": 0.88707607,
+          "drawdownPct": -24.0177
+        },
+        {
+          "sequence": 8,
+          "equity": 0.8473164,
+          "drawdownPct": -27.4233
+        },
+        {
+          "sequence": 9,
+          "equity": 0.8183605,
+          "drawdownPct": -29.9035
+        },
+        {
+          "sequence": 10,
+          "equity": 0.78335176,
+          "drawdownPct": -32.9022
+        },
+        {
+          "sequence": 11,
+          "equity": 0.75877018,
+          "drawdownPct": -35.0077
+        },
+        {
+          "sequence": 12,
+          "equity": 0.73386611,
+          "drawdownPct": -37.1409
+        },
+        {
+          "sequence": 13,
+          "equity": 0.70762933,
+          "drawdownPct": -39.3882
+        },
+        {
+          "sequence": 14,
+          "equity": 0.98640514,
+          "drawdownPct": -15.5097
+        },
+        {
+          "sequence": 15,
+          "equity": 1.0665262,
+          "drawdownPct": -8.647
+        },
+        {
+          "sequence": 16,
+          "equity": 1.01247214,
+          "drawdownPct": -13.277
+        },
+        {
+          "sequence": 17,
+          "equity": 0.98312108,
+          "drawdownPct": -15.791
+        },
+        {
+          "sequence": 18,
+          "equity": 0.950489,
+          "drawdownPct": -18.5861
+        },
+        {
+          "sequence": 19,
+          "equity": 0.92035953,
+          "drawdownPct": -21.1668
+        },
+        {
+          "sequence": 20,
+          "equity": 1.11025047,
+          "drawdownPct": -4.9018
+        },
+        {
+          "sequence": 21,
+          "equity": 1.06879119,
+          "drawdownPct": -8.453
+        },
+        {
+          "sequence": 22,
+          "equity": 1.03236918,
+          "drawdownPct": -11.5727
+        },
+        {
+          "sequence": 23,
+          "equity": 1.02023023,
+          "drawdownPct": -12.6124
+        },
+        {
+          "sequence": 24,
+          "equity": 0.98840892,
+          "drawdownPct": -15.3381
+        },
+        {
+          "sequence": 25,
+          "equity": 1.5640136,
+          "drawdownPct": 0
+        },
+        {
+          "sequence": 26,
+          "equity": 1.50081361,
+          "drawdownPct": -4.0409
+        },
+        {
+          "sequence": 27,
+          "equity": 1.44510964,
+          "drawdownPct": -7.6025
+        },
+        {
+          "sequence": 28,
+          "equity": 1.38493851,
+          "drawdownPct": -11.4497
+        },
+        {
+          "sequence": 29,
+          "equity": 1.34581925,
+          "drawdownPct": -13.9509
+        },
+        {
+          "sequence": 30,
+          "equity": 1.30379632,
+          "drawdownPct": -16.6378
+        },
+        {
+          "sequence": 31,
+          "equity": 1.26482114,
+          "drawdownPct": -19.1298
+        },
+        {
+          "sequence": 32,
+          "equity": 1.23429653,
+          "drawdownPct": -21.0815
+        },
+        {
+          "sequence": 33,
+          "equity": 1.20181485,
+          "drawdownPct": -23.1583
+        },
+        {
+          "sequence": 34,
+          "equity": 1.5123485,
+          "drawdownPct": -3.3034
+        },
+        {
+          "sequence": 35,
+          "equity": 1.46025675,
+          "drawdownPct": -6.634
+        },
+        {
+          "sequence": 36,
+          "equity": 1.41571619,
+          "drawdownPct": -9.4818
+        },
+        {
+          "sequence": 37,
+          "equity": 1.38770713,
+          "drawdownPct": -11.2727
+        }
+      ]
+    },
+    {
+      "symbol": "SOL",
+      "variant": "A",
+      "mode": "EXIT_REALIZATION",
+      "status": "OK",
+      "methodology": {
+        "modeLabel": "OOS Exit-Realized Closed-Trade Metrics",
+        "oosStartUtc": "2025-03-01",
+        "inclusionRule": "Include a closed trade if exitTime >= OOS_START_MS.",
+        "modeLimitation": "A pre-OOS trade can contribute its full lifetime P&L if it exits during OOS.",
+        "returnBasis": "Net closed-trade P&L percentage",
+        "equityBasis": "Sequential compounding by closed trade, ordered by exit timestamp",
+        "annualization": "Trade-level mean/std ratios annualized by observed trades per calendar year",
+        "riskFreeRatePerTrade": 0,
+        "sortinoTargetPerTrade": 0,
+        "primaryLimitation": "This is supplementary trade-level risk analysis, not daily or 4H marked-to-market portfolio risk accounting."
+      },
+      "period": {
+        "firstIncludedEntryUtc": "2025-02-01",
+        "lastIncludedExitUtc": "2026-08-17",
+        "durationStartUtc": "2025-02-01",
+        "durationYears": 1.536847,
+        "tradeCount": 63,
+        "tradesPerYear": 40.993
+      },
+      "distribution": {
+        "averageTradeReturnPct": 0.1964,
+        "sampleStdDevTradeReturnPct": 10.3644,
+        "downsideDeviationPct": 3.7086,
+        "winCount": 15,
+        "lossCount": 48,
+        "winRatePct": 23.81,
+        "bestTradePct": 54.0112,
+        "worstTradePct": -8.6643
+      },
+      "performance": {
+        "totalReturnPct": -14.279,
+        "cagrPct": -9.5391
+      },
+      "riskAdjusted": {
+        "sharpeRatioAnnualizedTradeFrequency": 0.1213,
+        "sortinoRatioAnnualizedTradeFrequency": 0.339,
+        "maxDrawdownPct": -38.0832,
+        "calmarRatioCagrOverAbsoluteMaxDrawdown": -0.2505,
+        "ulcerIndexPct": 23.8393,
+        "cvar95Pct": -6.8011,
+        "cvar95TailTradeCount": 4,
+        "cvar95WorstTradePct": -8.6643,
+        "cvar95Interpretation": "Tail contains 4 worst closed trades.",
+        "cvar99Pct": -8.6643,
+        "cvar99TailTradeCount": 1,
+        "cvar99WorstTradePct": -8.6643,
+        "cvar99Interpretation": "Tail contains one trade; interpret as worst-trade diagnostic."
+      },
+      "equityCurve": [
+        {
+          "sequence": 0,
+          "equity": 1,
+          "drawdownPct": 0
+        },
+        {
+          "sequence": 1,
+          "equity": 1.28674189,
+          "drawdownPct": 0
+        },
+        {
+          "sequence": 2,
+          "equity": 1.17525467,
+          "drawdownPct": -8.6643
+        },
+        {
+          "sequence": 3,
+          "equity": 1.10609621,
+          "drawdownPct": -14.039
+        },
+        {
+          "sequence": 4,
+          "equity": 1.05996246,
+          "drawdownPct": -17.6243
+        },
+        {
+          "sequence": 5,
+          "equity": 1.04681693,
+          "drawdownPct": -18.6459
+        },
+        {
+          "sequence": 6,
+          "equity": 0.99516113,
+          "drawdownPct": -22.6604
+        },
+        {
+          "sequence": 7,
+          "equity": 0.98106486,
+          "drawdownPct": -23.7559
+        },
+        {
+          "sequence": 8,
+          "equity": 1.15089874,
+          "drawdownPct": -10.5571
+        },
+        {
+          "sequence": 9,
+          "equity": 1.10988985,
+          "drawdownPct": -13.7442
+        },
+        {
+          "sequence": 10,
+          "equity": 1.18976382,
+          "drawdownPct": -7.5367
+        },
+        {
+          "sequence": 11,
+          "equity": 1.11586104,
+          "drawdownPct": -13.2801
+        },
+        {
+          "sequence": 12,
+          "equity": 1.06986088,
+          "drawdownPct": -16.8551
+        },
+        {
+          "sequence": 13,
+          "equity": 1.12549401,
+          "drawdownPct": -12.5315
+        },
+        {
+          "sequence": 14,
+          "equity": 1.08202035,
+          "drawdownPct": -15.9101
+        },
+        {
+          "sequence": 15,
+          "equity": 1.02032284,
+          "drawdownPct": -20.7049
+        },
+        {
+          "sequence": 16,
+          "equity": 0.97513983,
+          "drawdownPct": -24.2164
+        },
+        {
+          "sequence": 17,
+          "equity": 1.13871355,
+          "drawdownPct": -11.5041
+        },
+        {
+          "sequence": 18,
+          "equity": 1.13108892,
+          "drawdownPct": -12.0967
+        },
+        {
+          "sequence": 19,
+          "equity": 1.13882557,
+          "drawdownPct": -11.4954
+        },
+        {
+          "sequence": 20,
+          "equity": 1.08337302,
+          "drawdownPct": -15.8049
+        },
+        {
+          "sequence": 21,
+          "equity": 1.02664447,
+          "drawdownPct": -20.2136
+        },
+        {
+          "sequence": 22,
+          "equity": 0.9696099,
+          "drawdownPct": -24.6461
+        },
+        {
+          "sequence": 23,
+          "equity": 1.00299615,
+          "drawdownPct": -22.0515
+        },
+        {
+          "sequence": 24,
+          "equity": 1.00127163,
+          "drawdownPct": -22.1855
+        },
+        {
+          "sequence": 25,
+          "equity": 0.96089792,
+          "drawdownPct": -25.3232
+        },
+        {
+          "sequence": 26,
+          "equity": 1.02280385,
+          "drawdownPct": -20.5121
+        },
+        {
+          "sequence": 27,
+          "equity": 0.98545545,
+          "drawdownPct": -23.4147
+        },
+        {
+          "sequence": 28,
+          "equity": 1.26492732,
+          "drawdownPct": -1.6953
+        },
+        {
+          "sequence": 29,
+          "equity": 1.1968773,
+          "drawdownPct": -6.9839
+        },
+        {
+          "sequence": 30,
+          "equity": 1.1508473,
+          "drawdownPct": -10.5611
+        },
+        {
+          "sequence": 31,
+          "equity": 1.09573281,
+          "drawdownPct": -14.8444
+        },
+        {
+          "sequence": 32,
+          "equity": 1.05385012,
+          "drawdownPct": -18.0993
+        },
+        {
+          "sequence": 33,
+          "equity": 1.00264245,
+          "drawdownPct": -22.079
+        },
+        {
+          "sequence": 34,
+          "equity": 0.96394377,
+          "drawdownPct": -25.0865
+        },
+        {
+          "sequence": 35,
+          "equity": 0.92054069,
+          "drawdownPct": -28.4596
+        },
+        {
+          "sequence": 36,
+          "equity": 0.87135067,
+          "drawdownPct": -32.2824
+        },
+        {
+          "sequence": 37,
+          "equity": 0.84461856,
+          "drawdownPct": -34.3599
+        },
+        {
+          "sequence": 38,
+          "equity": 0.87943129,
+          "drawdownPct": -31.6544
+        },
+        {
+          "sequence": 39,
+          "equity": 1.35442252,
+          "drawdownPct": 0
+        },
+        {
+          "sequence": 40,
+          "equity": 1.28922051,
+          "drawdownPct": -4.814
+        },
+        {
+          "sequence": 41,
+          "equity": 1.20614481,
+          "drawdownPct": -10.9477
+        },
+        {
+          "sequence": 42,
+          "equity": 1.1490996,
+          "drawdownPct": -15.1594
+        },
+        {
+          "sequence": 43,
+          "equity": 1.0950967,
+          "drawdownPct": -19.1466
+        },
+        {
+          "sequence": 44,
+          "equity": 1.05591049,
+          "drawdownPct": -22.0398
+        },
+        {
+          "sequence": 45,
+          "equity": 1.00513761,
+          "drawdownPct": -25.7885
+        },
+        {
+          "sequence": 46,
+          "equity": 0.97866584,
+          "drawdownPct": -27.7429
+        },
+        {
+          "sequence": 47,
+          "equity": 0.9378077,
+          "drawdownPct": -30.7596
+        },
+        {
+          "sequence": 48,
+          "equity": 0.90492298,
+          "drawdownPct": -33.1875
+        },
+        {
+          "sequence": 49,
+          "equity": 0.87030594,
+          "drawdownPct": -35.7434
+        },
+        {
+          "sequence": 50,
+          "equity": 0.85691375,
+          "drawdownPct": -36.7322
+        },
+        {
+          "sequence": 51,
+          "equity": 0.83861535,
+          "drawdownPct": -38.0832
+        },
+        {
+          "sequence": 52,
+          "equity": 0.85698234,
+          "drawdownPct": -36.7271
+        },
+        {
+          "sequence": 53,
+          "equity": 1.05031226,
+          "drawdownPct": -22.4531
+        },
+        {
+          "sequence": 54,
+          "equity": 1.00952325,
+          "drawdownPct": -25.4647
+        },
+        {
+          "sequence": 55,
+          "equity": 0.96599562,
+          "drawdownPct": -28.6784
+        },
+        {
+          "sequence": 56,
+          "equity": 0.92346591,
+          "drawdownPct": -31.8185
+        },
+        {
+          "sequence": 57,
+          "equity": 0.94687946,
+          "drawdownPct": -30.0898
+        },
+        {
+          "sequence": 58,
+          "equity": 0.91645947,
+          "drawdownPct": -32.3358
+        },
+        {
+          "sequence": 59,
+          "equity": 0.88880099,
+          "drawdownPct": -34.3779
+        },
+        {
+          "sequence": 60,
+          "equity": 0.86497679,
+          "drawdownPct": -36.1369
+        },
+        {
+          "sequence": 61,
+          "equity": 0.87565837,
+          "drawdownPct": -35.3482
+        },
+        {
+          "sequence": 62,
+          "equity": 0.87221163,
+          "drawdownPct": -35.6027
+        },
+        {
+          "sequence": 63,
+          "equity": 0.85721002,
+          "drawdownPct": -36.7103
+        }
+      ]
+    },
+    {
+      "symbol": "SOL",
+      "variant": "B",
+      "mode": "EXIT_REALIZATION",
+      "status": "OK",
+      "methodology": {
+        "modeLabel": "OOS Exit-Realized Closed-Trade Metrics",
+        "oosStartUtc": "2025-03-01",
+        "inclusionRule": "Include a closed trade if exitTime >= OOS_START_MS.",
+        "modeLimitation": "A pre-OOS trade can contribute its full lifetime P&L if it exits during OOS.",
+        "returnBasis": "Net closed-trade P&L percentage",
+        "equityBasis": "Sequential compounding by closed trade, ordered by exit timestamp",
+        "annualization": "Trade-level mean/std ratios annualized by observed trades per calendar year",
+        "riskFreeRatePerTrade": 0,
+        "sortinoTargetPerTrade": 0,
+        "primaryLimitation": "This is supplementary trade-level risk analysis, not daily or 4H marked-to-market portfolio risk accounting."
+      },
+      "period": {
+        "firstIncludedEntryUtc": "2025-03-28",
+        "lastIncludedExitUtc": "2026-08-17",
+        "durationStartUtc": "2025-03-01",
+        "durationYears": 1.462469,
+        "tradeCount": 38,
+        "tradesPerYear": 25.9835
+      },
+      "distribution": {
+        "averageTradeReturnPct": -0.0587,
+        "sampleStdDevTradeReturnPct": 11.5884,
+        "downsideDeviationPct": 3.9899,
+        "winCount": 8,
+        "lossCount": 30,
+        "winRatePct": 21.05,
+        "bestTradePct": 54.0112,
+        "worstTradePct": -8.0717
+      },
+      "performance": {
+        "totalReturnPct": -20.0942,
+        "cagrPct": -14.2201
+      },
+      "riskAdjusted": {
+        "sharpeRatioAnnualizedTradeFrequency": -0.0258,
+        "sortinoRatioAnnualizedTradeFrequency": -0.075,
+        "maxDrawdownPct": -47.808,
+        "calmarRatioCagrOverAbsoluteMaxDrawdown": -0.2974,
+        "ulcerIndexPct": 27.968,
+        "cvar95Pct": -7.7444,
+        "cvar95TailTradeCount": 2,
+        "cvar95WorstTradePct": -8.0717,
+        "cvar95Interpretation": "Tail contains 2 worst closed trades.",
+        "cvar99Pct": -8.0717,
+        "cvar99TailTradeCount": 1,
+        "cvar99WorstTradePct": -8.0717,
+        "cvar99Interpretation": "Tail contains one trade; interpret as worst-trade diagnostic."
+      },
+      "equityCurve": [
+        {
+          "sequence": 0,
+          "equity": 1,
+          "drawdownPct": 0
+        },
+        {
+          "sequence": 1,
+          "equity": 0.98759812,
+          "drawdownPct": -1.2402
+        },
+        {
+          "sequence": 2,
+          "equity": 0.95418718,
+          "drawdownPct": -4.5813
+        },
+        {
+          "sequence": 3,
+          "equity": 0.92018753,
+          "drawdownPct": -7.9812
+        },
+        {
+          "sequence": 4,
+          "equity": 0.90155959,
+          "drawdownPct": -9.844
+        },
+        {
+          "sequence": 5,
+          "equity": 0.84555876,
+          "drawdownPct": -15.4441
+        },
+        {
+          "sequence": 6,
+          "equity": 0.81070151,
+          "drawdownPct": -18.9298
+        },
+        {
+          "sequence": 7,
+          "equity": 0.83778211,
+          "drawdownPct": -16.2218
+        },
+        {
+          "sequence": 8,
+          "equity": 0.79980631,
+          "drawdownPct": -20.0194
+        },
+        {
+          "sequence": 9,
+          "equity": 0.75420083,
+          "drawdownPct": -24.5799
+        },
+        {
+          "sequence": 10,
+          "equity": 0.72080252,
+          "drawdownPct": -27.9197
+        },
+        {
+          "sequence": 11,
+          "equity": 0.79591349,
+          "drawdownPct": -20.4087
+        },
+        {
+          "sequence": 12,
+          "equity": 0.75366519,
+          "drawdownPct": -24.6335
+        },
+        {
+          "sequence": 13,
+          "equity": 0.75882026,
+          "drawdownPct": -24.118
+        },
+        {
+          "sequence": 14,
+          "equity": 0.71908623,
+          "drawdownPct": -28.0914
+        },
+        {
+          "sequence": 15,
+          "equity": 0.67913786,
+          "drawdownPct": -32.0862
+        },
+        {
+          "sequence": 16,
+          "equity": 0.70252239,
+          "drawdownPct": -29.7478
+        },
+        {
+          "sequence": 17,
+          "equity": 0.67419498,
+          "drawdownPct": -32.5805
+        },
+        {
+          "sequence": 18,
+          "equity": 0.61977626,
+          "drawdownPct": -38.0224
+        },
+        {
+          "sequence": 19,
+          "equity": 0.57380635,
+          "drawdownPct": -42.6194
+        },
+        {
+          "sequence": 20,
+          "equity": 0.54170052,
+          "drawdownPct": -45.8299
+        },
+        {
+          "sequence": 21,
+          "equity": 0.52191995,
+          "drawdownPct": -47.808
+        },
+        {
+          "sequence": 22,
+          "equity": 0.6699347,
+          "drawdownPct": -33.0065
+        },
+        {
+          "sequence": 23,
+          "equity": 0.64417007,
+          "drawdownPct": -35.583
+        },
+        {
+          "sequence": 24,
+          "equity": 0.61954767,
+          "drawdownPct": -38.0452
+        },
+        {
+          "sequence": 25,
+          "equity": 0.59563518,
+          "drawdownPct": -40.4365
+        },
+        {
+          "sequence": 26,
+          "equity": 0.56881577,
+          "drawdownPct": -43.1184
+        },
+        {
+          "sequence": 27,
+          "equity": 0.53842053,
+          "drawdownPct": -46.1579
+        },
+        {
+          "sequence": 28,
+          "equity": 0.82922781,
+          "drawdownPct": -17.0772
+        },
+        {
+          "sequence": 29,
+          "equity": 0.79000907,
+          "drawdownPct": -20.9991
+        },
+        {
+          "sequence": 30,
+          "equity": 0.76173992,
+          "drawdownPct": -23.826
+        },
+        {
+          "sequence": 31,
+          "equity": 0.74167838,
+          "drawdownPct": -25.8322
+        },
+        {
+          "sequence": 32,
+          "equity": 0.73026549,
+          "drawdownPct": -26.9735
+        },
+        {
+          "sequence": 33,
+          "equity": 0.89500888,
+          "drawdownPct": -10.4991
+        },
+        {
+          "sequence": 34,
+          "equity": 0.85560449,
+          "drawdownPct": -14.4396
+        },
+        {
+          "sequence": 35,
+          "equity": 0.82811685,
+          "drawdownPct": -17.1883
+        },
+        {
+          "sequence": 36,
+          "equity": 0.80312453,
+          "drawdownPct": -19.6875
+        },
+        {
+          "sequence": 37,
+          "equity": 0.8130423,
+          "drawdownPct": -18.6958
+        },
+        {
+          "sequence": 38,
+          "equity": 0.79905837,
+          "drawdownPct": -20.0942
+        }
+      ]
+    },
+    {
+      "symbol": "BNB",
+      "variant": "A",
+      "mode": "EXIT_REALIZATION",
+      "status": "OK",
+      "methodology": {
+        "modeLabel": "OOS Exit-Realized Closed-Trade Metrics",
+        "oosStartUtc": "2025-03-01",
+        "inclusionRule": "Include a closed trade if exitTime >= OOS_START_MS.",
+        "modeLimitation": "A pre-OOS trade can contribute its full lifetime P&L if it exits during OOS.",
+        "returnBasis": "Net closed-trade P&L percentage",
+        "equityBasis": "Sequential compounding by closed trade, ordered by exit timestamp",
+        "annualization": "Trade-level mean/std ratios annualized by observed trades per calendar year",
+        "riskFreeRatePerTrade": 0,
+        "sortinoTargetPerTrade": 0,
+        "primaryLimitation": "This is supplementary trade-level risk analysis, not daily or 4H marked-to-market portfolio risk accounting."
+      },
+      "period": {
+        "firstIncludedEntryUtc": "2025-02-24",
+        "lastIncludedExitUtc": "2026-07-27",
+        "durationStartUtc": "2025-02-24",
+        "durationYears": 1.41775,
+        "tradeCount": 63,
+        "tradesPerYear": 44.4366
+      },
+      "distribution": {
+        "averageTradeReturnPct": -0.1033,
+        "sampleStdDevTradeReturnPct": 7.55,
+        "downsideDeviationPct": 2.9244,
+        "winCount": 15,
+        "lossCount": 48,
+        "winRatePct": 23.81,
+        "bestTradePct": 44.097,
+        "worstTradePct": -10.2213
+      },
+      "performance": {
+        "totalReturnPct": -19.45,
+        "cagrPct": -14.1493
+      },
+      "riskAdjusted": {
+        "sharpeRatioAnnualizedTradeFrequency": -0.0912,
+        "sortinoRatioAnnualizedTradeFrequency": -0.2355,
+        "maxDrawdownPct": -42.2996,
+        "calmarRatioCagrOverAbsoluteMaxDrawdown": -0.3345,
+        "ulcerIndexPct": 23.3198,
+        "cvar95Pct": -7.7022,
+        "cvar95TailTradeCount": 4,
+        "cvar95WorstTradePct": -10.2213,
+        "cvar95Interpretation": "Tail contains 4 worst closed trades.",
+        "cvar99Pct": -10.2213,
+        "cvar99TailTradeCount": 1,
+        "cvar99WorstTradePct": -10.2213,
+        "cvar99Interpretation": "Tail contains one trade; interpret as worst-trade diagnostic."
+      },
+      "equityCurve": [
+        {
+          "sequence": 0,
+          "equity": 1,
+          "drawdownPct": 0
+        },
+        {
+          "sequence": 1,
+          "equity": 1.03776666,
+          "drawdownPct": 0
+        },
+        {
+          "sequence": 2,
+          "equity": 1.03927241,
+          "drawdownPct": 0
+        },
+        {
+          "sequence": 3,
+          "equity": 1.06212639,
+          "drawdownPct": 0
+        },
+        {
+          "sequence": 4,
+          "equity": 1.03092725,
+          "drawdownPct": -2.9374
+        },
+        {
+          "sequence": 5,
+          "equity": 1.03572526,
+          "drawdownPct": -2.4857
+        },
+        {
+          "sequence": 6,
+          "equity": 1.02623378,
+          "drawdownPct": -3.3793
+        },
+        {
+          "sequence": 7,
+          "equity": 1.11608032,
+          "drawdownPct": 0
+        },
+        {
+          "sequence": 8,
+          "equity": 1.08892796,
+          "drawdownPct": -2.4328
+        },
+        {
+          "sequence": 9,
+          "equity": 1.06476014,
+          "drawdownPct": -4.5983
+        },
+        {
+          "sequence": 10,
+          "equity": 1.04498873,
+          "drawdownPct": -6.3698
+        },
+        {
+          "sequence": 11,
+          "equity": 1.0350654,
+          "drawdownPct": -7.2589
+        },
+        {
+          "sequence": 12,
+          "equity": 1.02157322,
+          "drawdownPct": -8.4678
+        },
+        {
+          "sequence": 13,
+          "equity": 1.00670109,
+          "drawdownPct": -9.8003
+        },
+        {
+          "sequence": 14,
+          "equity": 1.15859728,
+          "drawdownPct": 0
+        },
+        {
+          "sequence": 15,
+          "equity": 1.13266431,
+          "drawdownPct": -2.2383
+        },
+        {
+          "sequence": 16,
+          "equity": 1.2165573,
+          "drawdownPct": 0
+        },
+        {
+          "sequence": 17,
+          "equity": 1.17026364,
+          "drawdownPct": -3.8053
+        },
+        {
+          "sequence": 18,
+          "equity": 1.15232305,
+          "drawdownPct": -5.28
+        },
+        {
+          "sequence": 19,
+          "equity": 1.28393798,
+          "drawdownPct": 0
+        },
+        {
+          "sequence": 20,
+          "equity": 1.226832,
+          "drawdownPct": -4.4477
+        },
+        {
+          "sequence": 21,
+          "equity": 1.18926442,
+          "drawdownPct": -7.3737
+        },
+        {
+          "sequence": 22,
+          "equity": 1.06770618,
+          "drawdownPct": -16.8413
+        },
+        {
+          "sequence": 23,
+          "equity": 0.9775507,
+          "drawdownPct": -23.8631
+        },
+        {
+          "sequence": 24,
+          "equity": 0.90231998,
+          "drawdownPct": -29.7225
+        },
+        {
+          "sequence": 25,
+          "equity": 0.87295466,
+          "drawdownPct": -32.0096
+        },
+        {
+          "sequence": 26,
+          "equity": 1.06685038,
+          "drawdownPct": -16.908
+        },
+        {
+          "sequence": 27,
+          "equity": 1.03243991,
+          "drawdownPct": -19.588
+        },
+        {
+          "sequence": 28,
+          "equity": 0.99566957,
+          "drawdownPct": -22.4519
+        },
+        {
+          "sequence": 29,
+          "equity": 0.95815142,
+          "drawdownPct": -25.374
+        },
+        {
+          "sequence": 30,
+          "equity": 0.92428655,
+          "drawdownPct": -28.0116
+        },
+        {
+          "sequence": 31,
+          "equity": 0.92181765,
+          "drawdownPct": -28.2039
+        },
+        {
+          "sequence": 32,
+          "equity": 0.96879399,
+          "drawdownPct": -24.5451
+        },
+        {
+          "sequence": 33,
+          "equity": 1.39600354,
+          "drawdownPct": 0
+        },
+        {
+          "sequence": 34,
+          "equity": 1.35627956,
+          "drawdownPct": -2.8456
+        },
+        {
+          "sequence": 35,
+          "equity": 1.31384137,
+          "drawdownPct": -5.8855
+        },
+        {
+          "sequence": 36,
+          "equity": 1.26900748,
+          "drawdownPct": -9.0971
+        },
+        {
+          "sequence": 37,
+          "equity": 1.22219943,
+          "drawdownPct": -12.4501
+        },
+        {
+          "sequence": 38,
+          "equity": 1.17434924,
+          "drawdownPct": -15.8778
+        },
+        {
+          "sequence": 39,
+          "equity": 1.12985612,
+          "drawdownPct": -19.065
+        },
+        {
+          "sequence": 40,
+          "equity": 1.09869977,
+          "drawdownPct": -21.2968
+        },
+        {
+          "sequence": 41,
+          "equity": 1.08457774,
+          "drawdownPct": -22.3084
+        },
+        {
+          "sequence": 42,
+          "equity": 1.07853045,
+          "drawdownPct": -22.7416
+        },
+        {
+          "sequence": 43,
+          "equity": 1.04953402,
+          "drawdownPct": -24.8187
+        },
+        {
+          "sequence": 44,
+          "equity": 1.03320013,
+          "drawdownPct": -25.9887
+        },
+        {
+          "sequence": 45,
+          "equity": 1.00653429,
+          "drawdownPct": -27.8989
+        },
+        {
+          "sequence": 46,
+          "equity": 0.98262509,
+          "drawdownPct": -29.6116
+        },
+        {
+          "sequence": 47,
+          "equity": 0.9915758,
+          "drawdownPct": -28.9704
+        },
+        {
+          "sequence": 48,
+          "equity": 0.9728336,
+          "drawdownPct": -30.313
+        },
+        {
+          "sequence": 49,
+          "equity": 0.99267801,
+          "drawdownPct": -28.8914
+        },
+        {
+          "sequence": 50,
+          "equity": 0.96736089,
+          "drawdownPct": -30.705
+        },
+        {
+          "sequence": 51,
+          "equity": 0.94656317,
+          "drawdownPct": -32.1948
+        },
+        {
+          "sequence": 52,
+          "equity": 0.92645777,
+          "drawdownPct": -33.635
+        },
+        {
+          "sequence": 53,
+          "equity": 0.90546856,
+          "drawdownPct": -35.1385
+        },
+        {
+          "sequence": 54,
+          "equity": 0.88231676,
+          "drawdownPct": -36.797
+        },
+        {
+          "sequence": 55,
+          "equity": 0.88830063,
+          "drawdownPct": -36.3683
+        },
+        {
+          "sequence": 56,
+          "equity": 0.86647837,
+          "drawdownPct": -37.9315
+        },
+        {
+          "sequence": 57,
+          "equity": 0.9030089,
+          "drawdownPct": -35.3147
+        },
+        {
+          "sequence": 58,
+          "equity": 0.89004807,
+          "drawdownPct": -36.2431
+        },
+        {
+          "sequence": 59,
+          "equity": 0.86596968,
+          "drawdownPct": -37.9679
+        },
+        {
+          "sequence": 60,
+          "equity": 0.84784273,
+          "drawdownPct": -39.2664
+        },
+        {
+          "sequence": 61,
+          "equity": 0.83058919,
+          "drawdownPct": -40.5024
+        },
+        {
+          "sequence": 62,
+          "equity": 0.81626629,
+          "drawdownPct": -41.5284
+        },
+        {
+          "sequence": 63,
+          "equity": 0.80550021,
+          "drawdownPct": -42.2996
+        }
+      ]
+    },
+    {
+      "symbol": "BNB",
+      "variant": "B",
+      "mode": "EXIT_REALIZATION",
+      "status": "OK",
+      "methodology": {
+        "modeLabel": "OOS Exit-Realized Closed-Trade Metrics",
+        "oosStartUtc": "2025-03-01",
+        "inclusionRule": "Include a closed trade if exitTime >= OOS_START_MS.",
+        "modeLimitation": "A pre-OOS trade can contribute its full lifetime P&L if it exits during OOS.",
+        "returnBasis": "Net closed-trade P&L percentage",
+        "equityBasis": "Sequential compounding by closed trade, ordered by exit timestamp",
+        "annualization": "Trade-level mean/std ratios annualized by observed trades per calendar year",
+        "riskFreeRatePerTrade": 0,
+        "sortinoTargetPerTrade": 0,
+        "primaryLimitation": "This is supplementary trade-level risk analysis, not daily or 4H marked-to-market portfolio risk accounting."
+      },
+      "period": {
+        "firstIncludedEntryUtc": "2025-03-24",
+        "lastIncludedExitUtc": "2026-07-26",
+        "durationStartUtc": "2025-03-01",
+        "durationYears": 1.40178,
+        "tradeCount": 38,
+        "tradesPerYear": 27.1084
+      },
+      "distribution": {
+        "averageTradeReturnPct": 0.3681,
+        "sampleStdDevTradeReturnPct": 7.526,
+        "downsideDeviationPct": 2.5441,
+        "winCount": 9,
+        "lossCount": 29,
+        "winRatePct": 23.68,
+        "bestTradePct": 36.9458,
+        "worstTradePct": -8.4438
+      },
+      "performance": {
+        "totalReturnPct": 5.0651,
+        "cagrPct": 3.5877
+      },
+      "riskAdjusted": {
+        "sharpeRatioAnnualizedTradeFrequency": 0.2547,
+        "sortinoRatioAnnualizedTradeFrequency": 0.7534,
+        "maxDrawdownPct": -27.6544,
+        "calmarRatioCagrOverAbsoluteMaxDrawdown": 0.1297,
+        "ulcerIndexPct": 15.5005,
+        "cvar95Pct": -6.106,
+        "cvar95TailTradeCount": 2,
+        "cvar95WorstTradePct": -8.4438,
+        "cvar95Interpretation": "Tail contains 2 worst closed trades.",
+        "cvar99Pct": -8.4438,
+        "cvar99TailTradeCount": 1,
+        "cvar99WorstTradePct": -8.4438,
+        "cvar99Interpretation": "Tail contains one trade; interpret as worst-trade diagnostic."
+      },
+      "equityCurve": [
+        {
+          "sequence": 0,
+          "equity": 1,
+          "drawdownPct": 0
+        },
+        {
+          "sequence": 1,
+          "equity": 0.97642191,
+          "drawdownPct": -2.3578
+        },
+        {
+          "sequence": 2,
+          "equity": 0.99789378,
+          "drawdownPct": -0.2106
+        },
+        {
+          "sequence": 3,
+          "equity": 0.988749,
+          "drawdownPct": -1.1251
+        },
+        {
+          "sequence": 4,
+          "equity": 1.05495075,
+          "drawdownPct": 0
+        },
+        {
+          "sequence": 5,
+          "equity": 1.03536149,
+          "drawdownPct": -1.8569
+        },
+        {
+          "sequence": 6,
+          "equity": 1.01665425,
+          "drawdownPct": -3.6302
+        },
+        {
+          "sequence": 7,
+          "equity": 1.00340206,
+          "drawdownPct": -4.8864
+        },
+        {
+          "sequence": 8,
+          "equity": 0.98879447,
+          "drawdownPct": -6.271
+        },
+        {
+          "sequence": 9,
+          "equity": 1.13798882,
+          "drawdownPct": 0
+        },
+        {
+          "sequence": 10,
+          "equity": 1.22227617,
+          "drawdownPct": 0
+        },
+        {
+          "sequence": 11,
+          "equity": 1.36188093,
+          "drawdownPct": 0
+        },
+        {
+          "sequence": 12,
+          "equity": 1.32017793,
+          "drawdownPct": -3.0622
+        },
+        {
+          "sequence": 13,
+          "equity": 1.20870413,
+          "drawdownPct": -11.2474
+        },
+        {
+          "sequence": 14,
+          "equity": 1.16936778,
+          "drawdownPct": -14.1358
+        },
+        {
+          "sequence": 15,
+          "equity": 1.14027619,
+          "drawdownPct": -16.272
+        },
+        {
+          "sequence": 16,
+          "equity": 1.10349742,
+          "drawdownPct": -18.9725
+        },
+        {
+          "sequence": 17,
+          "equity": 1.06419637,
+          "drawdownPct": -21.8583
+        },
+        {
+          "sequence": 18,
+          "equity": 1.02409603,
+          "drawdownPct": -24.8028
+        },
+        {
+          "sequence": 19,
+          "equity": 0.98790042,
+          "drawdownPct": -27.4606
+        },
+        {
+          "sequence": 20,
+          "equity": 0.9852616,
+          "drawdownPct": -27.6544
+        },
+        {
+          "sequence": 21,
+          "equity": 1.01491497,
+          "drawdownPct": -25.477
+        },
+        {
+          "sequence": 22,
+          "equity": 0.98833676,
+          "drawdownPct": -27.4285
+        },
+        {
+          "sequence": 23,
+          "equity": 1.35348524,
+          "drawdownPct": -0.6165
+        },
+        {
+          "sequence": 24,
+          "equity": 1.31113448,
+          "drawdownPct": -3.7262
+        },
+        {
+          "sequence": 25,
+          "equity": 1.26639296,
+          "drawdownPct": -7.0115
+        },
+        {
+          "sequence": 26,
+          "equity": 1.23147153,
+          "drawdownPct": -9.5757
+        },
+        {
+          "sequence": 27,
+          "equity": 1.2246052,
+          "drawdownPct": -10.0799
+        },
+        {
+          "sequence": 28,
+          "equity": 1.20554669,
+          "drawdownPct": -11.4793
+        },
+        {
+          "sequence": 29,
+          "equity": 1.17691015,
+          "drawdownPct": -13.582
+        },
+        {
+          "sequence": 30,
+          "equity": 1.15466486,
+          "drawdownPct": -15.2154
+        },
+        {
+          "sequence": 31,
+          "equity": 1.12521645,
+          "drawdownPct": -17.3778
+        },
+        {
+          "sequence": 32,
+          "equity": 1.0997243,
+          "drawdownPct": -19.2496
+        },
+        {
+          "sequence": 33,
+          "equity": 1.06901335,
+          "drawdownPct": -21.5046
+        },
+        {
+          "sequence": 34,
+          "equity": 1.07626339,
+          "drawdownPct": -20.9723
+        },
+        {
+          "sequence": 35,
+          "equity": 1.12163841,
+          "drawdownPct": -17.6405
+        },
+        {
+          "sequence": 36,
+          "equity": 1.09129483,
+          "drawdownPct": -19.8686
+        },
+        {
+          "sequence": 37,
+          "equity": 1.06908706,
+          "drawdownPct": -21.4992
+        },
+        {
+          "sequence": 38,
+          "equity": 1.05065144,
+          "drawdownPct": -22.8529
+        }
+      ]
+    }
+  ]
+}

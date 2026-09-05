@@ -1,0 +1,845 @@
+{
+  "generatedAt": "2026-09-04T07:30:38.393Z",
+  "scope": "Crypto only: BTC, ETH, SOL, BNB",
+  "oosStart": "2025-03-01",
+  "inputFiles": {
+    "variantA": "baseline-4h-results.json",
+    "variantB": "variant-b-4h-ema-results.json"
+  },
+  "windowDefinition": "Non-overlapping two-calendar-month UTC windows",
+  "attributionMethod": "Trade entry timestamp",
+  "methodologyWarning": "This is entry-time trade attribution, not fold-boundary mark-to-market equity accounting. A trade may exit outside the OOS window to which it is attributed.",
+  "assets": {
+    "BTC": {
+      "symbol": "BTC",
+      "status": "OK",
+      "oosStart": "2025-03-01",
+      "attributionMethod": "ENTRY_TIME",
+      "attributionLimitation": "Trades are assigned by entry timestamp. Returns are not force-settled or marked to market at OOS fold boundaries.",
+      "windows": [
+        {
+          "fold": 1,
+          "windowStart": "2025-03-01",
+          "windowEnd": "2025-04-30",
+          "label": "2025-03-01 → 2025-04-30",
+          "variantA": {
+            "status": "TRADED",
+            "tradeCount": 7,
+            "netReturnPct": 4.04,
+            "winRatePct": 14.3
+          },
+          "variantB": {
+            "status": "TRADED",
+            "tradeCount": 5,
+            "netReturnPct": 12.75,
+            "winRatePct": 20
+          },
+          "differenceBMinusA": 8.71,
+          "verdict": "B_BETTER"
+        },
+        {
+          "fold": 2,
+          "windowStart": "2025-05-01",
+          "windowEnd": "2025-06-30",
+          "label": "2025-05-01 → 2025-06-30",
+          "variantA": {
+            "status": "TRADED",
+            "tradeCount": 5,
+            "netReturnPct": -9,
+            "winRatePct": 0
+          },
+          "variantB": {
+            "status": "TRADED",
+            "tradeCount": 2,
+            "netReturnPct": -2.63,
+            "winRatePct": 0
+          },
+          "differenceBMinusA": 6.37,
+          "verdict": "B_BETTER"
+        },
+        {
+          "fold": 3,
+          "windowStart": "2025-07-01",
+          "windowEnd": "2025-08-31",
+          "label": "2025-07-01 → 2025-08-31",
+          "variantA": {
+            "status": "TRADED",
+            "tradeCount": 8,
+            "netReturnPct": -5.31,
+            "winRatePct": 25
+          },
+          "variantB": {
+            "status": "TRADED",
+            "tradeCount": 3,
+            "netReturnPct": 1.83,
+            "winRatePct": 33.3
+          },
+          "differenceBMinusA": 7.14,
+          "verdict": "B_BETTER"
+        },
+        {
+          "fold": 4,
+          "windowStart": "2025-09-01",
+          "windowEnd": "2025-10-31",
+          "label": "2025-09-01 → 2025-10-31",
+          "variantA": {
+            "status": "TRADED",
+            "tradeCount": 8,
+            "netReturnPct": 4.85,
+            "winRatePct": 12.5
+          },
+          "variantB": {
+            "status": "TRADED",
+            "tradeCount": 7,
+            "netReturnPct": -15.46,
+            "winRatePct": 0
+          },
+          "differenceBMinusA": -20.31,
+          "verdict": "A_BETTER"
+        },
+        {
+          "fold": 5,
+          "windowStart": "2025-11-01",
+          "windowEnd": "2025-12-31",
+          "label": "2025-11-01 → 2025-12-31",
+          "variantA": {
+            "status": "TRADED",
+            "tradeCount": 8,
+            "netReturnPct": -17.68,
+            "winRatePct": 0
+          },
+          "variantB": {
+            "status": "TRADED",
+            "tradeCount": 4,
+            "netReturnPct": 7.93,
+            "winRatePct": 25
+          },
+          "differenceBMinusA": 25.61,
+          "verdict": "B_BETTER"
+        },
+        {
+          "fold": 6,
+          "windowStart": "2026-01-01",
+          "windowEnd": "2026-02-28",
+          "label": "2026-01-01 → 2026-02-28",
+          "variantA": {
+            "status": "TRADED",
+            "tradeCount": 3,
+            "netReturnPct": 33.05,
+            "winRatePct": 66.7
+          },
+          "variantB": {
+            "status": "TRADED",
+            "tradeCount": 1,
+            "netReturnPct": 34.12,
+            "winRatePct": 100
+          },
+          "differenceBMinusA": 1.07,
+          "verdict": "B_BETTER"
+        },
+        {
+          "fold": 7,
+          "windowStart": "2026-03-01",
+          "windowEnd": "2026-04-30",
+          "label": "2026-03-01 → 2026-04-30",
+          "variantA": {
+            "status": "TRADED",
+            "tradeCount": 8,
+            "netReturnPct": -11.59,
+            "winRatePct": 12.5
+          },
+          "variantB": {
+            "status": "TRADED",
+            "tradeCount": 4,
+            "netReturnPct": -10.75,
+            "winRatePct": 0
+          },
+          "differenceBMinusA": 0.84,
+          "verdict": "B_BETTER"
+        },
+        {
+          "fold": 8,
+          "windowStart": "2026-05-01",
+          "windowEnd": "2026-06-30",
+          "label": "2026-05-01 → 2026-06-30",
+          "variantA": {
+            "status": "TRADED",
+            "tradeCount": 6,
+            "netReturnPct": 12.4,
+            "winRatePct": 50
+          },
+          "variantB": {
+            "status": "TRADED",
+            "tradeCount": 4,
+            "netReturnPct": 15.06,
+            "winRatePct": 50
+          },
+          "differenceBMinusA": 2.66,
+          "verdict": "B_BETTER"
+        },
+        {
+          "fold": 9,
+          "windowStart": "2026-07-01",
+          "windowEnd": "2026-08-31",
+          "label": "2026-07-01 → 2026-08-31",
+          "variantA": {
+            "status": "TRADED",
+            "tradeCount": 5,
+            "netReturnPct": -2.53,
+            "winRatePct": 20
+          },
+          "variantB": {
+            "status": "TRADED",
+            "tradeCount": 3,
+            "netReturnPct": -4.63,
+            "winRatePct": 0
+          },
+          "differenceBMinusA": -2.1,
+          "verdict": "A_BETTER"
+        }
+      ],
+      "summary": {
+        "comparableWindows": 9,
+        "variantAWins": 2,
+        "variantBWins": 7,
+        "ties": 0,
+        "variantBWinRatioPct": 77.8,
+        "variantAAggregatePct": -0.29,
+        "variantBAggregatePct": 33.97,
+        "variantAMedianFoldPct": -2.53,
+        "variantBMedianFoldPct": 1.83,
+        "medianImprovementBMinusA": 4.36,
+        "variantAWorstFoldPct": -17.68,
+        "variantBWorstFoldPct": -15.46,
+        "worstFoldImprovementBMinusA": 2.22,
+        "variantABestFoldPct": 33.05,
+        "variantBBestFoldPct": 34.12
+      }
+    },
+    "ETH": {
+      "symbol": "ETH",
+      "status": "OK",
+      "oosStart": "2025-03-01",
+      "attributionMethod": "ENTRY_TIME",
+      "attributionLimitation": "Trades are assigned by entry timestamp. Returns are not force-settled or marked to market at OOS fold boundaries.",
+      "windows": [
+        {
+          "fold": 1,
+          "windowStart": "2025-03-01",
+          "windowEnd": "2025-04-30",
+          "label": "2025-03-01 → 2025-04-30",
+          "variantA": {
+            "status": "TRADED",
+            "tradeCount": 6,
+            "netReturnPct": 4.94,
+            "winRatePct": 33.3
+          },
+          "variantB": {
+            "status": "TRADED",
+            "tradeCount": 2,
+            "netReturnPct": 12.29,
+            "winRatePct": 50
+          },
+          "differenceBMinusA": 7.35,
+          "verdict": "B_BETTER"
+        },
+        {
+          "fold": 2,
+          "windowStart": "2025-05-01",
+          "windowEnd": "2025-06-30",
+          "label": "2025-05-01 → 2025-06-30",
+          "variantA": {
+            "status": "TRADED",
+            "tradeCount": 9,
+            "netReturnPct": -4.3,
+            "winRatePct": 11.1
+          },
+          "variantB": {
+            "status": "TRADED",
+            "tradeCount": 9,
+            "netReturnPct": -32.43,
+            "winRatePct": 0
+          },
+          "differenceBMinusA": -28.13,
+          "verdict": "A_BETTER"
+        },
+        {
+          "fold": 3,
+          "windowStart": "2025-07-01",
+          "windowEnd": "2025-08-31",
+          "label": "2025-07-01 → 2025-08-31",
+          "variantA": {
+            "status": "TRADED",
+            "tradeCount": 8,
+            "netReturnPct": 19.06,
+            "winRatePct": 25
+          },
+          "variantB": {
+            "status": "TRADED",
+            "tradeCount": 5,
+            "netReturnPct": 33.44,
+            "winRatePct": 40
+          },
+          "differenceBMinusA": 14.38,
+          "verdict": "B_BETTER"
+        },
+        {
+          "fold": 4,
+          "windowStart": "2025-09-01",
+          "windowEnd": "2025-10-31",
+          "label": "2025-09-01 → 2025-10-31",
+          "variantA": {
+            "status": "TRADED",
+            "tradeCount": 9,
+            "netReturnPct": -8.7,
+            "winRatePct": 22.2
+          },
+          "variantB": {
+            "status": "TRADED",
+            "tradeCount": 3,
+            "netReturnPct": -9.1,
+            "winRatePct": 0
+          },
+          "differenceBMinusA": -0.4,
+          "verdict": "A_BETTER"
+        },
+        {
+          "fold": 5,
+          "windowStart": "2025-11-01",
+          "windowEnd": "2025-12-31",
+          "label": "2025-11-01 → 2025-12-31",
+          "variantA": {
+            "status": "TRADED",
+            "tradeCount": 7,
+            "netReturnPct": -20.85,
+            "winRatePct": 0
+          },
+          "variantB": {
+            "status": "TRADED",
+            "tradeCount": 4,
+            "netReturnPct": 10.85,
+            "winRatePct": 25
+          },
+          "differenceBMinusA": 31.7,
+          "verdict": "B_BETTER"
+        },
+        {
+          "fold": 6,
+          "windowStart": "2026-01-01",
+          "windowEnd": "2026-02-28",
+          "label": "2026-01-01 → 2026-02-28",
+          "variantA": {
+            "status": "TRADED",
+            "tradeCount": 3,
+            "netReturnPct": 58.06,
+            "winRatePct": 66.7
+          },
+          "variantB": {
+            "status": "TRADED",
+            "tradeCount": 2,
+            "netReturnPct": 53.3,
+            "winRatePct": 50
+          },
+          "differenceBMinusA": -4.76,
+          "verdict": "A_BETTER"
+        },
+        {
+          "fold": 7,
+          "windowStart": "2026-03-01",
+          "windowEnd": "2026-04-30",
+          "label": "2026-03-01 → 2026-04-30",
+          "variantA": {
+            "status": "TRADED",
+            "tradeCount": 11,
+            "netReturnPct": -28.43,
+            "winRatePct": 18.2
+          },
+          "variantB": {
+            "status": "TRADED",
+            "tradeCount": 5,
+            "netReturnPct": -16.64,
+            "winRatePct": 0
+          },
+          "differenceBMinusA": 11.79,
+          "verdict": "B_BETTER"
+        },
+        {
+          "fold": 8,
+          "windowStart": "2026-05-01",
+          "windowEnd": "2026-06-30",
+          "label": "2026-05-01 → 2026-06-30",
+          "variantA": {
+            "status": "TRADED",
+            "tradeCount": 7,
+            "netReturnPct": 7.23,
+            "winRatePct": 14.3
+          },
+          "variantB": {
+            "status": "TRADED",
+            "tradeCount": 5,
+            "netReturnPct": 12,
+            "winRatePct": 20
+          },
+          "differenceBMinusA": 4.77,
+          "verdict": "B_BETTER"
+        },
+        {
+          "fold": 9,
+          "windowStart": "2026-07-01",
+          "windowEnd": "2026-08-31",
+          "label": "2026-07-01 → 2026-08-31",
+          "variantA": {
+            "status": "TRADED",
+            "tradeCount": 4,
+            "netReturnPct": 1.49,
+            "winRatePct": 25
+          },
+          "variantB": {
+            "status": "TRADED",
+            "tradeCount": 2,
+            "netReturnPct": -4.97,
+            "winRatePct": 0
+          },
+          "differenceBMinusA": -6.46,
+          "verdict": "A_BETTER"
+        }
+      ],
+      "summary": {
+        "comparableWindows": 9,
+        "variantAWins": 4,
+        "variantBWins": 5,
+        "ties": 0,
+        "variantBWinRatioPct": 55.6,
+        "variantAAggregatePct": 6.38,
+        "variantBAggregatePct": 38.77,
+        "variantAMedianFoldPct": 1.49,
+        "variantBMedianFoldPct": 10.85,
+        "medianImprovementBMinusA": 9.36,
+        "variantAWorstFoldPct": -28.43,
+        "variantBWorstFoldPct": -32.43,
+        "worstFoldImprovementBMinusA": -4,
+        "variantABestFoldPct": 58.06,
+        "variantBBestFoldPct": 53.3
+      }
+    },
+    "SOL": {
+      "symbol": "SOL",
+      "status": "OK",
+      "oosStart": "2025-03-01",
+      "attributionMethod": "ENTRY_TIME",
+      "attributionLimitation": "Trades are assigned by entry timestamp. Returns are not force-settled or marked to market at OOS fold boundaries.",
+      "windows": [
+        {
+          "fold": 1,
+          "windowStart": "2025-03-01",
+          "windowEnd": "2025-04-30",
+          "label": "2025-03-01 → 2025-04-30",
+          "variantA": {
+            "status": "TRADED",
+            "tradeCount": 7,
+            "netReturnPct": -10.56,
+            "winRatePct": 14.3
+          },
+          "variantB": {
+            "status": "TRADED",
+            "tradeCount": 2,
+            "netReturnPct": -4.58,
+            "winRatePct": 0
+          },
+          "differenceBMinusA": 5.98,
+          "verdict": "B_BETTER"
+        },
+        {
+          "fold": 2,
+          "windowStart": "2025-05-01",
+          "windowEnd": "2025-06-30",
+          "label": "2025-05-01 → 2025-06-30",
+          "variantA": {
+            "status": "TRADED",
+            "tradeCount": 9,
+            "netReturnPct": -1.06,
+            "winRatePct": 33.3
+          },
+          "variantB": {
+            "status": "TRADED",
+            "tradeCount": 8,
+            "netReturnPct": -24.46,
+            "winRatePct": 12.5
+          },
+          "differenceBMinusA": -23.4,
+          "verdict": "A_BETTER"
+        },
+        {
+          "fold": 3,
+          "windowStart": "2025-07-01",
+          "windowEnd": "2025-08-31",
+          "label": "2025-07-01 → 2025-08-31",
+          "variantA": {
+            "status": "TRADED",
+            "tradeCount": 5,
+            "netReturnPct": -14.85,
+            "winRatePct": 20
+          },
+          "variantB": {
+            "status": "TRADED",
+            "tradeCount": 5,
+            "netReturnPct": -5.78,
+            "winRatePct": 40
+          },
+          "differenceBMinusA": 9.07,
+          "verdict": "B_BETTER"
+        },
+        {
+          "fold": 4,
+          "windowStart": "2025-09-01",
+          "windowEnd": "2025-10-31",
+          "label": "2025-09-01 → 2025-10-31",
+          "variantA": {
+            "status": "TRADED",
+            "tradeCount": 6,
+            "netReturnPct": 30.46,
+            "winRatePct": 50
+          },
+          "variantB": {
+            "status": "TRADED",
+            "tradeCount": 7,
+            "netReturnPct": -1.36,
+            "winRatePct": 28.6
+          },
+          "differenceBMinusA": -31.82,
+          "verdict": "A_BETTER"
+        },
+        {
+          "fold": 5,
+          "windowStart": "2025-11-01",
+          "windowEnd": "2025-12-31",
+          "label": "2025-11-01 → 2025-12-31",
+          "variantA": {
+            "status": "TRADED",
+            "tradeCount": 9,
+            "netReturnPct": -33.23,
+            "winRatePct": 0
+          },
+          "variantB": {
+            "status": "TRADED",
+            "tradeCount": 5,
+            "netReturnPct": -19.63,
+            "winRatePct": 0
+          },
+          "differenceBMinusA": 13.6,
+          "verdict": "B_BETTER"
+        },
+        {
+          "fold": 6,
+          "windowStart": "2026-01-01",
+          "windowEnd": "2026-02-28",
+          "label": "2026-01-01 → 2026-02-28",
+          "variantA": {
+            "status": "TRADED",
+            "tradeCount": 3,
+            "netReturnPct": 52.64,
+            "winRatePct": 66.7
+          },
+          "variantB": {
+            "status": "TRADED",
+            "tradeCount": 1,
+            "netReturnPct": 54.01,
+            "winRatePct": 100
+          },
+          "differenceBMinusA": 1.37,
+          "verdict": "B_BETTER"
+        },
+        {
+          "fold": 7,
+          "windowStart": "2026-03-01",
+          "windowEnd": "2026-04-30",
+          "label": "2026-03-01 → 2026-04-30",
+          "variantA": {
+            "status": "TRADED",
+            "tradeCount": 10,
+            "netReturnPct": -33.53,
+            "winRatePct": 0
+          },
+          "variantB": {
+            "status": "TRADED",
+            "tradeCount": 4,
+            "netReturnPct": -11.93,
+            "winRatePct": 0
+          },
+          "differenceBMinusA": 21.6,
+          "verdict": "B_BETTER"
+        },
+        {
+          "fold": 8,
+          "windowStart": "2026-05-01",
+          "windowEnd": "2026-06-30",
+          "label": "2026-05-01 → 2026-06-30",
+          "variantA": {
+            "status": "TRADED",
+            "tradeCount": 7,
+            "netReturnPct": 10.5,
+            "winRatePct": 42.9
+          },
+          "variantB": {
+            "status": "TRADED",
+            "tradeCount": 2,
+            "netReturnPct": 17.16,
+            "winRatePct": 50
+          },
+          "differenceBMinusA": 6.66,
+          "verdict": "B_BETTER"
+        },
+        {
+          "fold": 9,
+          "windowStart": "2026-07-01",
+          "windowEnd": "2026-08-31",
+          "label": "2026-07-01 → 2026-08-31",
+          "variantA": {
+            "status": "TRADED",
+            "tradeCount": 6,
+            "netReturnPct": -9.47,
+            "winRatePct": 16.7
+          },
+          "variantB": {
+            "status": "TRADED",
+            "tradeCount": 4,
+            "netReturnPct": -6.61,
+            "winRatePct": 25
+          },
+          "differenceBMinusA": 2.86,
+          "verdict": "B_BETTER"
+        }
+      ],
+      "summary": {
+        "comparableWindows": 9,
+        "variantAWins": 2,
+        "variantBWins": 7,
+        "ties": 0,
+        "variantBWinRatioPct": 77.8,
+        "variantAAggregatePct": -33.38,
+        "variantBAggregatePct": -20.09,
+        "variantAMedianFoldPct": -9.47,
+        "variantBMedianFoldPct": -5.78,
+        "medianImprovementBMinusA": 3.69,
+        "variantAWorstFoldPct": -33.53,
+        "variantBWorstFoldPct": -24.46,
+        "worstFoldImprovementBMinusA": 9.07,
+        "variantABestFoldPct": 52.64,
+        "variantBBestFoldPct": 54.01
+      }
+    },
+    "BNB": {
+      "symbol": "BNB",
+      "status": "OK",
+      "oosStart": "2025-03-01",
+      "attributionMethod": "ENTRY_TIME",
+      "attributionLimitation": "Trades are assigned by entry timestamp. Returns are not force-settled or marked to market at OOS fold boundaries.",
+      "windows": [
+        {
+          "fold": 1,
+          "windowStart": "2025-03-01",
+          "windowEnd": "2025-04-30",
+          "label": "2025-03-01 → 2025-04-30",
+          "variantA": {
+            "status": "TRADED",
+            "tradeCount": 5,
+            "netReturnPct": -1.11,
+            "winRatePct": 60
+          },
+          "variantB": {
+            "status": "TRADED",
+            "tradeCount": 3,
+            "netReturnPct": -1.13,
+            "winRatePct": 33.3
+          },
+          "differenceBMinusA": -0.02,
+          "verdict": "A_BETTER"
+        },
+        {
+          "fold": 2,
+          "windowStart": "2025-05-01",
+          "windowEnd": "2025-06-30",
+          "label": "2025-05-01 → 2025-06-30",
+          "variantA": {
+            "status": "TRADED",
+            "tradeCount": 6,
+            "netReturnPct": -0.45,
+            "winRatePct": 16.7
+          },
+          "variantB": {
+            "status": "TRADED",
+            "tradeCount": 4,
+            "netReturnPct": 1.48,
+            "winRatePct": 25
+          },
+          "differenceBMinusA": 1.93,
+          "verdict": "B_BETTER"
+        },
+        {
+          "fold": 3,
+          "windowStart": "2025-07-01",
+          "windowEnd": "2025-08-31",
+          "label": "2025-07-01 → 2025-08-31",
+          "variantA": {
+            "status": "TRADED",
+            "tradeCount": 5,
+            "netReturnPct": 14.56,
+            "winRatePct": 40
+          },
+          "variantB": {
+            "status": "TRADED",
+            "tradeCount": 3,
+            "netReturnPct": 21.81,
+            "winRatePct": 66.7
+          },
+          "differenceBMinusA": 7.25,
+          "verdict": "B_BETTER"
+        },
+        {
+          "fold": 4,
+          "windowStart": "2025-09-01",
+          "windowEnd": "2025-10-31",
+          "label": "2025-09-01 → 2025-10-31",
+          "variantA": {
+            "status": "TRADED",
+            "tradeCount": 9,
+            "netReturnPct": -8.84,
+            "winRatePct": 22.2
+          },
+          "variantB": {
+            "status": "TRADED",
+            "tradeCount": 4,
+            "netReturnPct": -4.33,
+            "winRatePct": 25
+          },
+          "differenceBMinusA": 4.51,
+          "verdict": "B_BETTER"
+        },
+        {
+          "fold": 5,
+          "windowStart": "2025-11-01",
+          "windowEnd": "2025-12-31",
+          "label": "2025-11-01 → 2025-12-31",
+          "variantA": {
+            "status": "TRADED",
+            "tradeCount": 6,
+            "netReturnPct": -9.19,
+            "winRatePct": 16.7
+          },
+          "variantB": {
+            "status": "TRADED",
+            "tradeCount": 6,
+            "netReturnPct": -15.74,
+            "winRatePct": 0
+          },
+          "differenceBMinusA": -6.55,
+          "verdict": "A_BETTER"
+        },
+        {
+          "fold": 6,
+          "windowStart": "2026-01-01",
+          "windowEnd": "2026-02-28",
+          "label": "2026-01-01 → 2026-02-28",
+          "variantA": {
+            "status": "TRADED",
+            "tradeCount": 5,
+            "netReturnPct": 26.16,
+            "winRatePct": 20
+          },
+          "variantB": {
+            "status": "TRADED",
+            "tradeCount": 5,
+            "netReturnPct": 28.53,
+            "winRatePct": 40
+          },
+          "differenceBMinusA": 2.37,
+          "verdict": "B_BETTER"
+        },
+        {
+          "fold": 7,
+          "windowStart": "2026-03-01",
+          "windowEnd": "2026-04-30",
+          "label": "2026-03-01 → 2026-04-30",
+          "variantA": {
+            "status": "TRADED",
+            "tradeCount": 11,
+            "netReturnPct": -20.4,
+            "winRatePct": 9.1
+          },
+          "variantB": {
+            "status": "TRADED",
+            "tradeCount": 5,
+            "netReturnPct": -8.82,
+            "winRatePct": 0
+          },
+          "differenceBMinusA": 11.58,
+          "verdict": "B_BETTER"
+        },
+        {
+          "fold": 8,
+          "windowStart": "2026-05-01",
+          "windowEnd": "2026-06-30",
+          "label": "2026-05-01 → 2026-06-30",
+          "variantA": {
+            "status": "TRADED",
+            "tradeCount": 9,
+            "netReturnPct": -7.18,
+            "winRatePct": 33.3
+          },
+          "variantB": {
+            "status": "TRADED",
+            "tradeCount": 5,
+            "netReturnPct": -2.86,
+            "winRatePct": 40
+          },
+          "differenceBMinusA": 4.32,
+          "verdict": "B_BETTER"
+        },
+        {
+          "fold": 9,
+          "windowStart": "2026-07-01",
+          "windowEnd": "2026-08-31",
+          "label": "2026-07-01 → 2026-08-31",
+          "variantA": {
+            "status": "TRADED",
+            "tradeCount": 6,
+            "netReturnPct": -10.8,
+            "winRatePct": 0
+          },
+          "variantB": {
+            "status": "TRADED",
+            "tradeCount": 3,
+            "netReturnPct": -6.33,
+            "winRatePct": 0
+          },
+          "differenceBMinusA": 4.47,
+          "verdict": "B_BETTER"
+        }
+      ],
+      "summary": {
+        "comparableWindows": 9,
+        "variantAWins": 2,
+        "variantBWins": 7,
+        "ties": 0,
+        "variantBWinRatioPct": 77.8,
+        "variantAAggregatePct": -22.38,
+        "variantBAggregatePct": 5.07,
+        "variantAMedianFoldPct": -7.18,
+        "variantBMedianFoldPct": -2.86,
+        "medianImprovementBMinusA": 4.32,
+        "variantAWorstFoldPct": -20.4,
+        "variantBWorstFoldPct": -15.74,
+        "worstFoldImprovementBMinusA": 4.66,
+        "variantABestFoldPct": 26.16,
+        "variantBBestFoldPct": 28.53
+      }
+    }
+  },
+  "overall": {
+    "comparableWindows": 36,
+    "variantAWins": 10,
+    "variantBWins": 26,
+    "ties": 0,
+    "variantBWinRatioPct": 72.2
+  }
+}

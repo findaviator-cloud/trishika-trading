@@ -1,0 +1,3149 @@
+{
+  "crypto": {
+    "BTC": {
+      "metrics": {
+        "tradeCount": 33,
+        "winRate": 18.18,
+        "grossReturnPct": 38.46,
+        "netReturnPct": 33.97,
+        "grossMaxDrawdownPct": 16.43,
+        "netMaxDrawdownPct": 17.1,
+        "grossProfitFactor": 1.768,
+        "netProfitFactor": 1.677,
+        "expectancyPctNet": 1.2184,
+        "maxLosingStreak": 8,
+        "exitReasons": {
+          "STOP": 22,
+          "REVERSAL": 11
+        }
+      },
+      "trades": [
+        {
+          "direction": "LONG",
+          "entryTime": 1742817600000,
+          "exitTime": 1743004800000,
+          "entryPrice": 87689.52,
+          "exitPrice": 86007.59,
+          "exitReason": "STOP",
+          "grossPnlPct": -0.019180513247193165,
+          "netPnlPct": -0.020160842569284743
+        },
+        {
+          "direction": "SHORT",
+          "entryTime": 1743177600000,
+          "exitTime": 1743595200000,
+          "entryPrice": 84051.15,
+          "exitPrice": 86105.44,
+          "exitReason": "STOP",
+          "grossPnlPct": -0.023857842199052737,
+          "netPnlPct": -0.024833496529688248
+        },
+        {
+          "direction": "LONG",
+          "entryTime": 1743609600000,
+          "exitTime": 1743624000000,
+          "entryPrice": 86757.67,
+          "exitPrice": 84386.71,
+          "exitReason": "STOP",
+          "grossPnlPct": -0.027328534756638767,
+          "netPnlPct": -0.02830072012919571
+        },
+        {
+          "direction": "SHORT",
+          "entryTime": 1743696000000,
+          "exitTime": 1744401600000,
+          "entryPrice": 82039.32,
+          "exitPrice": 83858.28,
+          "exitReason": "REVERSAL",
+          "grossPnlPct": -0.02169088132978625,
+          "netPnlPct": -0.022668701538351987
+        },
+        {
+          "direction": "LONG",
+          "entryTime": 1744473600000,
+          "exitTime": 1748548800000,
+          "entryPrice": 85008.4,
+          "exitPrice": 105731.74,
+          "exitReason": "REVERSAL",
+          "grossPnlPct": 0.243779908809012,
+          "netPnlPct": 0.24253675047936785
+        },
+        {
+          "direction": "LONG",
+          "entryTime": 1749470400000,
+          "exitTime": 1749758400000,
+          "entryPrice": 107759.21,
+          "exitPrice": 105967.83,
+          "exitReason": "STOP",
+          "grossPnlPct": -0.016623915487131047,
+          "netPnlPct": -0.017606800129322697
+        },
+        {
+          "direction": "LONG",
+          "entryTime": 1750824000000,
+          "exitTime": 1751400000000,
+          "entryPrice": 106232.01,
+          "exitPrice": 105398.52,
+          "exitReason": "REVERSAL",
+          "grossPnlPct": -0.00784594022084295,
+          "netPnlPct": -0.008837598451506667
+        },
+        {
+          "direction": "LONG",
+          "entryTime": 1751486400000,
+          "exitTime": 1751630400000,
+          "entryPrice": 109676.14,
+          "exitPrice": 107837.87,
+          "exitReason": "STOP",
+          "grossPnlPct": -0.0167608925697057,
+          "netPnlPct": -0.017743640303269137
+        },
+        {
+          "direction": "LONG",
+          "entryTime": 1752076800000,
+          "exitTime": 1753416000000,
+          "entryPrice": 109071.32,
+          "exitPrice": 115419.65,
+          "exitReason": "REVERSAL",
+          "grossPnlPct": 0.05820347640424628,
+          "netPnlPct": 0.0571458017651616
+        },
+        {
+          "direction": "LONG",
+          "entryTime": 1754596800000,
+          "exitTime": 1755475200000,
+          "entryPrice": 117461.99,
+          "exitPrice": 115299.93,
+          "exitReason": "STOP",
+          "grossPnlPct": -0.018406464933890643,
+          "netPnlPct": -0.019387567917464765
+        },
+        {
+          "direction": "LONG",
+          "entryTime": 1756915200000,
+          "exitTime": 1756987200000,
+          "entryPrice": 112222.73,
+          "exitPrice": 109870.15,
+          "exitReason": "STOP",
+          "grossPnlPct": -0.020963489303815752,
+          "netPnlPct": -0.021942036540893217
+        },
+        {
+          "direction": "LONG",
+          "entryTime": 1757059200000,
+          "exitTime": 1757073600000,
+          "entryPrice": 112954.32,
+          "exitPrice": 110521.11,
+          "exitReason": "STOP",
+          "grossPnlPct": -0.021541539978285118,
+          "netPnlPct": -0.022519509453569064
+        },
+        {
+          "direction": "LONG",
+          "entryTime": 1757520000000,
+          "exitTime": 1758513600000,
+          "entryPrice": 113853.99,
+          "exitPrice": 111856.49,
+          "exitReason": "STOP",
+          "grossPnlPct": -0.01754440050805417,
+          "netPnlPct": -0.01852636512523731
+        },
+        {
+          "direction": "LONG",
+          "entryTime": 1759161600000,
+          "exitTime": 1760126400000,
+          "entryPrice": 113815.57,
+          "exitPrice": 112116.34,
+          "exitReason": "STOP",
+          "grossPnlPct": -0.014929679656307204,
+          "netPnlPct": -0.015914257687635103
+        },
+        {
+          "direction": "SHORT",
+          "entryTime": 1760688000000,
+          "exitTime": 1760918400000,
+          "entryPrice": 105633.75,
+          "exitPrice": 109451.89,
+          "exitReason": "STOP",
+          "grossPnlPct": -0.034884185188579164,
+          "netPnlPct": -0.03584881868664147
+        },
+        {
+          "direction": "LONG",
+          "entryTime": 1761523200000,
+          "exitTime": 1761681600000,
+          "entryPrice": 114559.41,
+          "exitPrice": 112294.72,
+          "exitReason": "STOP",
+          "grossPnlPct": -0.019768694688633626,
+          "netPnlPct": -0.02074843612322752
+        },
+        {
+          "direction": "SHORT",
+          "entryTime": 1761840000000,
+          "exitTime": 1761912000000,
+          "entryPrice": 107711.56,
+          "exitPrice": 110967.6,
+          "exitReason": "STOP",
+          "grossPnlPct": -0.029342258461028337,
+          "netPnlPct": -0.030312431116239602
+        },
+        {
+          "direction": "SHORT",
+          "entryTime": 1762185600000,
+          "exitTime": 1764345600000,
+          "entryPrice": 105745.71,
+          "exitPrice": 92362.5,
+          "exitReason": "REVERSAL",
+          "grossPnlPct": 0.14489874137231018,
+          "netPnlPct": 0.14375441479422713
+        },
+        {
+          "direction": "SHORT",
+          "entryTime": 1764561600000,
+          "exitTime": 1764676800000,
+          "entryPrice": 86346.13,
+          "exitPrice": 88748.32,
+          "exitReason": "STOP",
+          "grossPnlPct": -0.027067441952704052,
+          "netPnlPct": -0.028039888287583747
+        },
+        {
+          "direction": "SHORT",
+          "entryTime": 1765713600000,
+          "exitTime": 1766419200000,
+          "entryPrice": 89360.01,
+          "exitPrice": 89726.93,
+          "exitReason": "REVERSAL",
+          "grossPnlPct": -0.004089296268132592,
+          "netPnlPct": -0.005084709265365972
+        },
+        {
+          "direction": "SHORT",
+          "entryTime": 1766592000000,
+          "exitTime": 1766707200000,
+          "entryPrice": 87050,
+          "exitPrice": 89120.79,
+          "exitReason": "STOP",
+          "grossPnlPct": -0.023235767995324008,
+          "netPnlPct": -0.02421204408928157
+        },
+        {
+          "direction": "SHORT",
+          "entryTime": 1768795200000,
+          "exitTime": 1772049600000,
+          "entryPrice": 92690.08,
+          "exitPrice": 69038.26,
+          "exitReason": "REVERSAL",
+          "grossPnlPct": 0.34259003630740414,
+          "netPnlPct": 0.3412481172306352
+        },
+        {
+          "direction": "SHORT",
+          "entryTime": 1773014400000,
+          "exitTime": 1773043200000,
+          "entryPrice": 65971.2,
+          "exitPrice": 68162.95,
+          "exitReason": "STOP",
+          "grossPnlPct": -0.032154564906595184,
+          "netPnlPct": -0.033121926660811485
+        },
+        {
+          "direction": "SHORT",
+          "entryTime": 1773907200000,
+          "exitTime": 1774440000000,
+          "entryPrice": 70191.16,
+          "exitPrice": 71678.97,
+          "exitReason": "REVERSAL",
+          "grossPnlPct": -0.02075657616173887,
+          "netPnlPct": -0.02173533020855356
+        },
+        {
+          "direction": "SHORT",
+          "entryTime": 1774612800000,
+          "exitTime": 1775016000000,
+          "entryPrice": 66702.78,
+          "exitPrice": 68960.32,
+          "exitReason": "STOP",
+          "grossPnlPct": -0.03273679704502541,
+          "netPnlPct": -0.03370357685807368
+        },
+        {
+          "direction": "SHORT",
+          "entryTime": 1777492800000,
+          "exitTime": 1777593600000,
+          "entryPrice": 75563.87,
+          "exitPrice": 77308.4,
+          "exitReason": "STOP",
+          "grossPnlPct": -0.022565853128508673,
+          "netPnlPct": -0.023542798802542952
+        },
+        {
+          "direction": "SHORT",
+          "entryTime": 1778688000000,
+          "exitTime": 1778760000000,
+          "entryPrice": 78827.21,
+          "exitPrice": 80435.25,
+          "exitReason": "STOP",
+          "grossPnlPct": -0.019991732480473368,
+          "netPnlPct": -0.020971250988738532
+        },
+        {
+          "direction": "SHORT",
+          "entryTime": 1778860800000,
+          "exitTime": 1781481600000,
+          "entryPrice": 79150.26,
+          "exitPrice": 65746.45,
+          "exitReason": "REVERSAL",
+          "grossPnlPct": 0.2038712356332546,
+          "netPnlPct": 0.20266796603242176
+        },
+        {
+          "direction": "SHORT",
+          "entryTime": 1781798400000,
+          "exitTime": 1781956800000,
+          "entryPrice": 62369.43,
+          "exitPrice": 64296.85,
+          "exitReason": "STOP",
+          "grossPnlPct": -0.029976896224309546,
+          "netPnlPct": -0.03094643455891788
+        },
+        {
+          "direction": "SHORT",
+          "entryTime": 1782216000000,
+          "exitTime": 1783094400000,
+          "entryPrice": 62507.05,
+          "exitPrice": 61922.71,
+          "exitReason": "REVERSAL",
+          "grossPnlPct": 0.009436602500116686,
+          "netPnlPct": 0.008427670363684747
+        },
+        {
+          "direction": "SHORT",
+          "entryTime": 1785196800000,
+          "exitTime": 1785412800000,
+          "entryPrice": 63755.86,
+          "exitPrice": 64926.43,
+          "exitReason": "STOP",
+          "grossPnlPct": -0.018029175483697424,
+          "netPnlPct": -0.019010655568171386
+        },
+        {
+          "direction": "SHORT",
+          "entryTime": 1785513600000,
+          "exitTime": 1785816000000,
+          "entryPrice": 62716.57,
+          "exitPrice": 64121.05,
+          "exitReason": "STOP",
+          "grossPnlPct": -0.021903571448065873,
+          "netPnlPct": -0.02288117907280529
+        },
+        {
+          "direction": "SHORT",
+          "entryTime": 1786392000000,
+          "exitTime": 1786996800000,
+          "entryPrice": 64045.7,
+          "exitPrice": 64309.95,
+          "exitReason": "REVERSAL",
+          "grossPnlPct": -0.004109006460120135,
+          "netPnlPct": -0.00510439975701138
+        }
+      ],
+      "emaBlockedCount": 155
+    },
+    "ETH": {
+      "metrics": {
+        "tradeCount": 37,
+        "winRate": 16.22,
+        "grossReturnPct": 44,
+        "netReturnPct": 38.77,
+        "grossMaxDrawdownPct": 38.66,
+        "netMaxDrawdownPct": 39.39,
+        "grossProfitFactor": 1.598,
+        "netProfitFactor": 1.547,
+        "expectancyPctNet": 1.6143,
+        "maxLosingStreak": 12,
+        "exitReasons": {
+          "STOP": 30,
+          "REVERSAL": 7
+        }
+      },
+      "trades": [
+        {
+          "direction": "SHORT",
+          "entryTime": 1743148800000,
+          "exitTime": 1745208000000,
+          "entryPrice": 1910.21,
+          "exitPrice": 1634.55,
+          "exitReason": "REVERSAL",
+          "grossPnlPct": 0.16864580465571577,
+          "netPnlPct": 0.16747774288194694
+        },
+        {
+          "direction": "SHORT",
+          "entryTime": 1745294400000,
+          "exitTime": 1745323200000,
+          "entryPrice": 1579.22,
+          "exitPrice": 1640.22,
+          "exitReason": "STOP",
+          "grossPnlPct": -0.03719013303093488,
+          "netPnlPct": -0.03815246173355247
+        },
+        {
+          "direction": "SHORT",
+          "entryTime": 1746532800000,
+          "exitTime": 1746576000000,
+          "entryPrice": 1769.92,
+          "exitPrice": 1825.61,
+          "exitReason": "STOP",
+          "grossPnlPct": -0.030504872344038314,
+          "netPnlPct": -0.03147388296638298
+        },
+        {
+          "direction": "LONG",
+          "entryTime": 1746907200000,
+          "exitTime": 1747598400000,
+          "entryPrice": 2499.49,
+          "exitPrice": 2353.44,
+          "exitReason": "STOP",
+          "grossPnlPct": -0.05843192011170273,
+          "netPnlPct": -0.05937301764282543
+        },
+        {
+          "direction": "LONG",
+          "entryTime": 1747886400000,
+          "exitTime": 1748160000000,
+          "entryPrice": 2629.24,
+          "exitPrice": 2473.03,
+          "exitReason": "STOP",
+          "grossPnlPct": -0.05941260592414521,
+          "netPnlPct": -0.06035272325955332
+        },
+        {
+          "direction": "LONG",
+          "entryTime": 1748491200000,
+          "exitTime": 1748520000000,
+          "entryPrice": 2762.5,
+          "exitPrice": 2648.62,
+          "exitReason": "STOP",
+          "grossPnlPct": -0.04122352941176477,
+          "netPnlPct": -0.042181826733691974
+        },
+        {
+          "direction": "LONG",
+          "entryTime": 1749052800000,
+          "exitTime": 1749124800000,
+          "entryPrice": 2667.92,
+          "exitPrice": 2572.98,
+          "exitReason": "STOP",
+          "grossPnlPct": -0.03558577468589763,
+          "netPnlPct": -0.03654970694508208
+        },
+        {
+          "direction": "SHORT",
+          "entryTime": 1749168000000,
+          "exitTime": 1749211200000,
+          "entryPrice": 2414.02,
+          "exitPrice": 2524.77,
+          "exitReason": "STOP",
+          "grossPnlPct": -0.043865381797153824,
+          "netPnlPct": -0.04482103858696174
+        },
+        {
+          "direction": "LONG",
+          "entryTime": 1749513600000,
+          "exitTime": 1749772800000,
+          "entryPrice": 2680.13,
+          "exitPrice": 2591.13,
+          "exitReason": "STOP",
+          "grossPnlPct": -0.033207344419860174,
+          "netPnlPct": -0.03417365392068983
+        },
+        {
+          "direction": "SHORT",
+          "entryTime": 1750449600000,
+          "exitTime": 1750896000000,
+          "entryPrice": 2414.84,
+          "exitPrice": 2520.24,
+          "exitReason": "STOP",
+          "grossPnlPct": -0.04182141383360305,
+          "netPnlPct": -0.04277911356990116
+        },
+        {
+          "direction": "LONG",
+          "entryTime": 1751241600000,
+          "exitTime": 1751371200000,
+          "entryPrice": 2500.09,
+          "exitPrice": 2424.06,
+          "exitReason": "STOP",
+          "grossPnlPct": -0.03041090520741263,
+          "netPnlPct": -0.03138000974993371
+        },
+        {
+          "direction": "SHORT",
+          "entryTime": 1751428800000,
+          "exitTime": 1751472000000,
+          "entryPrice": 2430.55,
+          "exitPrice": 2510.52,
+          "exitReason": "STOP",
+          "grossPnlPct": -0.03185395854245332,
+          "netPnlPct": -0.03282162075280559
+        },
+        {
+          "direction": "LONG",
+          "entryTime": 1751486400000,
+          "exitTime": 1751630400000,
+          "entryPrice": 2604.73,
+          "exitPrice": 2514.12,
+          "exitReason": "STOP",
+          "grossPnlPct": -0.0347867149378247,
+          "netPnlPct": -0.03575144585742707
+        },
+        {
+          "direction": "LONG",
+          "entryTime": 1752004800000,
+          "exitTime": 1754049600000,
+          "entryPrice": 2610.61,
+          "exitPrice": 3642.72,
+          "exitReason": "REVERSAL",
+          "grossPnlPct": 0.39535204415826164,
+          "netPnlPct": 0.39395738944146186
+        },
+        {
+          "direction": "LONG",
+          "entryTime": 1754568000000,
+          "exitTime": 1755633600000,
+          "entryPrice": 3827.01,
+          "exitPrice": 4142,
+          "exitReason": "REVERSAL",
+          "grossPnlPct": 0.08230707523628111,
+          "netPnlPct": 0.08122530904414083
+        },
+        {
+          "direction": "LONG",
+          "entryTime": 1755878400000,
+          "exitTime": 1756152000000,
+          "entryPrice": 4616.09,
+          "exitPrice": 4386.52,
+          "exitReason": "STOP",
+          "grossPnlPct": -0.04973256587284902,
+          "netPnlPct": -0.05068235841070723
+        },
+        {
+          "direction": "LONG",
+          "entryTime": 1757606400000,
+          "exitTime": 1758499200000,
+          "entryPrice": 4412.52,
+          "exitPrice": 4288.89,
+          "exitReason": "STOP",
+          "grossPnlPct": -0.028018003317831996,
+          "netPnlPct": -0.028989499566389854
+        },
+        {
+          "direction": "LONG",
+          "entryTime": 1759320000000,
+          "exitTime": 1760097600000,
+          "entryPrice": 4298.21,
+          "exitPrice": 4159.7,
+          "exitReason": "STOP",
+          "grossPnlPct": -0.03222504251769931,
+          "netPnlPct": -0.03319233382952558
+        },
+        {
+          "direction": "LONG",
+          "entryTime": 1761523200000,
+          "exitTime": 1761667200000,
+          "entryPrice": 4158.46,
+          "exitPrice": 4030.67,
+          "exitReason": "STOP",
+          "grossPnlPct": -0.03073012605628045,
+          "netPnlPct": -0.031698911537483276
+        },
+        {
+          "direction": "SHORT",
+          "entryTime": 1762171200000,
+          "exitTime": 1764345600000,
+          "entryPrice": 3711.68,
+          "exitPrice": 3073.78,
+          "exitReason": "REVERSAL",
+          "grossPnlPct": 0.20752949137543997,
+          "netPnlPct": 0.20632256534707882
+        },
+        {
+          "direction": "SHORT",
+          "entryTime": 1764561600000,
+          "exitTime": 1764676800000,
+          "entryPrice": 2825.77,
+          "exitPrice": 2932.45,
+          "exitReason": "STOP",
+          "grossPnlPct": -0.03637913689917982,
+          "netPnlPct": -0.03734227619263375
+        },
+        {
+          "direction": "SHORT",
+          "entryTime": 1765756800000,
+          "exitTime": 1765785600000,
+          "entryPrice": 3063.49,
+          "exitPrice": 3168.4,
+          "exitReason": "STOP",
+          "grossPnlPct": -0.033111349577073734,
+          "netPnlPct": -0.034077755024772616
+        },
+        {
+          "direction": "SHORT",
+          "entryTime": 1765814400000,
+          "exitTime": 1766980800000,
+          "entryPrice": 3010.97,
+          "exitPrice": 3043.75,
+          "exitReason": "REVERSAL",
+          "grossPnlPct": -0.010769609856262852,
+          "netPnlPct": -0.011758345878395415
+        },
+        {
+          "direction": "LONG",
+          "entryTime": 1768348800000,
+          "exitTime": 1768780800000,
+          "entryPrice": 3325.83,
+          "exitPrice": 3225.32,
+          "exitReason": "STOP",
+          "grossPnlPct": -0.03022102753297662,
+          "netPnlPct": -0.031190321858280967
+        },
+        {
+          "direction": "SHORT",
+          "entryTime": 1768867200000,
+          "exitTime": 1772035200000,
+          "entryPrice": 3189.56,
+          "exitPrice": 2013.69,
+          "exitReason": "REVERSAL",
+          "grossPnlPct": 0.5839379447680626,
+          "netPnlPct": 0.5823547983964803
+        },
+        {
+          "direction": "SHORT",
+          "entryTime": 1772985600000,
+          "exitTime": 1773057600000,
+          "entryPrice": 1943.32,
+          "exitPrice": 2023.13,
+          "exitReason": "STOP",
+          "grossPnlPct": -0.03944877491807253,
+          "netPnlPct": -0.04040884610755957
+        },
+        {
+          "direction": "SHORT",
+          "entryTime": 1774137600000,
+          "exitTime": 1774252800000,
+          "entryPrice": 2084.86,
+          "exitPrice": 2163.06,
+          "exitReason": "STOP",
+          "grossPnlPct": -0.036152487679490974,
+          "netPnlPct": -0.03711585350889679
+        },
+        {
+          "direction": "SHORT",
+          "entryTime": 1774612800000,
+          "exitTime": 1774857600000,
+          "entryPrice": 1991.8,
+          "exitPrice": 2076.26,
+          "exitReason": "STOP",
+          "grossPnlPct": -0.04067891304557247,
+          "netPnlPct": -0.04163775471169373
+        },
+        {
+          "direction": "SHORT",
+          "entryTime": 1777305600000,
+          "exitTime": 1777435200000,
+          "entryPrice": 2275.07,
+          "exitPrice": 2338.86,
+          "exitReason": "STOP",
+          "grossPnlPct": -0.027273971079927795,
+          "netPnlPct": -0.02824621098889335
+        },
+        {
+          "direction": "SHORT",
+          "entryTime": 1777492800000,
+          "exitTime": 1777636800000,
+          "entryPrice": 2233.69,
+          "exitPrice": 2303.38,
+          "exitReason": "STOP",
+          "grossPnlPct": -0.030255537514435327,
+          "netPnlPct": -0.03122479734700445
+        },
+        {
+          "direction": "SHORT",
+          "entryTime": 1778169600000,
+          "exitTime": 1778428800000,
+          "entryPrice": 2294.82,
+          "exitPrice": 2363.17,
+          "exitReason": "STOP",
+          "grossPnlPct": -0.028923014425538573,
+          "netPnlPct": -0.029893606115268034
+        },
+        {
+          "direction": "SHORT",
+          "entryTime": 1778601600000,
+          "exitTime": 1778659200000,
+          "entryPrice": 2261.86,
+          "exitPrice": 2315.48,
+          "exitReason": "STOP",
+          "grossPnlPct": -0.023157185551159976,
+          "netPnlPct": -0.02413354018829006
+        },
+        {
+          "direction": "SHORT",
+          "entryTime": 1778688000000,
+          "exitTime": 1778760000000,
+          "entryPrice": 2236.48,
+          "exitPrice": 2294.63,
+          "exitReason": "STOP",
+          "grossPnlPct": -0.025341776234076963,
+          "netPnlPct": -0.026315947372273607
+        },
+        {
+          "direction": "SHORT",
+          "entryTime": 1778860800000,
+          "exitTime": 1781524800000,
+          "entryPrice": 2222.86,
+          "exitPrice": 1764.67,
+          "exitReason": "REVERSAL",
+          "grossPnlPct": 0.25964627947434926,
+          "netPnlPct": 0.2583872627032606
+        },
+        {
+          "direction": "SHORT",
+          "entryTime": 1782216000000,
+          "exitTime": 1782993600000,
+          "entryPrice": 1660.9,
+          "exitPrice": 1718.43,
+          "exitReason": "STOP",
+          "grossPnlPct": -0.033478233038296557,
+          "netPnlPct": -0.034444271785884384
+        },
+        {
+          "direction": "SHORT",
+          "entryTime": 1785513600000,
+          "exitTime": 1785945600000,
+          "entryPrice": 1862.93,
+          "exitPrice": 1919.62,
+          "exitReason": "STOP",
+          "grossPnlPct": -0.029531886519206796,
+          "netPnlPct": -0.030501869641126556
+        },
+        {
+          "direction": "SHORT",
+          "entryTime": 1786392000000,
+          "exitTime": 1786521600000,
+          "entryPrice": 1878.52,
+          "exitPrice": 1914.52,
+          "exitReason": "STOP",
+          "grossPnlPct": -0.018803668804713403,
+          "netPnlPct": -0.0197843747829195
+        }
+      ],
+      "emaBlockedCount": 133
+    },
+    "SOL": {
+      "metrics": {
+        "tradeCount": 38,
+        "winRate": 21.05,
+        "grossReturnPct": -17,
+        "netReturnPct": -20.09,
+        "grossMaxDrawdownPct": 46.7,
+        "netMaxDrawdownPct": 47.81,
+        "grossProfitFactor": 1.013,
+        "netProfitFactor": 0.982,
+        "expectancyPctNet": -0.0587,
+        "maxLosingStreak": 6,
+        "exitReasons": {
+          "STOP": 24,
+          "REVERSAL": 14
+        }
+      },
+      "trades": [
+        {
+          "direction": "SHORT",
+          "entryTime": 1743177600000,
+          "exitTime": 1743624000000,
+          "entryPrice": 129.92,
+          "exitPrice": 131.42,
+          "exitReason": "REVERSAL",
+          "grossPnlPct": -0.011413787855729773,
+          "netPnlPct": -0.012401880021790768
+        },
+        {
+          "direction": "SHORT",
+          "entryTime": 1743638400000,
+          "exitTime": 1744416000000,
+          "entryPrice": 117.42,
+          "exitPrice": 121.41,
+          "exitReason": "REVERSAL",
+          "grossPnlPct": -0.032863849765258135,
+          "netPnlPct": -0.033830502589080935
+        },
+        {
+          "direction": "SHORT",
+          "entryTime": 1746532800000,
+          "exitTime": 1746576000000,
+          "entryPrice": 142.57,
+          "exitPrice": 147.69,
+          "exitReason": "STOP",
+          "grossPnlPct": -0.03466720834179704,
+          "netPnlPct": -0.03563205870827202
+        },
+        {
+          "direction": "LONG",
+          "entryTime": 1746777600000,
+          "exitTime": 1747641600000,
+          "entryPrice": 165.08,
+          "exitPrice": 161.9,
+          "exitReason": "REVERSAL",
+          "grossPnlPct": -0.01926338744850986,
+          "netPnlPct": -0.020243633937816696
+        },
+        {
+          "direction": "SHORT",
+          "entryTime": 1747641600000,
+          "exitTime": 1747699200000,
+          "entryPrice": 161.9,
+          "exitPrice": 172.45,
+          "exitReason": "STOP",
+          "grossPnlPct": -0.06117715279791236,
+          "netPnlPct": -0.062115506468279125
+        },
+        {
+          "direction": "LONG",
+          "entryTime": 1747886400000,
+          "exitTime": 1748448000000,
+          "entryPrice": 176.83,
+          "exitPrice": 169.71,
+          "exitReason": "REVERSAL",
+          "grossPnlPct": -0.040264660973816646,
+          "netPnlPct": -0.04122391668498726
+        },
+        {
+          "direction": "SHORT",
+          "entryTime": 1748563200000,
+          "exitTime": 1749513600000,
+          "entryPrice": 166.71,
+          "exitPrice": 161.16,
+          "exitReason": "REVERSAL",
+          "grossPnlPct": 0.034437825763216745,
+          "netPnlPct": 0.03340390489788625
+        },
+        {
+          "direction": "LONG",
+          "entryTime": 1749585600000,
+          "exitTime": 1749744000000,
+          "entryPrice": 163.61,
+          "exitPrice": 156.35,
+          "exitReason": "STOP",
+          "grossPnlPct": -0.044373815781431514,
+          "netPnlPct": -0.04532896439134515
+        },
+        {
+          "direction": "SHORT",
+          "entryTime": 1749787200000,
+          "exitTime": 1750003200000,
+          "entryPrice": 144.76,
+          "exitPrice": 153.36,
+          "exitReason": "STOP",
+          "grossPnlPct": -0.05607720396452809,
+          "netPnlPct": -0.05702065503502807
+        },
+        {
+          "direction": "SHORT",
+          "entryTime": 1750435200000,
+          "exitTime": 1751126400000,
+          "entryPrice": 142.86,
+          "exitPrice": 149.33,
+          "exitReason": "STOP",
+          "grossPnlPct": -0.04332685997455299,
+          "netPnlPct": -0.04428305501705698
+        },
+        {
+          "direction": "LONG",
+          "entryTime": 1752177600000,
+          "exitTime": 1753905600000,
+          "entryPrice": 159.34,
+          "exitPrice": 176.12,
+          "exitReason": "REVERSAL",
+          "grossPnlPct": 0.1053094012802811,
+          "netPnlPct": 0.10420464425751241
+        },
+        {
+          "direction": "SHORT",
+          "entryTime": 1754164800000,
+          "exitTime": 1754308800000,
+          "entryPrice": 157.45,
+          "exitPrice": 166.11,
+          "exitReason": "STOP",
+          "grossPnlPct": -0.052134127987478296,
+          "netPnlPct": -0.05308152016340284
+        },
+        {
+          "direction": "LONG",
+          "entryTime": 1754640000000,
+          "exitTime": 1755576000000,
+          "entryPrice": 177.13,
+          "exitPrice": 178.52,
+          "exitReason": "REVERSAL",
+          "grossPnlPct": 0.007847343758821346,
+          "netPnlPct": 0.006840000086898446
+        },
+        {
+          "direction": "LONG",
+          "entryTime": 1755892800000,
+          "exitTime": 1756152000000,
+          "entryPrice": 198.97,
+          "exitPrice": 188.74,
+          "exitReason": "STOP",
+          "grossPnlPct": -0.05141478614866557,
+          "netPnlPct": -0.05236289730693766
+        },
+        {
+          "direction": "LONG",
+          "entryTime": 1756382400000,
+          "exitTime": 1756483200000,
+          "entryPrice": 213.15,
+          "exitPrice": 201.51,
+          "exitReason": "STOP",
+          "grossPnlPct": -0.05460942997888818,
+          "netPnlPct": -0.05555434808985371
+        },
+        {
+          "direction": "LONG",
+          "entryTime": 1757332800000,
+          "exitTime": 1758528000000,
+          "entryPrice": 214.28,
+          "exitPrice": 221.88,
+          "exitReason": "REVERSAL",
+          "grossPnlPct": 0.03546761246966579,
+          "netPnlPct": 0.03443266233226483
+        },
+        {
+          "direction": "LONG",
+          "entryTime": 1759363200000,
+          "exitTime": 1760097600000,
+          "entryPrice": 222.04,
+          "exitPrice": 213.3,
+          "exitReason": "STOP",
+          "grossPnlPct": -0.03936227706719497,
+          "netPnlPct": -0.04032243471130581
+        },
+        {
+          "direction": "SHORT",
+          "entryTime": 1760140800000,
+          "exitTime": 1760371200000,
+          "entryPrice": 188.43,
+          "exitPrice": 204.77,
+          "exitReason": "STOP",
+          "grossPnlPct": -0.07979684524100217,
+          "netPnlPct": -0.08071658852411945
+        },
+        {
+          "direction": "SHORT",
+          "entryTime": 1760702400000,
+          "exitTime": 1761048000000,
+          "entryPrice": 181.44,
+          "exitPrice": 195.78,
+          "exitReason": "STOP",
+          "grossPnlPct": -0.07324547961998162,
+          "netPnlPct": -0.07417177099467409
+        },
+        {
+          "direction": "SHORT",
+          "entryTime": 1761163200000,
+          "exitTime": 1761220800000,
+          "entryPrice": 180.21,
+          "exitPrice": 190.7,
+          "exitReason": "STOP",
+          "grossPnlPct": -0.05500786575773453,
+          "netPnlPct": -0.055952385632039636
+        },
+        {
+          "direction": "LONG",
+          "entryTime": 1761480000000,
+          "exitTime": 1761681600000,
+          "entryPrice": 197.74,
+          "exitPrice": 190.71,
+          "exitReason": "STOP",
+          "grossPnlPct": -0.03555173460099126,
+          "netPnlPct": -0.03651570088324885
+        },
+        {
+          "direction": "SHORT",
+          "entryTime": 1761840000000,
+          "exitTime": 1764187200000,
+          "entryPrice": 185.01,
+          "exitPrice": 143.99,
+          "exitReason": "REVERSAL",
+          "grossPnlPct": 0.28488089450656284,
+          "netPnlPct": 0.283596655731444
+        },
+        {
+          "direction": "SHORT",
+          "entryTime": 1764547200000,
+          "exitTime": 1764676800000,
+          "entryPrice": 133.48,
+          "exitPrice": 138.68,
+          "exitReason": "STOP",
+          "grossPnlPct": -0.03749639457744458,
+          "netPnlPct": -0.038458417171569836
+        },
+        {
+          "direction": "SHORT",
+          "entryTime": 1765123200000,
+          "exitTime": 1765180800000,
+          "entryPrice": 132.03,
+          "exitPrice": 137.14,
+          "exitReason": "STOP",
+          "grossPnlPct": -0.03726119294151953,
+          "netPnlPct": -0.03822345061973875
+        },
+        {
+          "direction": "SHORT",
+          "entryTime": 1765756800000,
+          "exitTime": 1765800000000,
+          "entryPrice": 129.39,
+          "exitPrice": 134.45,
+          "exitReason": "STOP",
+          "grossPnlPct": -0.03763480847898848,
+          "netPnlPct": -0.03859669272838462
+        },
+        {
+          "direction": "SHORT",
+          "entryTime": 1765814400000,
+          "exitTime": 1765972800000,
+          "entryPrice": 126.89,
+          "exitPrice": 132.74,
+          "exitReason": "STOP",
+          "grossPnlPct": -0.04407111646828388,
+          "netPnlPct": -0.04502656762623658
+        },
+        {
+          "direction": "SHORT",
+          "entryTime": 1766001600000,
+          "exitTime": 1766966400000,
+          "entryPrice": 122.39,
+          "exitPrice": 129.17,
+          "exitReason": "STOP",
+          "grossPnlPct": -0.0524889680266315,
+          "netPnlPct": -0.053436005539848175
+        },
+        {
+          "direction": "SHORT",
+          "entryTime": 1768780800000,
+          "exitTime": 1772049600000,
+          "entryPrice": 137.87,
+          "exitPrice": 89.43,
+          "exitReason": "REVERSAL",
+          "grossPnlPct": 0.5416526892541651,
+          "netPnlPct": 0.5401118070060353
+        },
+        {
+          "direction": "SHORT",
+          "entryTime": 1772913600000,
+          "exitTime": 1773072000000,
+          "entryPrice": 82.52,
+          "exitPrice": 86.53,
+          "exitReason": "STOP",
+          "grossPnlPct": -0.04634230902577152,
+          "netPnlPct": -0.04729549012619527
+        },
+        {
+          "direction": "SHORT",
+          "entryTime": 1774224000000,
+          "exitTime": 1774252800000,
+          "entryPrice": 86.21,
+          "exitPrice": 89.32,
+          "exitReason": "STOP",
+          "grossPnlPct": -0.03481862964621585,
+          "netPnlPct": -0.03578332866705913
+        },
+        {
+          "direction": "SHORT",
+          "entryTime": 1774612800000,
+          "exitTime": 1775606400000,
+          "entryPrice": 83.39,
+          "exitPrice": 85.56,
+          "exitReason": "REVERSAL",
+          "grossPnlPct": -0.025362318840579712,
+          "netPnlPct": -0.026336469446436084
+        },
+        {
+          "direction": "SHORT",
+          "entryTime": 1777305600000,
+          "exitTime": 1777867200000,
+          "entryPrice": 84.17,
+          "exitPrice": 85.4,
+          "exitReason": "REVERSAL",
+          "grossPnlPct": -0.014402810304449676,
+          "netPnlPct": -0.015387914941826564
+        },
+        {
+          "direction": "SHORT",
+          "entryTime": 1778918400000,
+          "exitTime": 1781481600000,
+          "entryPrice": 87.46,
+          "exitPrice": 71.29,
+          "exitReason": "REVERSAL",
+          "grossPnlPct": 0.22682003085986802,
+          "netPnlPct": 0.22559382393247174
+        },
+        {
+          "direction": "SHORT",
+          "entryTime": 1782316800000,
+          "exitTime": 1782446400000,
+          "entryPrice": 67.32,
+          "exitPrice": 70.35,
+          "exitReason": "STOP",
+          "grossPnlPct": -0.04307036247334761,
+          "netPnlPct": -0.04402681388516816
+        },
+        {
+          "direction": "SHORT",
+          "entryTime": 1783915200000,
+          "exitTime": 1784088000000,
+          "entryPrice": 75.87,
+          "exitPrice": 78.31,
+          "exitReason": "STOP",
+          "grossPnlPct": -0.031158217341335726,
+          "netPnlPct": -0.03212657494519222
+        },
+        {
+          "direction": "SHORT",
+          "entryTime": 1784304000000,
+          "exitTime": 1784505600000,
+          "entryPrice": 74.78,
+          "exitPrice": 77.03,
+          "exitReason": "STOP",
+          "grossPnlPct": -0.02920939893547969,
+          "netPnlPct": -0.030179704383819894
+        },
+        {
+          "direction": "SHORT",
+          "entryTime": 1784865600000,
+          "exitTime": 1786161600000,
+          "entryPrice": 75.84,
+          "exitPrice": 74.84,
+          "exitReason": "REVERSAL",
+          "grossPnlPct": 0.01336183858898976,
+          "netPnlPct": 0.012348983178106288
+        },
+        {
+          "direction": "SHORT",
+          "entryTime": 1786924800000,
+          "exitTime": 1786939200000,
+          "entryPrice": 74.62,
+          "exitPrice": 75.85,
+          "exitReason": "STOP",
+          "grossPnlPct": -0.01621621621621605,
+          "netPnlPct": -0.017199508353930915
+        }
+      ],
+      "emaBlockedCount": 152
+    },
+    "BNB": {
+      "metrics": {
+        "tradeCount": 38,
+        "winRate": 23.68,
+        "grossReturnPct": 9.13,
+        "netReturnPct": 5.07,
+        "grossMaxDrawdownPct": 27,
+        "netMaxDrawdownPct": 27.65,
+        "grossProfitFactor": 1.251,
+        "netProfitFactor": 1.19,
+        "expectancyPctNet": 0.3681,
+        "maxLosingStreak": 10,
+        "exitReasons": {
+          "STOP": 24,
+          "REVERSAL": 14
+        }
+      },
+      "trades": [
+        {
+          "direction": "LONG",
+          "entryTime": 1742846400000,
+          "exitTime": 1743004800000,
+          "entryPrice": 636.25,
+          "exitPrice": 621.87,
+          "exitReason": "STOP",
+          "grossPnlPct": -0.022601178781925357,
+          "netPnlPct": -0.023578089147960335
+        },
+        {
+          "direction": "SHORT",
+          "entryTime": 1743220800000,
+          "exitTime": 1744473600000,
+          "entryPrice": 613.02,
+          "exitPrice": 599.23,
+          "exitReason": "REVERSAL",
+          "grossPnlPct": 0.023012866512023722,
+          "netPnlPct": 0.02199036489631956
+        },
+        {
+          "direction": "SHORT",
+          "entryTime": 1746028800000,
+          "exitTime": 1746590400000,
+          "entryPrice": 597.08,
+          "exitPrice": 602,
+          "exitReason": "REVERSAL",
+          "grossPnlPct": -0.008172757475082948,
+          "netPnlPct": -0.009164089051819424
+        },
+        {
+          "direction": "LONG",
+          "entryTime": 1746705600000,
+          "exitTime": 1748649600000,
+          "entryPrice": 613.62,
+          "exitPrice": 655.36,
+          "exitReason": "REVERSAL",
+          "grossPnlPct": 0.0680225546755322,
+          "netPnlPct": 0.06695506586526179
+        },
+        {
+          "direction": "LONG",
+          "entryTime": 1749585600000,
+          "exitTime": 1749758400000,
+          "entryPrice": 667.54,
+          "exitPrice": 655.8,
+          "exitReason": "STOP",
+          "grossPnlPct": -0.0175869610809839,
+          "netPnlPct": -0.018568883158863958
+        },
+        {
+          "direction": "SHORT",
+          "entryTime": 1750536000000,
+          "exitTime": 1750708800000,
+          "entryPrice": 631.08,
+          "exitPrice": 642.05,
+          "exitReason": "STOP",
+          "grossPnlPct": -0.017085896737014106,
+          "netPnlPct": -0.018068319628831042
+        },
+        {
+          "direction": "LONG",
+          "entryTime": 1751241600000,
+          "exitTime": 1751371200000,
+          "entryPrice": 654.9,
+          "exitPrice": 647.01,
+          "exitReason": "STOP",
+          "grossPnlPct": -0.012047640861200137,
+          "netPnlPct": -0.013035099491023994
+        },
+        {
+          "direction": "LONG",
+          "entryTime": 1751472000000,
+          "exitTime": 1751630400000,
+          "entryPrice": 661.65,
+          "exitPrice": 652.67,
+          "exitReason": "STOP",
+          "grossPnlPct": -0.013572130280359751,
+          "netPnlPct": -0.014558065182628255
+        },
+        {
+          "direction": "LONG",
+          "entryTime": 1751846400000,
+          "exitTime": 1754064000000,
+          "entryPrice": 663.13,
+          "exitPrice": 763.95,
+          "exitReason": "REVERSAL",
+          "grossPnlPct": 0.152036553918538,
+          "netPnlPct": 0.15088509309503118
+        },
+        {
+          "direction": "LONG",
+          "entryTime": 1754596800000,
+          "exitTime": 1756166400000,
+          "entryPrice": 780.66,
+          "exitPrice": 839.32,
+          "exitReason": "REVERSAL",
+          "grossPnlPct": 0.07514154689621622,
+          "netPnlPct": 0.07406694265144242
+        },
+        {
+          "direction": "LONG",
+          "entryTime": 1757174400000,
+          "exitTime": 1758830400000,
+          "entryPrice": 859.52,
+          "exitPrice": 958.65,
+          "exitReason": "REVERSAL",
+          "grossPnlPct": 0.11533181310498875,
+          "netPnlPct": 0.11421703867909683
+        },
+        {
+          "direction": "LONG",
+          "entryTime": 1759161600000,
+          "exitTime": 1760126400000,
+          "entryPrice": 1011.07,
+          "exitPrice": 981.09,
+          "exitReason": "STOP",
+          "grossPnlPct": -0.029651755071360086,
+          "netPnlPct": -0.030621618384631955
+        },
+        {
+          "direction": "LONG",
+          "entryTime": 1760342400000,
+          "exitTime": 1760414400000,
+          "entryPrice": 1343.95,
+          "exitPrice": 1231.7,
+          "exitReason": "STOP",
+          "grossPnlPct": -0.08352245247219015,
+          "netPnlPct": -0.08443847200994903
+        },
+        {
+          "direction": "LONG",
+          "entryTime": 1761537600000,
+          "exitTime": 1761681600000,
+          "entryPrice": 1151.18,
+          "exitPrice": 1114.83,
+          "exitReason": "STOP",
+          "grossPnlPct": -0.03157629562709574,
+          "netPnlPct": -0.03254423536160134
+        },
+        {
+          "direction": "SHORT",
+          "entryTime": 1763668800000,
+          "exitTime": 1764345600000,
+          "entryPrice": 880.44,
+          "exitPrice": 902,
+          "exitReason": "REVERSAL",
+          "grossPnlPct": -0.023902439024390154,
+          "netPnlPct": -0.024878048780487605
+        },
+        {
+          "direction": "LONG",
+          "entryTime": 1764345600000,
+          "exitTime": 1764432000000,
+          "entryPrice": 902,
+          "exitPrice": 873.78,
+          "exitReason": "STOP",
+          "grossPnlPct": -0.03128603104212868,
+          "netPnlPct": -0.03225426089615935
+        },
+        {
+          "direction": "SHORT",
+          "entryTime": 1764561600000,
+          "exitTime": 1764676800000,
+          "entryPrice": 829.39,
+          "exitPrice": 859.16,
+          "exitReason": "STOP",
+          "grossPnlPct": -0.03465012337632101,
+          "netPnlPct": -0.03561499081922315
+        },
+        {
+          "direction": "LONG",
+          "entryTime": 1764748800000,
+          "exitTime": 1765411200000,
+          "entryPrice": 896.55,
+          "exitPrice": 863.63,
+          "exitReason": "STOP",
+          "grossPnlPct": -0.036718532151023275,
+          "netPnlPct": -0.03768133221883829
+        },
+        {
+          "direction": "SHORT",
+          "entryTime": 1765425600000,
+          "exitTime": 1765627200000,
+          "entryPrice": 868.19,
+          "exitPrice": 899.1,
+          "exitReason": "STOP",
+          "grossPnlPct": -0.03437882326771213,
+          "netPnlPct": -0.03534396187514055
+        },
+        {
+          "direction": "SHORT",
+          "entryTime": 1765814400000,
+          "exitTime": 1766937600000,
+          "entryPrice": 859.13,
+          "exitPrice": 860.57,
+          "exitReason": "REVERSAL",
+          "grossPnlPct": -0.0016733095506467066,
+          "netPnlPct": -0.0026711373272075845
+        },
+        {
+          "direction": "LONG",
+          "entryTime": 1767369600000,
+          "exitTime": 1768924800000,
+          "entryPrice": 878,
+          "exitPrice": 905.33,
+          "exitReason": "REVERSAL",
+          "grossPnlPct": 0.031127562642369044,
+          "netPnlPct": 0.030096950385855026
+        },
+        {
+          "direction": "SHORT",
+          "entryTime": 1768953600000,
+          "exitTime": 1769587200000,
+          "entryPrice": 884.19,
+          "exitPrice": 907.06,
+          "exitReason": "STOP",
+          "grossPnlPct": -0.025213326571560724,
+          "netPnlPct": -0.0261876260952274
+        },
+        {
+          "direction": "SHORT",
+          "entryTime": 1769716800000,
+          "exitTime": 1771689600000,
+          "entryPrice": 860.4,
+          "exitPrice": 627.65,
+          "exitReason": "REVERSAL",
+          "grossPnlPct": 0.37082769059189036,
+          "netPnlPct": 0.3694575479726083
+        },
+        {
+          "direction": "SHORT",
+          "entryTime": 1771819200000,
+          "exitTime": 1771833600000,
+          "entryPrice": 590.04,
+          "exitPrice": 608.49,
+          "exitReason": "STOP",
+          "grossPnlPct": -0.030320958438100898,
+          "netPnlPct": -0.031290152882440636
+        },
+        {
+          "direction": "SHORT",
+          "entryTime": 1771948800000,
+          "exitTime": 1772020800000,
+          "entryPrice": 586.09,
+          "exitPrice": 606.19,
+          "exitReason": "STOP",
+          "grossPnlPct": -0.033157920783912664,
+          "netPnlPct": -0.034124279683678815
+        },
+        {
+          "direction": "SHORT",
+          "entryTime": 1772913600000,
+          "exitTime": 1773057600000,
+          "entryPrice": 619.84,
+          "exitPrice": 636.78,
+          "exitReason": "STOP",
+          "grossPnlPct": -0.026602594302584825,
+          "netPnlPct": -0.02757550525280683
+        },
+        {
+          "direction": "SHORT",
+          "entryTime": 1773907200000,
+          "exitTime": 1774440000000,
+          "entryPrice": 645.39,
+          "exitPrice": 648.36,
+          "exitReason": "REVERSAL",
+          "grossPnlPct": -0.004580788450860629,
+          "netPnlPct": -0.005575710201534356
+        },
+        {
+          "direction": "SHORT",
+          "entryTime": 1774612800000,
+          "exitTime": 1775606400000,
+          "entryPrice": 611.07,
+          "exitPrice": 620.11,
+          "exitReason": "REVERSAL",
+          "grossPnlPct": -0.014578058731515298,
+          "netPnlPct": -0.015562988208045359
+        },
+        {
+          "direction": "SHORT",
+          "entryTime": 1775966400000,
+          "exitTime": 1776110400000,
+          "entryPrice": 595.5,
+          "exitPrice": 609.38,
+          "exitReason": "STOP",
+          "grossPnlPct": -0.022777249007187583,
+          "netPnlPct": -0.02375398339098833
+        },
+        {
+          "direction": "SHORT",
+          "entryTime": 1777305600000,
+          "exitTime": 1777867200000,
+          "entryPrice": 620.93,
+          "exitPrice": 632.26,
+          "exitReason": "STOP",
+          "grossPnlPct": -0.01791984310252115,
+          "netPnlPct": -0.018901432464737522
+        },
+        {
+          "direction": "SHORT",
+          "entryTime": 1779091200000,
+          "exitTime": 1779379200000,
+          "entryPrice": 641.86,
+          "exitPrice": 658,
+          "exitReason": "STOP",
+          "grossPnlPct": -0.024528875379939197,
+          "netPnlPct": -0.02550385901274277
+        },
+        {
+          "direction": "SHORT",
+          "entryTime": 1779955200000,
+          "exitTime": 1780099200000,
+          "entryPrice": 634.99,
+          "exitPrice": 649.06,
+          "exitReason": "STOP",
+          "grossPnlPct": -0.0216775028502757,
+          "netPnlPct": -0.02265533643063522
+        },
+        {
+          "direction": "LONG",
+          "entryTime": 1780156800000,
+          "exitTime": 1780315200000,
+          "entryPrice": 694.53,
+          "exitPrice": 675.81,
+          "exitReason": "STOP",
+          "grossPnlPct": -0.026953479331346397,
+          "netPnlPct": -0.027926039571894767
+        },
+        {
+          "direction": "SHORT",
+          "entryTime": 1780459200000,
+          "exitTime": 1781539200000,
+          "entryPrice": 633.97,
+          "exitPrice": 629.07,
+          "exitReason": "REVERSAL",
+          "grossPnlPct": 0.007789276233169495,
+          "netPnlPct": 0.006781990599753263
+        },
+        {
+          "direction": "SHORT",
+          "entryTime": 1781726400000,
+          "exitTime": 1783123200000,
+          "entryPrice": 598.6,
+          "exitPrice": 573.81,
+          "exitReason": "REVERSAL",
+          "grossPnlPct": 0.04320245377389753,
+          "netPnlPct": 0.04215977266068016
+        },
+        {
+          "direction": "SHORT",
+          "entryTime": 1783512000000,
+          "exitTime": 1783771200000,
+          "entryPrice": 566.14,
+          "exitPrice": 581.3,
+          "exitReason": "STOP",
+          "grossPnlPct": -0.026079477034233522,
+          "netPnlPct": -0.02705291084029604
+        },
+        {
+          "direction": "SHORT",
+          "entryTime": 1784304000000,
+          "exitTime": 1784548800000,
+          "entryPrice": 562.97,
+          "exitPrice": 574.09,
+          "exitReason": "STOP",
+          "grossPnlPct": -0.019369785225313074,
+          "netPnlPct": -0.02034992537001523
+        },
+        {
+          "direction": "SHORT",
+          "entryTime": 1784908800000,
+          "exitTime": 1785024000000,
+          "entryPrice": 561.41,
+          "exitPrice": 570.69,
+          "exitReason": "STOP",
+          "grossPnlPct": -0.01626101736494434,
+          "netPnlPct": -0.01724426472389995
+        }
+      ],
+      "emaBlockedCount": 136
+    }
+  },
+  "forex": {
+    "EUR_USD": {
+      "metrics": {
+        "tradeCount": 2,
+        "winRate": 0,
+        "grossReturnPct": 0,
+        "netReturnPct": -0.2,
+        "grossMaxDrawdownPct": 0,
+        "netMaxDrawdownPct": 0.2,
+        "grossProfitFactor": 0,
+        "netProfitFactor": 0,
+        "expectancyPctNet": -0.1,
+        "maxLosingStreak": 2,
+        "exitReasons": {
+          "STOP": 2,
+          "REVERSAL": 0
+        }
+      },
+      "trades": [
+        {
+          "direction": "SHORT",
+          "entryTime": 1787976000000,
+          "exitTime": 1788134400000,
+          "entryPrice": 1.16,
+          "exitPrice": 1.16,
+          "exitReason": "STOP",
+          "grossPnlPct": 0,
+          "netPnlPct": -0.0009995002498750516
+        },
+        {
+          "direction": "SHORT",
+          "entryTime": 1788148800000,
+          "exitTime": 1788192000000,
+          "entryPrice": 1.16,
+          "exitPrice": 1.16,
+          "exitReason": "STOP",
+          "grossPnlPct": 0,
+          "netPnlPct": -0.0009995002498750516
+        }
+      ],
+      "emaBlockedCount": 0
+    },
+    "XAU_USD": {
+      "metrics": {
+        "tradeCount": 0
+      },
+      "trades": [],
+      "emaBlockedCount": 0
+    }
+  },
+  "fno": {
+    "NIFTY": {
+      "metrics": {
+        "tradeCount": 7,
+        "winRate": 14.29,
+        "grossReturnPct": -6.27,
+        "netReturnPct": -6.92,
+        "grossMaxDrawdownPct": 6.27,
+        "netMaxDrawdownPct": 6.92,
+        "grossProfitFactor": 0.186,
+        "netProfitFactor": 0.161,
+        "expectancyPctNet": -1.0143,
+        "maxLosingStreak": 4,
+        "exitReasons": {
+          "STOP": 5,
+          "REVERSAL": 2
+        }
+      },
+      "trades": [
+        {
+          "direction": "LONG",
+          "entryTime": 1750824000000,
+          "exitTime": 1753675200000,
+          "entryPrice": 25173.9,
+          "exitPrice": 24745.59,
+          "exitReason": "STOP",
+          "grossPnlPct": -0.01701405026634739,
+          "netPnlPct": -0.01799654496872971
+        },
+        {
+          "direction": "LONG",
+          "entryTime": 1758081600000,
+          "exitTime": 1758772800000,
+          "entryPrice": 25314.15,
+          "exitPrice": 25026.54,
+          "exitReason": "STOP",
+          "grossPnlPct": -0.011361629760430425,
+          "netPnlPct": -0.01234977405852089
+        },
+        {
+          "direction": "LONG",
+          "entryTime": 1760673600000,
+          "exitTime": 1768190400000,
+          "entryPrice": 25670.15,
+          "exitPrice": 25556.9,
+          "exitReason": "REVERSAL",
+          "grossPnlPct": -0.004411738926340503,
+          "netPnlPct": -0.005406829642056188
+        },
+        {
+          "direction": "SHORT",
+          "entryTime": 1768968000000,
+          "exitTime": 1770091200000,
+          "entryPrice": 25153.8,
+          "exitPrice": 25503.75,
+          "exitReason": "STOP",
+          "grossPnlPct": -0.013721511542420295,
+          "netPnlPct": -0.014707297138079944
+        },
+        {
+          "direction": "SHORT",
+          "entryTime": 1772596800000,
+          "exitTime": 1782705600000,
+          "entryPrice": 24413.65,
+          "exitPrice": 24061.9,
+          "exitReason": "REVERSAL",
+          "grossPnlPct": 0.01461854633258386,
+          "netPnlPct": 0.013604434841996582
+        },
+        {
+          "direction": "LONG",
+          "entryTime": 1783396800000,
+          "exitTime": 1783483200000,
+          "entryPrice": 24483.35,
+          "exitPrice": 24075.05,
+          "exitReason": "STOP",
+          "grossPnlPct": -0.01667663943047004,
+          "netPnlPct": -0.01765947137506718
+        },
+        {
+          "direction": "LONG",
+          "entryTime": 1785816000000,
+          "exitTime": 1786939200000,
+          "entryPrice": 24617.6,
+          "exitPrice": 24236,
+          "exitReason": "STOP",
+          "grossPnlPct": -0.015501104900558893,
+          "netPnlPct": -0.016485111792212348
+        }
+      ],
+      "emaBlockedCount": 11
+    },
+    "BANKNIFTY": {
+      "metrics": {
+        "tradeCount": 5,
+        "winRate": 20,
+        "grossReturnPct": -3.17,
+        "netReturnPct": -3.65,
+        "grossMaxDrawdownPct": 6.45,
+        "netMaxDrawdownPct": 6.73,
+        "grossProfitFactor": 0.64,
+        "netProfitFactor": 0.599,
+        "expectancyPctNet": -0.698,
+        "maxLosingStreak": 3,
+        "exitReasons": {
+          "STOP": 4,
+          "REVERSAL": 1
+        }
+      },
+      "trades": [
+        {
+          "direction": "LONG",
+          "entryTime": 1750996800000,
+          "exitTime": 1753675200000,
+          "entryPrice": 57160.1,
+          "exitPrice": 56170.55,
+          "exitReason": "STOP",
+          "grossPnlPct": -0.01731190113383274,
+          "netPnlPct": -0.01829409813419869
+        },
+        {
+          "direction": "LONG",
+          "entryTime": 1759809600000,
+          "exitTime": 1769054400000,
+          "entryPrice": 56331,
+          "exitPrice": 59332.75,
+          "exitReason": "REVERSAL",
+          "grossPnlPct": 0.053287710141840305,
+          "netPnlPct": 0.052234948812363236
+        },
+        {
+          "direction": "LONG",
+          "entryTime": 1770696000000,
+          "exitTime": 1772424000000,
+          "entryPrice": 60682.8,
+          "exitPrice": 59662.82,
+          "exitReason": "STOP",
+          "grossPnlPct": -0.016808387220101917,
+          "netPnlPct": -0.01779108748275049
+        },
+        {
+          "direction": "SHORT",
+          "entryTime": 1773028800000,
+          "exitTime": 1773115200000,
+          "entryPrice": 55518.05,
+          "exitPrice": 56632.76,
+          "exitReason": "STOP",
+          "grossPnlPct": -0.019683130400142912,
+          "netPnlPct": -0.020662957356264666
+        },
+        {
+          "direction": "SHORT",
+          "entryTime": 1773374400000,
+          "exitTime": 1775793600000,
+          "entryPrice": 54154.3,
+          "exitPrice": 55795.52,
+          "exitReason": "STOP",
+          "grossPnlPct": -0.02941490642976341,
+          "netPnlPct": -0.030385006473311882
+        }
+      ],
+      "emaBlockedCount": 9
+    },
+    "RELIANCE": {
+      "metrics": {
+        "tradeCount": 7,
+        "winRate": 14.29,
+        "grossReturnPct": -13.88,
+        "netReturnPct": -14.48,
+        "grossMaxDrawdownPct": 14.41,
+        "netMaxDrawdownPct": 14.84,
+        "grossProfitFactor": 0.181,
+        "netProfitFactor": 0.169,
+        "expectancyPctNet": -2.182,
+        "maxLosingStreak": 5,
+        "exitReasons": {
+          "STOP": 5,
+          "REVERSAL": 2
+        }
+      },
+      "trades": [
+        {
+          "direction": "LONG",
+          "entryTime": 1750824000000,
+          "exitTime": 1753070400000,
+          "entryPrice": 1466.3,
+          "exitPrice": 1429.39,
+          "exitReason": "STOP",
+          "grossPnlPct": -0.025172202141444333,
+          "netPnlPct": -0.02614654276898909
+        },
+        {
+          "direction": "LONG",
+          "entryTime": 1760932800000,
+          "exitTime": 1767758400000,
+          "entryPrice": 1465,
+          "exitPrice": 1512.1,
+          "exitReason": "REVERSAL",
+          "grossPnlPct": 0.03215017064846415,
+          "netPnlPct": 0.031118536294992616
+        },
+        {
+          "direction": "SHORT",
+          "entryTime": 1768881600000,
+          "exitTime": 1770091200000,
+          "entryPrice": 1406.7,
+          "exitPrice": 1453.91,
+          "exitReason": "STOP",
+          "grossPnlPct": -0.03247106079468465,
+          "netPnlPct": -0.033438106211181706
+        },
+        {
+          "direction": "SHORT",
+          "entryTime": 1772596800000,
+          "exitTime": 1772683200000,
+          "entryPrice": 1331.5,
+          "exitPrice": 1376.3,
+          "exitReason": "STOP",
+          "grossPnlPct": -0.03255104265058484,
+          "netPnlPct": -0.033518008125196896
+        },
+        {
+          "direction": "SHORT",
+          "entryTime": 1775448000000,
+          "exitTime": 1777348800000,
+          "entryPrice": 1321.9,
+          "exitPrice": 1377.63,
+          "exitReason": "STOP",
+          "grossPnlPct": -0.0404535325159876,
+          "netPnlPct": -0.04141259945000453
+        },
+        {
+          "direction": "LONG",
+          "entryTime": 1777953600000,
+          "exitTime": 1778472000000,
+          "entryPrice": 1465.7,
+          "exitPrice": 1407.76,
+          "exitReason": "STOP",
+          "grossPnlPct": -0.03953059971344752,
+          "netPnlPct": -0.04049058911903125
+        },
+        {
+          "direction": "SHORT",
+          "entryTime": 1780372800000,
+          "exitTime": 1786334400000,
+          "entryPrice": 1312.4,
+          "exitPrice": 1322.8,
+          "exitReason": "REVERSAL",
+          "grossPnlPct": -0.007862110674327072,
+          "netPnlPct": -0.00885375274261846
+        }
+      ],
+      "emaBlockedCount": 11
+    },
+    "TCS": {
+      "metrics": {
+        "tradeCount": 4,
+        "winRate": 50,
+        "grossReturnPct": 29.06,
+        "netReturnPct": 28.54,
+        "grossMaxDrawdownPct": 5.4,
+        "netMaxDrawdownPct": 5.59,
+        "grossProfitFactor": 6.528,
+        "netProfitFactor": 6.263,
+        "expectancyPctNet": 7.4625,
+        "maxLosingStreak": 2,
+        "exitReasons": {
+          "STOP": 2,
+          "REVERSAL": 2
+        }
+      },
+      "trades": [
+        {
+          "direction": "SHORT",
+          "entryTime": 1752465600000,
+          "exitTime": 1758168000000,
+          "entryPrice": 3244.2,
+          "exitPrice": 3181,
+          "exitReason": "REVERSAL",
+          "grossPnlPct": 0.019867966048412455,
+          "netPnlPct": 0.01884860776150754
+        },
+        {
+          "direction": "SHORT",
+          "entryTime": 1758859200000,
+          "exitTime": 1759896000000,
+          "entryPrice": 2928.5,
+          "exitPrice": 3013.01,
+          "exitReason": "STOP",
+          "grossPnlPct": -0.028048363596536396,
+          "netPnlPct": -0.02901982949998816
+        },
+        {
+          "direction": "SHORT",
+          "entryTime": 1768881600000,
+          "exitTime": 1770091200000,
+          "entryPrice": 3143.8,
+          "exitPrice": 3230.13,
+          "exitReason": "STOP",
+          "grossPnlPct": -0.02672647850086529,
+          "netPnlPct": -0.02769926562880043
+        },
+        {
+          "direction": "SHORT",
+          "entryTime": 1770264000000,
+          "exitTime": 1784520000000,
+          "entryPrice": 3018,
+          "exitPrice": 2256.1,
+          "exitReason": "REVERSAL",
+          "grossPnlPct": 0.3377066619387439,
+          "netPnlPct": 0.33636962379587665
+        }
+      ],
+      "emaBlockedCount": 19
+    },
+    "INFY": {
+      "metrics": {
+        "tradeCount": 4,
+        "winRate": 50,
+        "grossReturnPct": 23.25,
+        "netReturnPct": 22.76,
+        "grossMaxDrawdownPct": 5.8,
+        "netMaxDrawdownPct": 5.99,
+        "grossProfitFactor": 5.219,
+        "netProfitFactor": 5.014,
+        "expectancyPctNet": 6.1035,
+        "maxLosingStreak": 2,
+        "exitReasons": {
+          "STOP": 2,
+          "REVERSAL": 2
+        }
+      },
+      "trades": [
+        {
+          "direction": "SHORT",
+          "entryTime": 1753416000000,
+          "exitTime": 1758254400000,
+          "entryPrice": 1535,
+          "exitPrice": 1529,
+          "exitReason": "REVERSAL",
+          "grossPnlPct": 0.003924133420536213,
+          "netPnlPct": 0.002920710998326914
+        },
+        {
+          "direction": "SHORT",
+          "entryTime": 1759464000000,
+          "exitTime": 1759896000000,
+          "entryPrice": 1440,
+          "exitPrice": 1486.45,
+          "exitReason": "STOP",
+          "grossPnlPct": -0.031248948837835133,
+          "netPnlPct": -0.032217215755538486
+        },
+        {
+          "direction": "LONG",
+          "entryTime": 1764820800000,
+          "exitTime": 1770177600000,
+          "entryPrice": 1593.7,
+          "exitPrice": 1549.67,
+          "exitReason": "STOP",
+          "grossPnlPct": -0.027627533412812988,
+          "netPnlPct": -0.02859941993613835
+        },
+        {
+          "direction": "SHORT",
+          "entryTime": 1770264000000,
+          "exitTime": 1785384000000,
+          "entryPrice": 1542.5,
+          "exitPrice": 1183.5,
+          "exitReason": "REVERSAL",
+          "grossPnlPct": 0.30333755809040985,
+          "netPnlPct": 0.3020348718754269
+        }
+      ],
+      "emaBlockedCount": 6
+    },
+    "HDFCBANK": {
+      "metrics": {
+        "tradeCount": 3,
+        "winRate": 33.33,
+        "grossReturnPct": 16.26,
+        "netReturnPct": 15.92,
+        "grossMaxDrawdownPct": 4.39,
+        "netMaxDrawdownPct": 4.58,
+        "grossProfitFactor": 4.869,
+        "netProfitFactor": 4.638,
+        "expectancyPctNet": 5.615,
+        "maxLosingStreak": 2,
+        "exitReasons": {
+          "STOP": 2,
+          "REVERSAL": 1
+        }
+      },
+      "trades": [
+        {
+          "direction": "LONG",
+          "entryTime": 1750996800000,
+          "exitTime": 1755835200000,
+          "entryPrice": 1002.05,
+          "exitPrice": 979.36,
+          "exitReason": "STOP",
+          "grossPnlPct": -0.022643580659647666,
+          "netPnlPct": -0.02362044864499513
+        },
+        {
+          "direction": "LONG",
+          "entryTime": 1760673600000,
+          "exitTime": 1762488000000,
+          "entryPrice": 997.25,
+          "exitPrice": 975.6,
+          "exitReason": "STOP",
+          "grossPnlPct": -0.021709701679618942,
+          "netPnlPct": -0.022687503077240434
+        },
+        {
+          "direction": "SHORT",
+          "entryTime": 1767758400000,
+          "exitTime": 1781841600000,
+          "entryPrice": 951.5,
+          "exitPrice": 782.5,
+          "exitReason": "REVERSAL",
+          "grossPnlPct": 0.21597444089456874,
+          "netPnlPct": 0.21475907413705286
+        }
+      ],
+      "emaBlockedCount": 14
+    },
+    "ICICIBANK": {
+      "metrics": {
+        "tradeCount": 12,
+        "winRate": 0,
+        "grossReturnPct": -28.26,
+        "netReturnPct": -29.11,
+        "grossMaxDrawdownPct": 28.26,
+        "netMaxDrawdownPct": 29.11,
+        "grossProfitFactor": 0,
+        "netProfitFactor": 0,
+        "expectancyPctNet": -2.8232,
+        "maxLosingStreak": 12,
+        "exitReasons": {
+          "STOP": 12,
+          "REVERSAL": 0
+        }
+      },
+      "trades": [
+        {
+          "direction": "LONG",
+          "entryTime": 1753156800000,
+          "exitTime": 1754366400000,
+          "entryPrice": 1477.1,
+          "exitPrice": 1446.85,
+          "exitReason": "STOP",
+          "grossPnlPct": -0.020479317581748036,
+          "netPnlPct": -0.021458348748582767
+        },
+        {
+          "direction": "SHORT",
+          "entryTime": 1758859200000,
+          "exitTime": 1760500800000,
+          "entryPrice": 1362.3,
+          "exitPrice": 1386.8,
+          "exitReason": "STOP",
+          "grossPnlPct": -0.017666570522065217,
+          "netPnlPct": -0.018648413030288857
+        },
+        {
+          "direction": "LONG",
+          "entryTime": 1760932800000,
+          "exitTime": 1761192000000,
+          "entryPrice": 1407.2,
+          "exitPrice": 1379.84,
+          "exitReason": "STOP",
+          "grossPnlPct": -0.01944286526435479,
+          "netPnlPct": -0.020422932365539825
+        },
+        {
+          "direction": "SHORT",
+          "entryTime": 1762228800000,
+          "exitTime": 1763006400000,
+          "entryPrice": 1341.2,
+          "exitPrice": 1371.45,
+          "exitReason": "STOP",
+          "grossPnlPct": -0.022056947026869334,
+          "netPnlPct": -0.023034401352679423
+        },
+        {
+          "direction": "SHORT",
+          "entryTime": 1767153600000,
+          "exitTime": 1767585600000,
+          "entryPrice": 1342.7,
+          "exitPrice": 1367.45,
+          "exitReason": "STOP",
+          "grossPnlPct": -0.0180993820615013,
+          "netPnlPct": -0.01908079197448309
+        },
+        {
+          "direction": "LONG",
+          "entryTime": 1767758400000,
+          "exitTime": 1768795200000,
+          "entryPrice": 1416,
+          "exitPrice": 1385.32,
+          "exitReason": "STOP",
+          "grossPnlPct": -0.021666666666666723,
+          "netPnlPct": -0.022644511077794305
+        },
+        {
+          "direction": "SHORT",
+          "entryTime": 1769486400000,
+          "exitTime": 1769745600000,
+          "entryPrice": 1339.7,
+          "exitPrice": 1381.56,
+          "exitReason": "STOP",
+          "grossPnlPct": -0.030299082196936777,
+          "netPnlPct": -0.03126829850658486
+        },
+        {
+          "direction": "SHORT",
+          "entryTime": 1773028800000,
+          "exitTime": 1773115200000,
+          "entryPrice": 1271.4,
+          "exitPrice": 1308.45,
+          "exitReason": "STOP",
+          "grossPnlPct": -0.028315946348733245,
+          "netPnlPct": -0.029287144803157306
+        },
+        {
+          "direction": "SHORT",
+          "entryTime": 1773633600000,
+          "exitTime": 1773720000000,
+          "entryPrice": 1247.6,
+          "exitPrice": 1291.99,
+          "exitReason": "STOP",
+          "grossPnlPct": -0.03435785106695877,
+          "netPnlPct": -0.03532301063610699
+        },
+        {
+          "direction": "SHORT",
+          "entryTime": 1774324800000,
+          "exitTime": 1775620800000,
+          "entryPrice": 1239.3,
+          "exitPrice": 1289.23,
+          "exitReason": "STOP",
+          "grossPnlPct": -0.03872854339411902,
+          "netPnlPct": -0.03968933445519418
+        },
+        {
+          "direction": "LONG",
+          "entryTime": 1776830400000,
+          "exitTime": 1777348800000,
+          "entryPrice": 1368.2,
+          "exitPrice": 1310.47,
+          "exitReason": "STOP",
+          "grossPnlPct": -0.042194123666130734,
+          "netPnlPct": -0.04315145087885808
+        },
+        {
+          "direction": "SHORT",
+          "entryTime": 1780459200000,
+          "exitTime": 1780545600000,
+          "entryPrice": 1217.9,
+          "exitPrice": 1260.51,
+          "exitReason": "STOP",
+          "grossPnlPct": -0.03380377783595523,
+          "netPnlPct": -0.03476949120143635
+        }
+      ],
+      "emaBlockedCount": 6
+    },
+    "SBIN": {
+      "metrics": {
+        "tradeCount": 5,
+        "winRate": 20,
+        "grossReturnPct": 6.48,
+        "netReturnPct": 5.95,
+        "grossMaxDrawdownPct": 11.34,
+        "netMaxDrawdownPct": 11.6,
+        "grossProfitFactor": 1.619,
+        "netProfitFactor": 1.569,
+        "expectancyPctNet": 1.6867,
+        "maxLosingStreak": 3,
+        "exitReasons": {
+          "STOP": 4,
+          "REVERSAL": 1
+        }
+      },
+      "trades": [
+        {
+          "direction": "LONG",
+          "entryTime": 1751428800000,
+          "exitTime": 1753761600000,
+          "entryPrice": 817.3,
+          "exitPrice": 795.47,
+          "exitReason": "STOP",
+          "grossPnlPct": -0.026709898446102942,
+          "netPnlPct": -0.027682702145806926
+        },
+        {
+          "direction": "LONG",
+          "entryTime": 1758168000000,
+          "exitTime": 1773720000000,
+          "entryPrice": 856.55,
+          "exitPrice": 1056.9,
+          "exitReason": "REVERSAL",
+          "grossPnlPct": 0.2339034498861714,
+          "netPnlPct": 0.23267016307968857
+        },
+        {
+          "direction": "SHORT",
+          "entryTime": 1778558400000,
+          "exitTime": 1781755200000,
+          "entryPrice": 979.4,
+          "exitPrice": 1035.69,
+          "exitReason": "STOP",
+          "grossPnlPct": -0.05435023993666066,
+          "netPnlPct": -0.05529541710813812
+        },
+        {
+          "direction": "LONG",
+          "entryTime": 1782705600000,
+          "exitTime": 1784779200000,
+          "entryPrice": 1041.1,
+          "exitPrice": 1007.24,
+          "exitReason": "STOP",
+          "grossPnlPct": -0.03252329267121301,
+          "netPnlPct": -0.033490285881936366
+        },
+        {
+          "direction": "LONG",
+          "entryTime": 1786075200000,
+          "exitTime": 1786939200000,
+          "entryPrice": 1088.5,
+          "exitPrice": 1054.87,
+          "exitReason": "STOP",
+          "grossPnlPct": -0.030895728066146155,
+          "netPnlPct": -0.0318643480280989
+        }
+      ],
+      "emaBlockedCount": 5
+    },
+    "BHARTIARTL": {
+      "metrics": {
+        "tradeCount": 7,
+        "winRate": 28.57,
+        "grossReturnPct": -6.56,
+        "netReturnPct": -7.21,
+        "grossMaxDrawdownPct": 6.8,
+        "netMaxDrawdownPct": 7.21,
+        "grossProfitFactor": 0.553,
+        "netProfitFactor": 0.521,
+        "expectancyPctNet": -1.0147,
+        "maxLosingStreak": 2,
+        "exitReasons": {
+          "STOP": 5,
+          "REVERSAL": 2
+        }
+      },
+      "trades": [
+        {
+          "direction": "LONG",
+          "entryTime": 1750824000000,
+          "exitTime": 1752811200000,
+          "entryPrice": 1950.6,
+          "exitPrice": 1902.4,
+          "exitReason": "STOP",
+          "grossPnlPct": -0.02471034553470719,
+          "netPnlPct": -0.025685147788045648
+        },
+        {
+          "direction": "LONG",
+          "entryTime": 1758168000000,
+          "exitTime": 1759291200000,
+          "entryPrice": 1924.8,
+          "exitPrice": 1879.14,
+          "exitReason": "STOP",
+          "grossPnlPct": -0.023721945137157086,
+          "netPnlPct": -0.02469773529693997
+        },
+        {
+          "direction": "LONG",
+          "entryTime": 1760414400000,
+          "exitTime": 1768190400000,
+          "entryPrice": 1943,
+          "exitPrice": 2007.4,
+          "exitReason": "REVERSAL",
+          "grossPnlPct": 0.03314462171899124,
+          "netPnlPct": 0.03211199341142623
+        },
+        {
+          "direction": "SHORT",
+          "entryTime": 1769572800000,
+          "exitTime": 1770177600000,
+          "entryPrice": 1964.3,
+          "exitPrice": 2016.21,
+          "exitReason": "STOP",
+          "grossPnlPct": -0.025746326027546784,
+          "netPnlPct": -0.02672009281812382
+        },
+        {
+          "direction": "SHORT",
+          "entryTime": 1771992000000,
+          "exitTime": 1777521600000,
+          "entryPrice": 1956.8,
+          "exitPrice": 1870.6,
+          "exitReason": "REVERSAL",
+          "grossPnlPct": 0.04608147118571582,
+          "netPnlPct": 0.04503591249387617
+        },
+        {
+          "direction": "LONG",
+          "entryTime": 1779076800000,
+          "exitTime": 1780027200000,
+          "entryPrice": 1915,
+          "exitPrice": 1838.28,
+          "exitReason": "STOP",
+          "grossPnlPct": -0.040062663185378655,
+          "netPnlPct": -0.04102212079338918
+        },
+        {
+          "direction": "LONG",
+          "entryTime": 1783396800000,
+          "exitTime": 1787889600000,
+          "entryPrice": 1931.8,
+          "exitPrice": 1875.62,
+          "exitReason": "STOP",
+          "grossPnlPct": -0.029081685474686814,
+          "netPnlPct": -0.0300521185726631
+        }
+      ],
+      "emaBlockedCount": 10
+    },
+    "ITC": {
+      "metrics": {
+        "tradeCount": 6,
+        "winRate": 16.67,
+        "grossReturnPct": 1.27,
+        "netReturnPct": 0.67,
+        "grossMaxDrawdownPct": 8.71,
+        "netMaxDrawdownPct": 9.16,
+        "grossProfitFactor": 1.211,
+        "netProfitFactor": 1.137,
+        "expectancyPctNet": 0.2175,
+        "maxLosingStreak": 5,
+        "exitReasons": {
+          "STOP": 5,
+          "REVERSAL": 1
+        }
+      },
+      "trades": [
+        {
+          "direction": "SHORT",
+          "entryTime": 1751515200000,
+          "exitTime": 1752552000000,
+          "entryPrice": 413.35,
+          "exitPrice": 421.91,
+          "exitReason": "STOP",
+          "grossPnlPct": -0.020288687160768926,
+          "netPnlPct": -0.02126790886275698
+        },
+        {
+          "direction": "SHORT",
+          "entryTime": 1753416000000,
+          "exitTime": 1754020800000,
+          "entryPrice": 409.1,
+          "exitPrice": 416.72,
+          "exitReason": "STOP",
+          "grossPnlPct": -0.01828565943559224,
+          "netPnlPct": -0.019266883164292148
+        },
+        {
+          "direction": "SHORT",
+          "entryTime": 1755662400000,
+          "exitTime": 1756958400000,
+          "entryPrice": 408.95,
+          "exitPrice": 416.06,
+          "exitReason": "STOP",
+          "grossPnlPct": -0.01708888141133491,
+          "netPnlPct": -0.018071301319969146
+        },
+        {
+          "direction": "SHORT",
+          "entryTime": 1760500800000,
+          "exitTime": 1760673600000,
+          "entryPrice": 399.75,
+          "exitPrice": 407.28,
+          "exitReason": "STOP",
+          "grossPnlPct": -0.01848850913376543,
+          "netPnlPct": -0.01946953011414121
+        },
+        {
+          "direction": "SHORT",
+          "entryTime": 1764820800000,
+          "exitTime": 1766548800000,
+          "entryPrice": 401.4,
+          "exitPrice": 407.98,
+          "exitReason": "STOP",
+          "grossPnlPct": -0.01612824158046977,
+          "netPnlPct": -0.017111621648854936
+        },
+        {
+          "direction": "SHORT",
+          "entryTime": 1767326400000,
+          "exitTime": 1777521600000,
+          "entryPrice": 349.5,
+          "exitPrice": 315.05,
+          "exitReason": "REVERSAL",
+          "grossPnlPct": 0.10934772258371672,
+          "netPnlPct": 0.10823892925779632
+        }
+      ],
+      "emaBlockedCount": 4
+    },
+    "WIPRO": {
+      "metrics": {
+        "tradeCount": 6,
+        "winRate": 16.67,
+        "grossReturnPct": -1.81,
+        "netReturnPct": -2.39,
+        "grossMaxDrawdownPct": 9.03,
+        "netMaxDrawdownPct": 9.3,
+        "grossProfitFactor": 0.977,
+        "netProfitFactor": 0.942,
+        "expectancyPctNet": -0.1626,
+        "maxLosingStreak": 3,
+        "exitReasons": {
+          "STOP": 4,
+          "REVERSAL": 2
+        }
+      },
+      "trades": [
+        {
+          "direction": "SHORT",
+          "entryTime": 1753761600000,
+          "exitTime": 1758168000000,
+          "entryPrice": 249.2,
+          "exitPrice": 258.24,
+          "exitReason": "STOP",
+          "grossPnlPct": -0.035006195786865035,
+          "netPnlPct": -0.03597070733530383
+        },
+        {
+          "direction": "SHORT",
+          "entryTime": 1759118400000,
+          "exitTime": 1760068800000,
+          "entryPrice": 239.27,
+          "exitPrice": 247.49,
+          "exitReason": "STOP",
+          "grossPnlPct": -0.03321346317022911,
+          "netPnlPct": -0.03417976655536614
+        },
+        {
+          "direction": "LONG",
+          "entryTime": 1764907200000,
+          "exitTime": 1768795200000,
+          "entryPrice": 258.61,
+          "exitPrice": 252.18,
+          "exitReason": "STOP",
+          "grossPnlPct": -0.02486369436603386,
+          "netPnlPct": -0.02583834334717705
+        },
+        {
+          "direction": "SHORT",
+          "entryTime": 1768881600000,
+          "exitTime": 1776312000000,
+          "entryPrice": 243.1,
+          "exitPrice": 209.46,
+          "exitReason": "REVERSAL",
+          "grossPnlPct": 0.16060345650720897,
+          "netPnlPct": 0.15944343306242437
+        },
+        {
+          "direction": "SHORT",
+          "entryTime": 1778731200000,
+          "exitTime": 1779163200000,
+          "entryPrice": 187.67,
+          "exitPrice": 194.33,
+          "exitReason": "STOP",
+          "grossPnlPct": -0.034271599855915325,
+          "netPnlPct": -0.035236845633170644
+        },
+        {
+          "direction": "SHORT",
+          "entryTime": 1780977600000,
+          "exitTime": 1785384000000,
+          "entryPrice": 181.86,
+          "exitPrice": 188.85,
+          "exitReason": "REVERSAL",
+          "grossPnlPct": -0.03701350277998405,
+          "netPnlPct": -0.037976008024581676
+        }
+      ],
+      "emaBlockedCount": 10
+    },
+    "HCLTECH": {
+      "metrics": {
+        "tradeCount": 4,
+        "winRate": 75,
+        "grossReturnPct": 35.46,
+        "netReturnPct": 34.92,
+        "grossMaxDrawdownPct": 3.39,
+        "netMaxDrawdownPct": 3.49,
+        "grossProfitFactor": 11.199,
+        "netProfitFactor": 10.792,
+        "expectancyPctNet": 8.5442,
+        "maxLosingStreak": 1,
+        "exitReasons": {
+          "STOP": 1,
+          "REVERSAL": 3
+        }
+      },
+      "trades": [
+        {
+          "direction": "SHORT",
+          "entryTime": 1752552000000,
+          "exitTime": 1760500800000,
+          "entryPrice": 1556.2,
+          "exitPrice": 1497.6,
+          "exitReason": "REVERSAL",
+          "grossPnlPct": 0.03912927350427364,
+          "netPnlPct": 0.03809066353575363
+        },
+        {
+          "direction": "LONG",
+          "entryTime": 1762920000000,
+          "exitTime": 1770264000000,
+          "entryPrice": 1581.3,
+          "exitPrice": 1624,
+          "exitReason": "REVERSAL",
+          "grossPnlPct": 0.027003098716246177,
+          "netPnlPct": 0.025976608862456896
+        },
+        {
+          "direction": "SHORT",
+          "entryTime": 1770264000000,
+          "exitTime": 1784692800000,
+          "entryPrice": 1624,
+          "exitPrice": 1236,
+          "exitReason": "REVERSAL",
+          "grossPnlPct": 0.31391585760517793,
+          "netPnlPct": 0.31260259837718696
+        },
+        {
+          "direction": "LONG",
+          "entryTime": 1786680000000,
+          "exitTime": 1787025600000,
+          "entryPrice": 1361.7,
+          "exitPrice": 1315.49,
+          "exitReason": "STOP",
+          "grossPnlPct": -0.03393552177425285,
+          "netPnlPct": -0.034901103461634775
+        }
+      ],
+      "emaBlockedCount": 15
+    },
+    "AXISBANK": {
+      "metrics": {
+        "tradeCount": 7,
+        "winRate": 14.29,
+        "grossReturnPct": -8.51,
+        "netReturnPct": -9.15,
+        "grossMaxDrawdownPct": 14.16,
+        "netMaxDrawdownPct": 14.5,
+        "grossProfitFactor": 0.572,
+        "netProfitFactor": 0.549,
+        "expectancyPctNet": -1.2443,
+        "maxLosingStreak": 4,
+        "exitReasons": {
+          "STOP": 5,
+          "REVERSAL": 2
+        }
+      },
+      "trades": [
+        {
+          "direction": "LONG",
+          "entryTime": 1750996800000,
+          "exitTime": 1751342400000,
+          "entryPrice": 1224.8,
+          "exitPrice": 1192.7,
+          "exitReason": "STOP",
+          "grossPnlPct": -0.026208360548660936,
+          "netPnlPct": -0.02718166553561885
+        },
+        {
+          "direction": "SHORT",
+          "entryTime": 1753070400000,
+          "exitTime": 1757908800000,
+          "entryPrice": 1093.8,
+          "exitPrice": 1106.3,
+          "exitReason": "REVERSAL",
+          "grossPnlPct": -0.01129892434240265,
+          "netPnlPct": -0.012287131314574151
+        },
+        {
+          "direction": "LONG",
+          "entryTime": 1757995200000,
+          "exitTime": 1767067200000,
+          "entryPrice": 1120.6,
+          "exitPrice": 1240.5,
+          "exitReason": "REVERSAL",
+          "grossPnlPct": 0.10699625200785312,
+          "netPnlPct": 0.10588980897736056
+        },
+        {
+          "direction": "LONG",
+          "entryTime": 1767758400000,
+          "exitTime": 1773288000000,
+          "entryPrice": 1288.3,
+          "exitPrice": 1257.38,
+          "exitReason": "STOP",
+          "grossPnlPct": -0.02400062097337563,
+          "netPnlPct": -0.024976132596590594
+        },
+        {
+          "direction": "SHORT",
+          "entryTime": 1773374400000,
+          "exitTime": 1775620800000,
+          "entryPrice": 1215.3,
+          "exitPrice": 1268.61,
+          "exitReason": "STOP",
+          "grossPnlPct": -0.042022370941424025,
+          "netPnlPct": -0.04297986982104274
+        },
+        {
+          "direction": "LONG",
+          "entryTime": 1776830400000,
+          "exitTime": 1777348800000,
+          "entryPrice": 1368.3,
+          "exitPrice": 1304.93,
+          "exitReason": "STOP",
+          "grossPnlPct": -0.04631294306804057,
+          "netPnlPct": -0.0472661535197465
+        },
+        {
+          "direction": "LONG",
+          "entryTime": 1781150400000,
+          "exitTime": 1784520000000,
+          "entryPrice": 1320.5,
+          "exitPrice": 1271.2,
+          "exitReason": "STOP",
+          "grossPnlPct": -0.03733434305187422,
+          "netPnlPct": -0.0382965276165399
+        }
+      ],
+      "emaBlockedCount": 2
+    },
+    "KOTAKBANK": {
+      "metrics": {
+        "tradeCount": 9,
+        "winRate": 22.22,
+        "grossReturnPct": -18.55,
+        "netReturnPct": -19.28,
+        "grossMaxDrawdownPct": 18.55,
+        "netMaxDrawdownPct": 19.28,
+        "grossProfitFactor": 0.142,
+        "netProfitFactor": 0.13,
+        "expectancyPctNet": -2.328,
+        "maxLosingStreak": 4,
+        "exitReasons": {
+          "STOP": 7,
+          "REVERSAL": 2
+        }
+      },
+      "trades": [
+        {
+          "direction": "LONG",
+          "entryTime": 1750824000000,
+          "exitTime": 1751515200000,
+          "entryPrice": 440.3,
+          "exitPrice": 427.57,
+          "exitReason": "STOP",
+          "grossPnlPct": -0.02891210538269362,
+          "netPnlPct": -0.029882707976014222
+        },
+        {
+          "direction": "LONG",
+          "entryTime": 1752033600000,
+          "exitTime": 1752811200000,
+          "entryPrice": 444.88,
+          "exitPrice": 431.18,
+          "exitReason": "STOP",
+          "grossPnlPct": -0.030794821075346146,
+          "netPnlPct": -0.031763541893861325
+        },
+        {
+          "direction": "SHORT",
+          "entryTime": 1753761600000,
+          "exitTime": 1758081600000,
+          "entryPrice": 392.9,
+          "exitPrice": 408.67,
+          "exitReason": "STOP",
+          "grossPnlPct": -0.038588592262705945,
+          "netPnlPct": -0.03954952320497196
+        },
+        {
+          "direction": "LONG",
+          "entryTime": 1758168000000,
+          "exitTime": 1758859200000,
+          "entryPrice": 409.86,
+          "exitPrice": 399.34,
+          "exitReason": "STOP",
+          "grossPnlPct": -0.025667301029620004,
+          "netPnlPct": -0.026641146805702176
+        },
+        {
+          "direction": "LONG",
+          "entryTime": 1759464000000,
+          "exitTime": 1768536000000,
+          "entryPrice": 420,
+          "exitPrice": 424.2,
+          "exitReason": "REVERSAL",
+          "grossPnlPct": 0.010000000000000009,
+          "netPnlPct": 0.008990504747626193
+        },
+        {
+          "direction": "SHORT",
+          "entryTime": 1769572800000,
+          "exitTime": 1770350400000,
+          "entryPrice": 410.1,
+          "exitPrice": 424.43,
+          "exitReason": "STOP",
+          "grossPnlPct": -0.03376292910491718,
+          "netPnlPct": -0.034728683298715146
+        },
+        {
+          "direction": "SHORT",
+          "entryTime": 1773028800000,
+          "exitTime": 1779076800000,
+          "entryPrice": 389.95,
+          "exitPrice": 381.1,
+          "exitReason": "REVERSAL",
+          "grossPnlPct": 0.02322225137759104,
+          "netPnlPct": 0.022199540481661506
+        },
+        {
+          "direction": "LONG",
+          "entryTime": 1781236800000,
+          "exitTime": 1783310400000,
+          "entryPrice": 396.85,
+          "exitPrice": 381.35,
+          "exitReason": "STOP",
+          "grossPnlPct": -0.03905757843013735,
+          "netPnlPct": -0.04001804062061187
+        },
+        {
+          "direction": "SHORT",
+          "entryTime": 1783569600000,
+          "exitTime": 1784260800000,
+          "entryPrice": 372.55,
+          "exitPrice": 386.93,
+          "exitReason": "STOP",
+          "grossPnlPct": -0.03716434497195875,
+          "netPnlPct": -0.03812669944974778
+        }
+      ],
+      "emaBlockedCount": 4
+    },
+    "LT": {
+      "metrics": {
+        "tradeCount": 9,
+        "winRate": 11.11,
+        "grossReturnPct": -19.62,
+        "netReturnPct": -20.34,
+        "grossMaxDrawdownPct": 19.62,
+        "netMaxDrawdownPct": 20.34,
+        "grossProfitFactor": 0.213,
+        "netProfitFactor": 0.203,
+        "expectancyPctNet": -2.4491,
+        "maxLosingStreak": 5,
+        "exitReasons": {
+          "STOP": 8,
+          "REVERSAL": 1
+        }
+      },
+      "trades": [
+        {
+          "direction": "LONG",
+          "entryTime": 1751256000000,
+          "exitTime": 1751428800000,
+          "entryPrice": 3709.6,
+          "exitPrice": 3604.99,
+          "exitReason": "STOP",
+          "grossPnlPct": -0.02819980590899296,
+          "netPnlPct": -0.02917112044581538
+        },
+        {
+          "direction": "SHORT",
+          "entryTime": 1752465600000,
+          "exitTime": 1753848000000,
+          "entryPrice": 3530.4,
+          "exitPrice": 3617.17,
+          "exitReason": "STOP",
+          "grossPnlPct": -0.023988366595985244,
+          "netPnlPct": -0.024963890467453398
+        },
+        {
+          "direction": "LONG",
+          "entryTime": 1755057600000,
+          "exitTime": 1755662400000,
+          "entryPrice": 3695.8,
+          "exitPrice": 3600.93,
+          "exitReason": "STOP",
+          "grossPnlPct": -0.025669679095189246,
+          "netPnlPct": -0.02664352249439428
+        },
+        {
+          "direction": "LONG",
+          "entryTime": 1759118400000,
+          "exitTime": 1768276800000,
+          "entryPrice": 3708.3,
+          "exitPrice": 3920.7,
+          "exitReason": "REVERSAL",
+          "grossPnlPct": 0.05727691934309509,
+          "netPnlPct": 0.05622017079802477
+        },
+        {
+          "direction": "SHORT",
+          "entryTime": 1768968000000,
+          "exitTime": 1769659200000,
+          "entryPrice": 3778.2,
+          "exitPrice": 3890.02,
+          "exitReason": "STOP",
+          "grossPnlPct": -0.028745353494326498,
+          "netPnlPct": -0.02971612275620128
+        },
+        {
+          "direction": "LONG",
+          "entryTime": 1770955200000,
+          "exitTime": 1772424000000,
+          "entryPrice": 4147,
+          "exitPrice": 4029.04,
+          "exitReason": "STOP",
+          "grossPnlPct": -0.028444658789486432,
+          "netPnlPct": -0.029415728595793555
+        },
+        {
+          "direction": "SHORT",
+          "entryTime": 1773633600000,
+          "exitTime": 1774411200000,
+          "entryPrice": 3425.2,
+          "exitPrice": 3648.46,
+          "exitReason": "STOP",
+          "grossPnlPct": -0.06119294167950318,
+          "netPnlPct": -0.06213127956887887
+        },
+        {
+          "direction": "LONG",
+          "entryTime": 1781582400000,
+          "exitTime": 1782964800000,
+          "entryPrice": 4188.9,
+          "exitPrice": 4018.78,
+          "exitReason": "STOP",
+          "grossPnlPct": -0.04061209386712494,
+          "netPnlPct": -0.04157100231903166
+        },
+        {
+          "direction": "SHORT",
+          "entryTime": 1784088000000,
+          "exitTime": 1785729600000,
+          "entryPrice": 3838,
+          "exitPrice": 3965.13,
+          "exitReason": "STOP",
+          "grossPnlPct": -0.03206200048926522,
+          "netPnlPct": -0.033029454761639654
+        }
+      ],
+      "emaBlockedCount": 3
+    },
+    "ONGC": {
+      "metrics": {
+        "tradeCount": 4,
+        "winRate": 25,
+        "grossReturnPct": 2.87,
+        "netReturnPct": 2.46,
+        "grossMaxDrawdownPct": 6.7,
+        "netMaxDrawdownPct": 6.98,
+        "grossProfitFactor": 1.497,
+        "netProfitFactor": 1.42,
+        "expectancyPctNet": 0.7507,
+        "maxLosingStreak": 3,
+        "exitReasons": {
+          "STOP": 2,
+          "REVERSAL": 2
+        }
+      },
+      "trades": [
+        {
+          "direction": "SHORT",
+          "entryTime": 1753761600000,
+          "exitTime": 1759291200000,
+          "entryPrice": 240.3,
+          "exitPrice": 246.02,
+          "exitReason": "STOP",
+          "grossPnlPct": -0.023250142264856555,
+          "netPnlPct": -0.02422640399172815
+        },
+        {
+          "direction": "LONG",
+          "entryTime": 1760500800000,
+          "exitTime": 1764820800000,
+          "entryPrice": 245.62,
+          "exitPrice": 240.57,
+          "exitReason": "REVERSAL",
+          "grossPnlPct": -0.020560214966207968,
+          "netPnlPct": -0.02153916527608679
+        },
+        {
+          "direction": "SHORT",
+          "entryTime": 1764820800000,
+          "exitTime": 1768363200000,
+          "entryPrice": 240.57,
+          "exitPrice": 246.67,
+          "exitReason": "STOP",
+          "grossPnlPct": -0.024729395548708788,
+          "netPnlPct": -0.02570417876155362
+        },
+        {
+          "direction": "LONG",
+          "entryTime": 1768536000000,
+          "exitTime": 1780027200000,
+          "entryPrice": 246.1,
+          "exitPrice": 271.35,
+          "exitReason": "REVERSAL",
+          "grossPnlPct": 0.10260056887444136,
+          "netPnlPct": 0.10149851933033904
+        }
+      ],
+      "emaBlockedCount": 4
+    },
+    "BAJFINANCE": {
+      "metrics": {
+        "tradeCount": 5,
+        "winRate": 0,
+        "grossReturnPct": -23.09,
+        "netReturnPct": -23.48,
+        "grossMaxDrawdownPct": 23.09,
+        "netMaxDrawdownPct": 23.48,
+        "grossProfitFactor": 0,
+        "netProfitFactor": 0,
+        "expectancyPctNet": -5.185,
+        "maxLosingStreak": 5,
+        "exitReasons": {
+          "STOP": 4,
+          "REVERSAL": 1
+        }
+      },
+      "trades": [
+        {
+          "direction": "SHORT",
+          "entryTime": 1753761600000,
+          "exitTime": 1757563200000,
+          "entryPrice": 880.6,
+          "exitPrice": 970.7,
+          "exitReason": "REVERSAL",
+          "grossPnlPct": -0.09281961471103328,
+          "netPnlPct": -0.09372634173281125
+        },
+        {
+          "direction": "SHORT",
+          "entryTime": 1764043200000,
+          "exitTime": 1764216000000,
+          "entryPrice": 994.2,
+          "exitPrice": 1033.03,
+          "exitReason": "STOP",
+          "grossPnlPct": -0.03758845338470318,
+          "netPnlPct": -0.038550383966027724
+        },
+        {
+          "direction": "SHORT",
+          "entryTime": 1767153600000,
+          "exitTime": 1770955200000,
+          "entryPrice": 984.8,
+          "exitPrice": 1015.13,
+          "exitReason": "STOP",
+          "grossPnlPct": -0.029877946666929445,
+          "netPnlPct": -0.030847583901645104
+        },
+        {
+          "direction": "SHORT",
+          "entryTime": 1773288000000,
+          "exitTime": 1775620800000,
+          "entryPrice": 873.05,
+          "exitPrice": 918.28,
+          "exitReason": "STOP",
+          "grossPnlPct": -0.04925512915450625,
+          "netPnlPct": -0.0502053988904837
+        },
+        {
+          "direction": "SHORT",
+          "entryTime": 1780459200000,
+          "exitTime": 1780632000000,
+          "entryPrice": 867.8,
+          "exitPrice": 908.66,
+          "exitReason": "STOP",
+          "grossPnlPct": -0.04496731450707636,
+          "netPnlPct": -0.045921869914865354
+        }
+      ],
+      "emaBlockedCount": 34
+    },
+    "MARUTI": {
+      "metrics": {
+        "tradeCount": 5,
+        "winRate": 40,
+        "grossReturnPct": 18.91,
+        "netReturnPct": 18.32,
+        "grossMaxDrawdownPct": 7.34,
+        "netMaxDrawdownPct": 7.53,
+        "grossProfitFactor": 2.964,
+        "netProfitFactor": 2.859,
+        "expectancyPctNet": 3.8548,
+        "maxLosingStreak": 2,
+        "exitReasons": {
+          "STOP": 3,
+          "REVERSAL": 2
+        }
+      },
+      "trades": [
+        {
+          "direction": "LONG",
+          "entryTime": 1755057600000,
+          "exitTime": 1762228800000,
+          "entryPrice": 12846,
+          "exitPrice": 15522,
+          "exitReason": "REVERSAL",
+          "grossPnlPct": 0.20831387202241936,
+          "netPnlPct": 0.20710616200540577
+        },
+        {
+          "direction": "LONG",
+          "entryTime": 1765771200000,
+          "exitTime": 1768536000000,
+          "entryPrice": 16454,
+          "exitPrice": 16026.91,
+          "exitReason": "STOP",
+          "grossPnlPct": -0.025956606296341334,
+          "netPnlPct": -0.02693016291173711
+        },
+        {
+          "direction": "SHORT",
+          "entryTime": 1769572800000,
+          "exitTime": 1778212800000,
+          "entryPrice": 14907,
+          "exitPrice": 13671,
+          "exitReason": "REVERSAL",
+          "grossPnlPct": 0.09041035769146366,
+          "netPnlPct": 0.08932049226648475
+        },
+        {
+          "direction": "SHORT",
+          "entryTime": 1780459200000,
+          "exitTime": 1781496000000,
+          "entryPrice": 13094,
+          "exitPrice": 13572.76,
+          "exitReason": "STOP",
+          "grossPnlPct": -0.035273592106542795,
+          "netPnlPct": -0.03623783639229328
+        },
+        {
+          "direction": "LONG",
+          "entryTime": 1782878400000,
+          "exitTime": 1783569600000,
+          "entryPrice": 14413,
+          "exitPrice": 13842.84,
+          "exitReason": "STOP",
+          "grossPnlPct": -0.03955873170054813,
+          "netPnlPct": -0.04051869298820354
+        }
+      ],
+      "emaBlockedCount": 12
+    },
+    "ADANIENT": {
+      "metrics": {
+        "tradeCount": 6,
+        "winRate": 33.33,
+        "grossReturnPct": 14.32,
+        "netReturnPct": 13.63,
+        "grossMaxDrawdownPct": 15.29,
+        "netMaxDrawdownPct": 15.63,
+        "grossProfitFactor": 2.108,
+        "netProfitFactor": 2.045,
+        "expectancyPctNet": 2.8978,
+        "maxLosingStreak": 4,
+        "exitReasons": {
+          "STOP": 4,
+          "REVERSAL": 2
+        }
+      },
+      "trades": [
+        {
+          "direction": "LONG",
+          "entryTime": 1751256000000,
+          "exitTime": 1753761600000,
+          "entryPrice": 2624.3,
+          "exitPrice": 2510.31,
+          "exitReason": "STOP",
+          "grossPnlPct": -0.04343634493007664,
+          "netPnlPct": -0.04439243054234032
+        },
+        {
+          "direction": "SHORT",
+          "entryTime": 1754280000000,
+          "exitTime": 1758254400000,
+          "entryPrice": 2356.6,
+          "exitPrice": 2448.92,
+          "exitReason": "STOP",
+          "grossPnlPct": -0.03769825065743271,
+          "netPnlPct": -0.03866007149635586
+        },
+        {
+          "direction": "LONG",
+          "entryTime": 1758513600000,
+          "exitTime": 1759204800000,
+          "entryPrice": 2593.7,
+          "exitPrice": 2494.21,
+          "exitReason": "STOP",
+          "grossPnlPct": -0.038358329799128565,
+          "netPnlPct": -0.0393194908887845
+        },
+        {
+          "direction": "SHORT",
+          "entryTime": 1762488000000,
+          "exitTime": 1762920000000,
+          "entryPrice": 2338,
+          "exitPrice": 2443.13,
+          "exitReason": "STOP",
+          "grossPnlPct": -0.04303086614302154,
+          "netPnlPct": -0.04398735703143419
+        },
+        {
+          "direction": "SHORT",
+          "entryTime": 1764302400000,
+          "exitTime": 1776744000000,
+          "entryPrice": 2298,
+          "exitPrice": 2249.4,
+          "exitReason": "REVERSAL",
+          "grossPnlPct": 0.021605761536409585,
+          "netPnlPct": 0.02058466632248024
+        },
+        {
+          "direction": "LONG",
+          "entryTime": 1776830400000,
+          "exitTime": 1786593600000,
+          "entryPrice": 2228.3,
+          "exitPrice": 2943.5,
+          "exitReason": "REVERSAL",
+          "grossPnlPct": 0.32096216846923653,
+          "netPnlPct": 0.31964186645177617
+        }
+      ],
+      "emaBlockedCount": 3
+    }
+  }
+}
