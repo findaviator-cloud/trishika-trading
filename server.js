@@ -85,14 +85,17 @@ server.listen(port, async () => {
   // MTF snapshots are research-only; no execution path is connected.
   startMtfResearchScheduler(log);
 
-  // Daily ETH/SOL refresh
+  // Daily ETH/SOL refresh is delayed after startup to avoid Twelve Data credit bursts.
   const DAILY_REFRESH_MS = 60 * 60 * 1000;
+  const DAILY_INITIAL_DELAY_MS = 75 * 1000;
   async function scheduleDailyRefresh() {
     await refreshDailyETH();
     await refreshDailySOL();
     setTimeout(scheduleDailyRefresh, DAILY_REFRESH_MS);
   }
-  scheduleDailyRefresh().catch(e => log.error('[SCHEDULER]', e.message));
+  setTimeout(() => {
+    scheduleDailyRefresh().catch((error) => log.error('[SCHEDULER]', error.message));
+  }, DAILY_INITIAL_DELAY_MS);
 
   // Monitor cycle
   const MONITOR_MS = 5 * 60 * 1000;
