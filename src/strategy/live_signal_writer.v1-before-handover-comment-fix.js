@@ -174,10 +174,9 @@ export function writeDonchianSignal(symbol, candles) {
     const opts = FNO_SYMBOLS_SET.has(symbol) ? FNO_OPTS : HOURLY_OPTS;
     const sig = donchianSignal(candles, opts);
 
-    // Informational-only completed-1D EMA(200) confirmation overlay.
-    // Does NOT affect the 1H Donchian signal itself and is NOT the
-    // validated 4H decision gate. See ema_confirmation.js and
-    // docs/crypto-4h-shadow-and-fno-handover.md.
+    // Informational-only completed-1D EMA(200) confirmation overlay —
+    // does NOT affect the signal itself. See ema_confirmation.js and
+    // backtest-spec.md Section 15.
     triggerEmaRefresh(symbol);
     const emaInfo = getEmaConfirmation(symbol, sig.direction, candles[candles.length - 1].close);
     sig.emaConfirmation = emaInfo.label;
