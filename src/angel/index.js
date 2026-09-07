@@ -41,6 +41,10 @@ function generateTOTP(secret) {
 }
 
 export async function angelLogin() {
+  if (process.env.ENABLE_ANGEL_ONE_WS !== "true") {
+    _log.info("Angel One login skipped — ENABLE_ANGEL_ONE_WS is not true.");
+    return false;
+  }
   if (!CONFIG.angelApiKey || !CONFIG.angelClientId || !CONFIG.angelPin || !CONFIG.angelTotpSecret) {
     _log.warn("Angel One credentials incomplete — skipping login"); return false;
   }
