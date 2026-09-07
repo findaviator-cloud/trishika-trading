@@ -22,3 +22,15 @@ signals_live/
 .DS_Store
 Thumbs.db
 .vscode/
+
+# Trading research/runtime artifacts — generated locally; do not commit by default
+data/backtest-results/
+data/shadow-live-1h/
+data/fno-input/
+data/trades.db-wal
+data/trades.db-shm
+
+# Downloaded market-history caches — regenerate from documented sources
+data/historical/
+data/historical-1d/
+data/historical-4h/
