@@ -515,6 +515,89 @@
   }
   .toggle.on::after { transform: translateX(16px); }
 
+
+  /* MTF research panel */
+  .mtf-section {
+    margin: 24px 0;
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    overflow: hidden;
+  }
+  .mtf-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 14px 18px;
+    border-bottom: 1px solid var(--border);
+  }
+  .mtf-title {
+    font-family: 'Space Mono', monospace;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: .5px;
+  }
+  .mtf-note {
+    color: var(--yellow);
+    font-family: 'Space Mono', monospace;
+    font-size: 10px;
+  }
+  .mtf-wrap {
+    overflow-x: auto;
+  }
+  .mtf-table {
+    width: 100%;
+    border-collapse: collapse;
+    min-width: 780px;
+    font-size: 12px;
+  }
+  .mtf-table th,
+  .mtf-table td {
+    padding: 11px 14px;
+    border-bottom: 1px solid var(--border);
+    text-align: left;
+    white-space: nowrap;
+  }
+  .mtf-table th {
+    color: var(--muted);
+    font-family: 'Space Mono', monospace;
+    font-size: 10px;
+    letter-spacing: .5px;
+  }
+  .mtf-table tr:last-child td {
+    border-bottom: 0;
+  }
+  .mtf-bias-long,
+  .mtf-alignment-bullish {
+    color: var(--green);
+    font-weight: 700;
+  }
+  .mtf-bias-short,
+  .mtf-alignment-bearish {
+    color: var(--red);
+    font-weight: 700;
+  }
+  .mtf-bias-neutral,
+  .mtf-alignment-neutral,
+  .mtf-alignment-mixed {
+    color: var(--neutral);
+    font-weight: 700;
+  }
+  .mtf-quality-ok {
+    color: var(--green);
+  }
+  .mtf-quality-stale,
+  .mtf-quality-partial,
+  .mtf-quality-na {
+    color: var(--yellow);
+  }
+  .mtf-empty {
+    padding: 22px 18px;
+    color: var(--muted);
+    font-size: 12px;
+  }
+
   /* SIGNAL HISTORY PANEL */
   .history-section {
     margin: 24px 0;
@@ -684,6 +767,36 @@
   </div>
   <div class="symbols-grid" id="forexGrid"></div>
 
+
+  <!-- Multi-timeframe research snapshots -->
+  <div class="mtf-section">
+    <div class="mtf-header">
+      <div class="mtf-title">MULTI-TIMEFRAME RESEARCH</div>
+      <div class="mtf-note">RESEARCH ONLY — EXECUTION DISABLED</div>
+    </div>
+    <div class="mtf-wrap">
+      <table class="mtf-table">
+        <thead>
+          <tr>
+            <th>Symbol</th>
+            <th>1H Bias</th>
+            <th>4H Bias</th>
+            <th>1D Bias</th>
+            <th>Alignment</th>
+            <th>Data Quality</th>
+            <th>Last Closed Candle (UTC)</th>
+            <th>Updated (UTC)</th>
+          </tr>
+        </thead>
+        <tbody id="mtfResearchBody">
+          <tr>
+            <td colspan="8" class="mtf-empty">Loading research snapshots...</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
   <!-- F&O -->
   <div class="section-header">
     <div class="section-title">F&O — Indian Markets</div>
@@ -848,6 +961,118 @@ function updateTicker() {
   document.getElementById('tickerTrack').innerHTML = items;
   document.getElementById('tickerBar').style.display = 'block';
 }
+
+
+function mtfClass(value, kind) {
+  const upper = String(value || '').toUpperCase();
+
+  if (kind === 'bias') {
+    if (upper === 'LONG_BIAS') return 'mtf-bias-long';
+    if (upper === 'SHORT_BIAS') return 'mtf-bias-short';
+    return 'mtf-bias-neutral';
+  }
+
+  if (kind === 'alignment') {
+    if (upper === 'BULLISH_ALIGNMENT') return 'mtf-alignment-bullish';
+    if (upper === 'BEARISH_ALIGNMENT') return 'mtf-alignment-bearish';
+    if (upper === 'MIXED') return 'mtf-alignment-mixed';
+    return 'mtf-alignment-neutral';
+  }
+
+  if (upper === 'OK') return 'mtf-quality-ok';
+  if (upper === 'STALE' || upper === 'PARTIAL' || upper === 'NA') return 'mtf-quality-stale';
+  return 'mtf-quality-na';
+}
+
+function escapeMtf(value) {
+  return String(value ?? '—')
+    .replaceAll('&', '&amp;')
+    .replaceAll('<', '&lt;')
+    .replaceAll('>', '&gt;')
+    .replaceAll('"', '&quot;')
+    .replaceAll("'", '&#039;');
+}
+
+function mtfUtc(value) {
+  if (!value) return '—';
+  const date = new Date(value);
+  if (Number.isNaN(date.getTime())) return '—';
+  return date.toISOString().replace('.000Z', 'Z');
+}
+
+function renderMtfResearch(payload) {
+  const body = document.getElementById('mtfResearchBody');
+  if (!body) return;
+
+  const items = Array.isArray(payload?.symbols) ? payload.symbols : [];
+
+  if (!items.length) {
+    body.innerHTML = '<tr><td colspan="8" class="mtf-empty">No research snapshots available.</td></tr>';
+    return;
+  }
+
+  body.innerHTML = items.map((item) => {
+    const frames = item.timeframes || {};
+    const oneHour = frames['1h'] || {};
+    const fourHour = frames['4h'] || {};
+    const oneDay = frames['1d'] || {};
+    const meta = item.meta || {};
+    const summary = item.summary || {};
+    const unavailable = item.available === false;
+
+    if (unavailable) {
+      return '<tr>' +
+        '<td>' + escapeMtf(item.symbol) + '</td>' +
+        '<td colspan="7" class="mtf-empty">' +
+        escapeMtf(item.error || 'Snapshot not available yet.') +
+        '</td>' +
+      '</tr>';
+    }
+
+    const oneBias = oneHour.bias || 'NEUTRAL';
+    const fourBias = fourHour.bias || 'NEUTRAL';
+    const dayBias = oneDay.bias || 'NEUTRAL';
+    const alignment = summary.alignment || 'NEUTRAL';
+    const quality = meta.dataQuality || 'NA';
+    const closedAt = [
+      oneHour.candleClosedAtUtc,
+      fourHour.candleClosedAtUtc,
+      oneDay.candleClosedAtUtc
+    ].filter(Boolean).join(' / ');
+
+    return '<tr>' +
+      '<td>' + escapeMtf(item.symbol) + '</td>' +
+      '<td class="' + mtfClass(oneBias, 'bias') + '">' + escapeMtf(oneBias) + '</td>' +
+      '<td class="' + mtfClass(fourBias, 'bias') + '">' + escapeMtf(fourBias) + '</td>' +
+      '<td class="' + mtfClass(dayBias, 'bias') + '">' + escapeMtf(dayBias) + '</td>' +
+      '<td class="' + mtfClass(alignment, 'alignment') + '">' + escapeMtf(alignment) + '</td>' +
+      '<td class="' + mtfClass(quality, 'quality') + '">' + escapeMtf(quality) + '</td>' +
+      '<td>' + escapeMtf(closedAt || '—') + '</td>' +
+      '<td>' + escapeMtf(mtfUtc(meta.generatedAtUtc)) + '</td>' +
+    '</tr>';
+  }).join('');
+}
+
+async function loadMtfResearch() {
+  try {
+    const response = await fetch('/api/mtf');
+
+    if (!response.ok) {
+      throw new Error('HTTP ' + response.status);
+    }
+
+    renderMtfResearch(await response.json());
+  } catch (error) {
+    const body = document.getElementById('mtfResearchBody');
+    if (body) {
+      body.innerHTML =
+        '<tr><td colspan="8" class="mtf-empty">MTF research snapshots unavailable: ' +
+        escapeMtf(error.message) +
+        '</td></tr>';
+    }
+  }
+}
+
 
 // Load all symbols via REST on startup
 async function loadAllSymbols() {
@@ -1091,6 +1316,8 @@ loadEnabledSymbols().then(() => loadAllSymbols()).then(() => {
   setInterval(pollUpdates, 30000);
   // Load 24-hour signal history
   loadHistory();
+  loadMtfResearch();
+  setInterval(loadMtfResearch, 60000);
 });
 </script>
 
