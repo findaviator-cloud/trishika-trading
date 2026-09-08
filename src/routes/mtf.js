@@ -1,6 +1,7 @@
 import express from 'express';
 import fs from 'fs';
 import path from 'path';
+import { runMtfResearchRefresh, getMtfSchedulerState } from '../strategy/mtf/scheduler.js';
 
 const router = express.Router();
 const ANALYSIS_DIR = path.resolve('signals_live', 'analysis');
@@ -84,6 +85,101 @@ function normalizeSymbol(value) {
     .replace('/', '_')
     .replace('-', '_');
 }
+
+
+router.post('/refresh', async (req, res) => {
+  const configuredSecret = process.env.MTF_REFRESH_SECRET;
+  const providedSecret = req.get('x-mtf-refresh-secret');
+
+  if (!configuredSecret) {
+    console.error('[MTF] Refresh rejected: MTF_REFRESH_SECRET is not configured.');
+
+    return res.status(503).json({
+      ok: false,
+      error: 'MTF refresh is not configured on this server.',
+      meta: {
+        tier: 'RESEARCH',
+        analysisOnly: true,
+        executionAllowed: false
+      }
+    });
+  }
+
+  if (!providedSecret || providedSecret !== configuredSecret) {
+    return res.status(401).json({
+      ok: false,
+      error: 'Unauthorized',
+      meta: {
+        tier: 'RESEARCH',
+        analysisOnly: true,
+        executionAllowed: false
+      }
+    });
+  }
+
+  const before = getMtfSchedulerState();
+
+  if (before.running) {
+    return res.status(409).json({
+      ok: false,
+      error: 'MTF refresh is already running.',
+      scheduler: before
+    });
+  }
+
+  const startedAtUtc = new Date().toISOString();
+  console.log(`[MTF] Protected manual refresh requested at ${startedAtUtc}`);
+
+  try {
+    const result = await runMtfResearchRefresh(console);
+
+    if (result.skipped) {
+      return res.status(409).json({
+        ok: false,
+        error: 'MTF refresh is already running.',
+        result,
+        scheduler: getMtfSchedulerState(),
+        meta: {
+          tier: 'RESEARCH',
+          analysisOnly: true,
+          executionAllowed: false
+        }
+      });
+    }
+
+    const status = result.code === 0 ? 200 : 502;
+
+    return res.status(status).json({
+      ok: result.code === 0,
+      message: result.code === 0
+        ? 'MTF refresh completed.'
+        : 'MTF refresh process did not complete successfully.',
+      startedAtUtc,
+      completedAtUtc: new Date().toISOString(),
+      result,
+      scheduler: getMtfSchedulerState(),
+      meta: {
+        tier: 'RESEARCH',
+        analysisOnly: true,
+        executionAllowed: false
+      }
+    });
+  } catch (error) {
+    console.error('[MTF] Protected manual refresh failed:', error);
+
+    return res.status(500).json({
+      ok: false,
+      error: 'MTF refresh failed.',
+      detail: error.message,
+      scheduler: getMtfSchedulerState(),
+      meta: {
+        tier: 'RESEARCH',
+        analysisOnly: true,
+        executionAllowed: false
+      }
+    });
+  }
+});
 
 router.get('/', (_req, res) => {
   const snapshots = SYMBOLS.map(safeSummary);
