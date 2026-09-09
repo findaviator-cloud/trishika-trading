@@ -34,3 +34,8 @@ data/trades.db-shm
 data/historical/
 data/historical-1d/
 data/historical-4h/
+
+# Local-only Indian market research inputs and generated reports
+data/india-input/
+data/india-analysis/
+env/
