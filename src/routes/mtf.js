@@ -1,10 +1,20 @@
 import express from 'express';
 import fs from 'fs';
 import path from 'path';
-import { runMtfResearchRefresh, getMtfSchedulerState } from '../strategy/mtf/scheduler.js';
+import crypto from 'crypto';
+import {
+  runMtfResearchRefresh,
+  getMtfSchedulerState
+} from '../strategy/mtf/scheduler.js';
+import {
+  getTwelveDataRateLimiterState
+} from '../services/twelve_data_rate_limiter.js';
 
 const router = express.Router();
-const ANALYSIS_DIR = path.resolve('signals_live', 'analysis');
+
+const ANALYSIS_DIR = path.resolve(
+  process.env.MTF_ANALYSIS_DIR || path.join('signals_live', 'analysis')
+);
 
 const SYMBOLS = Object.freeze([
   'BTC_USD',
@@ -15,9 +25,55 @@ const SYMBOLS = Object.freeze([
   'XAU_USD'
 ]);
 
+const STALE_AFTER_MS = Math.max(
+  60_000,
+  Number(process.env.MTF_SNAPSHOT_STALE_AFTER_MS || 6 * 60 * 60 * 1000)
+);
+
+function researchMeta() {
+  return {
+    tier: 'RESEARCH',
+    analysisOnly: true,
+    executionAllowed: false
+  };
+}
+
 function readJson(filePath) {
-  const raw = fs.readFileSync(filePath, 'utf8');
-  return JSON.parse(raw);
+  return JSON.parse(fs.readFileSync(filePath, 'utf8'));
+}
+
+function readManifest() {
+  const filePath = path.join(ANALYSIS_DIR, '_manifest.json');
+
+  if (!fs.existsSync(filePath)) {
+    return null;
+  }
+
+  try {
+    return readJson(filePath);
+  } catch {
+    return null;
+  }
+}
+
+function snapshotFreshness(generatedAtUtc) {
+  const generatedAtMs = Date.parse(generatedAtUtc || '');
+
+  if (!Number.isFinite(generatedAtMs)) {
+    return {
+      generatedAtUtc: generatedAtUtc ?? null,
+      ageMs: null,
+      stale: true
+    };
+  }
+
+  const ageMs = Math.max(0, Date.now() - generatedAtMs);
+
+  return {
+    generatedAtUtc,
+    ageMs,
+    stale: ageMs > STALE_AFTER_MS
+  };
 }
 
 function safeSummary(symbol) {
@@ -28,20 +84,23 @@ function safeSummary(symbol) {
       symbol,
       available: false,
       error: 'MTF snapshot is not available yet.',
-      meta: {
-        tier: 'RESEARCH',
-        analysisOnly: true,
-        executionAllowed: false
-      }
+      freshness: {
+        generatedAtUtc: null,
+        ageMs: null,
+        stale: true
+      },
+      meta: researchMeta()
     };
   }
 
   try {
     const snapshot = readJson(filePath);
+    const freshness = snapshotFreshness(snapshot.meta?.generatedAtUtc);
 
     return {
       symbol,
       available: true,
+      freshness,
       meta: {
         key: snapshot.meta?.key ?? symbol,
         market: snapshot.meta?.market ?? null,
@@ -49,7 +108,7 @@ function safeSummary(symbol) {
         dataQuality: snapshot.meta?.dataQuality ?? 'NA',
         tier: snapshot.meta?.tier ?? 'RESEARCH',
         analysisOnly: snapshot.meta?.analysisOnly === true,
-        executionAllowed: snapshot.meta?.executionAllowed === false ? false : false
+        executionAllowed: false
       },
       summary: {
         alignment: snapshot.summary?.alignment ?? 'NEUTRAL',
@@ -64,16 +123,17 @@ function safeSummary(symbol) {
         '1d': snapshot.timeframes?.['1d'] ?? null
       }
     };
-  } catch (error) {
+  } catch {
     return {
       symbol,
       available: false,
       error: 'MTF snapshot could not be read.',
-      meta: {
-        tier: 'RESEARCH',
-        analysisOnly: true,
-        executionAllowed: false
-      }
+      freshness: {
+        generatedAtUtc: null,
+        ageMs: null,
+        stale: true
+      },
+      meta: researchMeta()
     };
   }
 }
@@ -86,6 +146,49 @@ function normalizeSymbol(value) {
     .replace('-', '_');
 }
 
+function timingSafeSecretMatch(provided, configured) {
+  if (!provided || !configured) {
+    return false;
+  }
+
+  const providedBuffer = Buffer.from(String(provided));
+  const configuredBuffer = Buffer.from(String(configured));
+
+  return (
+    providedBuffer.length === configuredBuffer.length &&
+    crypto.timingSafeEqual(providedBuffer, configuredBuffer)
+  );
+}
+
+router.get('/status', (_req, res) => {
+  const manifest = readManifest();
+  const symbols = SYMBOLS.map(safeSummary);
+
+  return res.json({
+    meta: {
+      ...researchMeta(),
+      updatedAtUtc: new Date().toISOString(),
+      analysisDir: ANALYSIS_DIR,
+      snapshotStaleAfterMs: STALE_AFTER_MS
+    },
+    scheduler: getMtfSchedulerState(),
+    providerRateLimiter: getTwelveDataRateLimiterState(),
+    lastRefresh: manifest?.refresh ?? {
+      status: 'NOT_RUN',
+      partial: false,
+      completedCount: 0,
+      failedCount: 0
+    },
+    manifestMeta: manifest?.meta ?? null,
+    symbols: symbols.map((item) => ({
+      symbol: item.symbol,
+      available: item.available,
+      freshness: item.freshness,
+      dataQuality: item.meta?.dataQuality ?? 'NA',
+      error: item.error ?? null
+    }))
+  });
+});
 
 router.post('/refresh', async (req, res) => {
   const configuredSecret = process.env.MTF_REFRESH_SECRET;
@@ -97,23 +200,15 @@ router.post('/refresh', async (req, res) => {
     return res.status(503).json({
       ok: false,
       error: 'MTF refresh is not configured on this server.',
-      meta: {
-        tier: 'RESEARCH',
-        analysisOnly: true,
-        executionAllowed: false
-      }
+      meta: researchMeta()
     });
   }
 
-  if (!providedSecret || providedSecret !== configuredSecret) {
+  if (!timingSafeSecretMatch(providedSecret, configuredSecret)) {
     return res.status(401).json({
       ok: false,
       error: 'Unauthorized',
-      meta: {
-        tier: 'RESEARCH',
-        analysisOnly: true,
-        executionAllowed: false
-      }
+      meta: researchMeta()
     });
   }
 
@@ -123,7 +218,8 @@ router.post('/refresh', async (req, res) => {
     return res.status(409).json({
       ok: false,
       error: 'MTF refresh is already running.',
-      scheduler: before
+      scheduler: before,
+      meta: researchMeta()
     });
   }
 
@@ -139,30 +235,29 @@ router.post('/refresh', async (req, res) => {
         error: 'MTF refresh is already running.',
         result,
         scheduler: getMtfSchedulerState(),
-        meta: {
-          tier: 'RESEARCH',
-          analysisOnly: true,
-          executionAllowed: false
-        }
+        meta: researchMeta()
       });
     }
 
-    const status = result.code === 0 ? 200 : 502;
+    const manifest = readManifest();
+    const refresh = manifest?.refresh ?? null;
+    const totalFailure = result.code !== 0 || refresh?.status === 'FAILED';
 
-    return res.status(status).json({
-      ok: result.code === 0,
-      message: result.code === 0
-        ? 'MTF refresh completed.'
-        : 'MTF refresh process did not complete successfully.',
+    return res.status(totalFailure ? 502 : 200).json({
+      ok: !totalFailure,
+      partial: refresh?.status === 'PARTIAL',
+      message: totalFailure
+        ? 'MTF refresh process did not complete successfully.'
+        : refresh?.status === 'PARTIAL'
+          ? 'MTF refresh completed partially; successful snapshots were preserved.'
+          : 'MTF refresh completed.',
       startedAtUtc,
       completedAtUtc: new Date().toISOString(),
       result,
+      refresh,
       scheduler: getMtfSchedulerState(),
-      meta: {
-        tier: 'RESEARCH',
-        analysisOnly: true,
-        executionAllowed: false
-      }
+      providerRateLimiter: getTwelveDataRateLimiterState(),
+      meta: researchMeta()
     });
   } catch (error) {
     console.error('[MTF] Protected manual refresh failed:', error);
@@ -172,11 +267,8 @@ router.post('/refresh', async (req, res) => {
       error: 'MTF refresh failed.',
       detail: error.message,
       scheduler: getMtfSchedulerState(),
-      meta: {
-        tier: 'RESEARCH',
-        analysisOnly: true,
-        executionAllowed: false
-      }
+      providerRateLimiter: getTwelveDataRateLimiterState(),
+      meta: researchMeta()
     });
   }
 });
@@ -186,11 +278,10 @@ router.get('/', (_req, res) => {
 
   res.json({
     meta: {
-      tier: 'RESEARCH',
-      analysisOnly: true,
-      executionAllowed: false,
+      ...researchMeta(),
       source: 'generated-snapshots-only',
-      updatedAtUtc: new Date().toISOString()
+      updatedAtUtc: new Date().toISOString(),
+      analysisDir: ANALYSIS_DIR
     },
     symbols: snapshots
   });
@@ -203,11 +294,7 @@ router.get('/:symbol', (req, res) => {
     return res.status(404).json({
       error: `Unknown MTF symbol: ${symbol}`,
       supportedSymbols: SYMBOLS,
-      meta: {
-        tier: 'RESEARCH',
-        analysisOnly: true,
-        executionAllowed: false
-      }
+      meta: researchMeta()
     });
   }
 
