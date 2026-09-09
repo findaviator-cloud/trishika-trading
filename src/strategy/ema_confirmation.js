@@ -23,8 +23,14 @@
  * "today" candle is always dropped before computing, matching the
  * backtest's locked rule (spec Section 3: never use the in-progress
  * daily candle).
+ *
+ * CIRCUIT BREAKER: if Binance calls fail repeatedly (e.g. geo-restricted
+ * host IP returning HTTP 451 / non-array JSON error body), retries are
+ * blocked for a cooldown window instead of hitting Binance every monitor
+ * cycle. See dashboard/lib/ema-confirmation-circuit-breaker.cjs.
  */
 import https from 'https';
+import { isBlocked, recordFailure, recordSuccess } from '../../dashboard/lib/ema-confirmation-circuit-breaker.cjs';
 
 const EMA_LEN = 200; // locked, no parameter sweep — spec Section 3
 
@@ -61,7 +67,13 @@ function fetchBinanceDailyKlines(pair, limit = 250) {
       res.on('end', () => {
         try {
           const rows = JSON.parse(data);
-          if (!Array.isArray(rows)) return reject(new Error('Unexpected Binance response'));
+          if (!Array.isArray(rows)) {
+            // Diagnostic: log the raw body once so we can see Binance's
+            // actual error (commonly a 451 geo-restriction JSON body like
+            // {"code":0,"msg":"Service unavailable from a restricted location..."}).
+            console.error(`[EMA_CONFIRMATION] Non-array response for ${pair} (status ${res.statusCode}):`, data.slice(0, 300));
+            return reject(new Error(`Unexpected Binance response (status ${res.statusCode})`));
+          }
           resolve(rows.map(r => ({ time: r[0], close: parseFloat(r[4]) })));
         } catch (e) { reject(e); }
       });
@@ -82,10 +94,16 @@ function calcEma(closes, len) {
  * Fire-and-forget background refresh — NEVER blocks the caller.
  * Only re-fetches once per UTC calendar day (EMA(200) daily doesn't
  * change intraday, no need to hit Binance more often than that).
+ *
+ * If Binance calls fail repeatedly, the circuit breaker blocks further
+ * attempts for a cooldown window (default 4h) to avoid wasting bandwidth
+ * on a call that keeps failing (e.g. geo-restricted host).
  */
 export function triggerEmaRefresh(symbol) {
   const cfg = CONFIRMATION_CONFIG[symbol];
   if (!cfg || !cfg.enabled) return;
+
+  if (isBlocked(symbol)) return; // circuit breaker tripped — skip Binance call entirely
 
   const todayUTC = Math.floor(Date.now() / DAY_MS);
   const entry = cache.get(symbol);
@@ -101,12 +119,14 @@ export function triggerEmaRefresh(symbol) {
       const closes = completed.map(c => c.close);
       const ema = calcEma(closes, EMA_LEN);
       cache.set(symbol, { ema, asOfDayUTC: todayUTC, fetchedAt: Date.now(), refreshing: false });
+      recordSuccess(symbol);
       console.log(`[EMA_CONFIRMATION] ${symbol} refreshed — EMA(200)=${ema?.toFixed(2) ?? 'n/a'}`);
     })
     .catch(err => {
       console.error(`[EMA_CONFIRMATION] ${symbol} refresh failed:`, err.message);
       const prev = cache.get(symbol) ?? {};
       cache.set(symbol, { ...prev, refreshing: false });
+      recordFailure(symbol, err.message);
     });
 }
 
