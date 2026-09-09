@@ -20,7 +20,7 @@ import {
   refreshDailySOL
 } from './src/strategy/live_signal_writer.js';
 import { runMonitorCycle } from './src/strategy/monitor.js';
-import startMtfResearchScheduler from './src/strategy/mtf/scheduler.js';
+import { startMtfResearchScheduler } from './src/strategy/mtf/scheduler.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
