@@ -42,10 +42,7 @@ for (const sym of ['EUR_USD', 'XAU_USD']) {
 }
 
 // India F&O engines (Angel One)
-const FNO_SYMS = ['NIFTY','BANKNIFTY','RELIANCE','TCS','INFY','HDFCBANK',
-                  'ICICIBANK','SBIN','BHARTIARTL','ITC','WIPRO','HCLTECH',
-                  'AXISBANK','KOTAKBANK','LT','ONGC','TATAMOTORS',
-                  'BAJFINANCE','MARUTI','ADANIENT'];
+const FNO_SYMS = ['NIFTY','BANKNIFTY','SENSEX'];
 for (const sym of FNO_SYMS) {
   engines[sym] = new CandleEngine(sym);
   engines[sym].source = 'angelone';

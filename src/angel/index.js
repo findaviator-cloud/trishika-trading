@@ -98,24 +98,7 @@ export async function getFunds() {
 export const FNO_SYMBOLS = [
   { symbol:"NIFTY",      token:"99926000", exchange:"NSE" },
   { symbol:"BANKNIFTY",  token:"99926009", exchange:"NSE" },
-  { symbol:"RELIANCE",   token:"2885",     exchange:"NSE" },
-  { symbol:"TCS",        token:"11536",    exchange:"NSE" },
-  { symbol:"INFY",       token:"1594",     exchange:"NSE" },
-  { symbol:"HDFCBANK",   token:"1333",     exchange:"NSE" },
-  { symbol:"ICICIBANK",  token:"4963",     exchange:"NSE" },
-  { symbol:"SBIN",       token:"3045",     exchange:"NSE" },
-  { symbol:"BHARTIARTL", token:"10604",    exchange:"NSE" },
-  { symbol:"ITC",        token:"1660",     exchange:"NSE" },
-  { symbol:"WIPRO",      token:"3787",     exchange:"NSE" },
-  { symbol:"HCLTECH",    token:"7229",     exchange:"NSE" },
-  { symbol:"AXISBANK",   token:"5900",     exchange:"NSE" },
-  { symbol:"KOTAKBANK",  token:"1922",     exchange:"NSE" },
-  { symbol:"LT",         token:"11483",    exchange:"NSE" },
-  { symbol:"ONGC",       token:"2475",     exchange:"NSE" },
-  { symbol:"TATAMOTORS", token:"3456",     exchange:"NSE" },
-  { symbol:"BAJFINANCE", token:"317",      exchange:"NSE" },
-  { symbol:"MARUTI",     token:"10999",    exchange:"NSE" },
-  { symbol:"ADANIENT",   token:"25",       exchange:"NSE" },
+  { symbol:"SENSEX",     token:"99919000", exchange:"BSE" },
 ];
 
 export const ANGEL_TOKEN_TO_SYMBOL = Object.freeze(Object.fromEntries(FNO_SYMBOLS.map(s => [s.token, s.symbol])));
@@ -127,6 +110,7 @@ export async function loadFnoHistory(engines, log) {
   const YAHOO_MAP = {
     "NIFTY":      "^NSEI",
     "BANKNIFTY":  "^NSEBANK",
+    "SENSEX":     "^BSESN",
     "RELIANCE":   "RELIANCE.NS",
     "TCS":        "TCS.NS",
     "INFY":       "INFY.NS",
@@ -191,8 +175,15 @@ export function connectAngelOneFeed(engines, log) {
   });
   ws.on("open", () => {
     log.info("Angel One feed WS connected ✅");
-    ws.send(JSON.stringify({ correlationID:"trishika_fno", action:1, params:{ mode:1, tokenList:[{ exchangeType:1, tokens:FNO_SYMBOLS.map(s=>s.token) }] } }));
-    log.info(`Angel One → subscribed to ${FNO_SYMBOLS.length} F&O symbols`);
+    const EXCHANGE_TYPE = { NSE: 1, BSE: 3 };
+    const groups = {};
+    for (const s of FNO_SYMBOLS) {
+      const et = EXCHANGE_TYPE[s.exchange] || 1;
+      (groups[et] = groups[et] || []).push(s.token);
+    }
+    const tokenList = Object.entries(groups).map(([exchangeType, tokens]) => ({ exchangeType: Number(exchangeType), tokens }));
+    ws.send(JSON.stringify({ correlationID:"trishika_fno", action:1, params:{ mode:1, tokenList } }));
+    log.info(`Angel One → subscribed to ${FNO_SYMBOLS.length} F&O symbols across ${tokenList.length} exchange group(s)`);
   });
   ws.on("message", (raw) => {
     try {
