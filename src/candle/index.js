@@ -1,9 +1,28 @@
-import { WebSocket } from "ws";
-import { CONFIG, WS_TYPES, TWELVE_TO_SYMBOL } from "../config/index.js";
-import { writeDonchianSignal } from "../strategy/live_signal_writer.js";
-import { fetchTwelveDataJson } from "../services/twelve_data_rate_limiter.js";
+import { WebSocket } from 'ws';
+import { CONFIG, WS_TYPES, TWELVE_TO_SYMBOL } from '../config/index.js';
+import { writeDonchianSignal } from '../strategy/live_signal_writer.js';
+import { fetchTwelveDataJson } from '../services/twelve_data_rate_limiter.js';
 
-// ── Twelve Data REST fetch (hourly candles; globally rate-limited) ─────────────
+export const FOREX_ENGINE_KEYS = Object.freeze({
+  EUR_USD: 'EUR/USD',
+  XAU_USD: 'XAU/USD'
+});
+
+export function normalizeLiveSymbol(value) {
+  const raw = String(value ?? '').trim().toUpperCase();
+
+  const aliases = {
+    EURUSD: 'EUR_USD',
+    EUR_USD: 'EUR_USD',
+    'EUR/USD': 'EUR_USD',
+    XAUUSD: 'XAU_USD',
+    XAU_USD: 'XAU_USD',
+    'XAU/USD': 'XAU_USD'
+  };
+
+  return aliases[raw] ?? raw.replace(/[^A-Z0-9_]/g, '');
+}
+
 async function fetchTwelveHourly(symbol, limit = 200) {
   const key = CONFIG.twelveKey;
 
@@ -11,9 +30,9 @@ async function fetchTwelveHourly(symbol, limit = 200) {
     throw new Error('Twelve Data key is not configured.');
   }
 
-  const sym = encodeURIComponent(symbol);
   const url =
-    `https://api.twelvedata.com/time_series?symbol=${sym}&interval=1h&outputsize=${limit}&apikey=${key}`;
+    `https://api.twelvedata.com/time_series?symbol=${encodeURIComponent(symbol)}` +
+    `&interval=1h&outputsize=${limit}&apikey=${key}`;
 
   const parsed = await fetchTwelveDataJson(url);
 
@@ -21,14 +40,30 @@ async function fetchTwelveHourly(symbol, limit = 200) {
     throw new Error('Twelve Data response did not contain candle values.');
   }
 
-  return parsed.values.reverse().map((r) => ({
-    time: new Date(r.datetime).getTime(),
-    open: parseFloat(r.open),
-    high: parseFloat(r.high),
-    low: parseFloat(r.low),
-    close: parseFloat(r.close),
-    volume: 0
-  }));
+  const candles = parsed.values
+    .map((row) => ({
+      time: Date.parse(row.datetime),
+      open: Number(row.open),
+      high: Number(row.high),
+      low: Number(row.low),
+      close: Number(row.close),
+      volume: 0
+    }))
+    .filter(
+      (candle) =>
+        Number.isFinite(candle.time) &&
+        Number.isFinite(candle.open) &&
+        Number.isFinite(candle.high) &&
+        Number.isFinite(candle.low) &&
+        Number.isFinite(candle.close)
+    )
+    .sort((left, right) => left.time - right.time);
+
+  if (!candles.length) {
+    throw new Error('Twelve Data response did not contain usable hourly candles.');
+  }
+
+  return candles;
 }
 
 export class CandleEngine {
@@ -41,11 +76,24 @@ export class CandleEngine {
     this.analysisTime = 0;
     this.analyzing = false;
     this.subscribers = new Set();
-    this.source = "twelvedata";
+    this.source = 'twelvedata';
   }
 
   onTick(price, qty, time) {
-    const bucketTime = Math.floor(time / this.candleMs) * this.candleMs;
+    const numericPrice = Number(price);
+    const numericQty = Number(qty);
+    const numericTime = Number(time);
+
+    if (
+      !Number.isFinite(numericPrice) ||
+      numericPrice <= 0 ||
+      !Number.isFinite(numericTime)
+    ) {
+      return;
+    }
+
+    const bucketTime =
+      Math.floor(numericTime / this.candleMs) * this.candleMs;
 
     if (!this.currentCandle || this.currentCandle.time !== bucketTime) {
       if (this.currentCandle) {
@@ -66,17 +114,25 @@ export class CandleEngine {
 
       this.currentCandle = {
         time: bucketTime,
-        open: price,
-        high: price,
-        low: price,
-        close: price,
-        volume: qty
+        open: numericPrice,
+        high: numericPrice,
+        low: numericPrice,
+        close: numericPrice,
+        volume: Number.isFinite(numericQty) ? numericQty : 0
       };
     } else {
-      this.currentCandle.high = Math.max(this.currentCandle.high, price);
-      this.currentCandle.low = Math.min(this.currentCandle.low, price);
-      this.currentCandle.close = price;
-      this.currentCandle.volume += qty;
+      this.currentCandle.high = Math.max(
+        this.currentCandle.high,
+        numericPrice
+      );
+      this.currentCandle.low = Math.min(
+        this.currentCandle.low,
+        numericPrice
+      );
+      this.currentCandle.close = numericPrice;
+      this.currentCandle.volume += Number.isFinite(numericQty)
+        ? numericQty
+        : 0;
     }
 
     this.broadcast({
@@ -87,7 +143,20 @@ export class CandleEngine {
   }
 
   loadCandles(candles) {
-    this.candles = candles.slice(-CONFIG.maxCandles);
+    const normalized = Array.isArray(candles)
+      ? candles
+          .filter(
+            (candle) =>
+              Number.isFinite(candle?.time) &&
+              Number.isFinite(candle?.open) &&
+              Number.isFinite(candle?.high) &&
+              Number.isFinite(candle?.low) &&
+              Number.isFinite(candle?.close)
+          )
+          .sort((left, right) => left.time - right.time)
+      : [];
+
+    this.candles = normalized.slice(-CONFIG.maxCandles);
 
     if (this.candles.length > 0) {
       writeDonchianSignal(this.symbol, this.candles);
@@ -98,143 +167,163 @@ export class CandleEngine {
     return null;
   }
 
-  broadcast(msg) {
-    const data = JSON.stringify(msg);
+  broadcast(message) {
+    const data = JSON.stringify(message);
 
-    for (const ws of this.subscribers) {
-      if (ws.readyState === WebSocket.OPEN) {
-        ws.send(data);
+    for (const socket of this.subscribers) {
+      if (socket.readyState === WebSocket.OPEN) {
+        socket.send(data);
       }
     }
   }
 
-  subscribe(ws) {
-    this.subscribers.add(ws);
+  subscribe(socket) {
+    this.subscribers.add(socket);
   }
 
-  unsubscribe(ws) {
-    this.subscribers.delete(ws);
+  unsubscribe(socket) {
+    this.subscribers.delete(socket);
   }
 }
 
-// ── Crypto polling via Twelve Data REST (globally rate-limited) ───────────────
-const CRYPTO_SYMBOLS = {
-  BTC: "BTC/USD",
-  ETH: "ETH/USD",
-  SOL: "SOL/USD",
-  BNB: "BNB/USD"
-};
+const CRYPTO_SYMBOLS = Object.freeze({
+  BTC: 'BTC/USD',
+  ETH: 'ETH/USD',
+  SOL: 'SOL/USD',
+  BNB: 'BNB/USD'
+});
 
 function sleep(ms) {
   return new Promise((resolve) => setTimeout(resolve, ms));
 }
 
 export async function connectBinance(engines, log) {
-  log.info("Crypto → using Twelve Data REST (Binance blocked on Render)");
+  log.info('Crypto → using Twelve Data REST (Binance blocked on Render)');
 
   async function pollCrypto() {
-    for (const [sym, tdSym] of Object.entries(CRYPTO_SYMBOLS)) {
+    for (const [symbol, providerSymbol] of Object.entries(CRYPTO_SYMBOLS)) {
       try {
-        const candles = await fetchTwelveHourly(tdSym, 200);
+        const candles = await fetchTwelveHourly(providerSymbol, 200);
+        const engine = engines[symbol];
 
-        if (engines[sym]) {
-          engines[sym].loadCandles(candles);
-          const last = candles[candles.length - 1];
-          log.info(`[CRYPTO] ${sym} updated — last close: ${last.close}`);
-        }
+        if (!engine) continue;
+
+        engine.loadCandles(candles);
+
+        const last = candles.at(-1);
+        log.info(`[CRYPTO] ${symbol} updated — last close: ${last.close}`);
       } catch (error) {
-        log.error(`[CRYPTO] ${sym} fetch failed:`, error.message);
+        log.error(`[CRYPTO] ${symbol} fetch failed:`, error.message);
       }
     }
 
-    await sleep(15 * 60 * 1000);
-    pollCrypto().catch((error) => {
+    await sleep(15 * 60_000);
+
+    void pollCrypto().catch((error) => {
       log.error('[CRYPTO] Poll loop failed:', error.message);
     });
   }
 
-  pollCrypto().catch((error) => {
+  void pollCrypto().catch((error) => {
     log.error('[CRYPTO] Initial poll failed:', error.message);
   });
 }
 
-// ── Twelve Data WebSocket (Forex + Gold) ─────────────────────────────────────
 export async function loadForexHistory(engines, log) {
-  const FOREX_MAP = {
-    EUR_USD: "EUR/USD",
-    XAU_USD: "XAU/USD"
-  };
-
-  for (const [sym, tdSym] of Object.entries(FOREX_MAP)) {
+  for (const [engineKey, providerSymbol] of Object.entries(FOREX_ENGINE_KEYS)) {
     try {
-      const candles = await fetchTwelveHourly(tdSym, 200);
+      const candles = await fetchTwelveHourly(providerSymbol, 200);
+      const engine = engines[engineKey];
 
-      if (engines[sym]) {
-        engines[sym].loadCandles(candles);
-        const last = candles[candles.length - 1];
-        log.info(
-          `[FOREX] ${sym} history loaded — ${candles.length} candles, last close: ${last.close}`
+      if (!engine) {
+        log.warn(
+          `[FOREX] ${engineKey} engine is missing; history was not loaded.`
         );
+        continue;
       }
+
+      engine.loadCandles(candles);
+
+      const last = candles.at(-1);
+
+      log.info(
+        `[FOREX] ${engineKey} history loaded — ${candles.length} candles, ` +
+          `last close: ${last.close}`
+      );
     } catch (error) {
-      log.error(`[FOREX] ${sym} history load failed:`, error.message);
+      log.error(
+        `[FOREX] ${engineKey} history load failed:`,
+        error.message
+      );
     }
   }
 }
 
 export function connectTwelveData(engines, log) {
   if (!CONFIG.twelveKey) {
-    log.warn("Twelve Data key missing — Forex & Gold disabled");
+    log.warn('Twelve Data key missing — Forex & Gold disabled');
     return;
   }
 
-  const ws = new WebSocket(
-    "wss://ws.twelvedata.com/v1/quotes/price?apikey=" + CONFIG.twelveKey
+  const socket = new WebSocket(
+    `wss://ws.twelvedata.com/v1/quotes/price?apikey=${CONFIG.twelveKey}`
   );
 
-  ws.on("open", () => {
-    log.info("Twelve Data WS connected");
+  socket.on('open', () => {
+    log.info('Twelve Data WS connected');
+
     const symbols = Object.values(CONFIG.forexSymbols);
-    ws.send(JSON.stringify({
-      action: "subscribe",
-      params: { symbols: symbols.join(",") }
-    }));
-    log.info(`Twelve Data → subscribed: ${symbols.join(", ")}`);
+
+    socket.send(
+      JSON.stringify({
+        action: 'subscribe',
+        params: { symbols: symbols.join(',') }
+      })
+    );
+
+    log.info(`Twelve Data → subscribed: ${symbols.join(', ')}`);
   });
 
-  ws.on("close", () => {
-    log.warn("Twelve Data WS closed — reconnecting in 60s...");
-    setTimeout(() => connectTwelveData(engines, log), 60000);
+  socket.on('close', () => {
+    log.warn('Twelve Data WS closed — reconnecting in 60s...');
+    setTimeout(() => connectTwelveData(engines, log), 60_000);
   });
 
-  ws.on("error", (error) => {
-    log.error("Twelve Data WS:", error.message);
+  socket.on('error', (error) => {
+    log.error('Twelve Data WS:', error.message);
   });
 
-  ws.on("message", (raw) => {
+  socket.on('message', (raw) => {
     try {
-      const msg = JSON.parse(raw);
+      const message = JSON.parse(raw);
 
-      if (msg.event === "heartbeat") return;
+      if (message.event === 'heartbeat') return;
 
-      if (msg.event === "subscribe-status") {
-        log.info("Twelve Data subscribed:", JSON.stringify(msg));
+      if (message.event === 'subscribe-status') {
+        log.info('Twelve Data subscribed:', JSON.stringify(message));
         return;
       }
 
-      if (msg.event === "price" && msg.price) {
-        const sym = TWELVE_TO_SYMBOL[msg.symbol];
-
-        if (sym && engines[sym]) {
-          engines[sym].onTick(
-            parseFloat(msg.price),
-            1,
-            msg.timestamp ? msg.timestamp * 1000 : Date.now()
-          );
-        }
+      if (message.event !== 'price' || !message.price) {
+        return;
       }
+
+      const mapped =
+        TWELVE_TO_SYMBOL[message.symbol] ??
+        normalizeLiveSymbol(message.symbol);
+
+      const engineKey = normalizeLiveSymbol(mapped);
+      const engine = engines[engineKey];
+
+      if (!engine) return;
+
+      engine.onTick(
+        Number(message.price),
+        1,
+        message.timestamp ? Number(message.timestamp) * 1_000 : Date.now()
+      );
     } catch (error) {
-      log.error("Twelve Data parse:", error.message);
+      log.error('Twelve Data parse:', error.message);
     }
   });
 }

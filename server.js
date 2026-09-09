@@ -3,7 +3,7 @@ import http from 'http';
 import express from 'express';
 import path from 'path';
 import { fileURLToPath } from 'url';
-import routes from './src/routes/index.js';
+import routes, { setRouteEngines } from './src/routes/index.js';
 import {
   CandleEngine,
   connectBinance,
@@ -49,7 +49,7 @@ for (const symbol of ['BTC', 'ETH', 'SOL', 'BNB']) {
   engines[symbol].source = 'twelvedata';
 }
 
-for (const symbol of ['EURUSD', 'XAUUSD']) {
+for (const symbol of ['EUR_USD', 'XAU_USD']) {
   engines[symbol] = new CandleEngine(symbol);
   engines[symbol].source = 'twelvedata';
 }
@@ -58,6 +58,8 @@ for (const symbol of ['NIFTY', 'BANKNIFTY', 'SENSEX']) {
   engines[symbol] = new CandleEngine(symbol);
   engines[symbol].source = 'angelone';
 }
+
+setRouteEngines(engines);
 
 server.listen(port, async () => {
   log.info(`🚀 SERVER: http://localhost:${port}`);

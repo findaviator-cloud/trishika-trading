@@ -206,18 +206,27 @@ export function writeDonchianSignal(symbol, candles) {
     const opts = FNO_SYMBOLS_SET.has(symbol) ? FNO_OPTS : HOURLY_OPTS;
     const sig = donchianSignal(candles, opts);
 
-    // Informational-only crypto EMA overlay; it never changes Donchian direction.
-    triggerEmaRefresh(symbol);
+    // Binance-backed EMA is crypto-only; Forex/Gold/F&O must not request it.
+    const cryptoEmaSymbols = new Set(['BTC', 'ETH', 'SOL', 'BNB']);
 
-    const emaInfo = getEmaConfirmation(
-      symbol,
-      sig.direction,
-      candles[candles.length - 1].close
-    );
+    if (cryptoEmaSymbols.has(symbol)) {
+      triggerEmaRefresh(symbol);
 
-    sig.emaConfirmation = emaInfo.label;
-    sig.emaConfirmationNote = emaInfo.note;
-    sig.ema200Daily = emaInfo.ema;
+      const emaInfo = getEmaConfirmation(
+        symbol,
+        sig.direction,
+        candles[candles.length - 1].close
+      );
+
+      sig.emaConfirmation = emaInfo.label;
+      sig.emaConfirmationNote = emaInfo.note;
+      sig.ema200Daily = emaInfo.ema;
+    } else {
+      sig.emaConfirmation = 'N/A';
+      sig.emaConfirmationNote =
+        'EMA confirmation is not used for Forex/Gold/F&O research signals.';
+      sig.ema200Daily = null;
+    }
 
     writeSignalFile(
       file,
