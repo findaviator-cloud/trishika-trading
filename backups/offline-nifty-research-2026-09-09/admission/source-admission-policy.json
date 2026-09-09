@@ -1,0 +1,51 @@
+{
+  "schemaVersion": 1,
+  "policyId": "OFFLINE_INTRADAY_RESEARCH_SOURCE_ADMISSION_V1",
+  "policyVersion": 1,
+  "purpose": "Offline research-source admission only. This policy never authorizes trading, broker connectivity, WebSocket usage, orders, or execution.",
+  "researchOnly": true,
+  "approvedForTrading": false,
+  "executionBoundary": {
+    "brokerConnectivityAllowed": false,
+    "websocketAllowed": false,
+    "ordersAllowed": false,
+    "executionAllowed": false,
+    "humanReviewRequired": true
+  },
+  "requiredColumns": ["timestamp", "open", "high", "low", "close"],
+  "timezone": "Asia/Kolkata",
+  "expectedIntervalMinutes": 1,
+  "session": {
+    "start": "09:15",
+    "end": "15:30",
+    "minimumBarsPerCompleteSession": 300
+  },
+  "referenceReconciliation": {
+    "minimumOverlapDays": 2,
+    "maximumCloseDifference": 0.05,
+    "minimumPassRate": 1,
+    "failureOutcome": "REVIEW"
+  },
+  "freshness": {
+    "maximumAgeHours": 24,
+    "failureOutcome": "BLOCKED"
+  },
+  "decisionPrecedence": [
+    "artifactIntegrity",
+    "provenance",
+    "schema",
+    "structural",
+    "timestampIntegrity",
+    "session",
+    "referenceReconciliation",
+    "freshness"
+  ],
+  "terminalRules": {
+    "artifactIntegrity": "BLOCKED",
+    "provenance": "BLOCKED",
+    "schema": "BLOCKED",
+    "structural": "BLOCKED",
+    "timestampIntegrity": "BLOCKED",
+    "session": "BLOCKED"
+  }
+}

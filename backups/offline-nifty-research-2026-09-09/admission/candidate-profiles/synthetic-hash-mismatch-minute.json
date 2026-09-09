@@ -1,0 +1,13 @@
+{
+  "schemaVersion": 1,
+  "profileId": "SYNTHETIC_HASH_MISMATCH_BLOCKED",
+  "candidateType": "CSV_MINUTE_OHLC",
+  "sourceTier": "SYNTHETIC_TEST_FIXTURE",
+  "candidatePath": "admission/fixtures/synthetic-clean-minute.csv",
+  "referencePath": "admission/fixtures/synthetic-reference-daily.csv",
+  "evaluationAsOf": "2026-09-08T15:30:00+05:30",
+  "expectedSha256": "0000000000000000000000000000000000000000000000000000000000000000",
+  "expectedDecision": "BLOCKED",
+  "expectedApprovedForResearchSource": false,
+  "notes": "Controlled integrity fixture. SHA-256 mismatch must be terminal BLOCKED."
+}

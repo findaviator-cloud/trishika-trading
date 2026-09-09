@@ -1,0 +1,13 @@
+{
+  "schemaVersion": 1,
+  "profileId": "SYNTHETIC_CLEAN_MINUTE_APPROVED_RESEARCH_ONLY",
+  "candidateType": "CSV_MINUTE_OHLC",
+  "sourceTier": "SYNTHETIC_TEST_FIXTURE",
+  "candidatePath": "admission/fixtures/synthetic-clean-minute.csv",
+  "referencePath": "admission/fixtures/synthetic-reference-daily.csv",
+  "evaluationAsOf": "2026-09-08T15:30:00+05:30",
+  "expectedSha256": "201e2796b0a16612f8f3a9bed86daecf3aca9fc908d9514ff776518aa500a442",
+  "expectedDecision": "APPROVED_FOR_RESEARCH_SOURCE",
+  "expectedApprovedForResearchSource": true,
+  "notes": "Controlled regression-only fixture. Approval proves framework behavior only and never approves trading."
+}

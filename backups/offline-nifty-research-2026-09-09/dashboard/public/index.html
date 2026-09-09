@@ -1,0 +1,189 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex,nofollow">
+  <title>Offline NIFTY Research Status</title>
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+  <main class="page-shell">
+    <header class="hero">
+      <p class="eyebrow">LOCAL-ONLY · READ-ONLY · ARTIFACT-BACKED</p>
+      <h1>OFFLINE RESEARCH STATUS</h1>
+      <p class="subtitle">NIFTY research controls and data-governance dashboard</p>
+      <p id="generated-at" class="generated-at">Loading validated offline artifacts…</p>
+    </header>
+
+    <section id="critical-banner" class="critical-banner" aria-live="polite">
+      <strong>RESEARCH ONLY</strong>
+      <span>Loading hard safety boundary…</span>
+    </section>
+
+    <section class="grid overview-grid" aria-label="Core status">
+      <article class="card">
+        <h2>Suite</h2>
+        <p id="suite-status" class="status-value">—</p>
+      </article>
+      <article class="card">
+        <h2>Daily Reference</h2>
+        <p id="daily-status" class="status-value">—</p>
+      </article>
+      <article class="card">
+        <h2>Intraday Fixture</h2>
+        <p id="intraday-status" class="status-value">—</p>
+      </article>
+      <article class="card danger-card">
+        <h2>Current Eligibility</h2>
+        <p id="eligibility-status" class="status-value">—</p>
+      </article>
+    </section>
+
+    <section class="grid gate-grid" aria-label="Intraday gate status">
+      <article class="card">
+        <h2>Reconciliation</h2>
+        <p id="reconciliation-gate" class="status-value">—</p>
+      </article>
+      <article class="card">
+        <h2>Freshness</h2>
+        <p id="freshness-gate" class="status-value">—</p>
+      </article>
+      <article class="card">
+        <h2>Structural Gate</h2>
+        <p id="structural-gate" class="status-value">—</p>
+      </article>
+      <article class="card">
+        <h2>Fixture Decision</h2>
+        <p id="fixture-decision" class="status-value">—</p>
+      </article>
+    </section>
+
+    <section class="card hard-block-card">
+      <h2>Hard-block reason</h2>
+      <p id="hard-block-reason">Loading…</p>
+      <dl id="hard-block-details" class="details-list"></dl>
+    </section>
+
+    <section class="grid details-grid">
+      <article class="card">
+        <h2>Official daily reference</h2>
+        <dl id="daily-details" class="details-list"></dl>
+      </article>
+      <article class="card">
+        <h2>Frozen intraday fixture</h2>
+        <dl id="intraday-details" class="details-list"></dl>
+      </article>
+    </section>
+
+    <section class="card">
+      <h2>Reconciliation diagnostics</h2>
+      <dl id="reconciliation-details" class="details-list"></dl>
+    </section>
+
+    <section class="card">
+      <h2>Regression controls</h2>
+      <dl id="regression-details" class="details-list"></dl>
+    </section>
+
+    <section class="grid safety-grid">
+      <article class="card safety-card">
+        <h2>Broker</h2>
+        <p id="broker-status" class="status-value">—</p>
+      </article>
+      <article class="card safety-card">
+        <h2>WebSocket</h2>
+        <p id="websocket-status" class="status-value">—</p>
+      </article>
+      <article class="card safety-card">
+        <h2>Execution</h2>
+        <p id="execution-status" class="status-value">—</p>
+      </article>
+      <article class="card safety-card">
+        <h2>Human review</h2>
+        <p id="review-status" class="status-value">—</p>
+      </article>
+    </section>
+
+    <section class="card nifty-mtf-card">
+      <h2>NIFTY MTF — Phase 1</h2>
+      <p class="small-note">Offline official-daily reference only. Current 1H and 4H snapshots are intentionally not generated while the canonical intraday source-admission artifact remains blocked.</p>
+      <div class="grid nifty-mtf-grid">
+        <div>
+          <h3>1D official reference</h3>
+          <p id="nifty-mtf-1d-status" class="status-value">—</p>
+        </div>
+        <div>
+          <h3>1H current snapshot</h3>
+          <p id="nifty-mtf-1h-status" class="status-value">—</p>
+        </div>
+        <div>
+          <h3>4H current snapshot</h3>
+          <p id="nifty-mtf-4h-status" class="status-value">—</p>
+        </div>
+        <div>
+          <h3>Admission dependency</h3>
+          <p id="nifty-mtf-admission-status" class="status-value">—</p>
+        </div>
+      </div>
+      <dl id="nifty-mtf-details" class="details-list"></dl>
+    </section>
+
+    <section class="card admission-card">
+      <h2>Source admission artifact</h2>
+      <p class="small-note">Render-only view of <code>nifty-minute-source-admission.json</code> transported by <code>GET /api/admission</code>. No decision is recalculated in this dashboard.</p>
+      <div class="grid admission-grid">
+        <div>
+          <h3>Decision</h3>
+          <p id="admission-decision" class="status-value">—</p>
+        </div>
+        <div>
+          <h3>Terminal reason</h3>
+          <p id="admission-terminal-reason" class="status-value">—</p>
+        </div>
+        <div>
+          <h3>Research admission</h3>
+          <p id="admission-research-approved" class="status-value">—</p>
+        </div>
+        <div>
+          <h3>Trading approval</h3>
+          <p id="admission-trading-approved" class="status-value">—</p>
+        </div>
+      </div>
+      <h3>Raw gate results</h3>
+      <dl id="admission-gates" class="details-list"></dl>
+      <h3>Execution boundary</h3>
+      <dl id="admission-boundary" class="details-list"></dl>
+      <h3>Provenance</h3>
+      <dl id="admission-provenance" class="details-list"></dl>
+    </section>
+
+    <section class="card">
+      <h2>Provenance and SHA-256</h2>
+      <p class="small-note">Checksums are displayed from generated manifest/inventory artifacts. This dashboard does not mutate or replace source data.</p>
+      <div id="provenance-table-wrap"></div>
+    </section>
+
+    <section class="card">
+      <h2>API</h2>
+      <p class="small-note">
+        Read-only local endpoints:
+        <code>/api/health</code>,
+        <code>/api/status</code>,
+        <code>/api/manifest</code>,
+        <code>/api/daily</code>,
+        <code>/api/intraday</code>,
+        <code>/api/governance</code>.
+      </p>
+    </section>
+
+    <section id="error-panel" class="card error-panel" hidden>
+      <h2>Artifact integrity blocked</h2>
+      <p id="error-message"></p>
+      <pre id="error-details"></pre>
+    </section>
+  </main>
+
+  <script type="module" src="/app.js"></script>
+</body>
+</html>

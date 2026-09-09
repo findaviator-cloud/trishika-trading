@@ -1,0 +1,13 @@
+{
+  "schemaVersion": 1,
+  "profileId": "SYNTHETIC_RECONCILIATION_REVIEW_MINUTE",
+  "candidateType": "CSV_MINUTE_OHLC",
+  "sourceTier": "SYNTHETIC_TEST_FIXTURE",
+  "candidatePath": "admission/fixtures/synthetic-reconciliation-review-minute.csv",
+  "referencePath": "admission/fixtures/synthetic-reference-daily.csv",
+  "evaluationAsOf": "2026-09-08T15:30:00+05:30",
+  "expectedSha256": "c20f0b84852417d7c0265e4fb38c0d1d7aa41218ccd7736878310ffcbdb51310",
+  "expectedDecision": "REVIEW",
+  "expectedApprovedForResearchSource": false,
+  "notes": "Controlled reconciliation-failure fixture. Policy maps a standalone reference failure to REVIEW."
+}

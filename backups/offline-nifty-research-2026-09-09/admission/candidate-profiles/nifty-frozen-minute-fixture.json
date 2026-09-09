@@ -1,0 +1,13 @@
+{
+  "schemaVersion": 1,
+  "profileId": "NIFTY_FROZEN_THIRD_PARTY_MINUTE_FIXTURE",
+  "candidateType": "CSV_MINUTE_OHLC",
+  "sourceTier": "THIRD_PARTY_HISTORICAL_RESEARCH",
+  "candidatePath": "data/india-input/NIFTY 50_minute_data.csv",
+  "referencePath": "data/india-input/nifty50-nse-daily-normalized.csv",
+  "evaluationAsOf": "2026-09-08T15:30:00+05:30",
+  "expectedSha256": "6680370e257c8cac3d52a671f80a321c4b3fe33cc4b7e6b3db89ed94a05f19b7",
+  "expectedDecision": "BLOCKED",
+  "expectedApprovedForResearchSource": false,
+  "notes": "Frozen historical NIFTY fixture. Must remain BLOCKED as a real-world regression safety anchor."
+}

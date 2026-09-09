@@ -1,0 +1,13 @@
+{
+  "schemaVersion": 1,
+  "profileId": "SYNTHETIC_STALE_MINUTE_BLOCKED",
+  "candidateType": "CSV_MINUTE_OHLC",
+  "sourceTier": "SYNTHETIC_TEST_FIXTURE",
+  "candidatePath": "admission/fixtures/synthetic-stale-minute.csv",
+  "referencePath": "admission/fixtures/synthetic-stale-reference-daily.csv",
+  "evaluationAsOf": "2026-09-08T15:30:00+05:30",
+  "expectedSha256": "e610f3c01c96705c67ee2643542cde6de1eb8bddd9ca522067e3feb03bc5054f",
+  "expectedDecision": "BLOCKED",
+  "expectedApprovedForResearchSource": false,
+  "notes": "Controlled stale fixture. Reference dates/closes intentionally reconcile so freshness is the first and terminal failing policy gate."
+}
