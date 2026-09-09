@@ -1,0 +1,7 @@
+{
+  "decision": "APPROVED_FOR_RESEARCH_SOURCE",
+  "approvedForResearchSource": true,
+  "approvedForTrading": false,
+  "sourceKind": "SYNTHETIC_REGRESSION_FIXTURE",
+  "readinessOnly": true
+}
