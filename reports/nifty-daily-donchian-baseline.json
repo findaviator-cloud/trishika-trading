@@ -1,0 +1,1324 @@
+{
+  "generatedAtUtc": "2026-09-10T12:09:49.019Z",
+  "mode": "RESEARCH_ONLY_LOCAL_BACKTEST",
+  "safety": {
+    "networkCalls": false,
+    "brokerCalls": false,
+    "websocketCalls": false,
+    "orderPlacement": false,
+    "liveExecution": false
+  },
+  "input": {
+    "path": "data/india-input/nifty50-nse-daily-normalized.csv",
+    "rowCount": 666,
+    "firstTimestamp": "2024-01-01T15:30:00+05:30",
+    "lastTimestamp": "2026-09-07T15:30:00+05:30",
+    "sourceType": "NIFTY_50_PRICE_INDEX_DAILY_OHLC_AS_IS"
+  },
+  "frozenSpecification": {
+    "positionPolicy": "LONG_ONLY_FLAT_TO_LONG_TO_FLAT_NO_SHORTS_NO_REVERSALS_NO_SAME_DAY_FILLS",
+    "entry": "completed close strictly above maximum high of prior 20 trading-session rows",
+    "exit": "completed close strictly below minimum low of prior 20 trading-session rows",
+    "signalTiming": "signal at completed day t close using data through day t only",
+    "executionTiming": "fill at next trading-session open, day t+1",
+    "entryLookbackSessions": 20,
+    "exitLookbackSessions": 20,
+    "warmupCompletedSessions": 20,
+    "trendFilter": "NONE",
+    "atrStop": "NONE",
+    "openTradePolicy": "OPEN_AT_DATASET_END_NOT_FORCE_CLOSED_EXCLUDED_FROM_COMPLETED_METRICS_AND_EQUITY_CURVE",
+    "evidenceGate": {
+      "minimumCompletedTrades": 10,
+      "belowThresholdStatus": "INSUFFICIENT_EVIDENCE",
+      "atOrAboveThresholdStatus": "SUFFICIENT_EVIDENCE"
+    }
+  },
+  "signalLedgerSummary": {
+    "evaluableSignalDays": 645,
+    "rawEntryConditions": 47,
+    "rawExitConditions": 33,
+    "lastSignalDayWithNextOpenAvailable": "2026-09-04"
+  },
+  "scenarios": [
+    {
+      "scenario": {
+        "id": "ZERO_BPS",
+        "entryCostBps": 0,
+        "exitCostBps": 0,
+        "roundTripBps": 0
+      },
+      "status": "SUFFICIENT_EVIDENCE",
+      "statusMeaning": "Trade-count reporting threshold met. This is not an edge, robustness, deployment, or out-of-sample validation verdict.",
+      "completedTrades": [
+        {
+          "tradeId": 1,
+          "state": "COMPLETED",
+          "scenarioId": "ZERO_BPS",
+          "entrySignalDate": "2024-02-20",
+          "entrySignalTimestamp": "2024-02-20T15:30:00+05:30",
+          "entrySignalClose": 22196.95,
+          "entryPriorUpperBand": 22186.65,
+          "entryDate": "2024-02-21",
+          "entryTimestamp": "2024-02-21T15:30:00+05:30",
+          "entryRawFill": 22248.85,
+          "entryEffectiveFill": 22248.85,
+          "exitSignalDate": "2024-03-19",
+          "exitSignalTimestamp": "2024-03-19T15:30:00+05:30",
+          "exitSignalClose": 21817.45,
+          "exitPriorLowerBand": 21860.65,
+          "exitDate": "2024-03-20",
+          "exitTimestamp": "2024-03-20T15:30:00+05:30",
+          "exitRawFill": 21843.9,
+          "exitEffectiveFill": 21843.9,
+          "calendarDaysHeld": 28,
+          "tradingSessionsHeld": 19,
+          "grossReturn": -0.0182009407,
+          "netReturn": -0.0182009407
+        },
+        {
+          "tradeId": 2,
+          "state": "COMPLETED",
+          "scenarioId": "ZERO_BPS",
+          "entrySignalDate": "2024-04-08",
+          "entrySignalTimestamp": "2024-04-08T15:30:00+05:30",
+          "entrySignalClose": 22666.3,
+          "entryPriorUpperBand": 22619,
+          "entryDate": "2024-04-09",
+          "entryTimestamp": "2024-04-09T15:30:00+05:30",
+          "entryRawFill": 22765.1,
+          "entryEffectiveFill": 22765.1,
+          "exitSignalDate": "2024-08-05",
+          "exitSignalTimestamp": "2024-08-05T15:30:00+05:30",
+          "exitSignalClose": 24055.6,
+          "exitPriorLowerBand": 24074.2,
+          "exitDate": "2024-08-06",
+          "exitTimestamp": "2024-08-06T15:30:00+05:30",
+          "exitRawFill": 24189.85,
+          "exitEffectiveFill": 24189.85,
+          "calendarDaysHeld": 119,
+          "tradingSessionsHeld": 80,
+          "grossReturn": 0.0625848338,
+          "netReturn": 0.0625848338
+        },
+        {
+          "tradeId": 3,
+          "state": "COMPLETED",
+          "scenarioId": "ZERO_BPS",
+          "entrySignalDate": "2024-08-29",
+          "entrySignalTimestamp": "2024-08-29T15:30:00+05:30",
+          "entrySignalClose": 25151.95,
+          "entryPriorUpperBand": 25129.6,
+          "entryDate": "2024-08-30",
+          "entryTimestamp": "2024-08-30T15:30:00+05:30",
+          "entryRawFill": 25249.7,
+          "entryEffectiveFill": 25249.7,
+          "exitSignalDate": "2024-10-22",
+          "exitSignalTimestamp": "2024-10-22T15:30:00+05:30",
+          "exitSignalClose": 24472.1,
+          "exitPriorLowerBand": 24567.65,
+          "exitDate": "2024-10-23",
+          "exitTimestamp": "2024-10-23T15:30:00+05:30",
+          "exitRawFill": 24378.15,
+          "exitEffectiveFill": 24378.15,
+          "calendarDaysHeld": 54,
+          "tradingSessionsHeld": 37,
+          "grossReturn": -0.0345172418,
+          "netReturn": -0.0345172418
+        },
+        {
+          "tradeId": 4,
+          "state": "COMPLETED",
+          "scenarioId": "ZERO_BPS",
+          "entrySignalDate": "2024-12-05",
+          "entrySignalTimestamp": "2024-12-05T15:30:00+05:30",
+          "entrySignalClose": 24708.4,
+          "entryPriorUpperBand": 24573.2,
+          "entryDate": "2024-12-06",
+          "entryTimestamp": "2024-12-06T15:30:00+05:30",
+          "entryRawFill": 24729.45,
+          "entryEffectiveFill": 24729.45,
+          "exitSignalDate": "2025-01-10",
+          "exitSignalTimestamp": "2025-01-10T15:30:00+05:30",
+          "exitSignalClose": 23431.5,
+          "exitPriorLowerBand": 23460.45,
+          "exitDate": "2025-01-13",
+          "exitTimestamp": "2025-01-13T15:30:00+05:30",
+          "exitRawFill": 23195.4,
+          "exitEffectiveFill": 23195.4,
+          "calendarDaysHeld": 38,
+          "tradingSessionsHeld": 25,
+          "grossReturn": -0.0620333246,
+          "netReturn": -0.0620333246
+        },
+        {
+          "tradeId": 5,
+          "state": "COMPLETED",
+          "scenarioId": "ZERO_BPS",
+          "entrySignalDate": "2025-03-20",
+          "entrySignalTimestamp": "2025-03-20T15:30:00+05:30",
+          "entrySignalClose": 23190.65,
+          "entryPriorUpperBand": 23049.95,
+          "entryDate": "2025-03-21",
+          "entryTimestamp": "2025-03-21T15:30:00+05:30",
+          "entryRawFill": 23168.25,
+          "entryEffectiveFill": 23168.25,
+          "exitSignalDate": "2025-04-07",
+          "exitSignalTimestamp": "2025-04-07T15:30:00+05:30",
+          "exitSignalClose": 22161.6,
+          "exitPriorLowerBand": 22245.85,
+          "exitDate": "2025-04-08",
+          "exitTimestamp": "2025-04-08T15:30:00+05:30",
+          "exitRawFill": 22446.75,
+          "exitEffectiveFill": 22446.75,
+          "calendarDaysHeld": 18,
+          "tradingSessionsHeld": 11,
+          "grossReturn": -0.0311417565,
+          "netReturn": -0.0311417565
+        },
+        {
+          "tradeId": 6,
+          "state": "COMPLETED",
+          "scenarioId": "ZERO_BPS",
+          "entrySignalDate": "2025-04-21",
+          "entrySignalTimestamp": "2025-04-21T15:30:00+05:30",
+          "entrySignalClose": 24125.55,
+          "entryPriorUpperBand": 23872.35,
+          "entryDate": "2025-04-22",
+          "entryTimestamp": "2025-04-22T15:30:00+05:30",
+          "entryRawFill": 24185.4,
+          "entryEffectiveFill": 24185.4,
+          "exitSignalDate": "2025-07-25",
+          "exitSignalTimestamp": "2025-07-25T15:30:00+05:30",
+          "exitSignalClose": 24837,
+          "exitPriorLowerBand": 24882.3,
+          "exitDate": "2025-07-28",
+          "exitTimestamp": "2025-07-28T15:30:00+05:30",
+          "exitRawFill": 24782.45,
+          "exitEffectiveFill": 24782.45,
+          "calendarDaysHeld": 97,
+          "tradingSessionsHeld": 68,
+          "grossReturn": 0.024686381,
+          "netReturn": 0.024686381
+        },
+        {
+          "tradeId": 7,
+          "state": "COMPLETED",
+          "scenarioId": "ZERO_BPS",
+          "entrySignalDate": "2025-09-16",
+          "entrySignalTimestamp": "2025-09-16T15:30:00+05:30",
+          "entrySignalClose": 25239.1,
+          "entryPriorUpperBand": 25153.65,
+          "entryDate": "2025-09-17",
+          "entryTimestamp": "2025-09-17T15:30:00+05:30",
+          "entryRawFill": 25276.6,
+          "entryEffectiveFill": 25276.6,
+          "exitSignalDate": "2026-01-09",
+          "exitSignalTimestamp": "2026-01-09T15:30:00+05:30",
+          "exitSignalClose": 25683.3,
+          "exitPriorLowerBand": 25693.25,
+          "exitDate": "2026-01-12",
+          "exitTimestamp": "2026-01-12T15:30:00+05:30",
+          "exitRawFill": 25669.05,
+          "exitEffectiveFill": 25669.05,
+          "calendarDaysHeld": 117,
+          "tradingSessionsHeld": 79,
+          "grossReturn": 0.0155262179,
+          "netReturn": 0.0155262179
+        },
+        {
+          "tradeId": 8,
+          "state": "COMPLETED",
+          "scenarioId": "ZERO_BPS",
+          "entrySignalDate": "2026-04-15",
+          "entrySignalTimestamp": "2026-04-15T15:30:00+05:30",
+          "entrySignalClose": 24231.3,
+          "entryPriorUpperBand": 24074.05,
+          "entryDate": "2026-04-16",
+          "entryTimestamp": "2026-04-16T15:30:00+05:30",
+          "entryRawFill": 24385.2,
+          "entryEffectiveFill": 24385.2,
+          "exitSignalDate": "2026-05-12",
+          "exitSignalTimestamp": "2026-05-12T15:30:00+05:30",
+          "exitSignalClose": 23379.55,
+          "exitPriorLowerBand": 23555.6,
+          "exitDate": "2026-05-13",
+          "exitTimestamp": "2026-05-13T15:30:00+05:30",
+          "exitRawFill": 23362.45,
+          "exitEffectiveFill": 23362.45,
+          "calendarDaysHeld": 27,
+          "tradingSessionsHeld": 18,
+          "grossReturn": -0.0419414235,
+          "netReturn": -0.0419414235
+        },
+        {
+          "tradeId": 9,
+          "state": "COMPLETED",
+          "scenarioId": "ZERO_BPS",
+          "entrySignalDate": "2026-06-18",
+          "entrySignalTimestamp": "2026-06-18T15:30:00+05:30",
+          "entrySignalClose": 24168,
+          "entryPriorUpperBand": 24108.2,
+          "entryDate": "2026-06-19",
+          "entryTimestamp": "2026-06-19T15:30:00+05:30",
+          "entryRawFill": 23991.2,
+          "entryEffectiveFill": 23991.2,
+          "exitSignalDate": "2026-07-24",
+          "exitSignalTimestamp": "2026-07-24T15:30:00+05:30",
+          "exitSignalClose": 23767.45,
+          "exitPriorLowerBand": 23805.2,
+          "exitDate": "2026-07-27",
+          "exitTimestamp": "2026-07-27T15:30:00+05:30",
+          "exitRawFill": 23928.4,
+          "exitEffectiveFill": 23928.4,
+          "calendarDaysHeld": 38,
+          "tradingSessionsHeld": 25,
+          "grossReturn": -0.0026176265,
+          "netReturn": -0.0026176265
+        },
+        {
+          "tradeId": 10,
+          "state": "COMPLETED",
+          "scenarioId": "ZERO_BPS",
+          "entrySignalDate": "2026-08-03",
+          "entrySignalTimestamp": "2026-08-03T15:30:00+05:30",
+          "entrySignalClose": 24774.3,
+          "entryPriorUpperBand": 24530.9,
+          "entryDate": "2026-08-04",
+          "entryTimestamp": "2026-08-04T15:30:00+05:30",
+          "entryRawFill": 24703.9,
+          "entryEffectiveFill": 24703.9,
+          "exitSignalDate": "2026-09-02",
+          "exitSignalTimestamp": "2026-09-02T15:30:00+05:30",
+          "exitSignalClose": 23914.45,
+          "exitPriorLowerBand": 23952.55,
+          "exitDate": "2026-09-03",
+          "exitTimestamp": "2026-09-03T15:30:00+05:30",
+          "exitRawFill": 23997.95,
+          "exitEffectiveFill": 23997.95,
+          "calendarDaysHeld": 30,
+          "tradingSessionsHeld": 22,
+          "grossReturn": -0.0285764596,
+          "netReturn": -0.0285764596
+        }
+      ],
+      "openAtDatasetEnd": null,
+      "ignoredEntrySignals": [
+        {
+          "signalDate": "2024-03-01",
+          "executionDate": "2024-03-04",
+          "reason": "ALREADY_LONG"
+        },
+        {
+          "signalDate": "2024-03-04",
+          "executionDate": "2024-03-05",
+          "reason": "ALREADY_LONG"
+        },
+        {
+          "signalDate": "2024-03-06",
+          "executionDate": "2024-03-07",
+          "reason": "ALREADY_LONG"
+        },
+        {
+          "signalDate": "2024-05-23",
+          "executionDate": "2024-05-24",
+          "reason": "ALREADY_LONG"
+        },
+        {
+          "signalDate": "2024-06-03",
+          "executionDate": "2024-06-04",
+          "reason": "ALREADY_LONG"
+        },
+        {
+          "signalDate": "2024-06-18",
+          "executionDate": "2024-06-19",
+          "reason": "ALREADY_LONG"
+        },
+        {
+          "signalDate": "2024-06-25",
+          "executionDate": "2024-06-26",
+          "reason": "ALREADY_LONG"
+        },
+        {
+          "signalDate": "2024-06-26",
+          "executionDate": "2024-06-27",
+          "reason": "ALREADY_LONG"
+        },
+        {
+          "signalDate": "2024-06-27",
+          "executionDate": "2024-06-28",
+          "reason": "ALREADY_LONG"
+        },
+        {
+          "signalDate": "2024-07-03",
+          "executionDate": "2024-07-04",
+          "reason": "ALREADY_LONG"
+        },
+        {
+          "signalDate": "2024-07-09",
+          "executionDate": "2024-07-10",
+          "reason": "ALREADY_LONG"
+        },
+        {
+          "signalDate": "2024-07-12",
+          "executionDate": "2024-07-15",
+          "reason": "ALREADY_LONG"
+        },
+        {
+          "signalDate": "2024-07-18",
+          "executionDate": "2024-07-19",
+          "reason": "ALREADY_LONG"
+        },
+        {
+          "signalDate": "2024-08-01",
+          "executionDate": "2024-08-02",
+          "reason": "ALREADY_LONG"
+        },
+        {
+          "signalDate": "2024-08-30",
+          "executionDate": "2024-09-02",
+          "reason": "ALREADY_LONG"
+        },
+        {
+          "signalDate": "2024-09-02",
+          "executionDate": "2024-09-03",
+          "reason": "ALREADY_LONG"
+        },
+        {
+          "signalDate": "2024-09-12",
+          "executionDate": "2024-09-13",
+          "reason": "ALREADY_LONG"
+        },
+        {
+          "signalDate": "2024-09-20",
+          "executionDate": "2024-09-23",
+          "reason": "ALREADY_LONG"
+        },
+        {
+          "signalDate": "2024-09-23",
+          "executionDate": "2024-09-24",
+          "reason": "ALREADY_LONG"
+        },
+        {
+          "signalDate": "2024-09-26",
+          "executionDate": "2024-09-27",
+          "reason": "ALREADY_LONG"
+        },
+        {
+          "signalDate": "2025-03-21",
+          "executionDate": "2025-03-24",
+          "reason": "ALREADY_LONG"
+        },
+        {
+          "signalDate": "2025-03-24",
+          "executionDate": "2025-03-25",
+          "reason": "ALREADY_LONG"
+        },
+        {
+          "signalDate": "2025-04-23",
+          "executionDate": "2025-04-24",
+          "reason": "ALREADY_LONG"
+        },
+        {
+          "signalDate": "2025-05-12",
+          "executionDate": "2025-05-13",
+          "reason": "ALREADY_LONG"
+        },
+        {
+          "signalDate": "2025-05-15",
+          "executionDate": "2025-05-16",
+          "reason": "ALREADY_LONG"
+        },
+        {
+          "signalDate": "2025-06-26",
+          "executionDate": "2025-06-27",
+          "reason": "ALREADY_LONG"
+        },
+        {
+          "signalDate": "2025-06-27",
+          "executionDate": "2025-06-30",
+          "reason": "ALREADY_LONG"
+        },
+        {
+          "signalDate": "2025-09-17",
+          "executionDate": "2025-09-18",
+          "reason": "ALREADY_LONG"
+        },
+        {
+          "signalDate": "2025-09-18",
+          "executionDate": "2025-09-19",
+          "reason": "ALREADY_LONG"
+        },
+        {
+          "signalDate": "2025-10-16",
+          "executionDate": "2025-10-17",
+          "reason": "ALREADY_LONG"
+        },
+        {
+          "signalDate": "2025-10-17",
+          "executionDate": "2025-10-20",
+          "reason": "ALREADY_LONG"
+        },
+        {
+          "signalDate": "2025-10-20",
+          "executionDate": "2025-10-21",
+          "reason": "ALREADY_LONG"
+        },
+        {
+          "signalDate": "2025-11-20",
+          "executionDate": "2025-11-21",
+          "reason": "ALREADY_LONG"
+        },
+        {
+          "signalDate": "2026-01-02",
+          "executionDate": "2026-01-05",
+          "reason": "ALREADY_LONG"
+        },
+        {
+          "signalDate": "2026-04-21",
+          "executionDate": "2026-04-22",
+          "reason": "ALREADY_LONG"
+        },
+        {
+          "signalDate": "2026-07-03",
+          "executionDate": "2026-07-06",
+          "reason": "ALREADY_LONG"
+        },
+        {
+          "signalDate": "2026-07-06",
+          "executionDate": "2026-07-07",
+          "reason": "ALREADY_LONG"
+        }
+      ],
+      "ignoredExitSignals": [
+        {
+          "signalDate": "2024-10-23",
+          "executionDate": "2024-10-24",
+          "reason": "ALREADY_FLAT"
+        },
+        {
+          "signalDate": "2024-10-25",
+          "executionDate": "2024-10-28",
+          "reason": "ALREADY_FLAT"
+        },
+        {
+          "signalDate": "2024-11-04",
+          "executionDate": "2024-11-05",
+          "reason": "ALREADY_FLAT"
+        },
+        {
+          "signalDate": "2024-11-13",
+          "executionDate": "2024-11-14",
+          "reason": "ALREADY_FLAT"
+        },
+        {
+          "signalDate": "2024-11-18",
+          "executionDate": "2024-11-19",
+          "reason": "ALREADY_FLAT"
+        },
+        {
+          "signalDate": "2024-11-21",
+          "executionDate": "2024-11-22",
+          "reason": "ALREADY_FLAT"
+        },
+        {
+          "signalDate": "2025-01-13",
+          "executionDate": "2025-01-14",
+          "reason": "ALREADY_FLAT"
+        },
+        {
+          "signalDate": "2025-01-21",
+          "executionDate": "2025-01-22",
+          "reason": "ALREADY_FLAT"
+        },
+        {
+          "signalDate": "2025-01-27",
+          "executionDate": "2025-01-28",
+          "reason": "ALREADY_FLAT"
+        },
+        {
+          "signalDate": "2025-02-24",
+          "executionDate": "2025-02-25",
+          "reason": "ALREADY_FLAT"
+        },
+        {
+          "signalDate": "2025-02-28",
+          "executionDate": "2025-03-03",
+          "reason": "ALREADY_FLAT"
+        },
+        {
+          "signalDate": "2025-07-28",
+          "executionDate": "2025-07-29",
+          "reason": "ALREADY_FLAT"
+        },
+        {
+          "signalDate": "2025-08-01",
+          "executionDate": "2025-08-04",
+          "reason": "ALREADY_FLAT"
+        },
+        {
+          "signalDate": "2026-01-20",
+          "executionDate": "2026-01-21",
+          "reason": "ALREADY_FLAT"
+        },
+        {
+          "signalDate": "2026-01-21",
+          "executionDate": "2026-01-22",
+          "reason": "ALREADY_FLAT"
+        },
+        {
+          "signalDate": "2026-02-01",
+          "executionDate": "2026-02-02",
+          "reason": "ALREADY_FLAT"
+        },
+        {
+          "signalDate": "2026-03-04",
+          "executionDate": "2026-03-05",
+          "reason": "ALREADY_FLAT"
+        },
+        {
+          "signalDate": "2026-03-09",
+          "executionDate": "2026-03-10",
+          "reason": "ALREADY_FLAT"
+        },
+        {
+          "signalDate": "2026-03-12",
+          "executionDate": "2026-03-13",
+          "reason": "ALREADY_FLAT"
+        },
+        {
+          "signalDate": "2026-03-13",
+          "executionDate": "2026-03-16",
+          "reason": "ALREADY_FLAT"
+        },
+        {
+          "signalDate": "2026-03-23",
+          "executionDate": "2026-03-24",
+          "reason": "ALREADY_FLAT"
+        },
+        {
+          "signalDate": "2026-03-30",
+          "executionDate": "2026-04-01",
+          "reason": "ALREADY_FLAT"
+        },
+        {
+          "signalDate": "2026-06-08",
+          "executionDate": "2026-06-09",
+          "reason": "ALREADY_FLAT"
+        }
+      ],
+      "equityCurve": [
+        {
+          "tradeId": 1,
+          "exitDate": "2024-03-20",
+          "netReturn": -0.0182009407,
+          "equity": 0.9817990593
+        },
+        {
+          "tradeId": 2,
+          "exitDate": "2024-08-06",
+          "netReturn": 0.0625848338,
+          "equity": 1.0432447903
+        },
+        {
+          "tradeId": 3,
+          "exitDate": "2024-10-23",
+          "netReturn": -0.0345172418,
+          "equity": 1.0072348576
+        },
+        {
+          "tradeId": 4,
+          "exitDate": "2025-01-13",
+          "netReturn": -0.0620333246,
+          "equity": 0.9447527307
+        },
+        {
+          "tradeId": 5,
+          "exitDate": "2025-04-08",
+          "netReturn": -0.0311417565,
+          "equity": 0.9153314712
+        },
+        {
+          "tradeId": 6,
+          "exitDate": "2025-07-28",
+          "netReturn": 0.024686381,
+          "equity": 0.9379276926
+        },
+        {
+          "tradeId": 7,
+          "exitDate": "2026-01-12",
+          "netReturn": 0.0155262179,
+          "equity": 0.9524901624
+        },
+        {
+          "tradeId": 8,
+          "exitDate": "2026-05-13",
+          "netReturn": -0.0419414235,
+          "equity": 0.9125413691
+        },
+        {
+          "tradeId": 9,
+          "exitDate": "2026-07-27",
+          "netReturn": -0.0026176265,
+          "equity": 0.9101526766
+        },
+        {
+          "tradeId": 10,
+          "exitDate": "2026-09-03",
+          "netReturn": -0.0285764596,
+          "equity": 0.8841437354
+        }
+      ],
+      "metrics": {
+        "completedTradeCount": 10,
+        "openPositionAtDatasetEndCount": 0,
+        "winRate": 0.3,
+        "averageNetTradeReturn": -0.0116231341,
+        "medianNetTradeReturn": -0.0233887002,
+        "terminalReturnCompletedTradesOnly": -0.1158562646,
+        "maximumDrawdownCompletedTradesOnly": 0.1525059664,
+        "bestSingleTradeNetReturn": 0.0625848338,
+        "worstSingleTradeNetReturn": -0.0620333246
+      }
+    },
+    {
+      "scenario": {
+        "id": "TWENTY_BPS_ROUND_TRIP",
+        "entryCostBps": 10,
+        "exitCostBps": 10,
+        "roundTripBps": 20
+      },
+      "status": "SUFFICIENT_EVIDENCE",
+      "statusMeaning": "Trade-count reporting threshold met. This is not an edge, robustness, deployment, or out-of-sample validation verdict.",
+      "completedTrades": [
+        {
+          "tradeId": 1,
+          "state": "COMPLETED",
+          "scenarioId": "TWENTY_BPS_ROUND_TRIP",
+          "entrySignalDate": "2024-02-20",
+          "entrySignalTimestamp": "2024-02-20T15:30:00+05:30",
+          "entrySignalClose": 22196.95,
+          "entryPriorUpperBand": 22186.65,
+          "entryDate": "2024-02-21",
+          "entryTimestamp": "2024-02-21T15:30:00+05:30",
+          "entryRawFill": 22248.85,
+          "entryEffectiveFill": 22271.09885,
+          "exitSignalDate": "2024-03-19",
+          "exitSignalTimestamp": "2024-03-19T15:30:00+05:30",
+          "exitSignalClose": 21817.45,
+          "exitPriorLowerBand": 21860.65,
+          "exitDate": "2024-03-20",
+          "exitTimestamp": "2024-03-20T15:30:00+05:30",
+          "exitRawFill": 21843.9,
+          "exitEffectiveFill": 21822.0561,
+          "calendarDaysHeld": 28,
+          "tradingSessionsHeld": 19,
+          "grossReturn": -0.0182009407,
+          "netReturn": -0.0201625772
+        },
+        {
+          "tradeId": 2,
+          "state": "COMPLETED",
+          "scenarioId": "TWENTY_BPS_ROUND_TRIP",
+          "entrySignalDate": "2024-04-08",
+          "entrySignalTimestamp": "2024-04-08T15:30:00+05:30",
+          "entrySignalClose": 22666.3,
+          "entryPriorUpperBand": 22619,
+          "entryDate": "2024-04-09",
+          "entryTimestamp": "2024-04-09T15:30:00+05:30",
+          "entryRawFill": 22765.1,
+          "entryEffectiveFill": 22787.8651,
+          "exitSignalDate": "2024-08-05",
+          "exitSignalTimestamp": "2024-08-05T15:30:00+05:30",
+          "exitSignalClose": 24055.6,
+          "exitPriorLowerBand": 24074.2,
+          "exitDate": "2024-08-06",
+          "exitTimestamp": "2024-08-06T15:30:00+05:30",
+          "exitRawFill": 24189.85,
+          "exitEffectiveFill": 24165.66015,
+          "calendarDaysHeld": 119,
+          "tradingSessionsHeld": 80,
+          "grossReturn": 0.0625848338,
+          "netReturn": 0.0604617872
+        },
+        {
+          "tradeId": 3,
+          "state": "COMPLETED",
+          "scenarioId": "TWENTY_BPS_ROUND_TRIP",
+          "entrySignalDate": "2024-08-29",
+          "entrySignalTimestamp": "2024-08-29T15:30:00+05:30",
+          "entrySignalClose": 25151.95,
+          "entryPriorUpperBand": 25129.6,
+          "entryDate": "2024-08-30",
+          "entryTimestamp": "2024-08-30T15:30:00+05:30",
+          "entryRawFill": 25249.7,
+          "entryEffectiveFill": 25274.9497,
+          "exitSignalDate": "2024-10-22",
+          "exitSignalTimestamp": "2024-10-22T15:30:00+05:30",
+          "exitSignalClose": 24472.1,
+          "exitPriorLowerBand": 24567.65,
+          "exitDate": "2024-10-23",
+          "exitTimestamp": "2024-10-23T15:30:00+05:30",
+          "exitRawFill": 24378.15,
+          "exitEffectiveFill": 24353.77185,
+          "calendarDaysHeld": 54,
+          "tradingSessionsHeld": 37,
+          "grossReturn": -0.0345172418,
+          "netReturn": -0.0364462783
+        },
+        {
+          "tradeId": 4,
+          "state": "COMPLETED",
+          "scenarioId": "TWENTY_BPS_ROUND_TRIP",
+          "entrySignalDate": "2024-12-05",
+          "entrySignalTimestamp": "2024-12-05T15:30:00+05:30",
+          "entrySignalClose": 24708.4,
+          "entryPriorUpperBand": 24573.2,
+          "entryDate": "2024-12-06",
+          "entryTimestamp": "2024-12-06T15:30:00+05:30",
+          "entryRawFill": 24729.45,
+          "entryEffectiveFill": 24754.17945,
+          "exitSignalDate": "2025-01-10",
+          "exitSignalTimestamp": "2025-01-10T15:30:00+05:30",
+          "exitSignalClose": 23431.5,
+          "exitPriorLowerBand": 23460.45,
+          "exitDate": "2025-01-13",
+          "exitTimestamp": "2025-01-13T15:30:00+05:30",
+          "exitRawFill": 23195.4,
+          "exitEffectiveFill": 23172.2046,
+          "calendarDaysHeld": 38,
+          "tradingSessionsHeld": 25,
+          "grossReturn": -0.0620333246,
+          "netReturn": -0.0639073839
+        },
+        {
+          "tradeId": 5,
+          "state": "COMPLETED",
+          "scenarioId": "TWENTY_BPS_ROUND_TRIP",
+          "entrySignalDate": "2025-03-20",
+          "entrySignalTimestamp": "2025-03-20T15:30:00+05:30",
+          "entrySignalClose": 23190.65,
+          "entryPriorUpperBand": 23049.95,
+          "entryDate": "2025-03-21",
+          "entryTimestamp": "2025-03-21T15:30:00+05:30",
+          "entryRawFill": 23168.25,
+          "entryEffectiveFill": 23191.41825,
+          "exitSignalDate": "2025-04-07",
+          "exitSignalTimestamp": "2025-04-07T15:30:00+05:30",
+          "exitSignalClose": 22161.6,
+          "exitPriorLowerBand": 22245.85,
+          "exitDate": "2025-04-08",
+          "exitTimestamp": "2025-04-08T15:30:00+05:30",
+          "exitRawFill": 22446.75,
+          "exitEffectiveFill": 22424.30325,
+          "calendarDaysHeld": 18,
+          "tradingSessionsHeld": 11,
+          "grossReturn": -0.0311417565,
+          "netReturn": -0.0330775372
+        },
+        {
+          "tradeId": 6,
+          "state": "COMPLETED",
+          "scenarioId": "TWENTY_BPS_ROUND_TRIP",
+          "entrySignalDate": "2025-04-21",
+          "entrySignalTimestamp": "2025-04-21T15:30:00+05:30",
+          "entrySignalClose": 24125.55,
+          "entryPriorUpperBand": 23872.35,
+          "entryDate": "2025-04-22",
+          "entryTimestamp": "2025-04-22T15:30:00+05:30",
+          "entryRawFill": 24185.4,
+          "entryEffectiveFill": 24209.5854,
+          "exitSignalDate": "2025-07-25",
+          "exitSignalTimestamp": "2025-07-25T15:30:00+05:30",
+          "exitSignalClose": 24837,
+          "exitPriorLowerBand": 24882.3,
+          "exitDate": "2025-07-28",
+          "exitTimestamp": "2025-07-28T15:30:00+05:30",
+          "exitRawFill": 24782.45,
+          "exitEffectiveFill": 24757.66755,
+          "calendarDaysHeld": 97,
+          "tradingSessionsHeld": 68,
+          "grossReturn": 0.024686381,
+          "netReturn": 0.0226390556
+        },
+        {
+          "tradeId": 7,
+          "state": "COMPLETED",
+          "scenarioId": "TWENTY_BPS_ROUND_TRIP",
+          "entrySignalDate": "2025-09-16",
+          "entrySignalTimestamp": "2025-09-16T15:30:00+05:30",
+          "entrySignalClose": 25239.1,
+          "entryPriorUpperBand": 25153.65,
+          "entryDate": "2025-09-17",
+          "entryTimestamp": "2025-09-17T15:30:00+05:30",
+          "entryRawFill": 25276.6,
+          "entryEffectiveFill": 25301.8766,
+          "exitSignalDate": "2026-01-09",
+          "exitSignalTimestamp": "2026-01-09T15:30:00+05:30",
+          "exitSignalClose": 25683.3,
+          "exitPriorLowerBand": 25693.25,
+          "exitDate": "2026-01-12",
+          "exitTimestamp": "2026-01-12T15:30:00+05:30",
+          "exitRawFill": 25669.05,
+          "exitEffectiveFill": 25643.38095,
+          "calendarDaysHeld": 117,
+          "tradingSessionsHeld": 79,
+          "grossReturn": 0.0155262179,
+          "netReturn": 0.0134971945
+        },
+        {
+          "tradeId": 8,
+          "state": "COMPLETED",
+          "scenarioId": "TWENTY_BPS_ROUND_TRIP",
+          "entrySignalDate": "2026-04-15",
+          "entrySignalTimestamp": "2026-04-15T15:30:00+05:30",
+          "entrySignalClose": 24231.3,
+          "entryPriorUpperBand": 24074.05,
+          "entryDate": "2026-04-16",
+          "entryTimestamp": "2026-04-16T15:30:00+05:30",
+          "entryRawFill": 24385.2,
+          "entryEffectiveFill": 24409.5852,
+          "exitSignalDate": "2026-05-12",
+          "exitSignalTimestamp": "2026-05-12T15:30:00+05:30",
+          "exitSignalClose": 23379.55,
+          "exitPriorLowerBand": 23555.6,
+          "exitDate": "2026-05-13",
+          "exitTimestamp": "2026-05-13T15:30:00+05:30",
+          "exitRawFill": 23362.45,
+          "exitEffectiveFill": 23339.08755,
+          "calendarDaysHeld": 27,
+          "tradingSessionsHeld": 18,
+          "grossReturn": -0.0419414235,
+          "netReturn": -0.0438556264
+        },
+        {
+          "tradeId": 9,
+          "state": "COMPLETED",
+          "scenarioId": "TWENTY_BPS_ROUND_TRIP",
+          "entrySignalDate": "2026-06-18",
+          "entrySignalTimestamp": "2026-06-18T15:30:00+05:30",
+          "entrySignalClose": 24168,
+          "entryPriorUpperBand": 24108.2,
+          "entryDate": "2026-06-19",
+          "entryTimestamp": "2026-06-19T15:30:00+05:30",
+          "entryRawFill": 23991.2,
+          "entryEffectiveFill": 24015.1912,
+          "exitSignalDate": "2026-07-24",
+          "exitSignalTimestamp": "2026-07-24T15:30:00+05:30",
+          "exitSignalClose": 23767.45,
+          "exitPriorLowerBand": 23805.2,
+          "exitDate": "2026-07-27",
+          "exitTimestamp": "2026-07-27T15:30:00+05:30",
+          "exitRawFill": 23928.4,
+          "exitEffectiveFill": 23904.4716,
+          "calendarDaysHeld": 38,
+          "tradingSessionsHeld": 25,
+          "grossReturn": -0.0026176265,
+          "netReturn": -0.0046103984
+        },
+        {
+          "tradeId": 10,
+          "state": "COMPLETED",
+          "scenarioId": "TWENTY_BPS_ROUND_TRIP",
+          "entrySignalDate": "2026-08-03",
+          "entrySignalTimestamp": "2026-08-03T15:30:00+05:30",
+          "entrySignalClose": 24774.3,
+          "entryPriorUpperBand": 24530.9,
+          "entryDate": "2026-08-04",
+          "entryTimestamp": "2026-08-04T15:30:00+05:30",
+          "entryRawFill": 24703.9,
+          "entryEffectiveFill": 24728.6039,
+          "exitSignalDate": "2026-09-02",
+          "exitSignalTimestamp": "2026-09-02T15:30:00+05:30",
+          "exitSignalClose": 23914.45,
+          "exitPriorLowerBand": 23952.55,
+          "exitDate": "2026-09-03",
+          "exitTimestamp": "2026-09-03T15:30:00+05:30",
+          "exitRawFill": 23997.95,
+          "exitEffectiveFill": 23973.95205,
+          "calendarDaysHeld": 30,
+          "tradingSessionsHeld": 22,
+          "grossReturn": -0.0285764596,
+          "netReturn": -0.0305173658
+        }
+      ],
+      "openAtDatasetEnd": null,
+      "ignoredEntrySignals": [
+        {
+          "signalDate": "2024-03-01",
+          "executionDate": "2024-03-04",
+          "reason": "ALREADY_LONG"
+        },
+        {
+          "signalDate": "2024-03-04",
+          "executionDate": "2024-03-05",
+          "reason": "ALREADY_LONG"
+        },
+        {
+          "signalDate": "2024-03-06",
+          "executionDate": "2024-03-07",
+          "reason": "ALREADY_LONG"
+        },
+        {
+          "signalDate": "2024-05-23",
+          "executionDate": "2024-05-24",
+          "reason": "ALREADY_LONG"
+        },
+        {
+          "signalDate": "2024-06-03",
+          "executionDate": "2024-06-04",
+          "reason": "ALREADY_LONG"
+        },
+        {
+          "signalDate": "2024-06-18",
+          "executionDate": "2024-06-19",
+          "reason": "ALREADY_LONG"
+        },
+        {
+          "signalDate": "2024-06-25",
+          "executionDate": "2024-06-26",
+          "reason": "ALREADY_LONG"
+        },
+        {
+          "signalDate": "2024-06-26",
+          "executionDate": "2024-06-27",
+          "reason": "ALREADY_LONG"
+        },
+        {
+          "signalDate": "2024-06-27",
+          "executionDate": "2024-06-28",
+          "reason": "ALREADY_LONG"
+        },
+        {
+          "signalDate": "2024-07-03",
+          "executionDate": "2024-07-04",
+          "reason": "ALREADY_LONG"
+        },
+        {
+          "signalDate": "2024-07-09",
+          "executionDate": "2024-07-10",
+          "reason": "ALREADY_LONG"
+        },
+        {
+          "signalDate": "2024-07-12",
+          "executionDate": "2024-07-15",
+          "reason": "ALREADY_LONG"
+        },
+        {
+          "signalDate": "2024-07-18",
+          "executionDate": "2024-07-19",
+          "reason": "ALREADY_LONG"
+        },
+        {
+          "signalDate": "2024-08-01",
+          "executionDate": "2024-08-02",
+          "reason": "ALREADY_LONG"
+        },
+        {
+          "signalDate": "2024-08-30",
+          "executionDate": "2024-09-02",
+          "reason": "ALREADY_LONG"
+        },
+        {
+          "signalDate": "2024-09-02",
+          "executionDate": "2024-09-03",
+          "reason": "ALREADY_LONG"
+        },
+        {
+          "signalDate": "2024-09-12",
+          "executionDate": "2024-09-13",
+          "reason": "ALREADY_LONG"
+        },
+        {
+          "signalDate": "2024-09-20",
+          "executionDate": "2024-09-23",
+          "reason": "ALREADY_LONG"
+        },
+        {
+          "signalDate": "2024-09-23",
+          "executionDate": "2024-09-24",
+          "reason": "ALREADY_LONG"
+        },
+        {
+          "signalDate": "2024-09-26",
+          "executionDate": "2024-09-27",
+          "reason": "ALREADY_LONG"
+        },
+        {
+          "signalDate": "2025-03-21",
+          "executionDate": "2025-03-24",
+          "reason": "ALREADY_LONG"
+        },
+        {
+          "signalDate": "2025-03-24",
+          "executionDate": "2025-03-25",
+          "reason": "ALREADY_LONG"
+        },
+        {
+          "signalDate": "2025-04-23",
+          "executionDate": "2025-04-24",
+          "reason": "ALREADY_LONG"
+        },
+        {
+          "signalDate": "2025-05-12",
+          "executionDate": "2025-05-13",
+          "reason": "ALREADY_LONG"
+        },
+        {
+          "signalDate": "2025-05-15",
+          "executionDate": "2025-05-16",
+          "reason": "ALREADY_LONG"
+        },
+        {
+          "signalDate": "2025-06-26",
+          "executionDate": "2025-06-27",
+          "reason": "ALREADY_LONG"
+        },
+        {
+          "signalDate": "2025-06-27",
+          "executionDate": "2025-06-30",
+          "reason": "ALREADY_LONG"
+        },
+        {
+          "signalDate": "2025-09-17",
+          "executionDate": "2025-09-18",
+          "reason": "ALREADY_LONG"
+        },
+        {
+          "signalDate": "2025-09-18",
+          "executionDate": "2025-09-19",
+          "reason": "ALREADY_LONG"
+        },
+        {
+          "signalDate": "2025-10-16",
+          "executionDate": "2025-10-17",
+          "reason": "ALREADY_LONG"
+        },
+        {
+          "signalDate": "2025-10-17",
+          "executionDate": "2025-10-20",
+          "reason": "ALREADY_LONG"
+        },
+        {
+          "signalDate": "2025-10-20",
+          "executionDate": "2025-10-21",
+          "reason": "ALREADY_LONG"
+        },
+        {
+          "signalDate": "2025-11-20",
+          "executionDate": "2025-11-21",
+          "reason": "ALREADY_LONG"
+        },
+        {
+          "signalDate": "2026-01-02",
+          "executionDate": "2026-01-05",
+          "reason": "ALREADY_LONG"
+        },
+        {
+          "signalDate": "2026-04-21",
+          "executionDate": "2026-04-22",
+          "reason": "ALREADY_LONG"
+        },
+        {
+          "signalDate": "2026-07-03",
+          "executionDate": "2026-07-06",
+          "reason": "ALREADY_LONG"
+        },
+        {
+          "signalDate": "2026-07-06",
+          "executionDate": "2026-07-07",
+          "reason": "ALREADY_LONG"
+        }
+      ],
+      "ignoredExitSignals": [
+        {
+          "signalDate": "2024-10-23",
+          "executionDate": "2024-10-24",
+          "reason": "ALREADY_FLAT"
+        },
+        {
+          "signalDate": "2024-10-25",
+          "executionDate": "2024-10-28",
+          "reason": "ALREADY_FLAT"
+        },
+        {
+          "signalDate": "2024-11-04",
+          "executionDate": "2024-11-05",
+          "reason": "ALREADY_FLAT"
+        },
+        {
+          "signalDate": "2024-11-13",
+          "executionDate": "2024-11-14",
+          "reason": "ALREADY_FLAT"
+        },
+        {
+          "signalDate": "2024-11-18",
+          "executionDate": "2024-11-19",
+          "reason": "ALREADY_FLAT"
+        },
+        {
+          "signalDate": "2024-11-21",
+          "executionDate": "2024-11-22",
+          "reason": "ALREADY_FLAT"
+        },
+        {
+          "signalDate": "2025-01-13",
+          "executionDate": "2025-01-14",
+          "reason": "ALREADY_FLAT"
+        },
+        {
+          "signalDate": "2025-01-21",
+          "executionDate": "2025-01-22",
+          "reason": "ALREADY_FLAT"
+        },
+        {
+          "signalDate": "2025-01-27",
+          "executionDate": "2025-01-28",
+          "reason": "ALREADY_FLAT"
+        },
+        {
+          "signalDate": "2025-02-24",
+          "executionDate": "2025-02-25",
+          "reason": "ALREADY_FLAT"
+        },
+        {
+          "signalDate": "2025-02-28",
+          "executionDate": "2025-03-03",
+          "reason": "ALREADY_FLAT"
+        },
+        {
+          "signalDate": "2025-07-28",
+          "executionDate": "2025-07-29",
+          "reason": "ALREADY_FLAT"
+        },
+        {
+          "signalDate": "2025-08-01",
+          "executionDate": "2025-08-04",
+          "reason": "ALREADY_FLAT"
+        },
+        {
+          "signalDate": "2026-01-20",
+          "executionDate": "2026-01-21",
+          "reason": "ALREADY_FLAT"
+        },
+        {
+          "signalDate": "2026-01-21",
+          "executionDate": "2026-01-22",
+          "reason": "ALREADY_FLAT"
+        },
+        {
+          "signalDate": "2026-02-01",
+          "executionDate": "2026-02-02",
+          "reason": "ALREADY_FLAT"
+        },
+        {
+          "signalDate": "2026-03-04",
+          "executionDate": "2026-03-05",
+          "reason": "ALREADY_FLAT"
+        },
+        {
+          "signalDate": "2026-03-09",
+          "executionDate": "2026-03-10",
+          "reason": "ALREADY_FLAT"
+        },
+        {
+          "signalDate": "2026-03-12",
+          "executionDate": "2026-03-13",
+          "reason": "ALREADY_FLAT"
+        },
+        {
+          "signalDate": "2026-03-13",
+          "executionDate": "2026-03-16",
+          "reason": "ALREADY_FLAT"
+        },
+        {
+          "signalDate": "2026-03-23",
+          "executionDate": "2026-03-24",
+          "reason": "ALREADY_FLAT"
+        },
+        {
+          "signalDate": "2026-03-30",
+          "executionDate": "2026-04-01",
+          "reason": "ALREADY_FLAT"
+        },
+        {
+          "signalDate": "2026-06-08",
+          "executionDate": "2026-06-09",
+          "reason": "ALREADY_FLAT"
+        }
+      ],
+      "equityCurve": [
+        {
+          "tradeId": 1,
+          "exitDate": "2024-03-20",
+          "netReturn": -0.0201625772,
+          "equity": 0.9798374228
+        },
+        {
+          "tradeId": 2,
+          "exitDate": "2024-08-06",
+          "netReturn": 0.0604617872,
+          "equity": 1.0390801445
+        },
+        {
+          "tradeId": 3,
+          "exitDate": "2024-10-23",
+          "netReturn": -0.0364462783,
+          "equity": 1.0012095404
+        },
+        {
+          "tradeId": 4,
+          "exitDate": "2025-01-13",
+          "netReturn": -0.0639073839,
+          "equity": 0.937224858
+        },
+        {
+          "tradeId": 5,
+          "exitDate": "2025-04-08",
+          "netReturn": -0.0330775372,
+          "equity": 0.9062237679
+        },
+        {
+          "tradeId": 6,
+          "exitDate": "2025-07-28",
+          "netReturn": 0.0226390556,
+          "equity": 0.9267398181
+        },
+        {
+          "tradeId": 7,
+          "exitDate": "2026-01-12",
+          "netReturn": 0.0134971945,
+          "equity": 0.9392482057
+        },
+        {
+          "tradeId": 8,
+          "exitDate": "2026-05-13",
+          "netReturn": -0.0438556264,
+          "equity": 0.8980568873
+        },
+        {
+          "tradeId": 9,
+          "exitDate": "2026-07-27",
+          "netReturn": -0.0046103984,
+          "equity": 0.8939164873
+        },
+        {
+          "tradeId": 10,
+          "exitDate": "2026-09-03",
+          "netReturn": -0.0305173658,
+          "equity": 0.8666365108
+        }
+      ],
+      "metrics": {
+        "completedTradeCount": 10,
+        "openPositionAtDatasetEndCount": 0,
+        "winRate": 0.3,
+        "averageNetTradeReturn": -0.013597913,
+        "medianNetTradeReturn": -0.0253399715,
+        "terminalReturnCompletedTradesOnly": -0.1333634892,
+        "maximumDrawdownCompletedTradesOnly": 0.1659579722,
+        "bestSingleTradeNetReturn": 0.0604617872,
+        "worstSingleTradeNetReturn": -0.0639073839
+      }
+    }
+  ]
+}
