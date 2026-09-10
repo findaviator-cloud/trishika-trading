@@ -31,22 +31,36 @@ router.get("/signal", (req, res) => {
       reason:     "Signal not yet generated — waiting for first closed candle",
       _source:    "Pending",
       symbol,
+      emaConfirmation: "N/A",
+      emaConfirmationNote: "EMA(200) signal confirmation is not yet available.",
+      ema200Daily: null,
+      automationAllowed: false,
     });
   }
 
   try {
     const raw    = fs.readFileSync(filePath, "utf8");
     const data   = JSON.parse(raw);
+    const signal = data.signal ?? {};
+
     return res.json({
-      signal:     data.signal?.action     ?? "NEUTRAL",
-      confidence: data.signal?.confidence ?? 0,
-      reason:     data.signal?.reason     ?? "",
-      stopPrice:  data.signal?.stopPrice  ?? null,
-      direction:  data.signal?.direction  ?? 0,
+      signal:     signal.action     ?? "NEUTRAL",
+      confidence: signal.confidence ?? 0,
+      reason:     signal.reason     ?? "",
+      stopPrice:  signal.stopPrice  ?? null,
+      direction:  signal.direction  ?? 0,
       _source:    "Donchian-ATR",
-      asOf:       data.meta?.asOf         ?? null,
-      indicators: data.indicators         ?? {},
-      price:      data.price              ?? {},
+      asOf:       data.meta?.asOf   ?? null,
+      indicators: data.indicators   ?? {},
+      price:      data.price        ?? {},
+
+      // Informational-only completed-1D EMA(200) context. These fields
+      // are serialized by live_signal_writer.js; legacy signal files safely
+      // degrade to N/A/null without changing signal or execution behavior.
+      emaConfirmation: signal.emaConfirmation ?? "N/A",
+      emaConfirmationNote: signal.emaConfirmationNote ?? null,
+      ema200Daily: signal.ema200Daily ?? null,
+      automationAllowed: false,
     });
   } catch (err) {
     console.error("[CRYPTO ROUTE]", err.message);
