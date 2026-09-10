@@ -15,38 +15,39 @@
  *              suppressed (always 'N/A')
  *   Everything else (forex, F&O) — insufficient backtest depth, 'N/A'
  *
- * Daily candles are fetched from Binance's public REST endpoint (no API
- * key, no shared rate-limit risk with the production Twelve Data key —
- * same source already used for backtesting, see scripts/fetch-historical.js).
+ * Daily candles are fetched from Twelve Data through the repository-wide
+ * shared limiter. EMA(200) uses only FULLY COMPLETED UTC daily candles;
+ * a current UTC-day bar is excluded before computing.
  *
- * EMA(200) uses only FULLY COMPLETED daily candles — the in-progress
- * "today" candle is always dropped before computing, matching the
- * backtest's locked rule (spec Section 3: never use the in-progress
- * daily candle).
- *
- * CIRCUIT BREAKER: if Binance calls fail repeatedly (e.g. geo-restricted
- * host IP returning HTTP 451 / non-array JSON error body), retries are
- * blocked for a cooldown window instead of hitting Binance every monitor
- * cycle. See dashboard/lib/ema-confirmation-circuit-breaker.cjs.
+ * CIRCUIT BREAKER: if provider calls fail repeatedly, retries are blocked
+ * for a cooldown window instead of consuming shared Twelve Data capacity
+ * on every monitor cycle. See dashboard/lib/ema-confirmation-circuit-breaker.cjs.
  */
-import https from 'https';
-import { isBlocked, recordFailure, recordSuccess } from '../../dashboard/lib/ema-confirmation-circuit-breaker.cjs';
+import { CONFIG } from '../config/index.js';
+import { fetchTwelveDataJson } from '../services/twelve_data_rate_limiter.js';
+import {
+  isBlocked,
+  recordFailure,
+  recordSuccess,
+} from '../../dashboard/lib/ema-confirmation-circuit-breaker.cjs';
 
 const EMA_LEN = 200; // locked, no parameter sweep — spec Section 3
+const DAY_MS = 86_400_000;
 
-// symbol -> Binance pair + whether confirmation is enabled for it
+// Symbol -> Twelve Data pair + whether confirmation is enabled for it.
+// Enabled policy and evidence notes are intentionally unchanged.
 const CONFIRMATION_CONFIG = {
-  BTC: { pair: 'BTCUSDT', enabled: true, note: null },
+  BTC: { pair: 'BTC/USD', enabled: true, note: null },
   BNB: {
-    pair: 'BNBUSDT', enabled: true,
+    pair: 'BNB/USD', enabled: true,
     note: 'Cost-fragile: improvement over baseline shrinks and can turn negative under 3x higher slippage/fees — use tight risk limits.',
   },
   ETH: {
-    pair: 'ETHUSDT', enabled: true,
+    pair: 'ETH/USD', enabled: true,
     note: 'Historical tail-risk observed on large trend-reversal trades (backtest Fold 02) — verify manually before sizing up.',
   },
   SOL: {
-    pair: 'SOLUSDT', enabled: false,
+    pair: 'SOL/USD', enabled: false,
     note: 'Backtest evidence does not support this filter for SOL — confirmation suppressed.',
   },
 };
@@ -55,30 +56,92 @@ const CONFIRMATION_CONFIG = {
 // tool NEVER executes trades on its own. See backtest-spec.md Section 15.
 export const AUTOMATION_ALLOWED = false;
 
-const cache = new Map(); // symbol -> { ema, asOfDayUTC, fetchedAt, refreshing }
-const DAY_MS = 86_400_000;
+const cache = new Map(); // symbol -> { ema, asOfDayUTC, fetchedAt, refreshing, errorNote }
 
-function fetchBinanceDailyKlines(pair, limit = 250) {
-  return new Promise((resolve, reject) => {
-    const url = `https://api.binance.com/api/v3/klines?symbol=${pair}&interval=1d&limit=${limit}`;
-    https.get(url, { timeout: 10000 }, (res) => {
-      let data = '';
-      res.on('data', c => data += c);
-      res.on('end', () => {
-        try {
-          const rows = JSON.parse(data);
-          if (!Array.isArray(rows)) {
-            // Diagnostic: log the raw body once so we can see Binance's
-            // actual error (commonly a 451 geo-restriction JSON body like
-            // {"code":0,"msg":"Service unavailable from a restricted location..."}).
-            console.error(`[EMA_CONFIRMATION] Non-array response for ${pair} (status ${res.statusCode}):`, data.slice(0, 300));
-            return reject(new Error(`Unexpected Binance response (status ${res.statusCode})`));
-          }
-          resolve(rows.map(r => ({ time: r[0], close: parseFloat(r[4]) })));
-        } catch (e) { reject(e); }
-      });
-    }).on('error', reject).on('timeout', () => reject(new Error('Binance daily klines fetch timeout')));
-  });
+function utcDayBucketFromDateText(datetime) {
+  if (typeof datetime !== 'string') return null;
+
+  const match = /^(\d{4})-(\d{2})-(\d{2})/.exec(datetime);
+  if (!match) return null;
+
+  const year = Number(match[1]);
+  const month = Number(match[2]);
+  const day = Number(match[3]);
+
+  if (
+    !Number.isInteger(year) ||
+    !Number.isInteger(month) ||
+    !Number.isInteger(day) ||
+    month < 1 ||
+    month > 12 ||
+    day < 1 ||
+    day > 31
+  ) {
+    return null;
+  }
+
+  const timeMs = Date.UTC(year, month - 1, day);
+
+  // Reject impossible calendar dates such as 2026-02-30.
+  const date = new Date(timeMs);
+  if (
+    date.getUTCFullYear() !== year ||
+    date.getUTCMonth() !== month - 1 ||
+    date.getUTCDate() !== day
+  ) {
+    return null;
+  }
+
+  return timeMs;
+}
+
+async function fetchTwelveDataDailyCandles(pair, limit = 260) {
+  const key = CONFIG.twelveKey;
+
+  if (!key) {
+    throw new Error('Twelve Data key is not configured.');
+  }
+
+  const symbol = encodeURIComponent(pair);
+  const url =
+    `https://api.twelvedata.com/time_series?symbol=${symbol}&interval=1day&outputsize=${limit}&apikey=${key}`;
+
+  const parsed = await fetchTwelveDataJson(url);
+
+  if (!parsed || !Array.isArray(parsed.values)) {
+    throw new Error('Twelve Data response did not contain daily candle values.');
+  }
+
+  const candles = parsed.values
+    .map((row) => {
+      const timeMs = utcDayBucketFromDateText(row?.datetime);
+      const close = Number(row?.close);
+
+      if (timeMs === null || !Number.isFinite(close)) return null;
+
+      return { timeMs, close };
+    })
+    .filter(Boolean)
+    .sort((a, b) => a.timeMs - b.timeMs);
+
+  const deduped = [];
+  for (const candle of candles) {
+    if (!deduped.length || deduped[deduped.length - 1].timeMs !== candle.timeMs) {
+      deduped.push(candle);
+    }
+  }
+
+  return deduped;
+}
+
+function dropIncompleteDailyCandle(candles, nowMs = Date.now()) {
+  if (!candles.length) return [];
+
+  const currentBucket = Math.floor(nowMs / DAY_MS) * DAY_MS;
+  const last = candles[candles.length - 1];
+  const lastBucket = Math.floor(last.timeMs / DAY_MS) * DAY_MS;
+
+  return lastBucket >= currentBucket ? candles.slice(0, -1) : candles;
 }
 
 function calcEma(closes, len) {
@@ -92,41 +155,63 @@ function calcEma(closes, len) {
 /**
  * triggerEmaRefresh(symbol)
  * Fire-and-forget background refresh — NEVER blocks the caller.
- * Only re-fetches once per UTC calendar day (EMA(200) daily doesn't
- * change intraday, no need to hit Binance more often than that).
+ * Only re-fetches once per UTC calendar day (EMA(200) daily does not
+ * change intraday when calculated from completed daily candles).
  *
- * If Binance calls fail repeatedly, the circuit breaker blocks further
- * attempts for a cooldown window (default 4h) to avoid wasting bandwidth
- * on a call that keeps failing (e.g. geo-restricted host).
+ * If provider calls fail repeatedly, the circuit breaker blocks further
+ * attempts for a cooldown window to avoid wasting shared API capacity.
  */
 export function triggerEmaRefresh(symbol) {
   const cfg = CONFIRMATION_CONFIG[symbol];
   if (!cfg || !cfg.enabled) return;
 
-  if (isBlocked(symbol)) return; // circuit breaker tripped — skip Binance call entirely
+  if (isBlocked(symbol)) return;
 
   const todayUTC = Math.floor(Date.now() / DAY_MS);
   const entry = cache.get(symbol);
-  if (entry && entry.asOfDayUTC === todayUTC) return; // already fresh for today
-  if (entry && entry.refreshing) return; // already in flight
 
-  cache.set(symbol, { ...(entry ?? {}), refreshing: true });
+  if (entry && entry.asOfDayUTC === todayUTC) return;
+  if (entry && entry.refreshing) return;
 
-  fetchBinanceDailyKlines(cfg.pair)
-    .then(candles => {
-      // drop the last candle — it's today's still-forming day, never use it
-      const completed = candles.slice(0, -1);
-      const closes = completed.map(c => c.close);
+  cache.set(symbol, { ...(entry ?? {}), refreshing: true, errorNote: null });
+
+  fetchTwelveDataDailyCandles(cfg.pair)
+    .then((candles) => {
+      const completed = dropIncompleteDailyCandle(candles);
+      const closes = completed.map((candle) => candle.close);
       const ema = calcEma(closes, EMA_LEN);
-      cache.set(symbol, { ema, asOfDayUTC: todayUTC, fetchedAt: Date.now(), refreshing: false });
+
+      if (ema === null) {
+        throw new Error(
+          `Insufficient completed daily close data for EMA(${EMA_LEN}): ${closes.length} valid bars.`
+        );
+      }
+
+      cache.set(symbol, {
+        ema,
+        asOfDayUTC: todayUTC,
+        fetchedAt: Date.now(),
+        refreshing: false,
+        errorNote: null,
+      });
+
       recordSuccess(symbol);
-      console.log(`[EMA_CONFIRMATION] ${symbol} refreshed — EMA(200)=${ema?.toFixed(2) ?? 'n/a'}`);
+      console.log(
+        `[EMA_CONFIRMATION] ${symbol} refreshed — EMA(200)=${ema.toFixed(2)}`
+      );
     })
-    .catch(err => {
-      console.error(`[EMA_CONFIRMATION] ${symbol} refresh failed:`, err.message);
+    .catch((err) => {
+      const message = err?.message || String(err);
+      console.error(`[EMA_CONFIRMATION] ${symbol} refresh failed:`, message);
+
       const prev = cache.get(symbol) ?? {};
-      cache.set(symbol, { ...prev, refreshing: false });
-      recordFailure(symbol, err.message);
+      cache.set(symbol, {
+        ...prev,
+        refreshing: false,
+        errorNote: `EMA(200) unavailable: ${message}`,
+      });
+
+      recordFailure(symbol, message);
     });
 }
 
@@ -137,17 +222,31 @@ export function triggerEmaRefresh(symbol) {
  */
 export function getEmaConfirmation(symbol, direction, currentPrice) {
   const cfg = CONFIRMATION_CONFIG[symbol];
+
   if (!cfg || !cfg.enabled) {
-    return { label: 'N/A', note: cfg?.note ?? 'Not evaluated for this symbol.', ema: null };
+    return {
+      label: 'N/A',
+      note: cfg?.note ?? 'Not evaluated for this symbol.',
+      ema: null,
+    };
   }
 
   const entry = cache.get(symbol);
+
   if (!entry || entry.ema == null) {
-    return { label: 'N/A', note: 'EMA(200) not yet available — refreshing.', ema: null };
+    return {
+      label: 'N/A',
+      note: entry?.errorNote ?? 'EMA(200) not yet available — refreshing.',
+      ema: null,
+    };
   }
 
   if (direction === 0) {
-    return { label: 'N/A', note: cfg.note, ema: +entry.ema.toFixed(2) };
+    return {
+      label: 'N/A',
+      note: cfg.note,
+      ema: +entry.ema.toFixed(2),
+    };
   }
 
   const aligned = direction === 1
