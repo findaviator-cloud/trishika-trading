@@ -1,0 +1,64 @@
+{
+  "manifestType": "NIFTY_DAILY_HISTORY_CANDIDATE",
+  "admissionStatus": "PENDING_ACQUISITION",
+  "candidatePurpose": "Expand NIFTY daily Price Return OHLC history for future OOS-feasibility assessment; not approved for merge or backtest use.",
+  "requestedCoverage": {
+    "primaryStart": "2010-01-01",
+    "primaryEnd": "2023-12-31",
+    "requiredOverlapStart": "2024-01-01",
+    "requiredOverlapEnd": "2024-03-31"
+  },
+  "requiredSeriesIdentity": {
+    "indexName": "NIFTY 50",
+    "seriesVariant": "PRICE_RETURN",
+    "notAllowed": [
+      "TOTAL_RETURN",
+      "NET_TOTAL_RETURN",
+      "FUTURES",
+      "ETF_PROXY",
+      "CONSTITUENT_LEVEL_DATA"
+    ]
+  },
+  "provenance": {
+    "publisher": null,
+    "sourceUrl": null,
+    "retrievalTimestampUtc": null,
+    "retrievalMethod": null,
+    "licenseOrTermsUrl": null
+  },
+  "rawArtifact": {
+    "filename": null,
+    "immutablePath": null,
+    "sha256": null
+  },
+  "dataSemantics": {
+    "timezone": "Asia/Kolkata",
+    "sessionDefinition": null,
+    "columnsAndDefinitions": null,
+    "revisionPolicy": null,
+    "pointInTimeStatus": null,
+    "corporateActionAndRebalanceTreatment": null
+  },
+  "methodology": {
+    "documentUrl": null,
+    "applicablePeriods": [],
+    "knownComparabilityLimitations": []
+  },
+  "overlapReconciliation": {
+    "existingDatasetPath": "data/india-input/nifty50-nse-daily-normalized.csv",
+    "overlapStart": "2024-01-01",
+    "overlapEnd": "2024-03-31",
+    "priceFieldTolerance": null,
+    "status": "NOT_RUN",
+    "mismatchReportPath": null
+  },
+  "integrityAndFeasibility": {
+    "duplicateDateCheck": "NOT_RUN",
+    "gapCheck": "NOT_RUN",
+    "ohlcValidityCheck": "NOT_RUN",
+    "estimatedCompletedTrades": null,
+    "proposedIsTradeCount": null,
+    "proposedOosTradeCount": null,
+    "oosGateStatus": "NOT_ASSESSED"
+  }
+}
