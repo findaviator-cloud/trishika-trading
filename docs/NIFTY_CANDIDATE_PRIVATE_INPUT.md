@@ -24,3 +24,11 @@ The candidate must be explicitly documented as NIFTY 50 Price Return OHLC data.
 The admission utility writes only derived audit records: paths, metadata, hashes, row counts, integrity outcomes, and overlap mismatch details. It does not copy raw vendor data to an admission output directory, merge it into research inputs, change the canonical manifest, rerun a backtest, or unblock OOS evaluation.
 
 Raw storage, derived artifacts, and publication must comply with the applicable source terms.
+
+## Multiple-hold reporting
+
+The admission report records a single `primaryHold` for compatibility and an `allDetectedHolds` array so independent failures are not hidden.
+
+`evaluationOrder` is stored in every report to explain why a particular hold became primary for that run. A report with no detected technical holds remains `HOLD_PENDING_PROVENANCE_AND_MANIFEST_COMPLETION`; it is not an automatic approval.
+
+The utility still does not copy raw vendor bytes, modify the manifest, merge data, rerun a backtest, or unblock OOS evaluation.

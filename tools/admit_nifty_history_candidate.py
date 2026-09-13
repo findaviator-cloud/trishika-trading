@@ -10,7 +10,15 @@ from pathlib import Path
 OVERLAP_START = "2024-01-01"
 OVERLAP_END = "2024-03-31"
 PRIMARY_START = "2010-01-01"
-REQUIRED_FIELDS = ("date", "open", "high", "low", "close")
+
+HOLD_PRIORITY = (
+    "HOLD_HASH_MISMATCH_DETECTED",
+    "HOLD_INSUFFICIENT_COVERAGE",
+    "HOLD_DUPLICATE_DATES",
+    "HOLD_INVALID_OHLC",
+    "HOLD_NO_REQUIRED_OVERLAP",
+    "HOLD_UNEXPLAINED_OVERLAP_MISMATCH",
+)
 
 
 def utc_now():
@@ -79,6 +87,20 @@ def fail(message):
     return 2
 
 
+def add_hold(holds, hold_code, detail, affected_dates=None, affected_rows=None):
+    priority_rank = HOLD_PRIORITY.index(hold_code) + 1
+    record = {
+        "detail": detail,
+        "holdCode": hold_code,
+        "priorityRank": priority_rank,
+    }
+    if affected_dates:
+        record["affectedDates"] = affected_dates
+    if affected_rows:
+        record["affectedRows"] = affected_rows
+    holds.append(record)
+
+
 def main():
     parser = argparse.ArgumentParser(
         description="Validate a private NIFTY candidate without copying or modifying raw data."
@@ -124,7 +146,20 @@ def main():
     baseline_rows, baseline_columns = parse_rows(baseline)
 
     dates = [row["date"] for row in rows]
-    duplicate_dates = sorted({date for date in dates if dates.count(date) > 1})
+    candidate_start = min(dates) if dates else None
+    candidate_end = max(dates) if dates else None
+    coverage_ok = bool(dates) and candidate_start <= PRIMARY_START and candidate_end >= OVERLAP_END
+
+    rows_by_date = {}
+    for row in rows:
+        rows_by_date.setdefault(row["date"], []).append(row)
+
+    duplicate_dates = sorted(date for date, group in rows_by_date.items() if len(group) > 1)
+    duplicate_rows = [
+        {"date": date, "lineNumbers": [row["line"] for row in rows_by_date[date]]}
+        for date in duplicate_dates
+    ]
+
     invalid_ohlc_rows = [
         row for row in rows
         if min(row["open"], row["high"], row["low"], row["close"]) <= 0
@@ -151,48 +186,111 @@ def main():
                     "baseline": baseline_value,
                     "candidate": candidate_value,
                     "date": date,
-                    "field": field
+                    "field": field,
                 })
 
-    candidate_start = min(dates) if dates else None
-    candidate_end = max(dates) if dates else None
-    coverage_ok = bool(dates) and candidate_start <= PRIMARY_START and candidate_end >= OVERLAP_END
     expected_hash = manifest.get("rawArtifact", {}).get("sha256")
+    all_detected_holds = []
 
-    decision = "HOLD_PENDING_PROVENANCE_AND_MANIFEST_COMPLETION"
     if expected_hash and expected_hash != candidate_hash:
-        decision = "HOLD_HASH_MISMATCH_DETECTED"
+        add_hold(
+            all_detected_holds,
+            "HOLD_HASH_MISMATCH_DETECTED",
+            "Observed SHA-256 differs from the manifest SHA-256.",
+            affected_rows=[{"expectedSha256": expected_hash, "observedSha256": candidate_hash}],
+        )
         write_json(run_dir / "hash-mismatch-detected.json", {
-            "record_type": "HASH_MISMATCH_DETECTED",
-            "hash_algorithm": "SHA-256",
-            "detected_at_utc": generated_at,
-            "manifest_reference": str(manifest_path),
-            "expected_sha256": expected_hash,
-            "observed_sha256": candidate_hash,
-            "path_examined": str(candidate),
-            "detection_trigger": "MANDATORY_OVERLAP_RECONCILIATION_GATE"
+            "recordType": "HASH_MISMATCH_DETECTED",
+            "hashAlgorithm": "SHA-256",
+            "detectedAtUtc": generated_at,
+            "manifestReference": str(manifest_path),
+            "expectedSha256": expected_hash,
+            "observedSha256": candidate_hash,
+            "pathExamined": str(candidate),
+            "detectionTrigger": "MANDATORY_OVERLAP_RECONCILIATION_GATE",
         })
-    elif not coverage_ok:
-        decision = "HOLD_INSUFFICIENT_COVERAGE"
-    elif duplicate_dates:
-        decision = "HOLD_DUPLICATE_DATES"
-    elif invalid_ohlc_rows:
-        decision = "HOLD_INVALID_OHLC"
-    elif not overlap_dates:
-        decision = "HOLD_NO_REQUIRED_OVERLAP"
-    elif mismatches:
-        decision = "HOLD_UNEXPLAINED_OVERLAP_MISMATCH"
+
+    if not coverage_ok:
+        add_hold(
+            all_detected_holds,
+            "HOLD_INSUFFICIENT_COVERAGE",
+            "Candidate does not cover the required primary start through required overlap end.",
+            affected_rows=[{
+                "candidateMaxDate": candidate_end,
+                "candidateMinDate": candidate_start,
+                "requiredMaxDate": OVERLAP_END,
+                "requiredMinDate": PRIMARY_START,
+            }],
+        )
+
+    if duplicate_dates:
+        add_hold(
+            all_detected_holds,
+            "HOLD_DUPLICATE_DATES",
+            "Candidate contains one or more duplicate trading dates.",
+            affected_dates=duplicate_dates,
+            affected_rows=duplicate_rows,
+        )
+
+    if invalid_ohlc_rows:
+        add_hold(
+            all_detected_holds,
+            "HOLD_INVALID_OHLC",
+            "Candidate contains rows that violate OHLC consistency rules.",
+            affected_dates=sorted({row["date"] for row in invalid_ohlc_rows}),
+            affected_rows=[{
+                "date": row["date"],
+                "lineNumber": row["line"],
+                "open": row["open"],
+                "high": row["high"],
+                "low": row["low"],
+                "close": row["close"],
+            } for row in invalid_ohlc_rows],
+        )
+
+    if not overlap_dates:
+        add_hold(
+            all_detected_holds,
+            "HOLD_NO_REQUIRED_OVERLAP",
+            "No shared candidate/baseline dates exist inside the required overlap window.",
+            affected_rows=[{"overlapEnd": OVERLAP_END, "overlapStart": OVERLAP_START}],
+        )
+
+    if mismatches:
+        add_hold(
+            all_detected_holds,
+            "HOLD_UNEXPLAINED_OVERLAP_MISMATCH",
+            "One or more shared OHLC values exceed the configured tolerance.",
+            affected_dates=sorted({item["date"] for item in mismatches}),
+            affected_rows=mismatches,
+        )
         write_json(run_dir / "unexplained-overlap-mismatches.json", {
             "recordType": "UNEXPLAINED_OVERLAP_MISMATCH",
             "detectedAtUtc": generated_at,
             "trigger": "MANDATORY_OVERLAP_RECONCILIATION_GATE",
             "tolerance": args.tolerance,
-            "mismatches": mismatches
+            "mismatches": mismatches,
         })
+
+    all_detected_holds.sort(key=lambda item: item["priorityRank"])
+
+    if all_detected_holds:
+        primary_hold = all_detected_holds[0]["holdCode"]
+        decision = primary_hold
+        status = "HOLD"
+    else:
+        primary_hold = None
+        decision = "HOLD_PENDING_PROVENANCE_AND_MANIFEST_COMPLETION"
+        status = "HOLD"
 
     write_json(run_dir / "admission-report.json", {
         "recordType": "NIFTY_CANDIDATE_ADMISSION_RUN",
         "generatedAtUtc": generated_at,
+        "status": status,
+        "decision": decision,
+        "primaryHold": primary_hold,
+        "allDetectedHolds": all_detected_holds,
+        "evaluationOrder": list(HOLD_PRIORITY),
         "candidate": {
             "bytes": candidate_bytes,
             "mappedColumns": candidate_columns,
@@ -201,7 +299,7 @@ def main():
             "pathExamined": str(candidate),
             "rawCopiedToRunDirectory": False,
             "rowCount": len(rows),
-            "sha256": candidate_hash
+            "sha256": candidate_hash,
         },
         "checks": {
             "baselineMappedColumns": baseline_columns,
@@ -210,19 +308,21 @@ def main():
             "invalidOhlcRows": invalid_ohlc_rows,
             "overlapMismatchCount": len(mismatches),
             "overlapTolerance": args.tolerance,
-            "requiredOverlapDateCount": len(overlap_dates)
+            "requiredOverlapDateCount": len(overlap_dates),
         },
-        "decision": decision,
         "sourceDeclaration": {
             "publisher": args.publisher,
             "retrievalMethod": args.retrieval_method,
             "seriesVariant": args.series_variant,
             "sourceUrl": args.source_url,
-            "termsUrl": args.terms_url
-        }
+            "termsUrl": args.terms_url,
+        },
     })
 
     print(f"ADMISSION_DECISION={decision}")
+    print(f"STATUS={status}")
+    print(f"PRIMARY_HOLD={primary_hold or 'NONE'}")
+    print(f"ALL_DETECTED_HOLDS_COUNT={len(all_detected_holds)}")
     print(f"CANDIDATE_SHA256={candidate_hash}")
     print(f"REPORT={run_dir / 'admission-report.json'}")
     print("RAW_COPY_TO_RUN_DIRECTORY=FALSE")
