@@ -6,6 +6,7 @@ import candlesRouter, { setCandleRouteEngines } from './candles.js';
 import historyRouter from './history.js';
 import mtfRouter from './mtf.js';
 import angelRouter from './angel.js';
+import diagRouter from './diag.js';
 
 const router = express.Router();
 
@@ -21,5 +22,6 @@ router.use('/candles', candlesRouter);
 router.use('/history', historyRouter);
 router.use('/mtf', mtfRouter);
 router.use('/angel', angelRouter);
+router.use('/diag', diagRouter);
 
 export default router;
