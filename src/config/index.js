@@ -34,6 +34,15 @@ export const CONFIG = Object.freeze({
     EUR_USD: "EUR/USD",
     XAU_USD: "XAU/USD",
   },
+  // Crypto pairs in Twelve Data's live-tick WS format, so crypto gets the
+  // same real-time WebSocket price ticks that forex already had
+  // (previously crypto only refreshed every 15 minutes via REST polling).
+  cryptoTwelveSymbols: {
+    BTC: "BTC/USD",
+    ETH: "ETH/USD",
+    SOL: "SOL/USD",
+    BNB: "BNB/USD",
+  },
 });
 
 export const BINANCE_TO_SYMBOL = Object.freeze(
@@ -42,9 +51,13 @@ export const BINANCE_TO_SYMBOL = Object.freeze(
   )
 );
 
+// Extended to cover BOTH forex and crypto Twelve Data pairs, so incoming
+// WebSocket price ticks for either group map back to the correct engine key.
 export const TWELVE_TO_SYMBOL = Object.freeze(
   Object.fromEntries(
-    Object.entries(CONFIG.forexSymbols).map(([s, t]) => [t, s])
+    Object.entries({ ...CONFIG.forexSymbols, ...CONFIG.cryptoTwelveSymbols }).map(
+      ([s, t]) => [t, s]
+    )
   )
 );
 

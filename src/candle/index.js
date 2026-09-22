@@ -272,7 +272,13 @@ export function connectTwelveData(engines, log) {
   socket.on('open', () => {
     log.info('Twelve Data WS connected');
 
-    const symbols = Object.values(CONFIG.forexSymbols);
+    // Forex + crypto both subscribed here now, so crypto gets the same
+    // real-time WS price ticks forex already had (previously crypto only
+    // refreshed every 15 minutes via REST polling in connectBinance/pollCrypto).
+    const symbols = [
+      ...Object.values(CONFIG.forexSymbols),
+      ...Object.values(CONFIG.cryptoTwelveSymbols)
+    ];
 
     socket.send(
       JSON.stringify({
