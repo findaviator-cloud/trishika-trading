@@ -1,6 +1,7 @@
 import express from "express";
 import fs      from "fs";
 import path    from "path";
+import { getRiskAdvisory, getPositionSizingGuidance } from "../strategy/risk_advisory.js";
 
 const router = express.Router();
 
@@ -23,6 +24,8 @@ router.get("/signal", (req, res) => {
   }
 
   const filePath = path.join(SIGNALS_DIR, file);
+  const riskAdvisory = getRiskAdvisory(symbol);
+  const positionSizingGuidance = getPositionSizingGuidance();
 
   if (!fs.existsSync(filePath)) {
     return res.json({
@@ -35,6 +38,8 @@ router.get("/signal", (req, res) => {
       emaConfirmationNote: "EMA(200) signal confirmation is not yet available.",
       ema200Daily: null,
       automationAllowed: false,
+      riskAdvisory,
+      positionSizingGuidance,
     });
   }
 
@@ -61,6 +66,12 @@ router.get("/signal", (req, res) => {
       emaConfirmationNote: signal.emaConfirmationNote ?? null,
       ema200Daily: signal.ema200Daily ?? null,
       automationAllowed: false,
+
+      // Evidence-based risk notes + sizing formula. Informational only —
+      // never blocks or modifies the signal above. See
+      // src/strategy/risk_advisory.js and docs/EVIDENCE_NOTES.md.
+      riskAdvisory,
+      positionSizingGuidance,
     });
   } catch (err) {
     console.error("[CRYPTO ROUTE]", err.message);
