@@ -33,6 +33,9 @@ function toAnalysis(payload) {
     reason: payload.signal?.reason ?? '',
     stopPrice: payload.signal?.stopPrice ?? null,
     direction: payload.signal?.direction ?? 0,
+    emaConfirmation: payload.signal?.emaConfirmation ?? 'N/A',
+    emaConfirmationNote: payload.signal?.emaConfirmationNote ?? null,
+    ema200Daily: payload.signal?.ema200Daily ?? null,
     _source: 'Donchian-ATR',
     timestamp: payload.meta?.asOf
       ? new Date(payload.meta.asOf).getTime()

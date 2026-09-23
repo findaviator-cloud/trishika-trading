@@ -896,6 +896,12 @@ function renderCard(sym) {
         </div>
       </div>` : ''}
 
+      ${analysis?.emaConfirmation && analysis.emaConfirmation !== 'N/A' ? `
+      <div class="ema-confirmation-row" style="margin:8px 0;padding:6px 10px;border-radius:6px;font-size:11px;display:flex;justify-content:space-between;align-items:center;background:${analysis.emaConfirmation === 'ALIGNED' ? 'rgba(34,197,94,0.12)' : 'rgba(239,68,68,0.12)'};border:1px solid ${analysis.emaConfirmation === 'ALIGNED' ? 'var(--green)' : 'var(--red)'}">
+        <span style="color:var(--muted)">EMA(200) Trend</span>
+        <span style="font-weight:700;color:${analysis.emaConfirmation === 'ALIGNED' ? 'var(--green)' : 'var(--red)'}">${analysis.emaConfirmation === 'ALIGNED' ? '✅ ALIGNED' : '⚠️ CONFLICTING'}</span>
+      </div>` : ''}
+
       ${entry && signal !== 'NEUTRAL' ? `
       <div class="sltp-row">
         <div class="sltp-item">
