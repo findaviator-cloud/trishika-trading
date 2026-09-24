@@ -48,7 +48,7 @@ function buildFallback(symbol, engine) {
 }
 
 router.get('/signal', (req, res) => {
-  const symbol = normalizeLiveSymbol(req.query.symbol || 'EUR_USD');
+  const symbol = normalizeLiveSymbol(req.query.symbol || req.query.pair || 'EUR_USD');
 
   if (!FOREX_SIGNAL_FILE[symbol]) {
     return res.status(404).json({

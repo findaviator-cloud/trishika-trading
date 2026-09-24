@@ -41,3 +41,11 @@ data/india-analysis/
 env/
 
 /private_raw/
+
+# FX/Gold Twelve Data runtime history caches — regenerate through guarded research refresh
+data/EURUSD_1h.csv
+data/EURUSD_4h.csv
+data/EURUSD_1d.csv
+data/XAUUSD_1h.csv
+data/XAUUSD_4h.csv
+data/XAUUSD_1d.csv

@@ -1,0 +1,134 @@
+{
+  "version": 1,
+  "research_only": true,
+  "strategy_engine": "test_next_bar_strategy.run_next_bar_strategy",
+  "selection_rule": {
+    "primary": "highest_in_sample_final_equity",
+    "tie_breaker_1": "lower_in_sample_max_drawdown",
+    "tie_breaker_2": "higher_in_sample_trade_count"
+  },
+  "eligibility": {
+    "minimum_completed_folds": 8,
+    "minimum_closed_oos_trades": 30
+  },
+  "common_strategy": {
+    "compounding": true,
+    "ratchet": true,
+    "chandelier": false,
+    "next_open_exit": false,
+    "use_sma_filter": false,
+    "sma_len": 200,
+    "allow_long": true,
+    "allow_short": true,
+    "risk_pct": 0.0,
+    "initial_equity": 1000.0,
+    "fixed_notional": 1000.0,
+    "atr_len": 14
+  },
+  "candidates": [
+    {
+      "label": "don10_atr14_m2.0",
+      "donchian_len": 10,
+      "atr_len": 14,
+      "atr_mult": 2.0
+    },
+    {
+      "label": "don10_atr14_m3.5",
+      "donchian_len": 10,
+      "atr_len": 14,
+      "atr_mult": 3.5
+    },
+    {
+      "label": "don12_atr14_m3.5",
+      "donchian_len": 12,
+      "atr_len": 14,
+      "atr_mult": 3.5
+    },
+    {
+      "label": "don30_atr14_m3.5",
+      "donchian_len": 30,
+      "atr_len": 14,
+      "atr_mult": 3.5
+    }
+  ],
+  "assets": {
+    "EUR_USD": {
+      "twelve_data_symbol": "EUR/USD",
+      "csv_prefix": "EURUSD",
+      "costs": {
+        "spread_bps": 0.8,
+        "slippage_bps": 0.2,
+        "commission_bps": 0.0,
+        "stress_cost_multiplier": 2.0
+      },
+      "windows": {
+        "1h": {
+          "train_bars": 4320,
+          "test_bars": 720,
+          "step_bars": 720,
+          "warmup_bars": 250,
+          "anchored": false
+        },
+        "4h": {
+          "train_bars": 1080,
+          "test_bars": 180,
+          "step_bars": 180,
+          "warmup_bars": 250,
+          "anchored": false
+        },
+        "1day": {
+          "train_bars": 756,
+          "test_bars": 126,
+          "step_bars": 126,
+          "warmup_bars": 250,
+          "anchored": false
+        }
+      }
+    },
+    "XAU_USD": {
+      "twelve_data_symbol": "XAU/USD",
+      "csv_prefix": "XAUUSD",
+      "costs": {
+        "spread_bps": 3.0,
+        "slippage_bps": 1.0,
+        "commission_bps": 0.0,
+        "stress_cost_multiplier": 2.0
+      },
+      "windows": {
+        "1h": {
+          "train_bars": 4320,
+          "test_bars": 720,
+          "step_bars": 720,
+          "warmup_bars": 250,
+          "anchored": false
+        },
+        "4h": {
+          "train_bars": 1080,
+          "test_bars": 180,
+          "step_bars": 180,
+          "warmup_bars": 250,
+          "anchored": false
+        },
+        "1day": {
+          "train_bars": 756,
+          "test_bars": 126,
+          "step_bars": 126,
+          "warmup_bars": 250,
+          "anchored": false
+        }
+      }
+    }
+  },
+  "metadata": {
+    "native_4h_only": true,
+    "four_hour_contract": {
+      "train_bars": 1080,
+      "test_bars": 180,
+      "step_bars": 180,
+      "warmup_bars": 250,
+      "anchored": false,
+      "lookback_target_days": 730,
+      "lookback_is_not_oos_eligibility_guarantee": true
+    }
+  }
+}

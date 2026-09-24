@@ -1,0 +1,140 @@
+{
+  "version": 2,
+  "research_only": true,
+  "safety": {
+    "researchOnly": true,
+    "approvedForTrading": false,
+    "brokerConnectivityAllowed": false,
+    "websocketAllowed": false,
+    "ordersAllowed": false,
+    "executionAllowed": false,
+    "humanReviewRequired": true
+  },
+  "asset": "XAU_USD",
+  "symbol": "XAU/USD",
+  "timeframe": "4h",
+  "status": "INSUFFICIENT_DATA",
+  "oos_only": true,
+  "provenance": {
+    "provider": "TWELVE_DATA",
+    "providerSymbol": "XAU/USD",
+    "sourceGranularity": "4h",
+    "barConstruction": "provider_native",
+    "notNativeTwelveData": false
+  },
+  "data_coverage": {
+    "start": null,
+    "end": null,
+    "bars": 0
+  },
+  "data_quality": {
+    "passed": false,
+    "reasonCodes": [
+      "NO_VALIDATED_SOURCE_DATA"
+    ],
+    "sourceRows": 0,
+    "usableRows": 0,
+    "invalidRowsDropped": 0,
+    "duplicateRowsDropped": 0,
+    "largeGapCount": 0,
+    "expectedInterval": null
+  },
+  "eligibility": {
+    "eligible": false,
+    "status": "INSUFFICIENT_DATA",
+    "reasonCodes": [
+      "NO_VALIDATED_SOURCE_DATA",
+      "INSUFFICIENT_WARMUP",
+      "INSUFFICIENT_FOLDS",
+      "INSUFFICIENT_TRADES"
+    ],
+    "candidateFolds": 0,
+    "validCompletedFolds": 0,
+    "minimumRequiredFolds": 8,
+    "warmupRequired": true,
+    "warmupPass": false,
+    "closedOosTrades": 0,
+    "minimumRequiredClosedOosTrades": 30,
+    "dataQualityPass": false
+  },
+  "walk_forward": {
+    "candidate_folds": 0,
+    "valid_completed_folds": 0,
+    "invalid_folds": 0,
+    "minimum_required_folds": 8,
+    "folds": []
+  },
+  "metrics": {
+    "total_trades": null,
+    "win_rate_pct": null,
+    "total_return_pct": null,
+    "sharpe_ratio": null,
+    "max_drawdown_pct": null,
+    "profit_factor": null,
+    "average_trade_pct": null,
+    "long": {
+      "trades": null,
+      "win_rate_pct": null,
+      "total_return_pct": null,
+      "average_trade_pct": null
+    },
+    "short": {
+      "trades": null,
+      "win_rate_pct": null,
+      "total_return_pct": null,
+      "average_trade_pct": null
+    }
+  },
+  "base_cost_metrics_raw": {
+    "total_trades": null,
+    "win_rate_pct": null,
+    "total_return_pct": null,
+    "sharpe_ratio": null,
+    "max_drawdown_pct": null,
+    "profit_factor": null,
+    "average_trade_pct": null,
+    "long": {
+      "trades": null,
+      "win_rate_pct": null,
+      "total_return_pct": null,
+      "average_trade_pct": null
+    },
+    "short": {
+      "trades": null,
+      "win_rate_pct": null,
+      "total_return_pct": null,
+      "average_trade_pct": null
+    }
+  },
+  "stress_cost_metrics_raw": {
+    "total_trades": null,
+    "win_rate_pct": null,
+    "total_return_pct": null,
+    "sharpe_ratio": null,
+    "max_drawdown_pct": null,
+    "profit_factor": null,
+    "average_trade_pct": null,
+    "long": {
+      "trades": null,
+      "win_rate_pct": null,
+      "total_return_pct": null,
+      "average_trade_pct": null
+    },
+    "short": {
+      "trades": null,
+      "win_rate_pct": null,
+      "total_return_pct": null,
+      "average_trade_pct": null
+    }
+  },
+  "advisory": {
+    "level": "N/A",
+    "status": "INSUFFICIENT_DATA",
+    "message": "No validated Twelve Data historical OHLC file is available yet. A successful download alone does not make OOS metrics eligible."
+  },
+  "warnings": [
+    "Historical walk-forward simulation is research only; it is not a prediction or trading recommendation.",
+    "No provider data has been manually refreshed and reviewed yet.",
+    "Metrics remain N/A until valid source data, data quality, warm-up, at least 8 valid OOS folds, and at least 30 closed OOS trades are available."
+  ]
+}

@@ -21,6 +21,7 @@ import {
 } from './src/strategy/live_signal_writer.js';
 import { runMonitorCycle } from './src/strategy/monitor.js';
 import { startMtfResearchScheduler } from './src/strategy/mtf/scheduler.js';
+import { startFxGoldResearchScheduler } from './src/strategy/fx_gold/research_scheduler.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -79,6 +80,7 @@ server.listen(port, async () => {
   );
 
   startMtfResearchScheduler(log);
+  startFxGoldResearchScheduler(log);
 
   const DAILY_REFRESH_MS = 60 * 60 * 1_000;
   const DAILY_INITIAL_DELAY_MS = 75 * 1_000;

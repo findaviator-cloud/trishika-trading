@@ -110,7 +110,7 @@
       statusEl.textContent = 'Loading...';
 
       try {
-        const url = 'http://localhost:3000/api/forex/signal?pair=' + encodeURIComponent(symbol);
+        const url = '/api/forex/signal?symbol=' + encodeURIComponent(symbol);
         const res = await fetch(url);
         if (!res.ok) {
           throw new Error('HTTP ' + res.status);
