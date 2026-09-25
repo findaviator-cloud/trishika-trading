@@ -91,8 +91,8 @@ function readReport(symbol, timeframe) {
 function safeSecretMatch(provided, configured) {
   if (!provided || !configured) return false;
 
-  const left = Buffer.from(String(provided));
-  const right = Buffer.from(String(configured));
+  const left = Buffer.from(String(provided).trim());
+  const right = Buffer.from(String(configured).trim());
 
   return (
     left.length === right.length &&
