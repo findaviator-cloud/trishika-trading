@@ -7,7 +7,11 @@ ROOT = Path(__file__).resolve().parents[1]
 
 def assert_contains(path: Path, text: str) -> None:
     source = path.read_text(encoding="utf-8")
-    assert text in source, f"Missing required contract text in {path}: {text}"
+    normalized_source = "".join(source.split())
+    normalized_text = "".join(text.split())
+    assert normalized_text in normalized_source, (
+        f"Missing required contract text in {path}: {text}"
+    )
 
 
 def main() -> None:
@@ -42,7 +46,8 @@ def main() -> None:
     assert_contains(route, "scope: parsedScope.scope")
     assert_contains(refresh, "function normalizeRefreshOptions(options = {})")
     assert_contains(refresh, "function selectRefreshJobs(scope)")
-    assert_contains(refresh, "requestedReports: results.length")
+    assert_contains(refresh, "requestedReports: jobs.length")
+    assert_contains(refresh, "completedReports: results.length")
     assert_contains(refresh, "scope.mode === 'single'")
     assert_contains(scheduler, "03:30 IST")
     assert_contains(scheduler, "lastSkipReason")
@@ -72,6 +77,13 @@ def main() -> None:
     print("Golden Rule / report safety contract validation passed.")
     print("FX/Gold contract validation passed.")
 
+    assert_contains(refresh, 'const MAX_CONCURRENT_REFRESHES = 2')
+    assert_contains(refresh, 'const activeRefreshes = new Map()')
+    assert_contains(refresh, 'function scopesConflict(left, right)')
+    assert_contains(refresh, "'scope-conflict'")
+    assert_contains(refresh, "reason: 'capacity-reached'")
+    assert_contains(refresh, 'activeRefreshes.delete(key)')
+    assert_contains(route, "result.reason === 'capacity-reached'")
 
 if __name__ == "__main__":
     main()

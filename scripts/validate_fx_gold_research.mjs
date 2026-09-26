@@ -110,7 +110,14 @@ try {
     [sources.runner, '"INSUFFICIENT_TRADES"'],
     [sources.runner, '"researchOnly"'],
     [sources.runner, '"humanReviewRequired"'],
-    [sources.runner, '"provider": "TWELVE_DATA"']
+    [sources.runner, '"provider": "TWELVE_DATA"'],
+    [sources.refresh, "const MAX_CONCURRENT_REFRESHES = 2"],
+    [sources.refresh, "const activeRefreshes = new Map()"],
+    [sources.refresh, "function scopesConflict(left, right)"],
+    [sources.refresh, "'scope-conflict'"],
+    [sources.refresh, "reason: 'capacity-reached'"],
+    [sources.refresh, "activeRefreshes.delete(key)"],
+    [sources.route, "result.reason === 'capacity-reached'"],
   ];
 
   for (const [source, token] of tokens) {

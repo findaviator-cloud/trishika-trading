@@ -252,17 +252,6 @@ router.post('/research/refresh', async (req, res) => {
     });
   }
 
-  const state = getFxGoldResearchState();
-
-  if (state.running) {
-    return res.status(409).json({
-      ok: false,
-      error: 'FX/Gold research refresh is already running.',
-      research: state,
-      meta: meta()
-    });
-  }
-
   const parsedScope = parseRefreshScope(req);
 
   if (!parsedScope.ok) {
@@ -281,7 +270,21 @@ router.post('/research/refresh', async (req, res) => {
     scope: parsedScope.scope
   });
 
-  return res.status(result.ok ? 200 : result.partial ? 207 : 502).json({
+  const status = result.timedOut
+    ? 504
+    : result.skipped
+      ? result.reason === 'missing-api-key'
+        ? 503
+        : result.reason === 'capacity-reached'
+          ? 429
+          : 409
+      : result.ok
+        ? 200
+        : result.partial
+          ? 207
+          : 502;
+
+  return res.status(status).json({
     ok: result.ok,
     partial: Boolean(result.partial),
     scope: result.scope,
