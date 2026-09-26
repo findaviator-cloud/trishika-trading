@@ -355,7 +355,62 @@ export function getFxGoldResearchState() {
   };
 }
 
-export async function runFxGoldResearchRefresh(log = console) {
+function normalizeRefreshOptions(options = {}) {
+  if (options && typeof options.info === 'function') {
+    return {
+      log: options,
+      scope: { mode: 'full' }
+    };
+  }
+
+  const log = options?.log ?? console;
+  const requestedScope = options?.scope ?? { mode: 'full' };
+
+  if (!requestedScope || requestedScope.mode === 'full') {
+    return {
+      log,
+      scope: { mode: 'full' }
+    };
+  }
+
+  if (requestedScope.mode !== 'single') {
+    throw new Error('Invalid FX/Gold refresh scope mode.');
+  }
+
+  const symbol = SYMBOLS.find((item) => item.asset === requestedScope.symbol);
+  const timeframe = TIMEFRAMES.find((item) => item.key === requestedScope.timeframe);
+
+  if (!symbol || !timeframe) {
+    throw new Error('Invalid FX/Gold refresh scope selection.');
+  }
+
+  return {
+    log,
+    scope: {
+      mode: 'single',
+      symbol: symbol.asset,
+      timeframe: timeframe.key
+    }
+  };
+}
+
+function selectRefreshJobs(scope) {
+  const selectedSymbols = scope.mode === 'single'
+    ? SYMBOLS.filter((item) => item.asset === scope.symbol)
+    : SYMBOLS;
+
+  const selectedTimeframes = scope.mode === 'single'
+    ? TIMEFRAMES.filter((item) => item.key === scope.timeframe)
+    : TIMEFRAMES;
+
+  return selectedSymbols.flatMap((symbol) =>
+    selectedTimeframes.map((timeframe) => ({ symbol, timeframe }))
+  );
+}
+
+export async function runFxGoldResearchRefresh(options = {}) {
+  const { log, scope } = normalizeRefreshOptions(options);
+
   if (running) {
     return {
       skipped: true,
@@ -397,11 +452,10 @@ export async function runFxGoldResearchRefresh(log = console) {
     fs.mkdirSync(dataDir, { recursive: true });
     fs.mkdirSync(reportsDir, { recursive: true });
 
-    for (const symbol of SYMBOLS) {
-      for (const timeframe of TIMEFRAMES) {
-        const reportPath = reportPathFor(symbol, timeframe);
+    for (const { symbol, timeframe } of selectRefreshJobs(scope)) {
+      const reportPath = reportPathFor(symbol, timeframe);
 
-        try {
+      try {
           const downloaded = await fetchHistory(symbol, timeframe, apiKey);
 
           await runPythonWalkForward(
@@ -445,13 +499,12 @@ export async function runFxGoldResearchRefresh(log = console) {
             );
           }
 
-          results.push({
-            asset: symbol.asset,
-            timeframe: timeframe.key,
-            ok: false,
-            error: message
-          });
-        }
+        results.push({
+          asset: symbol.asset,
+          timeframe: timeframe.key,
+          ok: false,
+          error: message
+        });
       }
     }
 
@@ -472,6 +525,10 @@ export async function runFxGoldResearchRefresh(log = console) {
       ok: failures === 0,
       partial: failures > 0,
       outcome: lastOutcome,
+      scope: {
+        ...scope,
+        requestedReports: results.length
+      },
       results
     };
   } catch (error) {
@@ -485,6 +542,10 @@ export async function runFxGoldResearchRefresh(log = console) {
       ok: false,
       partial: false,
       outcome: 'failed',
+      scope: {
+        ...scope,
+        requestedReports: results.length
+      },
       error: error.message,
       results
     };

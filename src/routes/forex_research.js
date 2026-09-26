@@ -100,6 +100,76 @@ function safeSecretMatch(provided, configured) {
   );
 }
 
+function hasOwnQuery(req, name) {
+  return Object.prototype.hasOwnProperty.call(req.query ?? {}, name);
+}
+
+function getSingleQueryValue(req, name) {
+  const value = req.query?.[name];
+
+  if (
+    Array.isArray(value) ||
+    value === null ||
+    typeof value === 'object'
+  ) {
+    return { ok: false, value: null };
+  }
+
+  return {
+    ok: typeof value === 'string',
+    value: typeof value === 'string' ? value : null
+  };
+}
+
+function parseRefreshScope(req) {
+  const hasSymbol = hasOwnQuery(req, 'symbol');
+  const hasTimeframe = hasOwnQuery(req, 'timeframe');
+
+  if (!hasSymbol && !hasTimeframe) {
+    return {
+      ok: true,
+      scope: { mode: 'full' }
+    };
+  }
+
+  if (!hasSymbol || !hasTimeframe) {
+    return {
+      ok: false,
+      error: 'Provide both supported query parameters symbol and timeframe, or provide neither for a full refresh.'
+    };
+  }
+
+  const rawSymbol = getSingleQueryValue(req, 'symbol');
+  const rawTimeframe = getSingleQueryValue(req, 'timeframe');
+
+  if (!rawSymbol.ok || !rawTimeframe.ok) {
+    return {
+      ok: false,
+      error: 'symbol and timeframe must each be a single non-empty string.'
+    };
+  }
+
+  const symbol = normalizeSymbol(rawSymbol.value);
+  const requestedTimeframe = String(rawTimeframe.value).trim().toLowerCase();
+  const timeframe = requestedTimeframe === '1d' ? '1day' : requestedTimeframe;
+
+  if (!symbol || !timeframe || !SYMBOLS[symbol] || !TIMEFRAMES[timeframe]) {
+    return {
+      ok: false,
+      error: 'Unsupported refresh scope.'
+    };
+  }
+
+  return {
+    ok: true,
+    scope: {
+      mode: 'single',
+      symbol,
+      timeframe
+    }
+  };
+}
+
 router.get('/research', (req, res) => {
   const symbol = normalizeSymbol(req.query.symbol || req.query.pair || 'EUR_USD');
   const timeframe = normalizeTimeframe(req.query.timeframe || '1h');
@@ -193,11 +263,28 @@ router.post('/research/refresh', async (req, res) => {
     });
   }
 
-  const result = await runFxGoldResearchRefresh(console);
+  const parsedScope = parseRefreshScope(req);
+
+  if (!parsedScope.ok) {
+    return res.status(400).json({
+      ok: false,
+      error: 'INVALID_REFRESH_SCOPE',
+      message: parsedScope.error,
+      allowedSymbols: Object.keys(SYMBOLS),
+      allowedTimeframes: ['1h', '4h', '1day'],
+      meta: meta()
+    });
+  }
+
+  const result = await runFxGoldResearchRefresh({
+    log: console,
+    scope: parsedScope.scope
+  });
 
   return res.status(result.ok ? 200 : result.partial ? 207 : 502).json({
     ok: result.ok,
     partial: Boolean(result.partial),
+    scope: result.scope,
     result,
     research: getFxGoldResearchState(),
     scheduler: getFxGoldResearchSchedulerState(),
