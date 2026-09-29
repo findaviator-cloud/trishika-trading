@@ -37,6 +37,7 @@ def main() -> None:
     fetcher = ROOT / "scripts" / "fetch_twelvedata_ohlc.py"
 
     assert_contains(refresh, "fetchTwelveDataJson")
+    assert_contains(refresh, "caller: 'forex_research'")
     assert_contains(refresh, "run_fx_gold_walkforward.py")
     assert_contains(refresh, "outcome: 'skipped_already_running'")
     assert_contains(route, "x-forex-research-refresh-secret")

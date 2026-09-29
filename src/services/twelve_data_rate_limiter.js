@@ -28,6 +28,47 @@ let lastRateLimitMessage = null;
 let lastRequestAtUtc = null;
 let lastFailureAtUtc = null;
 let lastFailureMessage = null;
+let lastTelemetry = {
+  caller: 'unknown',
+  capturedAtUtc: null,
+  apiCreditsUsed: null,
+  apiCreditsLeft: null,
+  rateLimitLimit: null,
+  rateLimitRemaining: null,
+  rateLimitReset: null
+};
+
+const ALLOWED_CALLERS = new Set([
+  'forex_research',
+  'live_signal_writer',
+  'ema_confirmation',
+  'candle_service',
+  'mtf_child_process',
+  'crypto_forex_mtf_analysis',
+  'unknown'
+]);
+
+function normalizeCaller(value) {
+  const caller = String(value ?? '').trim();
+  return ALLOWED_CALLERS.has(caller) ? caller : 'unknown';
+}
+
+function headerValue(headers, name) {
+  const value = headers?.[name];
+  return value === undefined || value === null || value === '' ? null : String(value);
+}
+
+function recordTelemetry(headers, caller) {
+  lastTelemetry = {
+    caller: normalizeCaller(caller),
+    capturedAtUtc: new Date().toISOString(),
+    apiCreditsUsed: headerValue(headers, 'api-credits-used'),
+    apiCreditsLeft: headerValue(headers, 'api-credits-left'),
+    rateLimitLimit: headerValue(headers, 'x-ratelimit-limit'),
+    rateLimitRemaining: headerValue(headers, 'x-ratelimit-remaining'),
+    rateLimitReset: headerValue(headers, 'x-ratelimit-reset')
+  };
+}
 
 function sleep(ms) {
   return new Promise((resolve) => setTimeout(resolve, ms));
@@ -128,7 +169,10 @@ export function queueTwelveDataRequest(run) {
   });
 }
 
-export function fetchTwelveDataJson(url, timeoutMs = 15_000) {
+export function fetchTwelveDataJson(url, timeoutMs = 15_000, options = {}) {
+  const caller = normalizeCaller(options?.caller);
+  const captureHeaders = options?.captureHeaders !== false;
+
   return queueTwelveDataRequest(() => new Promise((resolve, reject) => {
     const request = https.get(url, { timeout: timeoutMs }, (response) => {
       let data = '';
@@ -140,6 +184,10 @@ export function fetchTwelveDataJson(url, timeoutMs = 15_000) {
       response.on('error', reject);
 
       response.on('end', () => {
+        if (captureHeaders) {
+          recordTelemetry(response.headers, caller);
+        }
+
         try {
           const parsed = JSON.parse(data);
 
@@ -193,6 +241,11 @@ export function getTwelveDataRateLimiterState() {
     lastRateLimitAtUtc,
     lastRateLimitMessage,
     lastFailureAtUtc,
-    lastFailureMessage
+    lastFailureMessage,
+    telemetry: {
+      advisoryOnly: true,
+      accountWideQuotaAuthoritative: false,
+      ...lastTelemetry
+    }
   };
 }

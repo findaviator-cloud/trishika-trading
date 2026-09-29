@@ -155,7 +155,7 @@ async function fetchTwelveDataKlines(symbol, limit) {
   const url =
     `https://api.twelvedata.com/time_series?symbol=${sym}&interval=1day&outputsize=${limit}&apikey=${key}`;
 
-  const parsed = await fetchTwelveDataJson(url);
+  const parsed = await fetchTwelveDataJson(url, 15_000, { caller: 'live_signal_writer' });
 
   if (!Array.isArray(parsed.values)) {
     throw new Error('Twelve Data response did not contain daily candle values.');

@@ -34,7 +34,7 @@ async function fetchTwelveHourly(symbol, limit = 200) {
     `https://api.twelvedata.com/time_series?symbol=${encodeURIComponent(symbol)}` +
     `&interval=1h&outputsize=${limit}&apikey=${key}`;
 
-  const parsed = await fetchTwelveDataJson(url);
+  const parsed = await fetchTwelveDataJson(url, 15_000, { caller: 'candle_service' });
 
   if (!Array.isArray(parsed.values)) {
     throw new Error('Twelve Data response did not contain candle values.');

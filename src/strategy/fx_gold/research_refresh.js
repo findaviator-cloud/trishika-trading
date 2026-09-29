@@ -169,7 +169,11 @@ async function fetchHistory(symbol, timeframe, apiKey) {
     order: 'ASC',
     apikey: apiKey
   });
-  const payload = await fetchTwelveDataJson(`https://api.twelvedata.com/time_series?${params.toString()}`);
+  const payload = await fetchTwelveDataJson(
+    `https://api.twelvedata.com/time_series?${params.toString()}`,
+    15_000,
+    { caller: 'forex_research' }
+  );
   const rows = normalizeCandles(payload?.values);
   if (!rows.length) throw new Error(`${symbol.asset} ${timeframe.key}: provider returned no valid OHLC rows`);
 

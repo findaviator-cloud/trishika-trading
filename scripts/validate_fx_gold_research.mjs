@@ -95,6 +95,7 @@ try {
 
   const tokens = [
     [sources.refresh, "key: '4h'"],
+    [sources.refresh, "caller: 'forex_research'"],
     [sources.refresh, "twelveInterval: '4h'"],
     [sources.refresh, "FX_GOLD_RESEARCH_LOOKBACK_DAYS_4H"],
     [sources.scheduler, "03:30 IST"],
