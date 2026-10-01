@@ -54,12 +54,30 @@ router.get('/:symbol', (req, res) => {
   const payload = signalFile ? getSignal(signalFile) : null;
   const analysis = toAnalysis(payload);
 
+  // A candle engine may have historical candles but no in-progress candle.
+  // Preserve a real live candle when present; otherwise expose the latest
+  // signal-store price in the existing current-candle response shape.
+  const signalLast = Number(analysis?.price?.last);
+  const fallbackCurrent = Number.isFinite(signalLast) && signalLast > 0
+    ? {
+        time: analysis?.timestamp ?? Date.now(),
+        open: signalLast,
+        high: signalLast,
+        low: signalLast,
+        close: signalLast,
+        volume: 0,
+        source: 'signal-store-fallback'
+      }
+    : null;
+
+  const current = engine?.currentCandle ?? fallbackCurrent;
+
   return res.json({
     symbol,
     requestedSymbol,
     source: engine?.source ?? null,
     candleMs: engine?.candleMs ?? null,
-    current: engine?.currentCandle ?? null,
+    current,
     candles: Array.isArray(engine?.candles) ? engine.candles : [],
     analysis,
     indicators: analysis?.indicators ?? {},
