@@ -70,6 +70,14 @@ function recordTelemetry(headers, caller) {
   };
 }
 
+export function recordTwelveDataTelemetry(headers, caller) {
+  const normalizedHeaders = headers && typeof headers.forEach === 'function'
+    ? Object.fromEntries(headers.entries())
+    : headers;
+
+  recordTelemetry(normalizedHeaders, caller);
+}
+
 function sleep(ms) {
   return new Promise((resolve) => setTimeout(resolve, ms));
 }

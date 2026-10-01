@@ -12,7 +12,10 @@ import {
   normalizeCandles,
 } from '../src/strategy/mtf/analysis_core.js';
 
-import { queueTwelveDataRequest } from '../src/services/twelve_data_rate_limiter.js';
+import {
+  queueTwelveDataRequest,
+  recordTwelveDataTelemetry
+} from '../src/services/twelve_data_rate_limiter.js';
 
 const OUTPUT_DIR = path.resolve(
   process.env.MTF_ANALYSIS_DIR || path.join('signals_live', 'analysis')
@@ -128,6 +131,8 @@ async function fetchTwelveDataCandles({ symbol, interval, outputsize }) {
           headers: { Accept: 'application/json' }
         }
       );
+
+      recordTwelveDataTelemetry(response.headers, 'mtf_child_process');
 
       const payload = await response.json().catch(() => null);
 
