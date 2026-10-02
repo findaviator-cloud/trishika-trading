@@ -49,3 +49,8 @@ data/EURUSD_1d.csv
 data/XAUUSD_1h.csv
 data/XAUUSD_4h.csv
 data/XAUUSD_1d.csv
+
+# FX/Gold offline source archives and generated research outputs (never commit raw provider data)
+data/offline/raw-archive/
+data/offline/normalized/
+reports/offline/
