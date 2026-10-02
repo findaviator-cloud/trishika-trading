@@ -5,6 +5,7 @@ const files = [
   'src/candle/index.js',
   'src/strategy/live_signal_writer.js',
   'src/strategy/monitor.js',
+  'scripts/generate-crypto-forex-mtf-analysis.js',
   'server.js'
 ];
 
@@ -31,6 +32,7 @@ const limiter = fs.readFileSync('src/services/twelve_data_rate_limiter.js', 'utf
 const candle = fs.readFileSync('src/candle/index.js', 'utf8');
 const writer = fs.readFileSync('src/strategy/live_signal_writer.js', 'utf8');
 const monitor = fs.readFileSync('src/strategy/monitor.js', 'utf8');
+const mtf = fs.readFileSync('scripts/generate-crypto-forex-mtf-analysis.js', 'utf8');
 const server = fs.readFileSync('server.js', 'utf8');
 
 for (const marker of [
@@ -58,7 +60,26 @@ for (const [file, source] of [
   }
 }
 
-if (server.includes('const DAILY_INITIAL_DELAY_MS = 75 * 1000;')) {
+if (mtf.includes('queueTwelveDataRequest')) {
+  pass('MTF analysis uses shared Twelve Data request queue');
+} else {
+  fail('MTF analysis does not use shared Twelve Data request queue');
+}
+
+if (mtf.includes("recordTwelveDataTelemetry(response.headers, 'mtf_child_process')")) {
+  pass('MTF analysis records Twelve Data telemetry with mtf_child_process caller');
+} else {
+  fail('MTF analysis telemetry caller marker missing');
+}
+
+if (mtf.includes('import https')) {
+  fail('MTF analysis still directly imports https for Twelve Data REST');
+}
+
+if (
+  server.includes('const DAILY_INITIAL_DELAY_MS = 75 * 1000;') ||
+  server.includes('const DAILY_INITIAL_DELAY_MS = 75 * 1_000;')
+) {
   pass('server delays initial daily refresh by 75 seconds');
 } else {
   fail('server initial daily refresh delay marker missing');
