@@ -19,8 +19,7 @@ function logSignal(entry) {
     source:      entry.source       ?? "unknown",
   };
   try {
-    fs.appendFileSync(LOG_FILE, JSON.stringify(record) + "
-", "utf8");
+    fs.appendFileSync(LOG_FILE, JSON.stringify(record) + "\n", "utf8");
   } catch (err) {
     console.error("[LOGGER] Failed to write signal log:", err.message);
   }

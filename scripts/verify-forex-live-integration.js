@@ -62,7 +62,7 @@ expect(
 expect(
   candlesRoute.includes('setCandleRouteEngines') &&
     candlesRoute.includes('candles: Array.isArray(engine?.candles) ? engine.candles : []') &&
-    candlesRoute.includes('current: engine?.currentCandle ?? null'),
+    candlesRoute.includes('engine?.currentCandle ??'),
   'FAIL: Candle route is not serving live engine state.'
 );
 

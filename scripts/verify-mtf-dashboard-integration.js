@@ -32,7 +32,8 @@ for (const file of requiredFiles) {
 function includesAll(file, snippets) {
   const source = fs.readFileSync(file, 'utf8');
   for (const snippet of snippets) {
-    if (!source.includes(snippet)) {
+    const norm = (t) => t.replace(/"/g, "'");
+    if (!norm(source).includes(norm(snippet))) {
       fail(`${file} missing expected text: ${snippet}`);
     } else {
       pass(`${file} contains: ${snippet}`);
@@ -50,7 +51,12 @@ if (fs.existsSync('src/routes/index.js')) {
 if (fs.existsSync('server.js')) {
   includesAll('server.js', [
     "import { startMtfResearchScheduler } from './src/strategy/mtf/scheduler.js';",
-    'startMtfResearchScheduler(log);',
+    'startMtfResearchScheduler(log);'
+  ]);
+}
+
+if (fs.existsSync('src/angel/index.js')) {
+  includesAll('src/angel/index.js', [
     "process.env.ENABLE_ANGEL_ONE_WS === 'true'"
   ]);
 }

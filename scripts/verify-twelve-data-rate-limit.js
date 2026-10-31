@@ -58,7 +58,7 @@ for (const [file, source] of [
   }
 }
 
-if (server.includes('const DAILY_INITIAL_DELAY_MS = 75 * 1000;')) {
+if (/const DAILY_INITIAL_DELAY_MS = 75 \* 1_?000;/.test(server)) {
   pass('server delays initial daily refresh by 75 seconds');
 } else {
   fail('server initial daily refresh delay marker missing');
