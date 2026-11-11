@@ -1,0 +1,40 @@
+name: paper-trading
+# Har ghante virtual (paper) trading engine chalta hai. Koi real order nahi.
+# Result data/paper/ mein commit hota hai -> GitHub par hi dikhta hai aur Render /api/paper se padhta hai.
+on:
+  schedule:
+    - cron: "7 * * * *"
+  workflow_dispatch: {}
+permissions:
+  contents: write
+concurrency:
+  group: paper-trading
+  cancel-in-progress: false
+jobs:
+  run:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - run: pip install pandas numpy
+      - name: Run paper engine
+        env:
+          TWELVE_DATA_API_KEY: ${{ secrets.TWELVE_DATA_API_KEY }}
+          PAPER_START_DATE: ${{ vars.PAPER_START_DATE || '2026-11-10' }}
+          PAPER_CAPITAL: ${{ vars.PAPER_CAPITAL || '100000' }}
+          PAPER_RISK_PCT: ${{ vars.PAPER_RISK_PCT || '0.5' }}
+        run: python research/v2_validation/paper_engine.py --out-dir data/paper
+      - name: Commit results
+        run: |
+          git config user.name "trishika-paper-bot"
+          git config user.email "paper-bot@users.noreply.github.com"
+          git add data/paper
+          git diff --cached --quiet && exit 0
+          git commit -m "paper: update [skip render]"
+          for i in 1 2 3; do
+            git pull --rebase -X theirs origin "${GITHUB_REF_NAME}" && git push && exit 0
+            sleep 5
+          done
+          exit 1

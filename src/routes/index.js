@@ -9,6 +9,7 @@ import mtfRouter from './mtf.js';
 import angelRouter from './angel.js';
 import diagRouter from './diag.js';
 
+import paperRouter from './paper.js';
 const router = express.Router();
 
 export function setRouteEngines(engines) {
@@ -25,5 +26,7 @@ router.use('/history', historyRouter);
 router.use('/mtf', mtfRouter);
 router.use('/angel', angelRouter);
 router.use('/diag', diagRouter);
+
+router.use('/paper', paperRouter);
 
 export default router;
