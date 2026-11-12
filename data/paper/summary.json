@@ -1,5 +1,5 @@
 {
-  "generated_at_utc": "2026-11-12T06:33:55Z",
+  "generated_at_utc": "2026-11-12T19:50:13Z",
   "paper_start_date": "2026-11-10",
   "days_running": 2,
   "virtual_capital": 100000.0,
@@ -30,32 +30,32 @@
     },
     "SHADOW_FULL_IN": {
       "closed": 1,
-      "open": 0,
+      "open": 1,
       "shadow": true,
       "progress_to_100": "1/100",
       "expected_net_bp_from_backtest": 22.0,
       "flag": "ABHI KAM TRADES (kam se kam 100 chahiye)"
     },
     "SHADOW_FULL_M": {
-      "closed": 2,
+      "closed": 3,
       "open": 1,
-      "avg_net_bp": -32.99,
-      "win_pct": 50.0,
-      "t_stat": -0.35,
-      "profit_factor": 0.48,
+      "avg_net_bp": 10.32,
+      "win_pct": 66.7,
+      "t_stat": 0.15,
+      "profit_factor": 1.24,
       "worst_trade_bp": -127.3,
-      "best_trade_bp": 61.3,
-      "cum_equity_pct": 0.005,
+      "best_trade_bp": 97.0,
+      "cum_equity_pct": 0.139,
       "max_drawdown_pct": -0.145,
-      "virtual_equity": 100005.28,
+      "virtual_equity": 100138.69,
       "shadow": true,
-      "progress_to_100": "2/100",
+      "progress_to_100": "3/100",
       "expected_net_bp_from_backtest": 0.0,
       "flag": "ABHI KAM TRADES (kam se kam 100 chahiye)"
     },
     "SHADOW_HALF_M": {
       "closed": 2,
-      "open": 0,
+      "open": 1,
       "avg_net_bp": -32.99,
       "win_pct": 50.0,
       "t_stat": -0.35,
@@ -105,35 +105,35 @@
     "XAU": {
       "ok": true,
       "bars": 5000,
-      "first": "2026-04-17 23:00:00",
-      "last": "2026-11-12 06:00:00"
+      "first": "2026-04-18 12:00:00",
+      "last": "2026-11-12 19:00:00"
     },
     "BTC": {
       "ok": true,
       "bars": 5000,
-      "first": "2026-04-17 23:00:00",
-      "last": "2026-11-12 06:00:00"
+      "first": "2026-04-18 12:00:00",
+      "last": "2026-11-12 19:00:00"
     },
     "ETH": {
       "ok": true,
       "bars": 5000,
-      "first": "2026-04-17 23:00:00",
-      "last": "2026-11-12 06:00:00"
+      "first": "2026-04-18 12:00:00",
+      "last": "2026-11-12 19:00:00"
     },
     "NIFTY50": {
       "ok": true,
-      "bars": 270,
-      "last": "2026-11-12"
+      "bars": 268,
+      "last": "2026-11-11"
     },
     "BANKNIFTY": {
       "ok": true,
-      "bars": 270,
-      "last": "2026-11-12"
+      "bars": 268,
+      "last": "2026-11-11"
     },
     "SENSEX": {
       "ok": true,
-      "bars": 270,
-      "last": "2026-11-12"
+      "bars": 268,
+      "last": "2026-11-11"
     }
   },
   "notes": [
