@@ -1,0 +1,144 @@
+{
+  "generated_at_utc": "2026-11-12T06:33:55Z",
+  "paper_start_date": "2026-11-10",
+  "days_running": 2,
+  "virtual_capital": 100000.0,
+  "safety": {
+    "researchOnly": true,
+    "paperOnly": true,
+    "ordersAllowed": false,
+    "executionAllowed": false,
+    "brokerConnectivityAllowed": false
+  },
+  "sleeves": {
+    "GOLD_NIGHT": {
+      "closed": 2,
+      "open": 0,
+      "avg_net_bp": 8.24,
+      "win_pct": 50.0,
+      "t_stat": 0.35,
+      "profit_factor": 2.06,
+      "worst_trade_bp": -15.5,
+      "best_trade_bp": 32.0,
+      "cum_equity_pct": 0.071,
+      "max_drawdown_pct": -0.067,
+      "virtual_equity": 100071.11,
+      "shadow": false,
+      "progress_to_100": "2/100",
+      "expected_net_bp_from_backtest": 3.6,
+      "flag": "ABHI KAM TRADES (kam se kam 100 chahiye)"
+    },
+    "SHADOW_FULL_IN": {
+      "closed": 1,
+      "open": 0,
+      "shadow": true,
+      "progress_to_100": "1/100",
+      "expected_net_bp_from_backtest": 22.0,
+      "flag": "ABHI KAM TRADES (kam se kam 100 chahiye)"
+    },
+    "SHADOW_FULL_M": {
+      "closed": 2,
+      "open": 1,
+      "avg_net_bp": -32.99,
+      "win_pct": 50.0,
+      "t_stat": -0.35,
+      "profit_factor": 0.48,
+      "worst_trade_bp": -127.3,
+      "best_trade_bp": 61.3,
+      "cum_equity_pct": 0.005,
+      "max_drawdown_pct": -0.145,
+      "virtual_equity": 100005.28,
+      "shadow": true,
+      "progress_to_100": "2/100",
+      "expected_net_bp_from_backtest": 0.0,
+      "flag": "ABHI KAM TRADES (kam se kam 100 chahiye)"
+    },
+    "SHADOW_HALF_M": {
+      "closed": 2,
+      "open": 0,
+      "avg_net_bp": -32.99,
+      "win_pct": 50.0,
+      "t_stat": -0.35,
+      "profit_factor": 0.48,
+      "worst_trade_bp": -127.3,
+      "best_trade_bp": 61.3,
+      "cum_equity_pct": -0.028,
+      "max_drawdown_pct": -0.178,
+      "virtual_equity": 99972.03,
+      "shadow": true,
+      "progress_to_100": "2/100",
+      "expected_net_bp_from_backtest": 0.0,
+      "flag": "ABHI KAM TRADES (kam se kam 100 chahiye)"
+    },
+    "SHADOW_INDIA_NIGHT": {
+      "closed": 3,
+      "open": 0,
+      "avg_net_bp": -13.73,
+      "win_pct": 0.0,
+      "t_stat": -2.42,
+      "profit_factor": 0.0,
+      "worst_trade_bp": -20.4,
+      "best_trade_bp": -2.5,
+      "cum_equity_pct": -0.412,
+      "max_drawdown_pct": -0.387,
+      "virtual_equity": 99588.47,
+      "shadow": true,
+      "progress_to_100": "3/100",
+      "expected_net_bp_from_backtest": 3.0,
+      "flag": "ABHI KAM TRADES (kam se kam 100 chahiye)"
+    }
+  },
+  "equity_portfolio": {
+    "closed": 2,
+    "open": 0,
+    "avg_net_bp": 8.24,
+    "win_pct": 50.0,
+    "t_stat": 0.35,
+    "profit_factor": 2.06,
+    "worst_trade_bp": -15.5,
+    "best_trade_bp": 32.0,
+    "cum_equity_pct": 0.071,
+    "max_drawdown_pct": -0.067,
+    "virtual_equity": 100071.11
+  },
+  "data_status": {
+    "XAU": {
+      "ok": true,
+      "bars": 5000,
+      "first": "2026-04-17 23:00:00",
+      "last": "2026-11-12 06:00:00"
+    },
+    "BTC": {
+      "ok": true,
+      "bars": 5000,
+      "first": "2026-04-17 23:00:00",
+      "last": "2026-11-12 06:00:00"
+    },
+    "ETH": {
+      "ok": true,
+      "bars": 5000,
+      "first": "2026-04-17 23:00:00",
+      "last": "2026-11-12 06:00:00"
+    },
+    "NIFTY50": {
+      "ok": true,
+      "bars": 270,
+      "last": "2026-11-12"
+    },
+    "BANKNIFTY": {
+      "ok": true,
+      "bars": 270,
+      "last": "2026-11-12"
+    },
+    "SENSEX": {
+      "ok": true,
+      "bars": 270,
+      "last": "2026-11-12"
+    }
+  },
+  "notes": [
+    "Sab trades virtual hain. Fill = candle open (cost assumption se), asli bid/ask/slippage nahi.",
+    "SHADOW sleeves sirf record ke liye hain (M short, inverted N short, India night); equity mein nahi judte.",
+    "Rules ko test dekhkar mat badlein; naya version = naya PAPER_START_DATE."
+  ]
+}
