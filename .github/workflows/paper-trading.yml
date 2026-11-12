@@ -3,7 +3,7 @@ name: paper-trading
 # Result data/paper/ mein commit hota hai -> GitHub par hi dikhta hai aur Render /api/paper se padhta hai.
 on:
   schedule:
-    - cron: "7 * * * *"
+    - cron: "7 */4 * * *"
   workflow_dispatch: {}
 permissions:
   contents: write
