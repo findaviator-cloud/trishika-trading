@@ -309,6 +309,54 @@ def build_signals(hourly, daily, trades, now):
     return out
 
 
+# gold night: pehle ki research se (vol20 terciles, 2010-26) - approx; regime ka definition engine ke daily-range regime se thoda alag hai
+NIGHT_TABLE = {"LOW": (17.9, -32.0), "MID": (23.5, -40.0), "HIGH": (37.3, -72.0)}
+
+
+def night_card(h, now, risk):
+    vr = vol_regime(h)
+    if not vr:
+        return None
+    exp_move, bad5 = NIGHT_TABLE[vr["regime"]]
+    nxt = now.normalize() + timedelta(hours=22)
+    if nxt <= now:
+        nxt += timedelta(days=1)
+    while nxt.weekday() not in (6, 0, 1, 2, 3):
+        nxt += timedelta(days=1)
+    frac = min(1.0, risk / (abs(bad5) / 1e4))
+    return dict(next_entry_utc=str(nxt), next_entry_ist=str(nxt + timedelta(hours=5, minutes=30)), exit_utc=str(nxt + timedelta(hours=6)),
+                regime=vr["regime"], avg_daily_range_20d_bp=vr["avg_daily_range_20d_bp"], typical_abs_move_bp=exp_move, bad_night_5pct_bp=bad5,
+                suggested_notional_frac=round(frac, 2), risk_budget_pct=round(risk * 100, 2),
+                note="Research ka andaza (edge ki guarantee nahi). Size sirf risk ke liye; direction ka koi signal nahi.")
+
+
+PLOG_COLS = ["logged_at_utc", "instrument", "timeframe", "formed_at", "kind", "direction", "role", "stop", "target"]
+
+
+def update_pattern_log(path, instruments, now, keep=3000):
+    rows, seen = [], set()
+    if os.path.exists(path):
+        with open(path, newline="") as f:
+            for r in csv.DictReader(f):
+                rows.append(r); seen.add((r["instrument"], r["timeframe"], r["formed_at"], r["kind"]))
+    new = 0
+    for inst, d in instruments.items():
+        for lst in ("patterns_last_24h_on_4h", "patterns_last_day_on_1h", "patterns_last_5d_on_1d"):
+            for p in d.get(lst, []) if isinstance(d, dict) else []:
+                k = (inst, p["timeframe"], p["formed_at"], p["kind"])
+                if k in seen:
+                    continue
+                seen.add(k); new += 1
+                rows.append(dict(logged_at_utc=now.strftime("%Y-%m-%d %H:%M"), instrument=inst, timeframe=p["timeframe"], formed_at=p["formed_at"], kind=p["kind"],
+                                 direction=p["direction"], role=p["role"], stop=p["stop"], target=p["target"]))
+    rows = rows[-keep:]
+    tmp = path + ".tmp"
+    with open(tmp, "w", newline="") as f:
+        w = csv.DictWriter(f, fieldnames=PLOG_COLS, extrasaction="ignore"); w.writeheader(); w.writerows(rows)
+    os.replace(tmp, path)
+    return new
+
+
 # ------------------------------------------------------------------ main
 def main():
     ap = argparse.ArgumentParser()
@@ -324,7 +372,7 @@ def main():
     start = pd.Timestamp(a.start)
     os.makedirs(a.out_dir, exist_ok=True)
     status, hourly, daily = {}, {}, {}
-    key = os.environ.get("TWELVE_DATA_API_KEY", "")
+    key = os.environ.get("TWELVE_DATA_API_KEY", "").strip().strip("\"'")
     csvmap = dict(x.split("=", 1) for x in a.csv)
     for sym in ("XAU", "BTC", "ETH"):
         try:
@@ -388,8 +436,15 @@ def main():
         sig = build_signals(hourly, daily, trades, now)
     except Exception as e:  # noqa: BLE001
         sig = {"error": str(e)[:200]}
+    card = None
+    try:
+        card = night_card(hourly["XAU"], now, a.risk) if "XAU" in hourly else None
+        if "error" not in sig:
+            update_pattern_log(os.path.join(a.out_dir, "pattern_log.csv"), sig, now)
+    except Exception as e:  # noqa: BLE001
+        card = {"error": scrub(e)}
     with open(os.path.join(a.out_dir, "signals.json"), "w") as f:
-        json.dump(dict(generated_at_utc=summ["generated_at_utc"], safety=SAFETY, instruments=sig), f, indent=2, default=str)
+        json.dump(dict(generated_at_utc=summ["generated_at_utc"], safety=SAFETY, gold_night_card=card, instruments=sig), f, indent=2, default=str)
     print(json.dumps({k: summ[k] for k in ("generated_at_utc", "days_running")}), "trades:", len(trades))
     for k, v in summ["sleeves"].items():
         print(f"  {k:22} closed={v['closed']:3d} open={v['open']} avg_net={v.get('avg_net_bp')}bp win={v.get('win_pct')}%")

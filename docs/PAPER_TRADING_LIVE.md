@@ -3,9 +3,9 @@
 Koi real order nahi. Engine sirf rules ko live candles par virtual chalata hai aur trade log banata hai.
 
 ## Kaise chalta hai
-GitHub Actions (`.github/workflows/paper-trading.yml`) har ghante `research/v2_validation/paper_engine.py` chalata hai
+GitHub Actions (`.github/workflows/paper-trading.yml`) har 4 ghante (00:07, 04:07 ... UTC) `research/v2_validation/paper_engine.py` chalata hai
 -> Twelve Data (gold, BTC, ETH 1h) + Yahoo (Nifty, Bank Nifty, Sensex daily) se data -> `data/paper/trades.csv` + `summary.json` commit.
-Commit message mein `[skip render]` hai, isliye Render har ghante redeploy nahi hota.
+Commit message mein `[skip render]` hai, isliye Render har baar redeploy nahi hota.
 Engine har baar PAPER_START_DATE se replay karta hai, isliye Render ya GitHub ka koi disk reset kuch nahi bigadta, aur look-ahead nahi hai (test: pichhle waqt par chalane se same trades).
 
 ## Sleeves
@@ -31,7 +31,7 @@ Half-W/half-N/half-IN signals research reports mein hain; live mein sirf upar wa
 - Kill switch review: 60+ trades par average net < −1 bp, ya 10% drawdown -> ruko, parakho (`flag` field summary mein).
 - Fills candle open par hain, asli bid/ask nahi; asli broker demo par 20–30 trades ka spread/slippage alag se naapo.
 - Rules mat badlo. Badalna hai to naya PAPER_START_DATE.
-- Twelve Data free limit: engine ~3 calls/ghanta (72/din), baaki app ke saath 800/din ke andar.
+- Twelve Data free limit (800 credits/din, 8/min, ek hi key Render par bhi): engine 3 calls x 6 runs = 18 credits/din. Render par MTF refresh ka bada kharch hai: `MTF_AUTO_REFRESH_INTERVAL_MS=14400000` (4 ghante) aur `MTF_SNAPSHOT_STALE_AFTER_MS=21600000` rakhein. Twelve Data Statistics mein 'Today' dekhte rahein.
 
 ## Dashboard par kya dikhta hai (`/api/paper/`)
 1. Sleeve table: trades, avg net bp, win %, t-stat, drawdown, backtest se compare (`expected_net_bp_from_backtest`).
@@ -40,3 +40,15 @@ Half-W/half-N/half-IN signals research reports mein hain; live mein sirf upar wa
 4. Har ghante update; poori history `trades.csv` mein.
 
 (v5) Engine error text se key scrub hoti hai; workflow push se pehle pull --rebase karta hai (3 try).
+
+## Naya (v7)
+- **Aaj raat ka gold plan**: entry/exit time, volatility regime, typical move, kharab raat ka andaza, suggested size (`signals.json` -> `gold_night_card`).
+- **Pattern history**: har naya pattern `data/paper/pattern_log.csv` mein jama hota hai (kab bana, side, role). API: `/api/paper/patterns`.
+- **Equity curve** (sirf equity sleeves) aur **chetavni**: data 9 ghante se purana ho ya koi data source fail ho to dashboard par laal/peeli patti.
+- Workflow mein `timeout-minutes: 10`, key ke aas-paas ke spaces/quotes engine khud hata deta hai.
+- Test: `python research/v2_validation/test_paper_engine.py` (look-ahead, rerun, data-fail guard, gold weekday rule).
+
+## Roz/hafte ki jaanch (2 minute)
+1. `/api/paper/` par laal ya peeli patti nahi honi chahiye.
+2. Twelve Data Statistics: aaj ka usage 600 se neeche.
+3. Har hafte `summary.json` mein `closed` count badhta ho. 100 trades se pehle nateeja mat nikaalo.
