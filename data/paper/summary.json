@@ -1,7 +1,7 @@
 {
-  "generated_at_utc": "2026-11-12T19:50:13Z",
+  "generated_at_utc": "2026-11-13T01:00:14Z",
   "paper_start_date": "2026-11-10",
-  "days_running": 2,
+  "days_running": 3,
   "virtual_capital": 100000.0,
   "safety": {
     "researchOnly": true,
@@ -13,7 +13,7 @@
   "sleeves": {
     "GOLD_NIGHT": {
       "closed": 2,
-      "open": 0,
+      "open": 1,
       "avg_net_bp": 8.24,
       "win_pct": 50.0,
       "t_stat": 0.35,
@@ -105,20 +105,20 @@
     "XAU": {
       "ok": true,
       "bars": 5000,
-      "first": "2026-04-18 12:00:00",
-      "last": "2026-11-12 19:00:00"
+      "first": "2026-04-18 17:00:00",
+      "last": "2026-11-13 00:00:00"
     },
     "BTC": {
       "ok": true,
       "bars": 5000,
-      "first": "2026-04-18 12:00:00",
-      "last": "2026-11-12 19:00:00"
+      "first": "2026-04-18 17:00:00",
+      "last": "2026-11-13 00:00:00"
     },
     "ETH": {
       "ok": true,
       "bars": 5000,
-      "first": "2026-04-18 12:00:00",
-      "last": "2026-11-12 19:00:00"
+      "first": "2026-04-18 17:00:00",
+      "last": "2026-11-13 00:00:00"
     },
     "NIFTY50": {
       "ok": true,
