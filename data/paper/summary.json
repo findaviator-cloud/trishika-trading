@@ -1,5 +1,5 @@
 {
-  "generated_at_utc": "2026-11-14T00:51:14Z",
+  "generated_at_utc": "2026-11-14T11:23:12Z",
   "paper_start_date": "2026-11-10",
   "days_running": 4,
   "virtual_capital": 100000.0,
@@ -22,7 +22,7 @@
       "best_trade_bp": 108.8,
       "cum_equity_pct": 0.542,
       "max_drawdown_pct": -0.067,
-      "virtual_equity": 100541.84,
+      "virtual_equity": 100541.54,
       "shadow": false,
       "progress_to_100": "3/100",
       "expected_net_bp_from_backtest": 3.6,
@@ -30,7 +30,7 @@
     },
     "SHADOW_FULL_IN": {
       "closed": 2,
-      "open": 0,
+      "open": 2,
       "avg_net_bp": 149.63,
       "win_pct": 50.0,
       "t_stat": 0.54,
@@ -47,7 +47,7 @@
     },
     "SHADOW_FULL_M": {
       "closed": 4,
-      "open": 0,
+      "open": 1,
       "avg_net_bp": 98.53,
       "win_pct": 75.0,
       "t_stat": 0.98,
@@ -64,7 +64,7 @@
     },
     "SHADOW_HALF_M": {
       "closed": 3,
-      "open": 0,
+      "open": 1,
       "avg_net_bp": 120.6,
       "win_pct": 66.7,
       "t_stat": 0.74,
@@ -108,41 +108,41 @@
     "best_trade_bp": 108.8,
     "cum_equity_pct": 0.542,
     "max_drawdown_pct": -0.067,
-    "virtual_equity": 100541.84
+    "virtual_equity": 100541.54
   },
   "data_status": {
     "XAU": {
       "ok": true,
       "bars": 5000,
-      "first": "2026-04-19 17:00:00",
-      "last": "2026-11-14 00:00:00"
+      "first": "2026-04-20 04:00:00",
+      "last": "2026-11-14 11:00:00"
     },
     "BTC": {
       "ok": true,
       "bars": 5000,
-      "first": "2026-04-19 17:00:00",
-      "last": "2026-11-14 00:00:00"
+      "first": "2026-04-20 04:00:00",
+      "last": "2026-11-14 11:00:00"
     },
     "ETH": {
       "ok": true,
       "bars": 5000,
-      "first": "2026-04-19 17:00:00",
-      "last": "2026-11-14 00:00:00"
+      "first": "2026-04-20 04:00:00",
+      "last": "2026-11-14 11:00:00"
     },
     "NIFTY50": {
       "ok": true,
-      "bars": 268,
-      "last": "2026-11-12"
+      "bars": 269,
+      "last": "2026-11-13"
     },
     "BANKNIFTY": {
       "ok": true,
-      "bars": 268,
-      "last": "2026-11-12"
+      "bars": 269,
+      "last": "2026-11-13"
     },
     "SENSEX": {
       "ok": true,
-      "bars": 268,
-      "last": "2026-11-12"
+      "bars": 269,
+      "last": "2026-11-13"
     }
   },
   "notes": [
