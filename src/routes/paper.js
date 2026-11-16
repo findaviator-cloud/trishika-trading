@@ -20,10 +20,22 @@ async function readFile(name) {
   return fs.promises.readFile(path.join(LOCAL, name), 'utf8');
 }
 
+function splitCsvLine(line) {
+  const out = []; let cur = ''; let q = false;
+  for (let i = 0; i < line.length; i += 1) {
+    const ch = line[i];
+    if (q) {
+      if (ch === '"' && line[i + 1] === '"') { cur += '"'; i += 1; } else if (ch === '"') q = false; else cur += ch;
+    } else if (ch === '"') q = true; else if (ch === ',') { out.push(cur); cur = ''; } else cur += ch;
+  }
+  out.push(cur);
+  return out;
+}
+
 function parseCsv(txt) {
   const [head, ...lines] = txt.trim().split(/\r?\n/);
-  const cols = head.split(',');
-  return lines.map((l) => Object.fromEntries(l.split(',').map((v, i) => [cols[i], v])));
+  const cols = splitCsvLine(head);
+  return lines.filter(Boolean).map((l) => Object.fromEntries(splitCsvLine(l).map((v, i) => [cols[i], v])));
 }
 
 router.get('/summary', async (_req, res) => {

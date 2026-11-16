@@ -223,10 +223,12 @@ def build_summary(trades, capital, now, start, data_status):
     by = {}
     for r in trades:
         by.setdefault(r['sleeve'], []).append(r)
+    for k in ("GOLD_NIGHT", "PAT4H_LONG"):
+        by.setdefault(k, [])
     sleeves = {}
     for k, rows in sorted(by.items()):
         st = sleeve_stats(rows, capital)
-        st["shadow"] = rows[0]["shadow"]
+        st["shadow"] = rows[0]["shadow"] if rows else False
         st["progress_to_100"] = f"{st['closed']}/100"
         st["expected_net_bp_from_backtest"] = EXPECTED.get(k)
         n = st["closed"]
@@ -275,12 +277,15 @@ def vol_regime(df_h):
                 tip="HIGH = size chhota rakho (raat ki chaal ~2x), LOW = normal")
 
 
+TF_STEP = {"1h": timedelta(hours=1), "4h": timedelta(hours=4), "1d": timedelta(days=1)}
+
+
 def recent_patterns(b, tf, now, last_bars, trades):
-    done = int((b.index + (b.index[1] - b.index[0]) <= now).sum()); b = b.iloc[:done]
+    step = TF_STEP[tf]
+    done = int((b.index + step <= now).sum()); b = b.iloc[:done]
     out = []
     if len(b) < 60:
         return out
-    step = b.index[1] - b.index[0]
     for det in (PL.detect, PL.detect_n):
         sg, _ = det(b)
         for i, d, kind, stop, tgt in sg:
@@ -433,7 +438,10 @@ def main():
     with open(os.path.join(a.out_dir, "summary.json"), "w") as f:
         json.dump(summ, f, indent=2, default=str)
     try:
-        sig = build_signals(hourly, daily, trades, now)
+        ist_today = (now + timedelta(hours=5, minutes=30)).normalize()
+        session_over = (now - now.normalize()) >= timedelta(hours=10)  # 15:30 IST = 10:00 UTC
+        daily_closed = {k: (v if session_over else v[v.index < ist_today]) for k, v in daily.items()}
+        sig = build_signals(hourly, daily_closed, trades, now)
     except Exception as e:  # noqa: BLE001
         sig = {"error": str(e)[:200]}
     card = None

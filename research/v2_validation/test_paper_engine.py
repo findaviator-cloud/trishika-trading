@@ -49,9 +49,20 @@ def main():
         # gold night sirf Sun-Thu entry
         wd = {pd.Timestamp(v["entry_time"]).weekday() for v in a.values() if v["sleeve"] == "GOLD_NIGHT"}
         assert wd <= {6, 0, 1, 2, 3}, wd; print("OK gold night weekdays", sorted(wd))
+        # India daily: din ka adhoora candle signals me nahi aana chahiye
+        dd = synth(n=400, seed=5, start="2025-01-01"); dd["timestamp"] = ((pd.date_range("2025-01-01", periods=400, freq="1D") - pd.Timestamp("1970-01-01")) // pd.Timedelta(milliseconds=1))
+        dd = dd[pd.to_datetime(dd.timestamp, unit="ms").dt.dayofweek < 5]; pd_ = os.path.join(d, "n.csv"); dd.to_csv(pd_, index=False)
+        last_day = pd.to_datetime(dd.timestamp, unit="ms").max()
+        csv2 = dict(csvs, NIFTY50=pd_)
+        for hh, expect_today in ((6, False), (11, True)):
+            o = os.path.join(d, f"i{hh}"); run(csv2, f"{last_day.date()}T{hh:02d}:00:00", o)
+            sig = json.load(open(os.path.join(o, "signals.json")))["instruments"].get("NIFTY50", {})
+            got = sig.get("candle_1d", {}).get("candle_time", "")[:10]
+            assert (got == str(last_day.date())) == expect_today, (hh, got, str(last_day.date()))
+        print("OK India daily: adhoora candle signals me nahi (06:00 UTC), band hone ke baad aata hai (11:00 UTC)")
         # equity-sleeve trades me shadow nahi
         s = json.load(open(os.path.join(full, "summary.json")))
-        assert all(not v["shadow"] for k, v in s["sleeves"].items() if k in ("GOLD_NIGHT", "PAT4H_LONG")); print("OK sleeves")
+        assert all(not v["shadow"] for k, v in s["sleeves"].items() if k in ("GOLD_NIGHT", "PAT4H_LONG")); assert "PAT4H_LONG" in s["sleeves"]; print("OK sleeves (dono equity sleeves hamesha listed)")
     print("SAB TEST PASS")
 
 
