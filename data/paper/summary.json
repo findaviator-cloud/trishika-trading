@@ -1,5 +1,5 @@
 {
-  "generated_at_utc": "2026-11-17T02:53:24Z",
+  "generated_at_utc": "2026-11-17T13:10:37Z",
   "paper_start_date": "2026-11-10",
   "days_running": 7,
   "virtual_capital": 100000.0,
@@ -12,19 +12,19 @@
   },
   "sleeves": {
     "GOLD_NIGHT": {
-      "closed": 4,
-      "open": 1,
-      "avg_net_bp": 26.48,
-      "win_pct": 50.0,
-      "t_stat": 0.89,
-      "profit_factor": 4.04,
+      "closed": 5,
+      "open": 0,
+      "avg_net_bp": 28.27,
+      "win_pct": 60.0,
+      "t_stat": 1.22,
+      "profit_factor": 5.06,
       "worst_trade_bp": -19.3,
       "best_trade_bp": 108.8,
-      "cum_equity_pct": 0.457,
+      "cum_equity_pct": 0.611,
       "max_drawdown_pct": -0.084,
-      "virtual_equity": 100457.09,
+      "virtual_equity": 100610.59,
       "shadow": false,
-      "progress_to_100": "4/100",
+      "progress_to_100": "5/100",
       "expected_net_bp_from_backtest": 3.6,
       "flag": "ABHI KAM TRADES (kam se kam 100 chahiye)"
     },
@@ -71,86 +71,86 @@
       "flag": "ABHI KAM TRADES (kam se kam 100 chahiye)"
     },
     "SHADOW_HALF_M": {
-      "closed": 4,
-      "open": 1,
-      "avg_net_bp": 154.01,
-      "win_pct": 75.0,
-      "t_stat": 1.28,
-      "profit_factor": 5.84,
+      "closed": 5,
+      "open": 0,
+      "avg_net_bp": 121.2,
+      "win_pct": 60.0,
+      "t_stat": 1.23,
+      "profit_factor": 5.41,
       "worst_trade_bp": -127.3,
       "best_trade_bp": 427.8,
-      "cum_equity_pct": 0.59,
+      "cum_equity_pct": 0.544,
       "max_drawdown_pct": -0.178,
-      "virtual_equity": 100590.3,
+      "virtual_equity": 100543.73,
       "shadow": true,
-      "progress_to_100": "4/100",
+      "progress_to_100": "5/100",
       "expected_net_bp_from_backtest": 0.0,
       "flag": "ABHI KAM TRADES (kam se kam 100 chahiye)"
     },
     "SHADOW_INDIA_NIGHT": {
-      "closed": 9,
+      "closed": 12,
       "open": 0,
-      "avg_net_bp": -6.96,
+      "avg_net_bp": -6.43,
       "win_pct": 33.3,
-      "t_stat": -0.81,
-      "profit_factor": 0.53,
+      "t_stat": -1.01,
+      "profit_factor": 0.48,
       "worst_trade_bp": -39.4,
       "best_trade_bp": 27.4,
-      "cum_equity_pct": -0.628,
+      "cum_equity_pct": -0.771,
       "max_drawdown_pct": -1.303,
-      "virtual_equity": 99372.31,
+      "virtual_equity": 99228.55,
       "shadow": true,
-      "progress_to_100": "9/100",
+      "progress_to_100": "12/100",
       "expected_net_bp_from_backtest": 3.0,
       "flag": "ABHI KAM TRADES (kam se kam 100 chahiye)"
     }
   },
   "equity_portfolio": {
-    "closed": 4,
+    "closed": 5,
     "open": 0,
-    "avg_net_bp": 26.48,
-    "win_pct": 50.0,
-    "t_stat": 0.89,
-    "profit_factor": 4.04,
+    "avg_net_bp": 28.27,
+    "win_pct": 60.0,
+    "t_stat": 1.22,
+    "profit_factor": 5.06,
     "worst_trade_bp": -19.3,
     "best_trade_bp": 108.8,
-    "cum_equity_pct": 0.457,
+    "cum_equity_pct": 0.611,
     "max_drawdown_pct": -0.084,
-    "virtual_equity": 100457.09
+    "virtual_equity": 100610.59
   },
   "data_status": {
     "XAU": {
       "ok": true,
       "bars": 5000,
-      "first": "2026-04-22 19:00:00",
-      "last": "2026-11-17 02:00:00"
+      "first": "2026-04-23 06:00:00",
+      "last": "2026-11-17 13:00:00"
     },
     "BTC": {
       "ok": true,
       "bars": 5000,
-      "first": "2026-04-22 19:00:00",
-      "last": "2026-11-17 02:00:00"
+      "first": "2026-04-23 06:00:00",
+      "last": "2026-11-17 13:00:00"
     },
     "ETH": {
       "ok": true,
       "bars": 5000,
-      "first": "2026-04-22 19:00:00",
-      "last": "2026-11-17 02:00:00"
+      "first": "2026-04-23 06:00:00",
+      "last": "2026-11-17 13:00:00"
     },
     "NIFTY50": {
       "ok": true,
-      "bars": 269,
-      "last": "2026-11-16"
+      "bars": 270,
+      "last": "2026-11-17"
     },
     "BANKNIFTY": {
       "ok": true,
-      "bars": 269,
-      "last": "2026-11-16"
+      "bars": 270,
+      "last": "2026-11-17"
     },
     "SENSEX": {
       "ok": true,
-      "bars": 269,
-      "last": "2026-11-16"
+      "bars": 270,
+      "last": "2026-11-17"
     }
   },
   "notes": [
