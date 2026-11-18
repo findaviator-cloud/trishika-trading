@@ -1,7 +1,7 @@
 {
-  "generated_at_utc": "2026-11-17T23:27:59Z",
+  "generated_at_utc": "2026-11-18T07:13:24Z",
   "paper_start_date": "2026-11-10",
-  "days_running": 7,
+  "days_running": 8,
   "virtual_capital": 100000.0,
   "safety": {
     "researchOnly": true,
@@ -12,19 +12,19 @@
   },
   "sleeves": {
     "GOLD_NIGHT": {
-      "closed": 5,
-      "open": 1,
-      "avg_net_bp": 28.27,
-      "win_pct": 60.0,
-      "t_stat": 1.22,
-      "profit_factor": 5.06,
-      "worst_trade_bp": -19.3,
+      "closed": 6,
+      "open": 0,
+      "avg_net_bp": -3.03,
+      "win_pct": 50.0,
+      "t_stat": -0.08,
+      "profit_factor": 0.91,
+      "worst_trade_bp": -159.5,
       "best_trade_bp": 108.8,
-      "cum_equity_pct": 0.611,
-      "max_drawdown_pct": -0.084,
-      "virtual_equity": 100610.59,
+      "cum_equity_pct": -0.083,
+      "max_drawdown_pct": -0.689,
+      "virtual_equity": 99916.98,
       "shadow": false,
-      "progress_to_100": "5/100",
+      "progress_to_100": "6/100",
       "expected_net_bp_from_backtest": 3.6,
       "flag": "ABHI KAM TRADES (kam se kam 100 chahiye)"
     },
@@ -38,7 +38,7 @@
     },
     "SHADOW_FULL_IN": {
       "closed": 5,
-      "open": 0,
+      "open": 1,
       "avg_net_bp": 136.5,
       "win_pct": 60.0,
       "t_stat": 1.4,
@@ -55,7 +55,7 @@
     },
     "SHADOW_FULL_M": {
       "closed": 5,
-      "open": 0,
+      "open": 1,
       "avg_net_bp": 129.67,
       "win_pct": 80.0,
       "t_stat": 1.54,
@@ -88,69 +88,69 @@
       "flag": "ABHI KAM TRADES (kam se kam 100 chahiye)"
     },
     "SHADOW_INDIA_NIGHT": {
-      "closed": 12,
+      "closed": 15,
       "open": 0,
-      "avg_net_bp": -6.43,
-      "win_pct": 33.3,
-      "t_stat": -1.01,
-      "profit_factor": 0.48,
+      "avg_net_bp": -9.63,
+      "win_pct": 26.7,
+      "t_stat": -1.79,
+      "profit_factor": 0.33,
       "worst_trade_bp": -39.4,
       "best_trade_bp": 27.4,
-      "cum_equity_pct": -0.771,
-      "max_drawdown_pct": -1.303,
-      "virtual_equity": 99228.55,
+      "cum_equity_pct": -1.438,
+      "max_drawdown_pct": -1.413,
+      "virtual_equity": 98562.49,
       "shadow": true,
-      "progress_to_100": "12/100",
+      "progress_to_100": "15/100",
       "expected_net_bp_from_backtest": 3.0,
       "flag": "ABHI KAM TRADES (kam se kam 100 chahiye)"
     }
   },
   "equity_portfolio": {
-    "closed": 5,
+    "closed": 6,
     "open": 0,
-    "avg_net_bp": 28.27,
-    "win_pct": 60.0,
-    "t_stat": 1.22,
-    "profit_factor": 5.06,
-    "worst_trade_bp": -19.3,
+    "avg_net_bp": -3.03,
+    "win_pct": 50.0,
+    "t_stat": -0.08,
+    "profit_factor": 0.91,
+    "worst_trade_bp": -159.5,
     "best_trade_bp": 108.8,
-    "cum_equity_pct": 0.611,
-    "max_drawdown_pct": -0.084,
-    "virtual_equity": 100610.59
+    "cum_equity_pct": -0.083,
+    "max_drawdown_pct": -0.689,
+    "virtual_equity": 99916.98
   },
   "data_status": {
     "XAU": {
       "ok": true,
       "bars": 5000,
-      "first": "2026-04-23 16:00:00",
-      "last": "2026-11-17 23:00:00"
+      "first": "2026-04-24 00:00:00",
+      "last": "2026-11-18 07:00:00"
     },
     "BTC": {
       "ok": true,
       "bars": 5000,
-      "first": "2026-04-23 16:00:00",
-      "last": "2026-11-17 23:00:00"
+      "first": "2026-04-24 00:00:00",
+      "last": "2026-11-18 07:00:00"
     },
     "ETH": {
       "ok": true,
       "bars": 5000,
-      "first": "2026-04-23 16:00:00",
-      "last": "2026-11-17 23:00:00"
+      "first": "2026-04-24 00:00:00",
+      "last": "2026-11-18 07:00:00"
     },
     "NIFTY50": {
       "ok": true,
-      "bars": 268,
-      "last": "2026-11-16"
+      "bars": 270,
+      "last": "2026-11-18"
     },
     "BANKNIFTY": {
       "ok": true,
-      "bars": 268,
-      "last": "2026-11-16"
+      "bars": 270,
+      "last": "2026-11-18"
     },
     "SENSEX": {
       "ok": true,
-      "bars": 268,
-      "last": "2026-11-16"
+      "bars": 270,
+      "last": "2026-11-18"
     }
   },
   "notes": [
