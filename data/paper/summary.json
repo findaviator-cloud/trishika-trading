@@ -1,5 +1,5 @@
 {
-  "generated_at_utc": "2026-11-18T07:13:24Z",
+  "generated_at_utc": "2026-11-18T17:11:37Z",
   "paper_start_date": "2026-11-10",
   "days_running": 8,
   "virtual_capital": 100000.0,
@@ -71,19 +71,19 @@
       "flag": "ABHI KAM TRADES (kam se kam 100 chahiye)"
     },
     "SHADOW_HALF_M": {
-      "closed": 5,
-      "open": 2,
-      "avg_net_bp": 121.2,
-      "win_pct": 60.0,
-      "t_stat": 1.23,
-      "profit_factor": 5.41,
-      "worst_trade_bp": -127.3,
+      "closed": 7,
+      "open": 0,
+      "avg_net_bp": 97.76,
+      "win_pct": 57.1,
+      "t_stat": 1.15,
+      "profit_factor": 3.12,
+      "worst_trade_bp": -186.1,
       "best_trade_bp": 427.8,
-      "cum_equity_pct": 0.544,
-      "max_drawdown_pct": -0.178,
-      "virtual_equity": 100543.73,
+      "cum_equity_pct": 2.732,
+      "max_drawdown_pct": -0.225,
+      "virtual_equity": 102731.75,
       "shadow": true,
-      "progress_to_100": "5/100",
+      "progress_to_100": "7/100",
       "expected_net_bp_from_backtest": 0.0,
       "flag": "ABHI KAM TRADES (kam se kam 100 chahiye)"
     },
@@ -122,20 +122,20 @@
     "XAU": {
       "ok": true,
       "bars": 5000,
-      "first": "2026-04-24 00:00:00",
-      "last": "2026-11-18 07:00:00"
+      "first": "2026-04-24 10:00:00",
+      "last": "2026-11-18 17:00:00"
     },
     "BTC": {
       "ok": true,
       "bars": 5000,
-      "first": "2026-04-24 00:00:00",
-      "last": "2026-11-18 07:00:00"
+      "first": "2026-04-24 10:00:00",
+      "last": "2026-11-18 17:00:00"
     },
     "ETH": {
       "ok": true,
       "bars": 5000,
-      "first": "2026-04-24 00:00:00",
-      "last": "2026-11-18 07:00:00"
+      "first": "2026-04-24 10:00:00",
+      "last": "2026-11-18 17:00:00"
     },
     "NIFTY50": {
       "ok": true,
