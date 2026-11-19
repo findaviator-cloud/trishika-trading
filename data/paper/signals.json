@@ -1,5 +1,5 @@
 {
-  "generated_at_utc": "2026-11-19T12:52:52Z",
+  "generated_at_utc": "2026-11-19T23:00:20Z",
   "safety": {
     "researchOnly": true,
     "paperOnly": true,
@@ -8,53 +8,70 @@
     "brokerConnectivityAllowed": false
   },
   "gold_night_card": {
-    "next_entry_utc": "2026-11-19 22:00:00",
-    "next_entry_ist": "2026-11-20 03:30:00",
-    "exit_utc": "2026-11-20 04:00:00",
-    "regime": "MID",
-    "avg_daily_range_20d_bp": 175.2,
-    "typical_abs_move_bp": 23.5,
-    "bad_night_5pct_bp": -40.0,
-    "suggested_notional_frac": 1.0,
+    "next_entry_utc": "2026-11-22 22:00:00",
+    "next_entry_ist": "2026-11-23 03:30:00",
+    "exit_utc": "2026-11-23 04:00:00",
+    "regime": "HIGH",
+    "avg_daily_range_20d_bp": 185.6,
+    "typical_abs_move_bp": 37.3,
+    "bad_night_5pct_bp": -72.0,
+    "suggested_notional_frac": 0.69,
     "risk_budget_pct": 0.5,
     "note": "Research ka andaza (edge ki guarantee nahi). Size sirf risk ke liye; direction ka koi signal nahi."
   },
   "instruments": {
     "XAU": {
       "candle_1h": {
-        "candle_time": "2026-11-19 11:00:00",
-        "open": 3735.3564,
-        "high": 3736.7811,
-        "low": 3720.5149,
-        "close": 3720.6988,
-        "close_position_pct": 1.1,
-        "range_vs_atr": 0.95,
-        "shapes": [
-          "close_bottom",
-          "bear_marubozu"
-        ],
+        "candle_time": "2026-11-19 22:00:00",
+        "open": 3625.2327,
+        "high": 3630.6392,
+        "low": 3623.2807,
+        "close": 3628.5617,
+        "close_position_pct": 71.8,
+        "range_vs_atr": 0.4,
+        "shapes": [],
         "note": "big candle ke baad agli candle ki range ~1.3-1.7x rehti hai (direction ka koi signal nahi)"
       },
       "candle_4h": {
-        "candle_time": "2026-11-19 08:00:00",
-        "open": 3736.9036,
-        "high": 3741.5348,
-        "low": 3720.5149,
-        "close": 3720.6988,
-        "close_position_pct": 0.9,
-        "range_vs_atr": 0.58,
+        "candle_time": "2026-11-19 16:00:00",
+        "open": 3676.9599,
+        "high": 3691.2628,
+        "low": 3665.8235,
+        "close": 3666.8714,
+        "close_position_pct": 4.1,
+        "range_vs_atr": 0.69,
         "shapes": [
           "close_bottom"
         ],
         "note": "big candle ke baad agli candle ki range ~1.3-1.7x rehti hai (direction ka koi signal nahi)"
       },
       "volatility": {
-        "avg_daily_range_20d_bp": 175.2,
-        "regime": "MID",
+        "avg_daily_range_20d_bp": 185.6,
+        "regime": "HIGH",
         "tip": "HIGH = size chhota rakho (raat ki chaal ~2x), LOW = normal"
       },
       "patterns_last_24h_on_4h": [],
       "patterns_last_day_on_1h": [
+        {
+          "timeframe": "1h",
+          "formed_at": "2026-11-19 16:00:00",
+          "kind": "FULL_IN",
+          "direction": "SHORT",
+          "role": "info (sirf 4h par test hua, trade nahi)",
+          "stop": 3747.9122,
+          "target": 3632.0368,
+          "last_close": 3628.5617
+        },
+        {
+          "timeframe": "1h",
+          "formed_at": "2026-11-19 14:00:00",
+          "kind": "HALF_IN",
+          "direction": "SHORT",
+          "role": "info (sirf 4h par test hua, trade nahi)",
+          "stop": 3747.6001,
+          "target": 3680.307,
+          "last_close": 3628.5617
+        },
         {
           "timeframe": "1h",
           "formed_at": "2026-11-19 03:00:00",
@@ -63,7 +80,7 @@
           "role": "info (sirf 4h par test hua, trade nahi)",
           "stop": 3763.0603,
           "target": 3688.214,
-          "last_close": 3720.6988
+          "last_close": 3628.5617
         },
         {
           "timeframe": "1h",
@@ -73,61 +90,55 @@
           "role": "info (sirf 4h par test hua, trade nahi)",
           "stop": 3763.0603,
           "target": 3649.2783,
-          "last_close": 3720.6988
-        },
-        {
-          "timeframe": "1h",
-          "formed_at": "2026-11-18 18:00:00",
-          "kind": "FULL_IN",
-          "direction": "SHORT",
-          "role": "info (sirf 4h par test hua, trade nahi)",
-          "stop": 3794.0805,
-          "target": 3632.0985,
-          "last_close": 3720.6988
-        },
-        {
-          "timeframe": "1h",
-          "formed_at": "2026-11-18 17:00:00",
-          "kind": "HALF_IN",
-          "direction": "SHORT",
-          "role": "info (sirf 4h par test hua, trade nahi)",
-          "stop": 3794.0544,
-          "target": 3678.9391,
-          "last_close": 3720.6988
+          "last_close": 3628.5617
         }
       ],
-      "open_paper_trades": []
+      "open_paper_trades": [
+        "GOLD_NIGHT|XAU|NIGHT|2026-11-19T22:00"
+      ]
     },
     "BTC": {
       "candle_1h": {
-        "candle_time": "2026-11-19 11:00:00",
-        "open": 63794.15,
-        "high": 64080.8,
-        "low": 63694.01,
-        "close": 63947.59,
-        "close_position_pct": 65.6,
-        "range_vs_atr": 0.76,
-        "shapes": [],
+        "candle_time": "2026-11-19 22:00:00",
+        "open": 61542.01,
+        "high": 62344.9,
+        "low": 61526.0,
+        "close": 62238.34,
+        "close_position_pct": 87.0,
+        "range_vs_atr": 1.38,
+        "shapes": [
+          "bull_marubozu"
+        ],
         "note": "big candle ke baad agli candle ki range ~1.3-1.7x rehti hai (direction ka koi signal nahi)"
       },
       "candle_4h": {
-        "candle_time": "2026-11-19 08:00:00",
-        "open": 63737.62,
-        "high": 64080.8,
-        "low": 63565.52,
-        "close": 63947.59,
-        "close_position_pct": 74.1,
-        "range_vs_atr": 0.48,
+        "candle_time": "2026-11-19 16:00:00",
+        "open": 63103.3,
+        "high": 63408.62,
+        "low": 62227.8,
+        "close": 62372.01,
+        "close_position_pct": 12.2,
+        "range_vs_atr": 1.09,
         "shapes": [],
         "note": "big candle ke baad agli candle ki range ~1.3-1.7x rehti hai (direction ka koi signal nahi)"
       },
       "volatility": {
-        "avg_daily_range_20d_bp": 369.3,
+        "avg_daily_range_20d_bp": 377.3,
         "regime": "HIGH",
         "tip": "HIGH = size chhota rakho (raat ki chaal ~2x), LOW = normal"
       },
       "patterns_last_24h_on_4h": [],
       "patterns_last_day_on_1h": [
+        {
+          "timeframe": "1h",
+          "formed_at": "2026-11-19 18:00:00",
+          "kind": "HALF_W",
+          "direction": "LONG",
+          "role": "info (sirf 4h par test hua, trade nahi)",
+          "stop": 61916.621,
+          "target": 64080.8,
+          "last_close": 62238.34
+        },
         {
           "timeframe": "1h",
           "formed_at": "2026-11-19 05:00:00",
@@ -136,7 +147,7 @@
           "role": "info (sirf 4h par test hua, trade nahi)",
           "stop": 61914.8001,
           "target": 64904.615,
-          "last_close": 63947.59
+          "last_close": 62238.34
         },
         {
           "timeframe": "1h",
@@ -146,76 +157,36 @@
           "role": "info (sirf 4h par test hua, trade nahi)",
           "stop": 61923.5523,
           "target": 63537.89,
-          "last_close": 63947.59
-        },
-        {
-          "timeframe": "1h",
-          "formed_at": "2026-11-18 23:00:00",
-          "kind": "FULL_IN",
-          "direction": "SHORT",
-          "role": "info (sirf 4h par test hua, trade nahi)",
-          "stop": 63667.8173,
-          "target": 60467.99,
-          "last_close": 63947.59
-        },
-        {
-          "timeframe": "1h",
-          "formed_at": "2026-11-18 21:00:00",
-          "kind": "HALF_IN",
-          "direction": "SHORT",
-          "role": "info (sirf 4h par test hua, trade nahi)",
-          "stop": 63669.4846,
-          "target": 61726.52,
-          "last_close": 63947.59
-        },
-        {
-          "timeframe": "1h",
-          "formed_at": "2026-11-18 16:00:00",
-          "kind": "FULL_M",
-          "direction": "SHORT",
-          "role": "info (sirf 4h par test hua, trade nahi)",
-          "stop": 65573.9205,
-          "target": 61314.5,
-          "last_close": 63947.59
-        },
-        {
-          "timeframe": "1h",
-          "formed_at": "2026-11-18 15:00:00",
-          "kind": "HALF_W",
-          "direction": "LONG",
-          "role": "info (sirf 4h par test hua, trade nahi)",
-          "stop": 62965.4233,
-          "target": 65268.0,
-          "last_close": 63947.59
+          "last_close": 62238.34
         }
       ],
       "open_paper_trades": []
     },
     "ETH": {
       "candle_1h": {
-        "candle_time": "2026-11-19 11:00:00",
-        "open": 1803.46,
-        "high": 1813.52,
-        "low": 1801.65,
-        "close": 1807.34,
-        "close_position_pct": 47.9,
-        "range_vs_atr": 0.79,
+        "candle_time": "2026-11-19 22:00:00",
+        "open": 1741.61,
+        "high": 1766.39,
+        "low": 1738.78,
+        "close": 1762.08,
+        "close_position_pct": 84.4,
+        "range_vs_atr": 1.35,
         "shapes": [],
         "note": "big candle ke baad agli candle ki range ~1.3-1.7x rehti hai (direction ka koi signal nahi)"
       },
       "candle_4h": {
-        "candle_time": "2026-11-19 08:00:00",
-        "open": 1804.28,
-        "high": 1813.59,
-        "low": 1798.0,
-        "close": 1807.34,
-        "close_position_pct": 59.9,
-        "range_vs_atr": 0.41,
+        "candle_time": "2026-11-19 16:00:00",
+        "open": 1781.88,
+        "high": 1791.57,
+        "low": 1750.63,
+        "close": 1770.82,
+        "close_position_pct": 49.3,
+        "range_vs_atr": 1.06,
         "shapes": [],
         "note": "big candle ke baad agli candle ki range ~1.3-1.7x rehti hai (direction ka koi signal nahi)"
       },
       "volatility": {
-        "avg_daily_range_20d_bp": 505.8,
+        "avg_daily_range_20d_bp": 515.1,
         "regime": "HIGH",
         "tip": "HIGH = size chhota rakho (raat ki chaal ~2x), LOW = normal"
       },
@@ -228,10 +199,40 @@
           "role": "info (edge nahi mila)",
           "stop": 1701.5312,
           "target": 1866.89,
-          "last_close": 1807.34
+          "last_close": 1770.82
         }
       ],
       "patterns_last_day_on_1h": [
+        {
+          "timeframe": "1h",
+          "formed_at": "2026-11-19 22:00:00",
+          "kind": "FULL_IN",
+          "direction": "SHORT",
+          "role": "info (sirf 4h par test hua, trade nahi)",
+          "stop": 1796.6144,
+          "target": 1683.69,
+          "last_close": 1762.08
+        },
+        {
+          "timeframe": "1h",
+          "formed_at": "2026-11-19 21:00:00",
+          "kind": "HALF_IN",
+          "direction": "SHORT",
+          "role": "info (sirf 4h par test hua, trade nahi)",
+          "stop": 1796.5057,
+          "target": 1724.63,
+          "last_close": 1762.08
+        },
+        {
+          "timeframe": "1h",
+          "formed_at": "2026-11-19 19:00:00",
+          "kind": "HALF_W",
+          "direction": "LONG",
+          "role": "info (sirf 4h par test hua, trade nahi)",
+          "stop": 1743.4568,
+          "target": 1817.57,
+          "last_close": 1762.08
+        },
         {
           "timeframe": "1h",
           "formed_at": "2026-11-19 04:00:00",
@@ -240,7 +241,7 @@
           "role": "info (sirf 4h par test hua, trade nahi)",
           "stop": 1743.5964,
           "target": 1842.01,
-          "last_close": 1807.34
+          "last_close": 1762.08
         },
         {
           "timeframe": "1h",
@@ -250,106 +251,49 @@
           "role": "info (sirf 4h par test hua, trade nahi)",
           "stop": 1743.7578,
           "target": 1803.1,
-          "last_close": 1807.34
-        },
-        {
-          "timeframe": "1h",
-          "formed_at": "2026-11-18 21:00:00",
-          "kind": "HALF_M",
-          "direction": "SHORT",
-          "role": "info (sirf 4h par test hua, trade nahi)",
-          "stop": 1802.7517,
-          "target": 1732.83,
-          "last_close": 1807.34
-        },
-        {
-          "timeframe": "1h",
-          "formed_at": "2026-11-18 21:00:00",
-          "kind": "HALF_IN",
-          "direction": "SHORT",
-          "role": "info (sirf 4h par test hua, trade nahi)",
-          "stop": 1792.1717,
-          "target": 1722.25,
-          "last_close": 1807.34
-        },
-        {
-          "timeframe": "1h",
-          "formed_at": "2026-11-18 17:00:00",
-          "kind": "FULL_M",
-          "direction": "SHORT",
-          "role": "info (sirf 4h par test hua, trade nahi)",
-          "stop": 1840.7989,
-          "target": 1668.24,
-          "last_close": 1807.34
-        },
-        {
-          "timeframe": "1h",
-          "formed_at": "2026-11-18 16:00:00",
-          "kind": "FULL_M",
-          "direction": "SHORT",
-          "role": "info (sirf 4h par test hua, trade nahi)",
-          "stop": 1849.6212,
-          "target": 1706.465,
-          "last_close": 1807.34
-        },
-        {
-          "timeframe": "1h",
-          "formed_at": "2026-11-18 15:00:00",
-          "kind": "HALF_W",
-          "direction": "LONG",
-          "role": "info (sirf 4h par test hua, trade nahi)",
-          "stop": 1747.0276,
-          "target": 1836.0,
-          "last_close": 1807.34
+          "last_close": 1762.08
         }
       ],
       "open_paper_trades": []
     },
     "NIFTY50": {
       "candle_1d": {
-        "candle_time": "2026-11-19 00:00:00",
-        "open": 25186.8008,
-        "high": 25514.3008,
-        "low": 25104.8008,
-        "close": 25514.3008,
-        "close_position_pct": 100.0,
-        "range_vs_atr": 1.46,
-        "shapes": [
-          "close_top"
-        ],
+        "candle_time": "2026-11-18 00:00:00",
+        "open": 25323.1504,
+        "high": 25390.8008,
+        "low": 25141.8008,
+        "close": 25227.9492,
+        "close_position_pct": 34.6,
+        "range_vs_atr": 0.88,
+        "shapes": [],
         "note": "big candle ke baad agli candle ki range ~1.3-1.7x rehti hai (direction ka koi signal nahi)"
       },
       "patterns_last_5d_on_1d": []
     },
     "BANKNIFTY": {
       "candle_1d": {
-        "candle_time": "2026-11-19 00:00:00",
-        "open": 62081.3008,
-        "high": 63063.0,
-        "low": 61951.1016,
-        "close": 63063.0,
-        "close_position_pct": 100.0,
-        "range_vs_atr": 1.38,
-        "shapes": [
-          "close_top",
-          "bull_marubozu"
-        ],
+        "candle_time": "2026-11-18 00:00:00",
+        "open": 62204.1016,
+        "high": 62363.75,
+        "low": 61765.4492,
+        "close": 62038.6484,
+        "close_position_pct": 45.7,
+        "range_vs_atr": 0.73,
+        "shapes": [],
         "note": "big candle ke baad agli candle ki range ~1.3-1.7x rehti hai (direction ka koi signal nahi)"
       },
       "patterns_last_5d_on_1d": []
     },
     "SENSEX": {
       "candle_1d": {
-        "candle_time": "2026-11-19 00:00:00",
-        "open": 82074.1562,
-        "high": 83043.8672,
-        "low": 81698.6328,
-        "close": 83021.75,
-        "close_position_pct": 98.4,
-        "range_vs_atr": 1.52,
-        "shapes": [
-          "close_top"
-        ],
+        "candle_time": "2026-11-18 00:00:00",
+        "open": 82376.5625,
+        "high": 82578.8672,
+        "low": 81780.4688,
+        "close": 82031.8125,
+        "close_position_pct": 31.5,
+        "range_vs_atr": 0.89,
+        "shapes": [],
         "note": "big candle ke baad agli candle ki range ~1.3-1.7x rehti hai (direction ka koi signal nahi)"
       },
       "patterns_last_5d_on_1d": []
