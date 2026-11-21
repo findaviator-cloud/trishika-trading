@@ -1,7 +1,7 @@
 {
-  "generated_at_utc": "2026-11-20T16:55:01Z",
+  "generated_at_utc": "2026-11-21T01:24:32Z",
   "paper_start_date": "2026-11-10",
-  "days_running": 10,
+  "days_running": 11,
   "virtual_capital": 100000.0,
   "safety": {
     "researchOnly": true,
@@ -122,35 +122,35 @@
     "XAU": {
       "ok": true,
       "bars": 5000,
-      "first": "2026-04-26 09:00:00",
-      "last": "2026-11-20 16:00:00"
+      "first": "2026-04-26 18:00:00",
+      "last": "2026-11-21 01:00:00"
     },
     "BTC": {
       "ok": true,
       "bars": 5000,
-      "first": "2026-04-26 09:00:00",
-      "last": "2026-11-20 16:00:00"
+      "first": "2026-04-26 18:00:00",
+      "last": "2026-11-21 01:00:00"
     },
     "ETH": {
       "ok": true,
       "bars": 5000,
-      "first": "2026-04-26 09:00:00",
-      "last": "2026-11-20 16:00:00"
+      "first": "2026-04-26 18:00:00",
+      "last": "2026-11-21 01:00:00"
     },
     "NIFTY50": {
       "ok": true,
-      "bars": 270,
-      "last": "2026-11-20"
+      "bars": 268,
+      "last": "2026-11-19"
     },
     "BANKNIFTY": {
       "ok": true,
-      "bars": 270,
-      "last": "2026-11-20"
+      "bars": 268,
+      "last": "2026-11-19"
     },
     "SENSEX": {
       "ok": true,
-      "bars": 270,
-      "last": "2026-11-20"
+      "bars": 268,
+      "last": "2026-11-19"
     }
   },
   "notes": [
