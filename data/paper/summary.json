@@ -1,5 +1,5 @@
 {
-  "generated_at_utc": "2026-11-22T06:34:00Z",
+  "generated_at_utc": "2026-11-22T16:12:11Z",
   "paper_start_date": "2026-11-10",
   "days_running": 12,
   "virtual_capital": 100000.0,
@@ -20,9 +20,9 @@
       "profit_factor": 0.42,
       "worst_trade_bp": -212.7,
       "best_trade_bp": 108.8,
-      "cum_equity_pct": -1.03,
-      "max_drawdown_pct": -1.63,
-      "virtual_equity": 98970.33,
+      "cum_equity_pct": -1.029,
+      "max_drawdown_pct": -1.629,
+      "virtual_equity": 98970.93,
       "shadow": false,
       "progress_to_100": "8/100",
       "expected_net_bp_from_backtest": 3.6,
@@ -114,28 +114,28 @@
     "profit_factor": 0.42,
     "worst_trade_bp": -212.7,
     "best_trade_bp": 108.8,
-    "cum_equity_pct": -1.03,
-    "max_drawdown_pct": -1.63,
-    "virtual_equity": 98970.33
+    "cum_equity_pct": -1.029,
+    "max_drawdown_pct": -1.629,
+    "virtual_equity": 98970.93
   },
   "data_status": {
     "XAU": {
       "ok": true,
       "bars": 5000,
-      "first": "2026-04-27 23:00:00",
-      "last": "2026-11-22 06:00:00"
+      "first": "2026-04-28 09:00:00",
+      "last": "2026-11-22 16:00:00"
     },
     "BTC": {
       "ok": true,
       "bars": 5000,
-      "first": "2026-04-27 23:00:00",
-      "last": "2026-11-22 06:00:00"
+      "first": "2026-04-28 09:00:00",
+      "last": "2026-11-22 16:00:00"
     },
     "ETH": {
       "ok": true,
       "bars": 5000,
-      "first": "2026-04-27 23:00:00",
-      "last": "2026-11-22 06:00:00"
+      "first": "2026-04-28 09:00:00",
+      "last": "2026-11-22 16:00:00"
     },
     "NIFTY50": {
       "ok": true,
