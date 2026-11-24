@@ -28,6 +28,7 @@ const SYMBOL_FILE = {
   XAU_USD: 'XAU_USD.json',
   NIFTY: 'NIFTY.json',
   BANKNIFTY: 'BANKNIFTY.json',
+  SENSEX: 'SENSEX.json',
   RELIANCE: 'RELIANCE.json',
   TCS: 'TCS.json',
   INFY: 'INFY.json',
@@ -174,6 +175,7 @@ async function fetchTwelveDataKlines(symbol, limit) {
 const FNO_SYMBOLS_SET = new Set([
   'NIFTY',
   'BANKNIFTY',
+  'SENSEX',
   'RELIANCE',
   'TCS',
   'INFY',

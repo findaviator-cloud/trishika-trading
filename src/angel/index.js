@@ -132,7 +132,7 @@ export const ANGEL_MARKET_DATA_INSTRUMENTS = Object.freeze([
     exchange: 'NSE',
     exchangeType: 1,
     symbolToken: '99926009',
-    historicalVerified: false,
+    historicalVerified: true,
     marketDataOnly: true,
     approvedForTrading: false,
     executionAllowed: false
@@ -143,7 +143,7 @@ export const ANGEL_MARKET_DATA_INSTRUMENTS = Object.freeze([
     exchange: 'BSE',
     exchangeType: 3,
     symbolToken: '99919000',
-    historicalVerified: false,
+    historicalVerified: true,
     marketDataOnly: true,
     approvedForTrading: false,
     executionAllowed: false

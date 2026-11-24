@@ -14,6 +14,7 @@ import {
   startAngelMarketDataLifecycle,
   setAngelLogger
 } from './src/angel/index.js';
+import { startAngelHistoryLoader } from './src/angel/history_loader.js';
 import { registerWebSocket } from './src/ws/index.js';
 import {
   refreshDailyETH,
@@ -73,6 +74,7 @@ server.listen(port, async () => {
   await loadForexHistory(engines, log);
 
   startAngelMarketDataLifecycle(engines);
+  startAngelHistoryLoader(engines, log);
 
   log.info(
     '[ANGEL/MARKET_DATA] Research-only connector initialized. ' +
