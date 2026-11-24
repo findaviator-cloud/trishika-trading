@@ -1,5 +1,5 @@
 {
-  "generated_at_utc": "2026-11-24T02:52:07Z",
+  "generated_at_utc": "2026-11-24T14:46:12Z",
   "paper_start_date": "2026-11-10",
   "days_running": 14,
   "virtual_capital": 100000.0,
@@ -12,19 +12,19 @@
   },
   "sleeves": {
     "GOLD_NIGHT": {
-      "closed": 9,
-      "open": 1,
-      "avg_net_bp": -3.1,
-      "win_pct": 44.4,
-      "t_stat": -0.07,
-      "profit_factor": 0.93,
+      "closed": 10,
+      "open": 0,
+      "avg_net_bp": -3.67,
+      "win_pct": 40.0,
+      "t_stat": -0.1,
+      "profit_factor": 0.91,
       "worst_trade_bp": -212.7,
       "best_trade_bp": 212.2,
-      "cum_equity_pct": -0.154,
-      "max_drawdown_pct": -1.628,
-      "virtual_equity": 99845.55,
+      "cum_equity_pct": -0.191,
+      "max_drawdown_pct": -1.627,
+      "virtual_equity": 99808.63,
       "shadow": false,
-      "progress_to_100": "9/100",
+      "progress_to_100": "10/100",
       "expected_net_bp_from_backtest": 3.6,
       "flag": "ABHI KAM TRADES (kam se kam 100 chahiye)"
     },
@@ -106,36 +106,36 @@
     }
   },
   "equity_portfolio": {
-    "closed": 9,
+    "closed": 10,
     "open": 0,
-    "avg_net_bp": -3.1,
-    "win_pct": 44.4,
-    "t_stat": -0.07,
-    "profit_factor": 0.93,
+    "avg_net_bp": -3.67,
+    "win_pct": 40.0,
+    "t_stat": -0.1,
+    "profit_factor": 0.91,
     "worst_trade_bp": -212.7,
     "best_trade_bp": 212.2,
-    "cum_equity_pct": -0.154,
-    "max_drawdown_pct": -1.628,
-    "virtual_equity": 99845.55
+    "cum_equity_pct": -0.191,
+    "max_drawdown_pct": -1.627,
+    "virtual_equity": 99808.63
   },
   "data_status": {
     "XAU": {
       "ok": true,
       "bars": 5000,
-      "first": "2026-04-29 19:00:00",
-      "last": "2026-11-24 02:00:00"
+      "first": "2026-04-30 07:00:00",
+      "last": "2026-11-24 14:00:00"
     },
     "BTC": {
       "ok": true,
       "bars": 5000,
-      "first": "2026-04-29 19:00:00",
-      "last": "2026-11-24 02:00:00"
+      "first": "2026-04-30 07:00:00",
+      "last": "2026-11-24 14:00:00"
     },
     "ETH": {
       "ok": true,
       "bars": 5000,
-      "first": "2026-04-29 19:00:00",
-      "last": "2026-11-24 02:00:00"
+      "first": "2026-04-30 07:00:00",
+      "last": "2026-11-24 14:00:00"
     },
     "NIFTY50": {
       "ok": true,
