@@ -1,5 +1,6 @@
 import WebSocket from 'ws';
 import { createHmac } from 'crypto';
+import { isAngelAllowedNow } from './market_hours.js';
 import { CONFIG } from '../config/index.js';
 
 let logger = {
@@ -737,6 +738,11 @@ export async function startAngelMarketData(engines) {
     };
   }
 
+  if (!isAngelAllowedNow()) {
+    runtime.status = 'MARKET_CLOSED';
+    return { ok: false, skipped: true, reason: 'Indian market closed (IST); Angel traffic paused.' };
+  }
+
   if (!hasCredentials()) {
     runtime.status = 'CREDENTIALS_MISSING';
     return {
@@ -787,6 +793,15 @@ export function stopAngelMarketData() {
   clearTokenState();
 
   runtime.status = 'STOPPED';
+  runtime.connected = false;
+  runtime.connecting = false;
+  runtime.subscribedSymbolCount = 0;
+}
+
+export function closeAngelSocketForMarketClose() {
+  resetReconnectTimer();
+  closeSocket('market closed');
+  runtime.status = 'MARKET_CLOSED';
   runtime.connected = false;
   runtime.connecting = false;
   runtime.subscribedSymbolCount = 0;

@@ -1,8 +1,14 @@
 // Angel One history bootstrap (research-only, no orders, executionAllowed=false).
 // Loads recent 5-minute candles, aggregates them to the engine's candle size
 // (CANDLE_MS, default 20 min) and hands them to CandleEngine.loadCandles().
-// A token-mismatch guard compares the last history close with the live tick price.
-import { fetchAngelHistoricalCandles } from './index.js';
+// Guard: last history close must be within 5% of the live tick price (token mismatch check).
+// Bandwidth: refreshes only inside market hours; socket is closed after market close.
+import {
+  fetchAngelHistoricalCandles,
+  getAngelMarketDataState,
+  closeAngelSocketForMarketClose
+} from './index.js';
+import { isIndianMarketWindow, isAngelAllowedNow } from './market_hours.js';
 
 const FIVE_MIN_MS = 5 * 60_000;
 const IST_OFFSET_MS = 5.5 * 3_600_000;
@@ -69,17 +75,22 @@ export async function loadOne(engines, key, log, { fetcher = fetchAngelHistorica
   return { key, ok: true, count: engine.candles.length };
 }
 
-export function startAngelHistoryLoader(engines, log = console, { firstDelayMs = 60_000, refreshMs = 4 * 3_600_000 } = {}) {
+export function startAngelHistoryLoader(engines, log = console, { firstDelayMs = 45_000, refreshMs = 4 * 3_600_000 } = {}) {
   if (!enabled()) {
     log.info('[ANGEL/HISTORY] Disabled (needs ENABLE_ANGEL_ONE_WS=true and ANGEL_ONE_HISTORICAL_ENABLED=true).');
     return;
   }
 
-  async function cycle(attempt = 1) {
+  const loaded = new Set();
+
+  async function cycle(attempt = 1, { force = false } = {}) {
+    // After boot: allowed briefly even when closed (one load of last session). Later: market hours only.
+    if (!force && !isAngelAllowedNow()) return;
     const retry = [];
     for (const key of KEYS) {
       try {
         const r = await loadOne(engines, key, log);
+        if (r.ok) loaded.add(key);
         if (r.retry) retry.push(key);
         else if (!r.ok) log.warn(`[ANGEL/HISTORY] ${key} not loaded: ${r.reason}`);
       } catch (e) {
@@ -87,9 +98,24 @@ export function startAngelHistoryLoader(engines, log = console, { firstDelayMs =
         if (/cooldown|rate/i.test(e.message)) break; // do not hammer Angel
       }
     }
-    if (retry.length && attempt < 5) setTimeout(() => cycle(attempt + 1), 90_000);
+    if (retry.length && attempt < 4) setTimeout(() => cycle(attempt + 1), 50_000);
   }
 
   setTimeout(() => void cycle(), firstDelayMs);
+
+  setInterval(() => {
+    if (isIndianMarketWindow()) {
+      // Market just (re)opened and something is still missing -> load it.
+      if (loaded.size < KEYS.length && getAngelMarketDataState().connected) void cycle();
+      return;
+    }
+    if (isAngelAllowedNow()) return; // boot grace
+    const st = getAngelMarketDataState();
+    if (st.connected || st.connecting || st.reconnectScheduled) {
+      closeAngelSocketForMarketClose();
+      log.info('[ANGEL/MARKET_DATA] Market closed (IST) — socket closed to save bandwidth. Reopens next session.');
+    }
+  }, 60_000);
+
   setInterval(() => void cycle(), refreshMs);
 }
