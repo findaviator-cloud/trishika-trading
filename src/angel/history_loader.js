@@ -9,6 +9,8 @@ import {
   closeAngelSocketForMarketClose
 } from './index.js';
 import { isIndianMarketWindow, isAngelAllowedNow } from './market_hours.js';
+import { refreshIndiaEma } from './ema_india.js';
+import { writeDonchianSignal } from '../strategy/live_signal_writer.js';
 
 const FIVE_MIN_MS = 5 * 60_000;
 const IST_OFFSET_MS = 5.5 * 3_600_000;
@@ -90,7 +92,13 @@ export function startAngelHistoryLoader(engines, log = console, { firstDelayMs =
     for (const key of KEYS) {
       try {
         const r = await loadOne(engines, key, log);
-        if (r.ok) loaded.add(key);
+        if (r.ok) {
+          loaded.add(key);
+          // daily EMA(200) overlay (once per IST day); rewrite the signal when it arrives
+          void refreshIndiaEma(key, engines[key].currentCandle?.close, log, {
+            onUpdated: () => writeDonchianSignal(key, engines[key].candles)
+          });
+        }
         if (r.retry) retry.push(key);
         else if (!r.ok) log.warn(`[ANGEL/HISTORY] ${key} not loaded: ${r.reason}`);
       } catch (e) {

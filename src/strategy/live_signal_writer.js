@@ -5,6 +5,7 @@
  */
 
 import fs from 'fs';
+import { INDIA_EMA_SYMBOLS, getIndiaEmaConfirmation } from '../angel/ema_india.js';
 import path from 'path';
 import { donchianSignal } from './donchian.js';
 import { setSignal, addToHistory } from './signal_store.js';
@@ -215,6 +216,16 @@ export function writeDonchianSignal(symbol, candles) {
       triggerEmaRefresh(symbol);
 
       const emaInfo = getEmaConfirmation(
+        symbol,
+        sig.direction,
+        candles[candles.length - 1].close
+      );
+
+      sig.emaConfirmation = emaInfo.label;
+      sig.emaConfirmationNote = emaInfo.note;
+      sig.ema200Daily = emaInfo.ema;
+    } else if (INDIA_EMA_SYMBOLS.has(symbol)) {
+      const emaInfo = getIndiaEmaConfirmation(
         symbol,
         sig.direction,
         candles[candles.length - 1].close
