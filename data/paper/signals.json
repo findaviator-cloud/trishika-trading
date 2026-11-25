@@ -1,5 +1,5 @@
 {
-  "generated_at_utc": "2026-11-25T00:34:54Z",
+  "generated_at_utc": "2026-11-25T11:50:26Z",
   "safety": {
     "researchOnly": true,
     "paperOnly": true,
@@ -12,7 +12,7 @@
     "next_entry_ist": "2026-11-26 03:30:00",
     "exit_utc": "2026-11-26 04:00:00",
     "regime": "HIGH",
-    "avg_daily_range_20d_bp": 202.3,
+    "avg_daily_range_20d_bp": 209.0,
     "typical_abs_move_bp": 37.3,
     "bad_night_5pct_bp": -72.0,
     "suggested_notional_frac": 0.69,
@@ -22,36 +22,56 @@
   "instruments": {
     "XAU": {
       "candle_1h": {
-        "candle_time": "2026-11-24 23:00:00",
-        "open": 3557.3513,
-        "high": 3568.6247,
-        "low": 3548.8679,
-        "close": 3550.3633,
-        "close_position_pct": 7.6,
-        "range_vs_atr": 1.16,
-        "shapes": [],
-        "note": "big candle ke baad agli candle ki range ~1.3-1.7x rehti hai (direction ka koi signal nahi)"
-      },
-      "candle_4h": {
-        "candle_time": "2026-11-24 20:00:00",
-        "open": 3555.7198,
-        "high": 3568.6247,
-        "low": 3547.1593,
-        "close": 3550.3633,
-        "close_position_pct": 14.9,
-        "range_vs_atr": 0.55,
+        "candle_time": "2026-11-25 10:00:00",
+        "open": 3529.2934,
+        "high": 3537.8193,
+        "low": 3527.5857,
+        "close": 3530.723,
+        "close_position_pct": 30.7,
+        "range_vs_atr": 0.61,
         "shapes": [
           "shooting_star"
         ],
         "note": "big candle ke baad agli candle ki range ~1.3-1.7x rehti hai (direction ka koi signal nahi)"
       },
+      "candle_4h": {
+        "candle_time": "2026-11-25 04:00:00",
+        "open": 3548.4132,
+        "high": 3557.706,
+        "low": 3512.3761,
+        "close": 3525.4954,
+        "close_position_pct": 28.9,
+        "range_vs_atr": 1.05,
+        "shapes": [],
+        "note": "big candle ke baad agli candle ki range ~1.3-1.7x rehti hai (direction ka koi signal nahi)"
+      },
       "volatility": {
-        "avg_daily_range_20d_bp": 202.3,
+        "avg_daily_range_20d_bp": 209.0,
         "regime": "HIGH",
         "tip": "HIGH = size chhota rakho (raat ki chaal ~2x), LOW = normal"
       },
       "patterns_last_24h_on_4h": [],
       "patterns_last_day_on_1h": [
+        {
+          "timeframe": "1h",
+          "formed_at": "2026-11-25 06:00:00",
+          "kind": "HALF_IN",
+          "direction": "SHORT",
+          "role": "info (sirf 4h par test hua, trade nahi)",
+          "stop": 3580.2258,
+          "target": 3463.5828,
+          "last_close": 3530.723
+        },
+        {
+          "timeframe": "1h",
+          "formed_at": "2026-11-25 06:00:00",
+          "kind": "FULL_IN",
+          "direction": "SHORT",
+          "role": "info (sirf 4h par test hua, trade nahi)",
+          "stop": 3580.2258,
+          "target": 3422.0495,
+          "last_close": 3530.723
+        },
         {
           "timeframe": "1h",
           "formed_at": "2026-11-24 16:00:00",
@@ -60,7 +80,7 @@
           "role": "info (sirf 4h par test hua, trade nahi)",
           "stop": 3651.464,
           "target": 3572.6122,
-          "last_close": 3550.3633
+          "last_close": 3530.723
         },
         {
           "timeframe": "1h",
@@ -70,7 +90,7 @@
           "role": "info (sirf 4h par test hua, trade nahi)",
           "stop": 3651.464,
           "target": 3534.0708,
-          "last_close": 3550.3633
+          "last_close": 3530.723
         },
         {
           "timeframe": "1h",
@@ -80,68 +100,38 @@
           "role": "info (sirf 4h par test hua, trade nahi)",
           "stop": 3603.2764,
           "target": 3681.1967,
-          "last_close": 3550.3633
-        },
-        {
-          "timeframe": "1h",
-          "formed_at": "2026-11-24 09:00:00",
-          "kind": "FULL_M",
-          "direction": "SHORT",
-          "role": "info (sirf 4h par test hua, trade nahi)",
-          "stop": 3693.6142,
-          "target": 3555.9893,
-          "last_close": 3550.3633
-        },
-        {
-          "timeframe": "1h",
-          "formed_at": "2026-11-24 03:00:00",
-          "kind": "HALF_M",
-          "direction": "SHORT",
-          "role": "info (sirf 4h par test hua, trade nahi)",
-          "stop": 3693.9398,
-          "target": 3620.5648,
-          "last_close": 3550.3633
-        },
-        {
-          "timeframe": "1h",
-          "formed_at": "2026-11-24 01:00:00",
-          "kind": "HALF_N",
-          "direction": "LONG",
-          "role": "info (sirf 4h par test hua, trade nahi)",
-          "stop": 3615.8977,
-          "target": 3708.6405,
-          "last_close": 3550.3633
+          "last_close": 3530.723
         }
       ],
-      "open_paper_trades": [
-        "GOLD_NIGHT|XAU|NIGHT|2026-11-24T22:00"
-      ]
+      "open_paper_trades": []
     },
     "BTC": {
       "candle_1h": {
-        "candle_time": "2026-11-24 23:00:00",
-        "open": 59986.01,
-        "high": 60065.04,
-        "low": 59768.42,
-        "close": 59832.0,
-        "close_position_pct": 21.4,
-        "range_vs_atr": 0.5,
+        "candle_time": "2026-11-25 10:00:00",
+        "open": 59086.0,
+        "high": 59197.66,
+        "low": 58783.24,
+        "close": 58900.0,
+        "close_position_pct": 28.2,
+        "range_vs_atr": 0.87,
         "shapes": [],
         "note": "big candle ke baad agli candle ki range ~1.3-1.7x rehti hai (direction ka koi signal nahi)"
       },
       "candle_4h": {
-        "candle_time": "2026-11-24 20:00:00",
-        "open": 59679.19,
-        "high": 60106.0,
-        "low": 59481.33,
-        "close": 59832.0,
-        "close_position_pct": 56.1,
-        "range_vs_atr": 0.48,
-        "shapes": [],
+        "candle_time": "2026-11-25 04:00:00",
+        "open": 59421.85,
+        "high": 59421.85,
+        "low": 58633.12,
+        "close": 58738.33,
+        "close_position_pct": 13.3,
+        "range_vs_atr": 0.62,
+        "shapes": [
+          "bear_marubozu"
+        ],
         "note": "big candle ke baad agli candle ki range ~1.3-1.7x rehti hai (direction ka koi signal nahi)"
       },
       "volatility": {
-        "avg_daily_range_20d_bp": 442.4,
+        "avg_daily_range_20d_bp": 450.9,
         "regime": "HIGH",
         "tip": "HIGH = size chhota rakho (raat ki chaal ~2x), LOW = normal"
       },
@@ -151,29 +141,29 @@
     },
     "ETH": {
       "candle_1h": {
-        "candle_time": "2026-11-24 23:00:00",
-        "open": 1685.55,
-        "high": 1686.1,
-        "low": 1677.75,
-        "close": 1680.11,
-        "close_position_pct": 28.3,
-        "range_vs_atr": 0.47,
+        "candle_time": "2026-11-25 10:00:00",
+        "open": 1645.37,
+        "high": 1649.22,
+        "low": 1641.73,
+        "close": 1648.74,
+        "close_position_pct": 93.6,
+        "range_vs_atr": 0.49,
         "shapes": [],
         "note": "big candle ke baad agli candle ki range ~1.3-1.7x rehti hai (direction ka koi signal nahi)"
       },
       "candle_4h": {
-        "candle_time": "2026-11-24 20:00:00",
-        "open": 1673.71,
-        "high": 1688.55,
-        "low": 1667.01,
-        "close": 1680.11,
-        "close_position_pct": 60.8,
-        "range_vs_atr": 0.54,
+        "candle_time": "2026-11-25 04:00:00",
+        "open": 1664.43,
+        "high": 1667.19,
+        "low": 1633.11,
+        "close": 1640.95,
+        "close_position_pct": 23.0,
+        "range_vs_atr": 0.85,
         "shapes": [],
         "note": "big candle ke baad agli candle ki range ~1.3-1.7x rehti hai (direction ka koi signal nahi)"
       },
       "volatility": {
-        "avg_daily_range_20d_bp": 571.0,
+        "avg_daily_range_20d_bp": 581.6,
         "regime": "HIGH",
         "tip": "HIGH = size chhota rakho (raat ki chaal ~2x), LOW = normal"
       },
@@ -183,54 +173,42 @@
     },
     "NIFTY50": {
       "candle_1d": {
-        "candle_time": "2026-11-23 00:00:00",
-        "open": 25929.1504,
-        "high": 25992.5996,
-        "low": 25343.8496,
-        "close": 25349.6504,
-        "close_position_pct": 0.9,
-        "range_vs_atr": 2.12,
-        "shapes": [
-          "close_bottom",
-          "bear_marubozu",
-          "big_down"
-        ],
+        "candle_time": "2026-11-25 00:00:00",
+        "open": 25658.3496,
+        "high": 25951.6504,
+        "low": 25619.0,
+        "close": 25819.25,
+        "close_position_pct": 60.2,
+        "range_vs_atr": 0.99,
+        "shapes": [],
         "note": "big candle ke baad agli candle ki range ~1.3-1.7x rehti hai (direction ka koi signal nahi)"
       },
       "patterns_last_5d_on_1d": []
     },
     "BANKNIFTY": {
       "candle_1d": {
-        "candle_time": "2026-11-23 00:00:00",
-        "open": 65012.0508,
-        "high": 65193.3984,
-        "low": 62546.1992,
-        "close": 62585.3516,
-        "close_position_pct": 1.5,
-        "range_vs_atr": 2.84,
-        "shapes": [
-          "close_bottom",
-          "bear_marubozu",
-          "big_down"
-        ],
+        "candle_time": "2026-11-25 00:00:00",
+        "open": 63408.6016,
+        "high": 64133.8008,
+        "low": 63247.8984,
+        "close": 63703.25,
+        "close_position_pct": 51.4,
+        "range_vs_atr": 0.81,
+        "shapes": [],
         "note": "big candle ke baad agli candle ki range ~1.3-1.7x rehti hai (direction ka koi signal nahi)"
       },
       "patterns_last_5d_on_1d": []
     },
     "SENSEX": {
       "candle_1d": {
-        "candle_time": "2026-11-23 00:00:00",
-        "open": 84421.9688,
-        "high": 84662.9609,
-        "low": 82395.8828,
-        "close": 82435.9922,
-        "close_position_pct": 1.8,
-        "range_vs_atr": 2.31,
-        "shapes": [
-          "close_bottom",
-          "bear_marubozu",
-          "big_down"
-        ],
+        "candle_time": "2026-11-25 00:00:00",
+        "open": 83436.8906,
+        "high": 84498.2109,
+        "low": 83380.75,
+        "close": 83938.2812,
+        "close_position_pct": 49.9,
+        "range_vs_atr": 1.02,
+        "shapes": [],
         "note": "big candle ke baad agli candle ki range ~1.3-1.7x rehti hai (direction ka koi signal nahi)"
       },
       "patterns_last_5d_on_1d": []
