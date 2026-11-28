@@ -143,3 +143,9 @@ logged_at_utc,instrument,timeframe,formed_at,kind,direction,role,stop,target
 2026-11-27 13:44,ETH,1h,2026-11-27 05:00:00,FULL_N,LONG,"info (sirf 4h par test hua, trade nahi)",1664.3558,1835.61
 2026-11-27 13:44,ETH,1h,2026-11-27 03:00:00,HALF_N,LONG,"info (sirf 4h par test hua, trade nahi)",1680.3049,1726.32
 2026-11-27 13:44,ETH,1h,2026-11-27 03:00:00,FULL_N,LONG,"info (sirf 4h par test hua, trade nahi)",1680.3049,1752.82
+2026-11-27 23:59,XAU,1h,2026-11-27 19:00:00,HALF_N,LONG,"info (sirf 4h par test hua, trade nahi)",3612.6562,3711.7155
+2026-11-27 23:59,BTC,4h,2026-11-27 16:00:00,HALF_IN,SHORT,info,62551.5222,54946.17
+2026-11-27 23:59,BTC,1h,2026-11-27 23:00:00,HALF_IN,SHORT,"info (sirf 4h par test hua, trade nahi)",60681.3922,57833.79
+2026-11-27 23:59,BTC,1h,2026-11-27 15:00:00,FULL_M,SHORT,"info (sirf 4h par test hua, trade nahi)",62016.8974,58078.295
+2026-11-27 23:59,ETH,4h,2026-11-27 16:00:00,HALF_IN,SHORT,info,1765.3188,1519.01
+2026-11-27 23:59,ETH,1h,2026-11-27 23:00:00,HALF_IN,SHORT,"info (sirf 4h par test hua, trade nahi)",1691.5333,1595.0
